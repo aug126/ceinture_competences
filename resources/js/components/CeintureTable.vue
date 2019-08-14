@@ -1,52 +1,69 @@
 <template>
-  <v-container fluid>
-    <v-row align="center" justify="center">
-      <v-col cols="9">
-        <v-simple-table :dense="true">
-          <thead>
-            <tr>
-              <th class="text-left"></th>
-              <th
-                class="text-left"
-                v-for="(colors, competence) in competenceObject"
-                :key="competence"
-              >{{competence}}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in ceintureEleveList" :key="item.name">
-              <td>
-                <strong>{{ item.name }}</strong>
-              </td>
-              <td
-                v-for="(niveau, competence) in item.competences"
-                :key="competence"
-                :class="competenceObject[competence][niveau] + '--text'"
-                @click="() => upLvl(item, competence)"
-              >{{competence}}</td>
-            </tr>
-          </tbody>
-        </v-simple-table>
-      </v-col>
-    </v-row>
-  </v-container>
+  <div>
+    <v-card>
+      <v-simple-table id="ceinture-table" :fixed-header="true" :height="tableHeight" :dense="true">
+        <thead>
+          <tr>
+            <th>
+              <v-btn small color="info" dark depressed>
+                <v-icon>mdi-table-edit</v-icon>
+              </v-btn>
+            </th>
+            <th class="border-right">
+              <h4>2019</h4>
+            </th>
+            <th
+              v-for="(colors, competence) in competenceObject"
+              :key="competence"
+              :class="{'border-right': competence === 'orthographe'}"
+            >{{competence}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in ceintureEleveList" :key="item.name">
+            <td>
+              <strong>{{ item.numero }}</strong>
+            </td>
+            <td class="border-right">
+              <strong>{{ item.name }}</strong>
+            </td>
+            <td
+              v-for="(niveau, competence) in item.competences"
+              :key="competence"
+              :class="{'border-right': competence === 'orthographe'}"
+              @click="() => upLvl(item, competence)"
+            >
+              <ceinture-type-2 :color="competenceObject[competence][niveau]"></ceinture-type-2>
+            </td>
+          </tr>
+        </tbody>
+      </v-simple-table>
+    </v-card>
+  </div>
 </template>
 
 <script>
+// import CeintureType1 from "../svg/ceinture-type-1";
+import CeintureType2 from "../svg/ceinture-type-2";
+// import CeintureType3 from "../svg/ceinture-type-3";
 export default {
+  components: {
+    CeintureType2
+  },
   methods: {
     upLvl(row, competence) {
       let maxLvl = this.competenceObject[competence].length - 1;
       let currentLvl = row.competences[competence];
-      console.log(maxLvl, currentLvl);
       if (maxLvl > currentLvl) row.competences[competence] += 1;
     }
   },
+  mounted() {
+    this.tableHeight = document.body.clientHeight - 148;
+  },
   data() {
     return {
+      tableHeight: 0,
       competenceObject: {
-        math: ["white", "yellow", "orange", "green", "red"],
-        français: ["white", "yellow", "orange", "green", "red", "blue"],
         grammaire: ["white", "yellow", "orange", "green", "red", "blue"],
         conjugaison: ["white", "yellow", "orange", "green", "red", "blue"],
         orthographe: ["white", "yellow", "orange", "green", "red", "blue"],
@@ -57,10 +74,9 @@ export default {
       },
       ceintureEleveList: [
         {
-          name: "mlqsdjaaf",
+          numero: 1,
+          name: "Augustin",
           competences: {
-            math: 3,
-            français: 2,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -71,10 +87,9 @@ export default {
           }
         },
         {
-          name: "mlqsdzjf",
+          numero: 2,
+          name: "Céline",
           competences: {
-            math: 4,
-            français: 3,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -85,10 +100,9 @@ export default {
           }
         },
         {
-          name: "mlqsardjf",
+          numero: 3,
+          name: "Autres enfants",
           competences: {
-            math: 1,
-            français: 4,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -99,10 +113,9 @@ export default {
           }
         },
         {
-          name: "mlqsvvdjf",
+          numero: 4,
+          name: "aad",
           competences: {
-            math: 2,
-            français: 0,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -113,10 +126,9 @@ export default {
           }
         },
         {
-          name: "mlqsdjf",
+          numero: 5,
+          name: "aae",
           competences: {
-            math: 1,
-            français: 5,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -127,10 +139,9 @@ export default {
           }
         },
         {
-          name: "mlqsdjaaf",
+          numero: 6,
+          name: "aaf",
           competences: {
-            math: 3,
-            français: 2,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -141,10 +152,9 @@ export default {
           }
         },
         {
-          name: "mlqsdzjf",
+          numero: 7,
+          name: "aag",
           competences: {
-            math: 4,
-            français: 3,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -155,10 +165,9 @@ export default {
           }
         },
         {
-          name: "mlqsardjf",
+          numero: 8,
+          name: "aah",
           competences: {
-            math: 1,
-            français: 4,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -169,10 +178,9 @@ export default {
           }
         },
         {
-          name: "mlqsvvdjf",
+          numero: 9,
+          name: "aai",
           competences: {
-            math: 2,
-            français: 0,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -183,10 +191,9 @@ export default {
           }
         },
         {
-          name: "mlqsdjf",
+          numero: 1,
+          name: "aaj",
           competences: {
-            math: 1,
-            français: 5,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -197,10 +204,9 @@ export default {
           }
         },
         {
-          name: "mlqsdjaaf",
+          numero: 1,
+          name: "aak",
           competences: {
-            math: 3,
-            français: 2,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -211,10 +217,9 @@ export default {
           }
         },
         {
-          name: "mlqsdzjf",
+          numero: 1,
+          name: "aal",
           competences: {
-            math: 4,
-            français: 3,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -225,10 +230,9 @@ export default {
           }
         },
         {
-          name: "mlqsardjf",
+          numero: 1,
+          name: "aam",
           competences: {
-            math: 1,
-            français: 4,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -239,10 +243,9 @@ export default {
           }
         },
         {
-          name: "mlqsvvdjf",
+          numero: 1,
+          name: "aan",
           competences: {
-            math: 2,
-            français: 0,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -253,10 +256,9 @@ export default {
           }
         },
         {
-          name: "mlqsdjf",
+          numero: 1,
+          name: "aao",
           competences: {
-            math: 1,
-            français: 5,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -267,10 +269,9 @@ export default {
           }
         },
         {
-          name: "mlqsdjaaf",
+          numero: 1,
+          name: "aap",
           competences: {
-            math: 3,
-            français: 2,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -281,10 +282,9 @@ export default {
           }
         },
         {
-          name: "mlqsdzjf",
+          numero: 1,
+          name: "aaq",
           competences: {
-            math: 4,
-            français: 3,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -295,10 +295,9 @@ export default {
           }
         },
         {
-          name: "mlqsardjf",
+          numero: 1,
+          name: "aar",
           competences: {
-            math: 1,
-            français: 4,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -309,10 +308,9 @@ export default {
           }
         },
         {
-          name: "mlqsvvdjf",
+          numero: 1,
+          name: "aas",
           competences: {
-            math: 2,
-            français: 0,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -323,10 +321,9 @@ export default {
           }
         },
         {
-          name: "mlqsdjf",
+          numero: 1,
+          name: "aat",
           competences: {
-            math: 1,
-            français: 5,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -337,10 +334,9 @@ export default {
           }
         },
         {
-          name: "mlqsdjaaf",
+          numero: 1,
+          name: "aau",
           competences: {
-            math: 3,
-            français: 2,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -351,10 +347,9 @@ export default {
           }
         },
         {
-          name: "mlqsdzjf",
+          numero: 1,
+          name: "aav",
           competences: {
-            math: 4,
-            français: 3,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -365,10 +360,9 @@ export default {
           }
         },
         {
-          name: "mlqsardjf",
+          numero: 1,
+          name: "aaw",
           competences: {
-            math: 1,
-            français: 4,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -379,10 +373,9 @@ export default {
           }
         },
         {
-          name: "mlqsvvdjf",
+          numero: 1,
+          name: "aax",
           competences: {
-            math: 2,
-            français: 0,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -393,10 +386,9 @@ export default {
           }
         },
         {
-          name: "mlqsdjf",
+          numero: 1,
+          name: "aay",
           competences: {
-            math: 1,
-            français: 5,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -407,10 +399,9 @@ export default {
           }
         },
         {
-          name: "mlqsdjaaf",
+          numero: 1,
+          name: "aaz",
           competences: {
-            math: 3,
-            français: 2,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -421,10 +412,9 @@ export default {
           }
         },
         {
-          name: "mlqsdzjf",
+          numero: 1,
+          name: "aba",
           competences: {
-            math: 4,
-            français: 3,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -435,10 +425,9 @@ export default {
           }
         },
         {
-          name: "mlqsardjf",
+          numero: 1,
+          name: "abb",
           competences: {
-            math: 1,
-            français: 4,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -449,10 +438,9 @@ export default {
           }
         },
         {
-          name: "mlqsvvdjf",
+          numero: 1,
+          name: "abc",
           competences: {
-            math: 2,
-            français: 0,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -463,10 +451,9 @@ export default {
           }
         },
         {
-          name: "mlqsdjf",
+          numero: 1,
+          name: "abd",
           competences: {
-            math: 1,
-            français: 5,
             grammaire: 3,
             conjugaison: 1,
             orthographe: 3,
@@ -481,3 +468,14 @@ export default {
   }
 };
 </script>
+
+<style lang="sass" scoped>
+#ceinture-table
+  th, td
+    font-size: 1.2rem
+    border-color: black
+    text-align: center
+    user-select: none
+  .border-right
+    border-right: 1px solid
+</style>

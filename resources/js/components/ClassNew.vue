@@ -1,53 +1,45 @@
 <template>
-  <v-container fluid>
-    <v-row align="center" justify="center">
-      <v-col cols="9">
-        <v-card>
-          <v-card-text>
-            <h1>Créez une classe avec des élèves.</h1>
-            <v-form v-model="valid">
-              <v-container>
-                <v-row>
-                  <v-col cols="12" md="4">
-                    <v-text-field
-                      v-model="className"
-                      :rules="classRules"
-                      label="Nom de la classe"
-                      required
-                    ></v-text-field>
-                    <v-text-field
-                      v-model="eleveList"
-                      label="Elève 1, élève 2, ..."
-                      :rules="eleveRules"
-                    ></v-text-field>
-                  </v-col>
+  <div>
+    <h1>Créez une classe avec des élèves.</h1>
+    <v-card>
+      <v-card-text>
+        <v-form v-model="valid">
+          <v-container>
+            <v-row>
+              <v-col cols="12" md="4">
+                <v-text-field
+                  v-model="className"
+                  :rules="classRules"
+                  label="Nom de la classe"
+                  required
+                ></v-text-field>
+                <v-text-field v-model="eleveList" label="Elève 1, élève 2, ..." :rules="eleveRules"></v-text-field>
+              </v-col>
 
-                  <v-col cols="12" md="8">
-                    <v-chip
-                      class="ma-2"
-                      v-for="(eleve, index) in chipEleveList"
-                      :key="index + eleve"
-                      pill
-                      close
-                      @click:close="() => closeChip(index)"
-                    >
-                      <v-avatar left :color="getRandomColor(eleve)">{{eleve.charAt(0)}}</v-avatar>
-                      {{eleve}}
-                    </v-chip>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-form>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn disabled text>Annuler</v-btn>
-            <v-btn text color="primary">Créer</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+              <v-col cols="12" md="8">
+                <v-chip
+                  class="ma-2"
+                  v-for="(eleve, index) in chipEleveList"
+                  :key="index + eleve"
+                  pill
+                  close
+                  @click:close="() => closeChip(index)"
+                >
+                  <v-avatar left :color="getRandomColor(eleve)">{{eleve.charAt(0)}}</v-avatar>
+                  {{eleve}}
+                </v-chip>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-form>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn disabled text>Annuler</v-btn>
+        <v-btn text color="primary">Créer</v-btn>
+      </v-card-actions>
+    </v-card>
+  </div>
 </template>
 
 <script>

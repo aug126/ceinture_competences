@@ -1,21 +1,25 @@
 <template>
-  <v-app id="sandbox">
-    <v-navigation-drawer
-      v-model="primaryDrawer.model"
-      :clipped="true"
-      :mini-variant="primaryDrawer.mini"
-      app
-      overflow
-    ></v-navigation-drawer>
-
+  <v-app id="App">
+    <!-- <options-drawer></options-drawer> -->
     <v-app-bar :clipped-left="true" app dark color="primary">
-      <v-app-bar-nav-icon @click.stop="primaryDrawer.model = !primaryDrawer.model"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon class="ml-1">
+        <btn-options></btn-options>
+      </v-app-bar-nav-icon>
       <v-toolbar-title>Ceintures de Compétences</v-toolbar-title>
     </v-app-bar>
 
     <v-content>
-      <!-- <class-new></class-new> -->
-      <ceinture-table></ceinture-table>
+      <v-container fluid>
+        <v-row justify="center">
+          <v-col cols="2" id="sidebar-nav">
+            <floating-drawer></floating-drawer>
+          </v-col>
+          <v-col cols="9">
+            <!-- <class-new></class-new> -->
+            <ceinture-table></ceinture-table>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-content>
 
     <v-footer app color="primary">
@@ -27,16 +31,26 @@
 <script>
 import ClassNew from "./ClassNew";
 import CeintureTable from "./CeintureTable";
+import FloatingDrawer from "./drawers/FloatingDrawer";
+import OptionsDrawer from "./drawers/OptionsDrawer";
+import BtnOptions from "./BtnOptions";
 export default {
   components: {
     ClassNew,
-    CeintureTable
+    CeintureTable,
+    FloatingDrawer,
+    OptionsDrawer,
+    BtnOptions
   },
-  data: () => ({
-    primaryDrawer: {
-      model: null,
-      mini: false
-    }
-  })
+  data: () => ({})
 };
 </script>
+
+<style lang="sass" scoped>
+#sidebar-nav
+  justify-content: center
+  display: flex
+#App
+  button.v-app-bar__nav-icon
+    margin-top: -8px !important
+</style>
