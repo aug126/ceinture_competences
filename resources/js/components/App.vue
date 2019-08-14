@@ -34,13 +34,15 @@ import CeintureTable from "./CeintureTable";
 import FloatingDrawer from "./drawers/FloatingDrawer";
 import OptionsDrawer from "./drawers/OptionsDrawer";
 import BtnOptions from "./BtnOptions";
+import ProvisoireTest from "./Test";
 export default {
   components: {
     ClassNew,
     CeintureTable,
     FloatingDrawer,
     OptionsDrawer,
-    BtnOptions
+    BtnOptions,
+    ProvisoireTest
   },
   data: () => ({})
 };

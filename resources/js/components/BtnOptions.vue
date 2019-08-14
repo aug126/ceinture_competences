@@ -6,7 +6,7 @@
     transition="scale-transition"
   >
     <template v-slot:activator>
-      <v-btn v-model="fab" color="secondary lighten-2" fab>
+      <v-btn v-model="fab" color="secondary" dark fab>
         <v-icon v-if="fab">mdi-close</v-icon>
         <v-icon v-else>mdi-cogs</v-icon>
       </v-btn>
