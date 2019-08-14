@@ -10,6 +10,8 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ClassNew__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClassNew */ "./resources/js/components/ClassNew.vue");
+/* harmony import */ var _CeintureTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CeintureTable */ "./resources/js/components/CeintureTable.vue");
+//
 //
 //
 //
@@ -36,9 +38,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ClassNew: _ClassNew__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ClassNew: _ClassNew__WEBPACK_IMPORTED_MODULE_0__["default"],
+    CeintureTable: _CeintureTable__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -46,6 +50,468 @@ __webpack_require__.r(__webpack_exports__);
         model: null,
         mini: false
       }
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CeintureTable.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CeintureTable.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    upLvl: function upLvl(row, competence) {
+      var maxLvl = this.competenceObject[competence].length - 1;
+      var currentLvl = row.competences[competence];
+      console.log(maxLvl, currentLvl);
+      if (maxLvl > currentLvl) row.competences[competence] += 1;
+    }
+  },
+  data: function data() {
+    return {
+      competenceObject: {
+        math: ["white", "yellow", "orange", "green", "red"],
+        français: ["white", "yellow", "orange", "green", "red", "blue"],
+        grammaire: ["white", "yellow", "orange", "green", "red", "blue"],
+        conjugaison: ["white", "yellow", "orange", "green", "red", "blue"],
+        orthographe: ["white", "yellow", "orange", "green", "red", "blue"],
+        numération: ["white", "yellow", "orange", "green", "red", "blue"],
+        calculsEcrits: ["white", "yellow", "orange", "green", "red", "blue"],
+        mesures: ["white", "yellow", "orange", "green", "red", "blue"],
+        géométrie: ["white", "yellow", "orange", "green", "red", "blue"]
+      },
+      ceintureEleveList: [{
+        name: "mlqsdjaaf",
+        competences: {
+          math: 3,
+          français: 2,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdzjf",
+        competences: {
+          math: 4,
+          français: 3,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsardjf",
+        competences: {
+          math: 1,
+          français: 4,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsvvdjf",
+        competences: {
+          math: 2,
+          français: 0,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdjf",
+        competences: {
+          math: 1,
+          français: 5,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdjaaf",
+        competences: {
+          math: 3,
+          français: 2,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdzjf",
+        competences: {
+          math: 4,
+          français: 3,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsardjf",
+        competences: {
+          math: 1,
+          français: 4,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsvvdjf",
+        competences: {
+          math: 2,
+          français: 0,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdjf",
+        competences: {
+          math: 1,
+          français: 5,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdjaaf",
+        competences: {
+          math: 3,
+          français: 2,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdzjf",
+        competences: {
+          math: 4,
+          français: 3,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsardjf",
+        competences: {
+          math: 1,
+          français: 4,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsvvdjf",
+        competences: {
+          math: 2,
+          français: 0,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdjf",
+        competences: {
+          math: 1,
+          français: 5,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdjaaf",
+        competences: {
+          math: 3,
+          français: 2,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdzjf",
+        competences: {
+          math: 4,
+          français: 3,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsardjf",
+        competences: {
+          math: 1,
+          français: 4,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsvvdjf",
+        competences: {
+          math: 2,
+          français: 0,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdjf",
+        competences: {
+          math: 1,
+          français: 5,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdjaaf",
+        competences: {
+          math: 3,
+          français: 2,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdzjf",
+        competences: {
+          math: 4,
+          français: 3,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsardjf",
+        competences: {
+          math: 1,
+          français: 4,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsvvdjf",
+        competences: {
+          math: 2,
+          français: 0,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdjf",
+        competences: {
+          math: 1,
+          français: 5,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdjaaf",
+        competences: {
+          math: 3,
+          français: 2,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdzjf",
+        competences: {
+          math: 4,
+          français: 3,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsardjf",
+        competences: {
+          math: 1,
+          français: 4,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsvvdjf",
+        competences: {
+          math: 2,
+          français: 0,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }, {
+        name: "mlqsdjf",
+        competences: {
+          math: 1,
+          français: 5,
+          grammaire: 3,
+          conjugaison: 1,
+          orthographe: 3,
+          numération: 1,
+          calculsEcrits: 4,
+          mesures: 1,
+          géométrie: 2
+        }
+      }]
     };
   }
 });
@@ -1309,13 +1775,112 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("v-content", [_c("class-new")], 1),
+      _c("v-content", [_c("ceinture-table")], 1),
       _vm._v(" "),
       _c("v-footer", { attrs: { app: "", color: "primary" } }, [
         _c("span", { staticClass: "px-4" }, [
           _vm._v("© " + _vm._s(new Date().getFullYear()))
         ])
       ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CeintureTable.vue?vue&type=template&id=507f3cb8&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CeintureTable.vue?vue&type=template&id=507f3cb8& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { fluid: "" } },
+    [
+      _c(
+        "v-row",
+        { attrs: { align: "center", justify: "center" } },
+        [
+          _c(
+            "v-col",
+            { attrs: { cols: "9" } },
+            [
+              _c("v-simple-table", { attrs: { dense: true } }, [
+                _c("thead", [
+                  _c(
+                    "tr",
+                    [
+                      _c("th", { staticClass: "text-left" }),
+                      _vm._v(" "),
+                      _vm._l(_vm.competenceObject, function(
+                        colors,
+                        competence
+                      ) {
+                        return _c(
+                          "th",
+                          { key: competence, staticClass: "text-left" },
+                          [_vm._v(_vm._s(competence))]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.ceintureEleveList, function(item) {
+                    return _c(
+                      "tr",
+                      { key: item.name },
+                      [
+                        _c("td", [_c("strong", [_vm._v(_vm._s(item.name))])]),
+                        _vm._v(" "),
+                        _vm._l(item.competences, function(niveau, competence) {
+                          return _c(
+                            "td",
+                            {
+                              key: competence,
+                              class:
+                                _vm.competenceObject[competence][niveau] +
+                                "--text",
+                              on: {
+                                click: function() {
+                                  return _vm.upLvl(item, competence)
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(competence))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  }),
+                  0
+                )
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -38467,6 +39032,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_332fccf4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_332fccf4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/CeintureTable.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/CeintureTable.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CeintureTable_vue_vue_type_template_id_507f3cb8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CeintureTable.vue?vue&type=template&id=507f3cb8& */ "./resources/js/components/CeintureTable.vue?vue&type=template&id=507f3cb8&");
+/* harmony import */ var _CeintureTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CeintureTable.vue?vue&type=script&lang=js& */ "./resources/js/components/CeintureTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CeintureTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CeintureTable_vue_vue_type_template_id_507f3cb8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CeintureTable_vue_vue_type_template_id_507f3cb8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/CeintureTable.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/CeintureTable.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/CeintureTable.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CeintureTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CeintureTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CeintureTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CeintureTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/CeintureTable.vue?vue&type=template&id=507f3cb8&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/CeintureTable.vue?vue&type=template&id=507f3cb8& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CeintureTable_vue_vue_type_template_id_507f3cb8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CeintureTable.vue?vue&type=template&id=507f3cb8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CeintureTable.vue?vue&type=template&id=507f3cb8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CeintureTable_vue_vue_type_template_id_507f3cb8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CeintureTable_vue_vue_type_template_id_507f3cb8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

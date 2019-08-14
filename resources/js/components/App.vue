@@ -14,7 +14,8 @@
     </v-app-bar>
 
     <v-content>
-      <class-new></class-new>
+      <!-- <class-new></class-new> -->
+      <ceinture-table></ceinture-table>
     </v-content>
 
     <v-footer app color="primary">
@@ -25,9 +26,11 @@
 
 <script>
 import ClassNew from "./ClassNew";
+import CeintureTable from "./CeintureTable";
 export default {
   components: {
-    ClassNew
+    ClassNew,
+    CeintureTable
   },
   data: () => ({
     primaryDrawer: {
