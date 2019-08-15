@@ -7,29 +7,35 @@
     transition="scale-transition"
   >
     <template v-slot:activator>
-      <v-btn v-if="fab" small v-model="fab" color="light" fab>
+      <!-- <v-btn v-if="fab" small v-model="fab" color="light" fab>
         <v-icon>mdi-close</v-icon>
-      </v-btn>
-      <slot v-else>
-        <v-btn small v-model="fab" color="light" fab>
-          <v-icon>mdi-play</v-icon>
+      </v-btn>-->
+      <slot>
+        <v-btn small v-model="fab" color="primary" fab>
+          <v-icon v-if="!fab">mdi-play</v-icon>
+          <v-icon v-else>mdi-close</v-icon>
         </v-btn>
       </slot>
     </template>
-    <v-btn fab dark small color="secondary">
-      <v-icon v-if="fakeCollapse">mdi-pencil</v-icon>
+    <v-btn @click="updateCompetence('practice')" fab dark small color="secondary">
+      <!-- <v-icon v-if="fakeCollapse">mdi-pencil</v-icon> -->
+      <v-icon>mdi-dumbbell</v-icon>
     </v-btn>
-    <v-btn class="middle" fab dark small color="success">
+    <v-btn @click="updateCompetence('success')" class="middle" fab dark small color="success">
       <v-icon>mdi-plus</v-icon>
     </v-btn>
-    <v-btn fab dark small color="error">
-      <v-icon v-if="fakeCollapse">mdi-close</v-icon>
+    <v-btn @click="updateCompetence('fail')" fab dark small color="error">
+      <!-- <v-icon>mdi-close</v-icon> -->
+      <v-icon>mdi-minus</v-icon>
     </v-btn>
   </v-speed-dial>
 </template>
 
 <script>
 export default {
+  props: {
+    competenceUpdates: Array
+  },
   data() {
     return {
       fab: false,
@@ -39,6 +45,12 @@ export default {
   methods: {
     fake() {
       this.fakeCollapse = !this.fakeCollapse;
+    },
+    updateCompetence(status) {
+      this.$store.commit("updateCompetence", {
+        competenceUpdates: this.competenceUpdates,
+        status
+      });
     }
   }
 };

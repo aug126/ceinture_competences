@@ -29,13 +29,16 @@
               <strong>{{ item.name }}</strong>
             </td>
             <td
-              v-for="(niveau, competence) in item.competences"
+              v-for="(allUpdates, competence) in item.competences"
               :key="competence"
               :class="{'border-right': competence === 'orthographe'}"
             >
               <!-- @click="() => upLvl(item, competence)" -->
-              <belt-actions>
-                <ceinture-type-2 v-if="niveau > 0" :color="competenceObject[competence][niveau]"></ceinture-type-2>
+              <belt-actions :competence-updates="allUpdates">
+                <ceinture-type-2
+                  v-if="niveau(allUpdates) > 0"
+                  :color="competenceObject[competence][niveau(allUpdates)]"
+                ></ceinture-type-2>
               </belt-actions>
             </td>
           </tr>
@@ -60,6 +63,10 @@ export default {
       let maxLvl = this.competenceObject[competence].length - 1;
       let currentLvl = row.competences[competence];
       if (maxLvl > currentLvl) row.competences[competence] += 1;
+    },
+    niveau(allUpdatesMessages) {
+      let up = allUpdatesMessages;
+      return up[up.length - 1] && up[up.length - 1].actualLevel;
     }
   },
   mounted() {
@@ -83,7 +90,7 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 #ceinture-table
   th, td
     font-size: 1.2rem
@@ -99,5 +106,7 @@ export default {
     td 
       border-top: 1px solid black
   // Modifications inputs pour changer les données.
+  tbody tr:hover
+    background: none !important
   
 </style>

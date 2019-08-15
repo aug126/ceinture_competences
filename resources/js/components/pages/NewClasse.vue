@@ -112,6 +112,7 @@ export default {
         name: this.className,
         studentsBelt
       };
+      // let newClasse = {};
       // this.$set(newClasse, "id", time);
       // this.$set(newClasse, "name", this.className);
       // this.$set(newClasse, "studentsBelt", studentsBelt);

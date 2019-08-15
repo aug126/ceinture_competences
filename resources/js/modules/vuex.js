@@ -11,25 +11,30 @@ const state = {
       numero: 1,
       name: 'name 1',
       competences: {
-        grammaire: 0,
-        conjugaison: 0,
-        orthographe: 0,
-        numération: 0,
-        calculsEcrits: 0,
-        mesures: 0,
-        géométrie: 0
+        grammaire: [{
+          date: '',
+          message: '',
+          status: 'success', // 'success' | 'fail' | 'practice'
+          actualLevel: 1
+        }],
+        conjugaison: [],
+        orthographe: [],
+        numération: [],
+        calculsEcrits: [],
+        mesures: [],
+        géométrie: []
       }
     }, {
       numero: 2,
       name: 'name 2',
       competences: {
-        grammaire: 0,
-        conjugaison: 0,
-        orthographe: 0,
-        numération: 0,
-        calculsEcrits: 0,
-        mesures: 0,
-        géométrie: 0
+        grammaire: [],
+        conjugaison: [],
+        orthographe: [],
+        numération: [],
+        calculsEcrits: [],
+        mesures: [],
+        géométrie: []
       }
     }]
   }],
@@ -44,6 +49,24 @@ const mutations = {
   // classes
   addClasse(state, newClasse) {
     state.classes.push(newClasse);
+  },
+  updateCompetence(state, {
+    competenceUpdates,
+    status,
+    message = ''
+  }) {
+    if (!status || !competenceUpdates) return console.error('il faut un status/competenceUpdates = {} pour update une competence');
+    let date = new Date;
+    const month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+    date = `${date.getDate()} ${month[date.getMonth()]}`;
+    let lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
+    let lastLevel = lastUpdate.actualLevel || 0;
+    competenceUpdates.push({
+      date,
+      message,
+      status, // 'success' | 'fail' | 'practice'
+      actualLevel: status === 'success' ? ++lastLevel : lastLevel
+    })
   },
   // loader
   startLoader(state) {
