@@ -3,14 +3,14 @@
     <h1>Créez une classe avec des élèves.</h1>
     <v-card>
       <v-card-text>
-        <v-form v-model="valid">
+        <v-form ref="form" v-model="valid">
           <v-container>
             <v-row>
               <v-col cols="12" md="4">
                 <v-text-field
                   v-model="className"
                   :rules="classRules"
-                  label="Nom de la classe"
+                  label="5 ème primaire 2019"
                   required
                 ></v-text-field>
                 <v-text-field v-model="eleveList" label="Elève 1, élève 2, ..." :rules="eleveRules"></v-text-field>
@@ -35,8 +35,8 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn disabled text>Annuler</v-btn>
-        <v-btn text color="primary">Créer</v-btn>
+        <v-btn text @click="clear">Annuler</v-btn>
+        <v-btn text @click="createClasse" color="info">Créer</v-btn>
       </v-card-actions>
     </v-card>
   </div>
@@ -47,9 +47,11 @@ export default {
   data() {
     return {
       valid: false,
-      className: "Nouvelle classe",
+      className: "5 ème primaire 2019",
       classRules: [v => !!v || "Le nom de la classe est requis."],
-      eleveList: "",
+
+      eleveList:
+        "Cyrille, Sandrine, Augustin, Larissa, Grigori, Aurélie, Damien",
       eleveRules: [
         v => this.validUniqueEleve(v) || "Il ne peut pas y avoir 2 même noms"
       ]
@@ -71,17 +73,25 @@ export default {
       return validation;
     },
     getRandomColor(eleve) {
-      console.log("charcode = ", eleve.charCodeAt(0));
       let letter = eleve.charCodeAt(0) - 65;
       let num = letter * 9;
       let num2 = 255 - num;
       let num3 = num > num2 ? num : num2;
       return `rgb(${num}, ${num2}, ${num3})`;
+    },
+    clear() {
+      this.eleveList = "";
+      this.className = "";
+      this.$refs.form.resetValidation();
+    },
+    createClasse() {
+      if (this.valid !== false) return;
     }
   },
   computed: {
     chipEleveList() {
-      if (this.eleveList.length === 0) return null;
+      if (this.eleveList === undefined || this.eleveList.length === 0)
+        return null;
       let list = this.eleveList.split(",").map(name => {
         let trim = name.trim();
         return trim.charAt(0).toUpperCase() + trim.slice(1);

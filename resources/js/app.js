@@ -27,12 +27,17 @@
 // const app = new Vue({Vuetify}).$mount('#app');
 
 import Vue from 'vue';
-import vuetify from './vuetify'
 
-import App from './components/App.vue'
+// Root Component
+import App from './components/App.vue';
+
+// modules
+import vuetify from './modules/vuetify';
+import router from './modules/router';
 
 new Vue({
   vuetify,
+  router,
   el: "#app",
   components: {
     App

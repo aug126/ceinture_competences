@@ -15,8 +15,11 @@
             <floating-drawer></floating-drawer>
           </v-col>
           <v-col cols="9">
+            <!-- ROUTER
+              ======================= -->
+              <router-view></router-view>
             <!-- <class-new></class-new> -->
-            <ceinture-table></ceinture-table>
+            <!-- <ceinture-table></ceinture-table> -->
           </v-col>
         </v-row>
       </v-container>
@@ -29,16 +32,12 @@
 </template>
 
 <script>
-import ClassNew from "./ClassNew";
-import CeintureTable from "./CeintureTable";
 import FloatingDrawer from "./drawers/FloatingDrawer";
 import OptionsDrawer from "./drawers/OptionsDrawer";
 import BtnOptions from "./BtnOptions";
 import ProvisoireTest from "./Test";
 export default {
   components: {
-    ClassNew,
-    CeintureTable,
     FloatingDrawer,
     OptionsDrawer,
     BtnOptions,

@@ -16,13 +16,16 @@
           </template>
 
 
-          <v-list-item link to="">
+          <v-list-item link to="/ceintures/1">
             <v-list-item-title>ma première classe</v-list-item-title>
           </v-list-item>
-          <v-list-item link to="">
+          <v-list-item link to="/ceintures/2">
             <v-list-item-title>2019</v-list-item-title>
           </v-list-item>
-
+          <v-list-item class="text-center" link to="/new-classe">
+            <v-list-item-title>Nouvelle classe</v-list-item-title>
+            <v-list-item-action><v-icon color="info">mdi-plus-circle</v-icon></v-list-item-action>
+          </v-list-item>
         </v-list-group>
 
       </v-list>
