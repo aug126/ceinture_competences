@@ -373,7 +373,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _svg_ceinture_type_2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../svg/ceinture-type-2 */ "./resources/js/components/svg/ceinture-type-2.vue");
+/* harmony import */ var _svg_ceinture_type_2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../svg/ceinture-type-2 */ "./resources/js/components/svg/ceinture-type-2.vue");
+/* harmony import */ var _partials_BeltActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../partials/BeltActions */ "./resources/js/components/partials/BeltActions.vue");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../config */ "./resources/js/config.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -418,12 +421,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-// import CeintureType1 from "../svg/ceinture-type-1";
- // import CeintureType3 from "../svg/ceinture-type-3";
+//
+//
+//
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    CeintureType2: _svg_ceinture_type_2__WEBPACK_IMPORTED_MODULE_0__["default"]
+    CeintureType2: _svg_ceinture_type_2__WEBPACK_IMPORTED_MODULE_0__["default"],
+    BeltActions: _partials_BeltActions__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   methods: {
     upLvl: function upLvl(row, competence) {
@@ -435,389 +443,31 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.tableHeight = document.body.clientHeight - 148;
   },
+  created: function created() {
+    if (this.currentClasse === undefined) this.$router.push({
+      path: "/"
+    });
+  },
   data: function data() {
     return {
       tableHeight: 0,
-      competenceObject: {
-        grammaire: ["white", "yellow", "orange", "green", "red", "blue"],
-        conjugaison: ["white", "yellow", "orange", "green", "red", "blue"],
-        orthographe: ["white", "yellow", "orange", "green", "red", "blue"],
-        numération: ["white", "yellow", "orange", "green", "red", "blue"],
-        calculsEcrits: ["white", "yellow", "orange", "green", "red", "blue"],
-        mesures: ["white", "yellow", "orange", "green", "red", "blue"],
-        géométrie: ["white", "yellow", "orange", "green", "red", "blue"]
-      },
-      ceintureEleveList: [{
-        numero: 1,
-        name: "Augustin",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 2,
-        name: "Céline",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 3,
-        name: "Autres enfants",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 4,
-        name: "aad",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 5,
-        name: "aae",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 6,
-        name: "aaf",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 7,
-        name: "aag",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 8,
-        name: "aah",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 9,
-        name: "aai",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aaj",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aak",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aal",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aam",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aan",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aao",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aap",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aaq",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aar",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aas",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aat",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aau",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aav",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aaw",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aax",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aay",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aaz",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "aba",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "abb",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "abc",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }, {
-        numero: 1,
-        name: "abd",
-        competences: {
-          grammaire: 3,
-          conjugaison: 1,
-          orthographe: 3,
-          numération: 1,
-          calculsEcrits: 4,
-          mesures: 1,
-          géométrie: 2
-        }
-      }]
+      competenceObject: _config__WEBPACK_IMPORTED_MODULE_2__["default"].competences
     };
+  },
+  computed: {
+    currentClasse: function currentClasse() {
+      var classeId = this.$route.params.id;
+      return this.$store.getters.currentClasse(classeId);
+    }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/ClassNew.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/ClassNew.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/NewClasse.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/NewClasse.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -965,11 +615,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     buildClasse: function buildClasse() {
       var time = new Date();
       time = time.getTime();
-      return {
-        id: time + this.className,
+      var studentsBelt = this.chipEleveList.map(function (student, index) {
+        return {
+          numero: index + 1,
+          name: student,
+          competences: {
+            grammaire: 0,
+            conjugaison: 0,
+            orthographe: 0,
+            numération: 0,
+            calculsEcrits: 0,
+            mesures: 0,
+            géométrie: 0
+          }
+        };
+      });
+      var newClasse = {
+        id: time,
         name: this.className,
-        students: this.chipEleveList
-      };
+        studentsBelt: studentsBelt
+      }; // this.$set(newClasse, "id", time);
+      // this.$set(newClasse, "name", this.className);
+      // this.$set(newClasse, "studentsBelt", studentsBelt);
+
+      return newClasse;
     }
   },
   computed: {
@@ -982,6 +651,61 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return list.filter(function (eleve) {
         return eleve.length > 0;
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/BeltActions.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partials/BeltActions.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      fab: false,
+      fakeCollapse: true
+    };
+  },
+  methods: {
+    fake: function fake() {
+      this.fakeCollapse = !this.fakeCollapse;
     }
   }
 });
@@ -1110,7 +834,26 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#ceinture-table th[data-v-444a716d], #ceinture-table td[data-v-444a716d] {\n  font-size: 1.2rem;\n  border-color: black;\n  text-align: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n#ceinture-table .border-right[data-v-444a716d] {\n  border-right: 1px solid;\n}", ""]);
+exports.push([module.i, "#ceinture-table th[data-v-444a716d], #ceinture-table td[data-v-444a716d] {\n  font-size: 1.2rem;\n  border-color: black;\n  text-align: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n#ceinture-table .border-right[data-v-444a716d] {\n  border-right: 1px solid;\n}\n#ceinture-table tr:last-child td[data-v-444a716d] {\n  border-bottom: 1px solid black;\n}\n#ceinture-table tr:first-child td[data-v-444a716d] {\n  border-top: 1px solid black;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/BeltActions.vue?vue&type=style&index=0&lang=sass&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/lib/loader.js??ref--8-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partials/BeltActions.vue?vue&type=style&index=0&lang=sass& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "#BeltActions .v-speed-dial__list {\n  z-index: 5;\n  left: 50%;\n  transform: translateX(-50%);\n}\n#BeltActions .v-speed-dial__list .v-speed-dial--direction-left {\n  right: 55%;\n}\n#BeltActions .v-speed-dial__list .v-speed-dial--direction-right {\n  left: 55%;\n}\n#BeltActions .v-speed-dial__list .v-btn.middle {\n  margin-top: -180%;\n}", ""]);
 
 // exports
 
@@ -2539,6 +2282,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/BeltActions.vue?vue&type=style&index=0&lang=sass&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/lib/loader.js??ref--8-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partials/BeltActions.vue?vue&type=style&index=0&lang=sass& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--8-2!../../../../node_modules/sass-loader/lib/loader.js??ref--8-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./BeltActions.vue?vue&type=style&index=0&lang=sass& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/BeltActions.vue?vue&type=style&index=0&lang=sass&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/svg/ceinture-type-2.vue?vue&type=style&index=0&id=67ab2fcb&lang=sass&scoped=true&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/lib/loader.js??ref--8-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/svg/ceinture-type-2.vue?vue&type=style&index=0&id=67ab2fcb&lang=sass&scoped=true& ***!
@@ -3529,7 +3302,11 @@ var render = function() {
                 [
                   _c(
                     "v-list-item-icon",
-                    [_c("v-icon", [_vm._v("mdi-lock-open")])],
+                    [
+                      _c("v-icon", { attrs: { color: "info" } }, [
+                        _vm._v("mdi-lock-open")
+                      ])
+                    ],
                     1
                   ),
                   _vm._v(" "),
@@ -3573,7 +3350,7 @@ var render = function() {
                       "v-list-item",
                       {
                         key: classe.id,
-                        attrs: { link: "", to: "/ceintures/" + classe.name }
+                        attrs: { link: "", to: "/ceintures/" + classe.id }
                       },
                       [_c("v-list-item-title", [_vm._v(_vm._s(classe.name))])],
                       1
@@ -3649,7 +3426,7 @@ var render = function() {
                 id: "ceinture-table",
                 "fixed-header": true,
                 height: _vm.tableHeight,
-                dense: true
+                dense: false
               }
             },
             [
@@ -3678,7 +3455,11 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c("th", { staticClass: "border-right" }, [
-                      _c("h4", [_vm._v("2019")])
+                      _c("h4", [
+                        _vm._v(
+                          _vm._s(_vm.currentClasse && _vm.currentClasse.name)
+                        )
+                      ])
                     ]),
                     _vm._v(" "),
                     _vm._l(_vm.competenceObject, function(colors, competence) {
@@ -3700,45 +3481,54 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.ceintureEleveList, function(item) {
-                  return _c(
-                    "tr",
-                    { key: item.name },
-                    [
-                      _c("td", [_c("strong", [_vm._v(_vm._s(item.numero))])]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "border-right" }, [
-                        _c("strong", [_vm._v(_vm._s(item.name))])
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(item.competences, function(niveau, competence) {
-                        return _c(
-                          "td",
-                          {
-                            key: competence,
-                            class: {
-                              "border-right": competence === "orthographe"
+                _vm._l(
+                  _vm.currentClasse && _vm.currentClasse.studentsBelt,
+                  function(item) {
+                    return _c(
+                      "tr",
+                      { key: item.name },
+                      [
+                        _c("td", [_c("strong", [_vm._v(_vm._s(item.numero))])]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "border-right" }, [
+                          _c("strong", [_vm._v(_vm._s(item.name))])
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(item.competences, function(niveau, competence) {
+                          return _c(
+                            "td",
+                            {
+                              key: competence,
+                              class: {
+                                "border-right": competence === "orthographe"
+                              }
                             },
-                            on: {
-                              click: function() {
-                                return _vm.upLvl(item, competence)
-                              }
-                            }
-                          },
-                          [
-                            _c("ceinture-type-2", {
-                              attrs: {
-                                color: _vm.competenceObject[competence][niveau]
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      })
-                    ],
-                    2
-                  )
-                }),
+                            [
+                              _c(
+                                "belt-actions",
+                                [
+                                  niveau > 0
+                                    ? _c("ceinture-type-2", {
+                                        attrs: {
+                                          color:
+                                            _vm.competenceObject[competence][
+                                              niveau
+                                            ]
+                                        }
+                                      })
+                                    : _vm._e()
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  }
+                ),
                 0
               )
             ]
@@ -3757,10 +3547,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/ClassNew.vue?vue&type=template&id=38e4b49e&":
-/*!*****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/ClassNew.vue?vue&type=template&id=38e4b49e& ***!
-  \*****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/NewClasse.vue?vue&type=template&id=73db4687&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/NewClasse.vue?vue&type=template&id=73db4687& ***!
+  \******************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3910,6 +3700,141 @@ var render = function() {
             1
           )
         ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/Welcome.vue?vue&type=template&id=04233788&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/Welcome.vue?vue&type=template&id=04233788& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("h1", [_vm._v("Bienvenue")])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/BeltActions.vue?vue&type=template&id=c91257c0&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partials/BeltActions.vue?vue&type=template&id=c91257c0& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-speed-dial",
+    {
+      attrs: {
+        id: "BeltActions",
+        direction: "right",
+        "open-on-hover": false,
+        transition: "scale-transition"
+      },
+      scopedSlots: _vm._u([
+        {
+          key: "activator",
+          fn: function() {
+            return [
+              _vm.fab
+                ? _c(
+                    "v-btn",
+                    {
+                      attrs: { small: "", color: "light", fab: "" },
+                      model: {
+                        value: _vm.fab,
+                        callback: function($$v) {
+                          _vm.fab = $$v
+                        },
+                        expression: "fab"
+                      }
+                    },
+                    [_c("v-icon", [_vm._v("mdi-close")])],
+                    1
+                  )
+                : _vm._t("default", [
+                    _c(
+                      "v-btn",
+                      {
+                        attrs: { small: "", color: "light", fab: "" },
+                        model: {
+                          value: _vm.fab,
+                          callback: function($$v) {
+                            _vm.fab = $$v
+                          },
+                          expression: "fab"
+                        }
+                      },
+                      [_c("v-icon", [_vm._v("mdi-play")])],
+                      1
+                    )
+                  ])
+            ]
+          },
+          proxy: true
+        }
+      ]),
+      model: {
+        value: _vm.fab,
+        callback: function($$v) {
+          _vm.fab = $$v
+        },
+        expression: "fab"
+      }
+    },
+    [
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { attrs: { fab: "", dark: "", small: "", color: "secondary" } },
+        [_vm.fakeCollapse ? _c("v-icon", [_vm._v("mdi-pencil")]) : _vm._e()],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        {
+          staticClass: "middle",
+          attrs: { fab: "", dark: "", small: "", color: "success" }
+        },
+        [_c("v-icon", [_vm._v("mdi-plus")])],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { attrs: { fab: "", dark: "", small: "", color: "error" } },
+        [_vm.fakeCollapse ? _c("v-icon", [_vm._v("mdi-close")]) : _vm._e()],
         1
       )
     ],
@@ -45328,17 +45253,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/pages/ClassNew.vue":
-/*!****************************************************!*\
-  !*** ./resources/js/components/pages/ClassNew.vue ***!
-  \****************************************************/
+/***/ "./resources/js/components/pages/NewClasse.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/pages/NewClasse.vue ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ClassNew_vue_vue_type_template_id_38e4b49e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClassNew.vue?vue&type=template&id=38e4b49e& */ "./resources/js/components/pages/ClassNew.vue?vue&type=template&id=38e4b49e&");
-/* harmony import */ var _ClassNew_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ClassNew.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/ClassNew.vue?vue&type=script&lang=js&");
+/* harmony import */ var _NewClasse_vue_vue_type_template_id_73db4687___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NewClasse.vue?vue&type=template&id=73db4687& */ "./resources/js/components/pages/NewClasse.vue?vue&type=template&id=73db4687&");
+/* harmony import */ var _NewClasse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewClasse.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/NewClasse.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -45348,9 +45273,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ClassNew_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ClassNew_vue_vue_type_template_id_38e4b49e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ClassNew_vue_vue_type_template_id_38e4b49e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _NewClasse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _NewClasse_vue_vue_type_template_id_73db4687___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _NewClasse_vue_vue_type_template_id_73db4687___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -45360,38 +45285,178 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/pages/ClassNew.vue"
+component.options.__file = "resources/js/components/pages/NewClasse.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/pages/ClassNew.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/components/pages/ClassNew.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************/
+/***/ "./resources/js/components/pages/NewClasse.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/pages/NewClasse.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ClassNew_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ClassNew.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/ClassNew.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ClassNew_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NewClasse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./NewClasse.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/NewClasse.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NewClasse_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/pages/ClassNew.vue?vue&type=template&id=38e4b49e&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/components/pages/ClassNew.vue?vue&type=template&id=38e4b49e& ***!
-  \***********************************************************************************/
+/***/ "./resources/js/components/pages/NewClasse.vue?vue&type=template&id=73db4687&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/pages/NewClasse.vue?vue&type=template&id=73db4687& ***!
+  \************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClassNew_vue_vue_type_template_id_38e4b49e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ClassNew.vue?vue&type=template&id=38e4b49e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/ClassNew.vue?vue&type=template&id=38e4b49e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClassNew_vue_vue_type_template_id_38e4b49e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewClasse_vue_vue_type_template_id_73db4687___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./NewClasse.vue?vue&type=template&id=73db4687& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/NewClasse.vue?vue&type=template&id=73db4687&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewClasse_vue_vue_type_template_id_73db4687___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClassNew_vue_vue_type_template_id_38e4b49e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewClasse_vue_vue_type_template_id_73db4687___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/Welcome.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/pages/Welcome.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Welcome_vue_vue_type_template_id_04233788___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Welcome.vue?vue&type=template&id=04233788& */ "./resources/js/components/pages/Welcome.vue?vue&type=template&id=04233788&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _Welcome_vue_vue_type_template_id_04233788___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Welcome_vue_vue_type_template_id_04233788___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/pages/Welcome.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/Welcome.vue?vue&type=template&id=04233788&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/pages/Welcome.vue?vue&type=template&id=04233788& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Welcome_vue_vue_type_template_id_04233788___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Welcome.vue?vue&type=template&id=04233788& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/Welcome.vue?vue&type=template&id=04233788&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Welcome_vue_vue_type_template_id_04233788___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Welcome_vue_vue_type_template_id_04233788___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/partials/BeltActions.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/partials/BeltActions.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BeltActions_vue_vue_type_template_id_c91257c0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BeltActions.vue?vue&type=template&id=c91257c0& */ "./resources/js/components/partials/BeltActions.vue?vue&type=template&id=c91257c0&");
+/* harmony import */ var _BeltActions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BeltActions.vue?vue&type=script&lang=js& */ "./resources/js/components/partials/BeltActions.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _BeltActions_vue_vue_type_style_index_0_lang_sass___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BeltActions.vue?vue&type=style&index=0&lang=sass& */ "./resources/js/components/partials/BeltActions.vue?vue&type=style&index=0&lang=sass&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _BeltActions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BeltActions_vue_vue_type_template_id_c91257c0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BeltActions_vue_vue_type_template_id_c91257c0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/partials/BeltActions.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/partials/BeltActions.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/partials/BeltActions.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BeltActions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BeltActions.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/BeltActions.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BeltActions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/partials/BeltActions.vue?vue&type=style&index=0&lang=sass&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/partials/BeltActions.vue?vue&type=style&index=0&lang=sass& ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_lib_loader_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_BeltActions_vue_vue_type_style_index_0_lang_sass___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--8-2!../../../../node_modules/sass-loader/lib/loader.js??ref--8-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./BeltActions.vue?vue&type=style&index=0&lang=sass& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/BeltActions.vue?vue&type=style&index=0&lang=sass&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_lib_loader_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_BeltActions_vue_vue_type_style_index_0_lang_sass___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_lib_loader_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_BeltActions_vue_vue_type_style_index_0_lang_sass___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_lib_loader_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_BeltActions_vue_vue_type_style_index_0_lang_sass___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_lib_loader_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_BeltActions_vue_vue_type_style_index_0_lang_sass___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_lib_loader_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_BeltActions_vue_vue_type_style_index_0_lang_sass___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/partials/BeltActions.vue?vue&type=template&id=c91257c0&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/partials/BeltActions.vue?vue&type=template&id=c91257c0& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BeltActions_vue_vue_type_template_id_c91257c0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./BeltActions.vue?vue&type=template&id=c91257c0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/BeltActions.vue?vue&type=template&id=c91257c0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BeltActions_vue_vue_type_template_id_c91257c0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BeltActions_vue_vue_type_template_id_c91257c0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -45484,6 +45549,419 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/config.js":
+/*!********************************!*\
+  !*** ./resources/js/config.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  competences: {
+    grammaire: [, "white", "yellow", "orange", "green", "red", "blue"],
+    conjugaison: [, "white", "yellow", "orange", "green", "red", "blue"],
+    orthographe: [, "white", "yellow", "orange", "green", "red", "blue"],
+    numération: [, "white", "yellow", "orange", "green", "red", "blue"],
+    calculsEcrits: [, "white", "yellow", "orange", "green", "red", "blue"],
+    mesures: [, "white", "yellow", "orange", "green", "red", "blue"],
+    géométrie: [, "white", "yellow", "orange", "green", "red", "blue"]
+  } // {
+  //   numero: 1,
+  //   name: "Augustin",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 2,
+  //   name: "Céline",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 3,
+  //   name: "Autres enfants",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 4,
+  //   name: "aad",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 5,
+  //   name: "aae",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 6,
+  //   name: "aaf",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 7,
+  //   name: "aag",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 8,
+  //   name: "aah",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 9,
+  //   name: "aai",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aaj",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aak",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aal",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aam",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aan",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aao",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aap",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aaq",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aar",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aas",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aat",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aau",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aav",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aaw",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aax",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aay",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aaz",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "aba",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "abb",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "abc",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // },
+  // {
+  //   numero: 1,
+  //   name: "abd",
+  //   competences: {
+  //     grammaire: 3,
+  //     conjugaison: 1,
+  //     orthographe: 3,
+  //     numération: 1,
+  //     calculsEcrits: 4,
+  //     mesures: 1,
+  //     géométrie: 2
+  //   }
+  // }
+
+});
+
+/***/ }),
+
 /***/ "./resources/js/modules/router.js":
 /*!****************************************!*\
   !*** ./resources/js/modules/router.js ***!
@@ -45496,19 +45974,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _components_pages_ClassNew__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/pages/ClassNew */ "./resources/js/components/pages/ClassNew.vue");
+/* harmony import */ var _components_pages_NewClasse__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/pages/NewClasse */ "./resources/js/components/pages/NewClasse.vue");
 /* harmony import */ var _components_pages_CeintureTable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/pages/CeintureTable */ "./resources/js/components/pages/CeintureTable.vue");
+/* harmony import */ var _components_pages_Welcome_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/pages/Welcome.vue */ "./resources/js/components/pages/Welcome.vue");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 
+
 var routes = [{
   path: "/new-classe",
-  component: _components_pages_ClassNew__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _components_pages_NewClasse__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
-  path: "/ceintures/:classe",
+  path: "/ceintures/:id",
   component: _components_pages_CeintureTable__WEBPACK_IMPORTED_MODULE_3__["default"]
+}, {
+  path: "/",
+  component: _components_pages_Welcome_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
 }];
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: routes
@@ -45588,8 +46071,45 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var state = {
-  classes: [],
+  classes: [{
+    id: 'time',
+    name: 'fake',
+    studentsBelt: [{
+      numero: 1,
+      name: 'name 1',
+      competences: {
+        grammaire: 0,
+        conjugaison: 0,
+        orthographe: 0,
+        numération: 0,
+        calculsEcrits: 0,
+        mesures: 0,
+        géométrie: 0
+      }
+    }, {
+      numero: 2,
+      name: 'name 2',
+      competences: {
+        grammaire: 0,
+        conjugaison: 0,
+        orthographe: 0,
+        numération: 0,
+        calculsEcrits: 0,
+        mesures: 0,
+        géométrie: 0
+      }
+    }]
+  }],
   overlayLoader: false
+};
+var getters = {
+  currentClasse: function currentClasse(state, getters) {
+    return function (id) {
+      return state.classes.find(function (classe) {
+        return classe.id == id;
+      });
+    };
+  }
 };
 var mutations = {
   // classes
@@ -45608,6 +46128,7 @@ var mutations = {
 };
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: state,
+  getters: getters,
   mutations: mutations
 }));
 

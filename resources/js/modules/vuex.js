@@ -4,8 +4,40 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  classes: [],
+  classes: [{
+    id: 'time',
+    name: 'fake',
+    studentsBelt: [{
+      numero: 1,
+      name: 'name 1',
+      competences: {
+        grammaire: 0,
+        conjugaison: 0,
+        orthographe: 0,
+        numération: 0,
+        calculsEcrits: 0,
+        mesures: 0,
+        géométrie: 0
+      }
+    }, {
+      numero: 2,
+      name: 'name 2',
+      competences: {
+        grammaire: 0,
+        conjugaison: 0,
+        orthographe: 0,
+        numération: 0,
+        calculsEcrits: 0,
+        mesures: 0,
+        géométrie: 0
+      }
+    }]
+  }],
   overlayLoader: false
+}
+
+const getters = {
+  currentClasse: (state, getters) => (id) => state.classes.find((classe) => classe.id == id),
 }
 
 const mutations = {
@@ -26,5 +58,6 @@ const mutations = {
 
 export default new Vuex.Store({
   state,
-  mutations
+  getters,
+  mutations,
 })

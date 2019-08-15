@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card>
-      <v-simple-table id="ceinture-table" :fixed-header="true" :height="tableHeight" :dense="true">
+      <v-simple-table id="ceinture-table" :fixed-header="true" :height="tableHeight" :dense="false">
         <thead>
           <tr>
             <th>
@@ -10,7 +10,7 @@
               </v-btn>
             </th>
             <th class="border-right">
-              <h4>2019</h4>
+              <h4>{{currentClasse && currentClasse.name}}</h4>
             </th>
             <th
               v-for="(colors, competence) in competenceObject"
@@ -20,8 +20,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in ceintureEleveList" :key="item.name">
+          <tr v-for="item in (currentClasse && currentClasse.studentsBelt)" :key="item.name">
             <td>
+              <!-- <v-text-field disabled v-model="item.numero"></v-text-field> -->
               <strong>{{ item.numero }}</strong>
             </td>
             <td class="border-right">
@@ -31,9 +32,11 @@
               v-for="(niveau, competence) in item.competences"
               :key="competence"
               :class="{'border-right': competence === 'orthographe'}"
-              @click="() => upLvl(item, competence)"
             >
-              <ceinture-type-2 :color="competenceObject[competence][niveau]"></ceinture-type-2>
+              <!-- @click="() => upLvl(item, competence)" -->
+              <belt-actions>
+                <ceinture-type-2 v-if="niveau > 0" :color="competenceObject[competence][niveau]"></ceinture-type-2>
+              </belt-actions>
             </td>
           </tr>
         </tbody>
@@ -43,12 +46,14 @@
 </template>
 
 <script>
-// import CeintureType1 from "../svg/ceinture-type-1";
-import CeintureType2 from "./../svg/ceinture-type-2";
-// import CeintureType3 from "../svg/ceinture-type-3";
+import CeintureType2 from "../svg/ceinture-type-2";
+import BeltActions from "../partials/BeltActions";
+import config from "../../config";
+import { mapGetters } from "vuex";
 export default {
   components: {
-    CeintureType2
+    CeintureType2,
+    BeltActions
   },
   methods: {
     upLvl(row, competence) {
@@ -60,411 +65,20 @@ export default {
   mounted() {
     this.tableHeight = document.body.clientHeight - 148;
   },
+  created() {
+    if (this.currentClasse === undefined) this.$router.push({ path: "/" });
+  },
   data() {
     return {
       tableHeight: 0,
-      competenceObject: {
-        grammaire: ["white", "yellow", "orange", "green", "red", "blue"],
-        conjugaison: ["white", "yellow", "orange", "green", "red", "blue"],
-        orthographe: ["white", "yellow", "orange", "green", "red", "blue"],
-        numération: ["white", "yellow", "orange", "green", "red", "blue"],
-        calculsEcrits: ["white", "yellow", "orange", "green", "red", "blue"],
-        mesures: ["white", "yellow", "orange", "green", "red", "blue"],
-        géométrie: ["white", "yellow", "orange", "green", "red", "blue"]
-      },
-      ceintureEleveList: [
-        {
-          numero: 1,
-          name: "Augustin",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 2,
-          name: "Céline",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 3,
-          name: "Autres enfants",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 4,
-          name: "aad",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 5,
-          name: "aae",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 6,
-          name: "aaf",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 7,
-          name: "aag",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 8,
-          name: "aah",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 9,
-          name: "aai",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aaj",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aak",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aal",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aam",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aan",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aao",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aap",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aaq",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aar",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aas",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aat",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aau",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aav",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aaw",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aax",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aay",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aaz",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "aba",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "abb",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "abc",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        },
-        {
-          numero: 1,
-          name: "abd",
-          competences: {
-            grammaire: 3,
-            conjugaison: 1,
-            orthographe: 3,
-            numération: 1,
-            calculsEcrits: 4,
-            mesures: 1,
-            géométrie: 2
-          }
-        }
-      ]
+      competenceObject: config.competences
     };
+  },
+  computed: {
+    currentClasse() {
+      let classeId = this.$route.params.id;
+      return this.$store.getters.currentClasse(classeId);
+    }
   }
 };
 </script>
@@ -478,4 +92,12 @@ export default {
     user-select: none
   .border-right
     border-right: 1px solid
+  tr:last-child
+    td 
+      border-bottom: 1px solid black
+  tr:first-child
+    td 
+      border-top: 1px solid black
+  // Modifications inputs pour changer les données.
+  
 </style>

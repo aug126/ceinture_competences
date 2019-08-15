@@ -94,11 +94,28 @@ export default {
     buildClasse() {
       let time = new Date();
       time = time.getTime();
-      return {
-        id: time + this.className,
+      const studentsBelt = this.chipEleveList.map((student, index) => ({
+        numero: index + 1,
+        name: student,
+        competences: {
+          grammaire: 0,
+          conjugaison: 0,
+          orthographe: 0,
+          numération: 0,
+          calculsEcrits: 0,
+          mesures: 0,
+          géométrie: 0
+        }
+      }));
+      let newClasse = {
+        id: time,
         name: this.className,
-        students: this.chipEleveList
+        studentsBelt
       };
+      // this.$set(newClasse, "id", time);
+      // this.$set(newClasse, "name", this.className);
+      // this.$set(newClasse, "studentsBelt", studentsBelt);
+      return newClasse;
     }
   },
   computed: {

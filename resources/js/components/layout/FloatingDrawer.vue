@@ -4,7 +4,7 @@
       <v-list :dense="false" rounded>
         <v-list-item active-class="active" link>
           <v-list-item-icon>
-            <v-icon>mdi-lock-open</v-icon>
+            <v-icon color="info">mdi-lock-open</v-icon>
           </v-list-item-icon>
           <v-list-item-title>Se Connecter</v-list-item-title>
         </v-list-item>
@@ -22,7 +22,7 @@
             v-for="classe in classes"
             :key="classe.id"
             link
-            :to="'/ceintures/' + classe.name"
+            :to="'/ceintures/' + classe.id"
           >
             <v-list-item-title>{{classe.name}}</v-list-item-title>
           </v-list-item>

@@ -5,17 +5,22 @@ Vue.use(VueRouter);
 
 
 
-import ClassNew from "../components/pages/ClassNew";
+import NewClasse from "../components/pages/NewClasse";
 import CeintureTable from "../components/pages/CeintureTable";
+import Welcome from "../components/pages/Welcome.vue"
 
 const routes = [{
     path: "/new-classe",
-    component: ClassNew
+    component: NewClasse
   },
   {
-    path: "/ceintures/:classe",
+    path: "/ceintures/:id",
     component: CeintureTable
   },
+  {
+    path: "/",
+    component: Welcome
+  }
 ]
 
 export default new VueRouter({
