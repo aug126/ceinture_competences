@@ -28,16 +28,19 @@
 
 import Vue from 'vue';
 
-// Root Component
-import App from './components/App.vue';
-
 // modules
 import vuetify from './modules/vuetify';
 import router from './modules/router';
+import store from './modules/vuex';
+
+// Root Component
+import App from './components/App.vue';
+
 
 new Vue({
   vuetify,
   router,
+  store,
   el: "#app",
   components: {
     App

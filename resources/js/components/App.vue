@@ -1,6 +1,7 @@
 <template>
   <v-app id="App">
-    <!-- <options-drawer></options-drawer> -->
+    <all-global-components></all-global-components>
+    <!-- <left-drawer-notused></left-drawer-notused> -->
     <v-app-bar :clipped-left="true" app dark color="primary">
       <v-app-bar-nav-icon class="ml-1">
         <btn-options></btn-options>
@@ -16,10 +17,8 @@
           </v-col>
           <v-col cols="9">
             <!-- ROUTER
-              ======================= -->
-              <router-view></router-view>
-            <!-- <class-new></class-new> -->
-            <!-- <ceinture-table></ceinture-table> -->
+            =======================-->
+            <router-view></router-view>
           </v-col>
         </v-row>
       </v-container>
@@ -32,16 +31,14 @@
 </template>
 
 <script>
-import FloatingDrawer from "./drawers/FloatingDrawer";
-import OptionsDrawer from "./drawers/OptionsDrawer";
-import BtnOptions from "./BtnOptions";
-import ProvisoireTest from "./Test";
+import FloatingDrawer from "./layout/FloatingDrawer";
+import BtnOptions from "./layout/BtnOptions";
+import AllGlobalComponents from "./global/AllGlobalComponents";
 export default {
   components: {
     FloatingDrawer,
-    OptionsDrawer,
     BtnOptions,
-    ProvisoireTest
+    AllGlobalComponents
   },
   data: () => ({})
 };

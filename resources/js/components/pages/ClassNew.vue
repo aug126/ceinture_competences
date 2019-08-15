@@ -84,8 +84,21 @@ export default {
       this.className = "";
       this.$refs.form.resetValidation();
     },
-    createClasse() {
-      if (this.valid !== false) return;
+    async createClasse() {
+      this.$refs.form.validate();
+      if (this.valid === false) return;
+      let newClasse = this.buildClasse();
+      await this.$store.commit("addClasse", newClasse);
+      this.$router.push({ path: "/ceintures/" + newClasse.id });
+    },
+    buildClasse() {
+      let time = new Date();
+      time = time.getTime();
+      return {
+        id: time + this.className,
+        name: this.className,
+        students: this.chipEleveList
+      };
     }
   },
   computed: {

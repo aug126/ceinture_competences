@@ -44,7 +44,7 @@
 
 <script>
 // import CeintureType1 from "../svg/ceinture-type-1";
-import CeintureType2 from "./svg/ceinture-type-2";
+import CeintureType2 from "./../svg/ceinture-type-2";
 // import CeintureType3 from "../svg/ceinture-type-3";
 export default {
   components: {
