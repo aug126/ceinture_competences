@@ -98,13 +98,13 @@ export default {
         numero: index + 1,
         name: student,
         competences: {
-          grammaire: 0,
-          conjugaison: 0,
-          orthographe: 0,
-          numération: 0,
-          calculsEcrits: 0,
-          mesures: 0,
-          géométrie: 0
+          grammaire: [],
+          conjugaison: [],
+          orthographe: [],
+          numération: [],
+          calculsEcrits: [],
+          mesures: [],
+          géométrie: []
         }
       }));
       let newClasse = {

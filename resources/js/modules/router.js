@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 
 
 import NewClasse from "../components/pages/NewClasse";
-import CeintureTable from "../components/pages/CeintureTable";
+import BeltTable from "../components/pages/BeltTable";
 import Welcome from "../components/pages/Welcome.vue"
 
 const routes = [{
@@ -15,7 +15,7 @@ const routes = [{
   },
   {
     path: "/ceintures/:id",
-    component: CeintureTable
+    component: BeltTable
   },
   {
     path: "/",

@@ -34,7 +34,7 @@
               :class="{'border-right': competence === 'orthographe'}"
             >
               <!-- @click="() => upLvl(item, competence)" -->
-              <belt-actions :competence-updates="allUpdates">
+              <belt-actions :competence-updates="allUpdates" :competence-name="competence">
                 <ceinture-type-2
                   v-if="niveau(allUpdates) > 0"
                   :color="competenceObject[competence][niveau(allUpdates)]"

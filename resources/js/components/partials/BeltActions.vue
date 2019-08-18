@@ -22,7 +22,8 @@
       <v-icon>mdi-dumbbell</v-icon>
     </v-btn>
     <v-btn @click="updateCompetence('success')" class="middle" fab dark small color="success">
-      <v-icon>mdi-plus</v-icon>
+      <!-- <v-icon>mdi-plus</v-icon> -->
+      <v-icon>mdi-arrow-up</v-icon>
     </v-btn>
     <v-btn @click="updateCompetence('fail')" fab dark small color="error">
       <!-- <v-icon>mdi-close</v-icon> -->
@@ -34,7 +35,8 @@
 <script>
 export default {
   props: {
-    competenceUpdates: Array
+    competenceUpdates: Array,
+    competenceName: String
   },
   data() {
     return {
@@ -47,8 +49,9 @@ export default {
       this.fakeCollapse = !this.fakeCollapse;
     },
     updateCompetence(status) {
-      this.$store.commit("updateCompetence", {
+      this.$store.dispatch("updateCompetence", {
         competenceUpdates: this.competenceUpdates,
+        competenceName: this.competenceName,
         status
       });
     }

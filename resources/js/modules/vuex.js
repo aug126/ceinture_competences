@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import config from '../config'
 
 Vue.use(Vuex)
 
@@ -16,6 +17,26 @@ const state = {
           message: '',
           status: 'success', // 'success' | 'fail' | 'practice'
           actualLevel: 1
+        }, {
+          date: '',
+          message: '',
+          status: 'success', // 'success' | 'fail' | 'practice'
+          actualLevel: 2
+        }, {
+          date: '',
+          message: '',
+          status: 'success', // 'success' | 'fail' | 'practice'
+          actualLevel: 3
+        }, {
+          date: '',
+          message: '',
+          status: 'success', // 'success' | 'fail' | 'practice'
+          actualLevel: 4
+        }, {
+          date: '',
+          message: '',
+          status: 'success', // 'success' | 'fail' | 'practice'
+          actualLevel: 5
         }],
         conjugaison: [],
         orthographe: [],
@@ -38,7 +59,15 @@ const state = {
       }
     }]
   }],
-  overlayLoader: false
+
+  // Globals paramètres :
+  // =================
+  overlayLoader: false,
+  notifyInfo: {
+    status: null,
+    show: false,
+    message: null
+  }
 }
 
 const getters = {
@@ -55,7 +84,8 @@ const mutations = {
     status,
     message = ''
   }) {
-    if (!status || !competenceUpdates) return console.error('il faut un status/competenceUpdates = {} pour update une competence');
+    // Cette fonction devrait être appelée par son action pour vérification.
+    //TODO vérifier le nombre de competences Up avec le nombre de ceintures disponibles et renvoyer une notif si on est au max.
     let date = new Date;
     const month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
     date = `${date.getDate()} ${month[date.getMonth()]}`;
@@ -76,6 +106,47 @@ const mutations = {
   stopLoader(state) {
     console.log('stop loader');
     state.overlayLoader = false;
+  },
+  // notifications infos (snakbar)
+  showInfo(state, {
+    message,
+    status
+  }) {
+    state.notifyInfo = {
+      show: true,
+      message,
+      status
+    }
+  },
+  hideInfo(state, data = null) {
+    state.notifyInfo = {
+      show: false,
+      message: null,
+      status: null,
+    }
+  }
+}
+
+const actions = {
+  updateCompetence(context, {
+    competenceUpdates,
+    competenceName,
+    status,
+    message = ''
+  }) {
+    if (!status || !competenceUpdates || !competenceName) return console.error('il faut un status/competenceUpdates/competenceName dans {} pour update une competence');
+    let maxLevel = config.competences[competenceName].length - 1; // - 1 car la première valeur est empty pour l'icone "start"
+    let lastUpdate = competenceUpdates[competenceUpdates.length - 1];
+    let actualLevel = lastUpdate.actualLevel;
+    if (actualLevel === maxLevel)
+      context.commit("showInfo", {
+        message: "Le Niveau de compétence est déjà au maximal"
+      })
+    else context.commit("updateCompetence", {
+      competenceUpdates,
+      status
+    });
+
   }
 }
 
@@ -83,4 +154,5 @@ export default new Vuex.Store({
   state,
   getters,
   mutations,
+  actions
 })
