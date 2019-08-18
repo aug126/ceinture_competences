@@ -37,6 +37,11 @@ const state = {
           message: '',
           status: 'success', // 'success' | 'fail' | 'practice'
           actualLevel: 5
+        }, {
+          date: '',
+          message: '',
+          status: 'success', // 'success' | 'fail' | 'practice'
+          actualLevel: 6
         }],
         conjugaison: [],
         orthographe: [],
@@ -110,7 +115,7 @@ const mutations = {
   // notifications infos (snakbar)
   showInfo(state, {
     message,
-    status
+    status = null
   }) {
     state.notifyInfo = {
       show: true,
@@ -140,7 +145,8 @@ const actions = {
     let actualLevel = lastUpdate.actualLevel;
     if (actualLevel === maxLevel)
       context.commit("showInfo", {
-        message: "Le Niveau de compétence est déjà au maximal"
+        message: "Le Niveau de compétence est déjà au maximal",
+        status: 'warning'
       })
     else context.commit("updateCompetence", {
       competenceUpdates,

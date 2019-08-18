@@ -1,8 +1,9 @@
 <template>
   <div id="NotifyInfo" class="text-center ma-2">
-    <v-snackbar top color="secondary" :timeout="5000" v-model="showInfo.show">
-      {{ showInfo.message }}
-      <v-btn color="primary" outlined @click="hideInfo">Close</v-btn>
+    <v-snackbar top color="secondary" :timeout="8000" v-model="showInfo.show">
+      <v-icon v-if="color === 'warning'" class="warning--text">mdi-exclamation</v-icon>
+      <span>{{ showInfo.message }}</span>
+      <v-btn :color="color" outlined @click="hideInfo">Close</v-btn>
     </v-snackbar>
   </div>
 </template>
@@ -16,6 +17,11 @@ export default {
   methods: {
     hideInfo() {
       this.$store.commit("hideInfo");
+    }
+  },
+  computed: {
+    color() {
+      return this.showInfo.status || "primary";
     }
   }
 };

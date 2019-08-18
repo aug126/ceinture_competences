@@ -204,6 +204,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     showInfo: Object
@@ -211,6 +212,11 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     hideInfo: function hideInfo() {
       this.$store.commit("hideInfo");
+    }
+  },
+  computed: {
+    color: function color() {
+      return this.showInfo.status || "primary";
     }
   }
 });
@@ -3090,7 +3096,7 @@ var render = function() {
       _c(
         "v-snackbar",
         {
-          attrs: { top: "", color: "secondary", timeout: 5000 },
+          attrs: { top: "", color: "secondary", timeout: 8000 },
           model: {
             value: _vm.showInfo.show,
             callback: function($$v) {
@@ -3100,11 +3106,18 @@ var render = function() {
           }
         },
         [
-          _vm._v("\n    " + _vm._s(_vm.showInfo.message) + "\n    "),
+          _vm.color === "warning"
+            ? _c("v-icon", { staticClass: "warning--text" }, [
+                _vm._v("mdi-exclamation")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("span", [_vm._v(_vm._s(_vm.showInfo.message))]),
+          _vm._v(" "),
           _c(
             "v-btn",
             {
-              attrs: { color: "primary", outlined: "" },
+              attrs: { color: _vm.color, outlined: "" },
               on: { click: _vm.hideInfo }
             },
             [_vm._v("Close")]
@@ -46147,6 +46160,12 @@ var state = {
           status: 'success',
           // 'success' | 'fail' | 'practice'
           actualLevel: 5
+        }, {
+          date: '',
+          message: '',
+          status: 'success',
+          // 'success' | 'fail' | 'practice'
+          actualLevel: 6
         }],
         conjugaison: [],
         orthographe: [],
@@ -46224,7 +46243,8 @@ var mutations = {
   // notifications infos (snakbar)
   showInfo: function showInfo(state, _ref2) {
     var message = _ref2.message,
-        status = _ref2.status;
+        _ref2$status = _ref2.status,
+        status = _ref2$status === void 0 ? null : _ref2$status;
     state.notifyInfo = {
       show: true,
       message: message,
@@ -46253,7 +46273,8 @@ var actions = {
     var lastUpdate = competenceUpdates[competenceUpdates.length - 1];
     var actualLevel = lastUpdate.actualLevel;
     if (actualLevel === maxLevel) context.commit("showInfo", {
-      message: "Le Niveau de compétence est déjà au maximal"
+      message: "Le Niveau de compétence est déjà au maximal",
+      status: 'warning'
     });else context.commit("updateCompetence", {
       competenceUpdates: competenceUpdates,
       status: status
