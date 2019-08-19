@@ -40,8 +40,8 @@
                       v-on="on"
                       :class="getThemeColor(update.status)"
                       class="text-center lighten-5 update"
-                      :style="'border-left: 8px solid ' + (config[competence][update.actualLevel] || 'transparent') + ' !important'"
-                    >{{update[fileOption]}}</div>
+                      :style="'border-left: 8px solid ' + (update.status === 'success' && config[competence][update.actualLevel] || 'transparent') + ' !important'"
+                    >{{update[fileOption] || '- - - -'}}</div>
                   </template>
                   <span>{{update[disabledOption]}}</span>
                 </v-tooltip>

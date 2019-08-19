@@ -731,6 +731,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     competenceUpdates: Array,
@@ -740,7 +747,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       fab: false,
       fakeCollapse: true,
-      startColor: "primary"
+      startColor: "primary",
+      message: ""
     };
   },
   methods: {
@@ -751,8 +759,17 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch("updateCompetence", {
         competenceUpdates: this.competenceUpdates,
         competenceName: this.competenceName,
+        message: this.message,
         status: status
       });
+      this.message = "";
+    },
+    focusInput: function focusInput() {
+      var _this = this;
+
+      setTimeout(function () {
+        _this.$refs.inputMessage.$el.querySelector("input").focus();
+      }, 0);
     }
   }
 });
@@ -941,7 +958,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".h-100 {\n  height: 100% !important;\n}\n#sidebar-nav {\n  justify-content: center;\n  display: flex;\n}\n#App button.v-app-bar__nav-icon {\n  margin-top: -8px !important;\n}", ""]);
+exports.push([module.i, ".h-100 {\n  height: 100% !important;\n}\n.cursor-pointer {\n  cursor: pointer;\n}\n#sidebar-nav {\n  justify-content: center;\n  display: flex;\n}\n#App button.v-app-bar__nav-icon {\n  margin-top: -8px !important;\n}", ""]);
 
 // exports
 
@@ -1017,7 +1034,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#BeltActions .v-speed-dial__list {\n  z-index: 5;\n  left: 50%;\n  transform: translateX(-50%);\n}\n#BeltActions .v-speed-dial__list .v-speed-dial--direction-left {\n  right: 55%;\n}\n#BeltActions .v-speed-dial__list .v-speed-dial--direction-right {\n  left: 55%;\n}\n#BeltActions .v-speed-dial__list .v-btn.middle {\n  margin-top: -180%;\n}\n#BeltActions button.transition-color {\n  transition: background ease 0.3s !important;\n}", ""]);
+exports.push([module.i, "#BeltActions .v-speed-dial__list {\n  z-index: 5;\n  left: 50%;\n  transform: translateX(-50%);\n}\n#BeltActions .v-speed-dial__list .v-speed-dial--direction-left {\n  right: 55%;\n}\n#BeltActions .v-speed-dial__list .v-speed-dial--direction-right {\n  left: 55%;\n}\n#BeltActions .v-speed-dial__list .v-btn.middle {\n  margin-top: -180%;\n}\n#BeltActions .v-speed-dial__list .input {\n  width: 200px !important;\n  position: absolute;\n  z-index: 10;\n  top: 120% !important;\n  transition: transform 0.2s ease 0.2s !important;\n  caret-color: #4057b5 !important;\n}\n#BeltActions .v-speed-dial .v-speed-dial--is-active {\n  transform: scale(2);\n}\n#BeltActions button.transition-color {\n  transition: background ease 0.3s !important;\n}\n#BeltActions .input-info-border .v-input__slot {\n  border: 1px solid #4057b5;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12) !important;\n}\n#BeltActions .close.v-btn--active:before {\n  opacity: 0 !important;\n}", ""]);
 
 // exports
 
@@ -4010,36 +4027,46 @@ var render = function() {
             key: "activator",
             fn: function() {
               return [
-                _vm._t("default", [
-                  _c(
-                    "v-btn",
-                    {
-                      staticClass: "transition-color",
-                      attrs: { small: "", color: _vm.startColor, fab: "" },
-                      on: {
-                        mouseenter: function($event) {
-                          _vm.startColor = "info"
-                        },
-                        mouseleave: function($event) {
-                          _vm.startColor = "primary"
-                        }
+                _c(
+                  "div",
+                  {
+                    staticClass: "cursor-pointer",
+                    on: {
+                      click: _vm.focusInput,
+                      mouseenter: function($event) {
+                        _vm.startColor = "info"
                       },
-                      model: {
-                        value: _vm.fab,
-                        callback: function($$v) {
-                          _vm.fab = $$v
-                        },
-                        expression: "fab"
+                      mouseleave: function($event) {
+                        _vm.startColor = "primary"
                       }
-                    },
-                    [
+                    }
+                  },
+                  [
+                    _vm._t("default", [
                       !_vm.fab
-                        ? _c("v-icon", [_vm._v("mdi-play")])
-                        : _c("v-icon", [_vm._v("mdi-close")])
-                    ],
-                    1
-                  )
-                ])
+                        ? _c("v-icon", { attrs: { color: _vm.startColor } }, [
+                            _vm._v("mdi-play")
+                          ])
+                        : _c(
+                            "v-btn",
+                            {
+                              staticClass: "transition-color close",
+                              attrs: { small: "", color: "info", fab: "" },
+                              model: {
+                                value: _vm.fab,
+                                callback: function($$v) {
+                                  _vm.fab = $$v
+                                },
+                                expression: "fab"
+                              }
+                            },
+                            [_c("v-icon", [_vm._v("mdi-close")])],
+                            1
+                          )
+                    ])
+                  ],
+                  2
+                )
               ]
             },
             proxy: true
@@ -4086,6 +4113,24 @@ var render = function() {
         [_c("v-icon", [_vm._v("mdi-arrow-up")])],
         1
       ),
+      _vm._v(" "),
+      _c("v-text-field", {
+        ref: "inputMessage",
+        staticClass: "input input-info-border",
+        attrs: { label: "Commentaire ou note", solo: "" },
+        on: {
+          click: function($event) {
+            $event.stopPropagation()
+          }
+        },
+        model: {
+          value: _vm.message,
+          callback: function($$v) {
+            _vm.message = $$v
+          },
+          expression: "message"
+        }
+      }),
       _vm._v(" "),
       _c(
         "v-btn",
@@ -4231,16 +4276,22 @@ var render = function() {
                                                   ),
                                                   style:
                                                     "border-left: 8px solid " +
-                                                    (_vm.config[competence][
-                                                      update.actualLevel
-                                                    ] || "transparent") +
+                                                    ((update.status ===
+                                                      "success" &&
+                                                      _vm.config[competence][
+                                                        update.actualLevel
+                                                      ]) ||
+                                                      "transparent") +
                                                     " !important"
                                                 },
                                                 on
                                               ),
                                               [
                                                 _vm._v(
-                                                  _vm._s(update[_vm.fileOption])
+                                                  _vm._s(
+                                                    update[_vm.fileOption] ||
+                                                      "- - - -"
+                                                  )
                                                 )
                                               ]
                                             )
@@ -46773,7 +46824,8 @@ var actions = {
       status: 'warning'
     });else context.commit("updateCompetence", {
       competenceUpdates: competenceUpdates,
-      status: status
+      status: status,
+      message: message
     });
   }
 };

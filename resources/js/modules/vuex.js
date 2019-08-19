@@ -150,7 +150,8 @@ const actions = {
       })
     else context.commit("updateCompetence", {
       competenceUpdates,
-      status
+      status,
+      message
     });
 
   }

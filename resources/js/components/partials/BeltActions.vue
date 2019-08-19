@@ -10,20 +10,19 @@
       <!-- <v-btn v-if="fab" small v-model="fab" color="light" fab>
         <v-icon>mdi-close</v-icon>
       </v-btn>-->
-      <slot>
-        <v-btn
-          small
-          v-model="fab"
-          :color="startColor"
-          fab
-          class="transition-color"
-          @mouseenter="startColor='info'"
-          @mouseleave="startColor='primary'"
-        >
-          <v-icon v-if="!fab">mdi-play</v-icon>
-          <v-icon v-else>mdi-close</v-icon>
-        </v-btn>
-      </slot>
+      <div
+        @click="focusInput"
+        class="cursor-pointer"
+        @mouseenter="startColor='info'"
+        @mouseleave="startColor='primary'"
+      >
+        <slot>
+          <v-icon :color="startColor" v-if="!fab">mdi-play</v-icon>
+          <v-btn v-else small v-model="fab" color="info" fab class="transition-color close">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </slot>
+      </div>
     </template>
     <v-btn @click="updateCompetence('practice')" fab dark small color="secondary">
       <!-- <v-icon v-if="fakeCollapse">mdi-pencil</v-icon> -->
@@ -33,6 +32,14 @@
       <!-- <v-icon>mdi-plus</v-icon> -->
       <v-icon>mdi-arrow-up</v-icon>
     </v-btn>
+    <v-text-field
+      ref="inputMessage"
+      @click.stop
+      v-model="message"
+      class="input input-info-border"
+      label="Commentaire ou note"
+      solo
+    ></v-text-field>
     <v-btn @click="updateCompetence('fail')" fab dark small color="error">
       <!-- <v-icon>mdi-close</v-icon> -->
       <v-icon>mdi-minus</v-icon>
@@ -50,7 +57,8 @@ export default {
     return {
       fab: false,
       fakeCollapse: true,
-      startColor: "primary"
+      startColor: "primary",
+      message: ""
     };
   },
   methods: {
@@ -61,25 +69,49 @@ export default {
       this.$store.dispatch("updateCompetence", {
         competenceUpdates: this.competenceUpdates,
         competenceName: this.competenceName,
+        message: this.message,
         status
       });
+      this.message = "";
+    },
+    focusInput() {
+      setTimeout(() => {
+        this.$refs.inputMessage.$el.querySelector("input").focus();
+      }, 0);
     }
   }
 };
 </script>
 
 <style lang="sass">
-#BeltActions .v-speed-dial__list
-  z-index: 5
-  left: 50%
-  transform: translateX(-50%)
-  .v-speed-dial--direction-left
-    right: 55%
-  .v-speed-dial--direction-right
-    left: 55%
-  .v-btn.middle 
-    margin-top: -180%
+#BeltActions 
+  .v-speed-dial__list
+    z-index: 5
+    left: 50%
+    transform: translateX(-50%)
+    .v-speed-dial--direction-left
+      right: 55%
+    .v-speed-dial--direction-right
+      left: 55%
+    .v-btn.middle 
+      margin-top: -180%
+    .input
+      width: 200px !important
+      position: absolute
+      z-index: 10
+      top: 120% !important
+      transition: transform .2s ease .2s !important
+      caret-color: #4057b5 !important
+  .v-speed-dial
+    .v-speed-dial--is-active
+      transform: scale(2)
+  
 #BeltActions
   button.transition-color 
     transition: background ease .3s !important
+  .input-info-border .v-input__slot
+    border: 1px solid #4057b5
+    box-shadow: 0 6px 6px -3px rgba(0,0,0,.2),0 10px 14px 1px rgba(0,0,0,.14),0 4px 18px 3px rgba(0,0,0,.12)!important // == elevation-10
+  .close.v-btn--active:before
+    opacity: 0 !important
 </style>
