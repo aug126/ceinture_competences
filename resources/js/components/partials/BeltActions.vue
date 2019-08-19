@@ -11,7 +11,15 @@
         <v-icon>mdi-close</v-icon>
       </v-btn>-->
       <slot>
-        <v-btn small v-model="fab" color="primary" fab>
+        <v-btn
+          small
+          v-model="fab"
+          :color="startColor"
+          fab
+          class="transition-color"
+          @mouseenter="startColor='info'"
+          @mouseleave="startColor='primary'"
+        >
           <v-icon v-if="!fab">mdi-play</v-icon>
           <v-icon v-else>mdi-close</v-icon>
         </v-btn>
@@ -41,7 +49,8 @@ export default {
   data() {
     return {
       fab: false,
-      fakeCollapse: true
+      fakeCollapse: true,
+      startColor: "primary"
     };
   },
   methods: {
@@ -70,4 +79,7 @@ export default {
     left: 55%
   .v-btn.middle 
     margin-top: -180%
+#BeltActions
+  button.transition-color 
+    transition: background ease .3s !important
 </style>

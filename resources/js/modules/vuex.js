@@ -13,32 +13,32 @@ const state = {
       name: 'name 1',
       competences: {
         grammaire: [{
-          date: '',
-          message: '',
+          date: '19 aout',
+          message: 'test message laissé',
           status: 'success', // 'success' | 'fail' | 'practice'
           actualLevel: 1
         }, {
-          date: '',
+          date: '19 aout',
           message: '',
           status: 'success', // 'success' | 'fail' | 'practice'
           actualLevel: 2
         }, {
-          date: '',
+          date: '19 aout',
           message: '',
           status: 'success', // 'success' | 'fail' | 'practice'
           actualLevel: 3
         }, {
-          date: '',
+          date: '19 aout',
           message: '',
           status: 'success', // 'success' | 'fail' | 'practice'
           actualLevel: 4
         }, {
-          date: '',
+          date: '19 aout',
           message: '',
           status: 'success', // 'success' | 'fail' | 'practice'
           actualLevel: 5
         }, {
-          date: '',
+          date: '19 aout',
           message: '',
           status: 'success', // 'success' | 'fail' | 'practice'
           actualLevel: 6
@@ -141,11 +141,11 @@ const actions = {
   }) {
     if (!status || !competenceUpdates || !competenceName) return console.error('il faut un status/competenceUpdates/competenceName dans {} pour update une competence');
     let maxLevel = config.competences[competenceName].length - 1; // - 1 car la première valeur est empty pour l'icone "start"
-    let lastUpdate = competenceUpdates[competenceUpdates.length - 1];
-    let actualLevel = lastUpdate.actualLevel;
+    let lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
+    let actualLevel = lastUpdate.actualLevel || 0;
     if (actualLevel === maxLevel)
       context.commit("showInfo", {
-        message: "Le Niveau de compétence est déjà au maximal",
+        message: "Le Niveau de compétence est déjà au maximum",
         status: 'warning'
       })
     else context.commit("updateCompetence", {

@@ -44,7 +44,8 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
+@import '../../sass/app.sass'
 #sidebar-nav
   justify-content: center
   display: flex

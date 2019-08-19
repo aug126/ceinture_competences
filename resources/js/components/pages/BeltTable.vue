@@ -1,5 +1,6 @@
 <template>
   <div>
+    <belt-student-sheet @close="studentSheet = {}" :student="studentSheet" />
     <v-card>
       <v-simple-table id="ceinture-table" :fixed-header="true" :height="tableHeight" :dense="false">
         <thead>
@@ -20,20 +21,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in (currentClasse && currentClasse.studentsBelt)" :key="item.name">
+          <tr v-for="student in (currentClasse && currentClasse.studentsBelt)" :key="student.name">
             <td>
-              <!-- <v-text-field disabled v-model="item.numero"></v-text-field> -->
-              <strong>{{ item.numero }}</strong>
+              <!-- <v-text-field disabled v-model="student.numero"></v-text-field> -->
+              <strong>{{ student.numero }}</strong>
             </td>
-            <td class="border-right">
-              <strong>{{ item.name }}</strong>
+            <td class="border-right name">
+              <strong @click="() => showStudentSheet(student)">{{ student.name }}</strong>
             </td>
             <td
-              v-for="(allUpdates, competence) in item.competences"
+              v-for="(allUpdates, competence) in student.competences"
               :key="competence"
               :class="{'border-right': competence === 'orthographe'}"
             >
-              <!-- @click="() => upLvl(item, competence)" -->
+              <!-- @click="() => upLvl(student, competence)" -->
               <belt-actions :competence-updates="allUpdates" :competence-name="competence">
                 <ceinture-type-2
                   v-if="niveau(allUpdates) > 0"
@@ -51,12 +52,14 @@
 <script>
 import CeintureType2 from "../svg/ceinture-type-2";
 import BeltActions from "../partials/BeltActions";
+import BeltStudentSheet from "../partials/BeltStudentSheet";
 import config from "../../config";
 import { mapGetters } from "vuex";
 export default {
   components: {
     CeintureType2,
-    BeltActions
+    BeltActions,
+    BeltStudentSheet
   },
   methods: {
     upLvl(row, competence) {
@@ -67,6 +70,9 @@ export default {
     niveau(allUpdatesMessages) {
       let up = allUpdatesMessages;
       return up[up.length - 1] && up[up.length - 1].actualLevel;
+    },
+    showStudentSheet(student) {
+      this.studentSheet = student;
     }
   },
   mounted() {
@@ -78,7 +84,8 @@ export default {
   data() {
     return {
       tableHeight: 0,
-      competenceObject: config.competences
+      competenceObject: config.competences,
+      studentSheet: {}
     };
   },
   computed: {
@@ -108,5 +115,11 @@ export default {
   // Modifications inputs pour changer les données.
   tbody tr:hover
     background: none !important
-  
+  td.name
+    cursor: pointer
+    > strong 
+      display: block
+      transition: color .2s ease-in
+    &:hover > strong
+      color: #4057b5 !important
 </style>
