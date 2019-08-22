@@ -68,8 +68,6 @@ export default {
   },
   watch: {
     student(newVal) {
-      console.log("student change : ", newVal);
-      console.log("config, ", this.config);
       if (newVal.name) this.show = true;
     },
     show(val) {

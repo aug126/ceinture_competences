@@ -855,8 +855,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     student: function student(newVal) {
-      console.log("student change : ", newVal);
-      console.log("config, ", this.config);
       if (newVal.name) this.show = true;
     },
     show: function show(val) {
