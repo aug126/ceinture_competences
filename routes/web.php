@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +13,7 @@
 |
 */
 
+Route::get('/test', 'TestController@index');
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', compact('test'));
 });

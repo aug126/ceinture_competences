@@ -26,11 +26,13 @@
     </template>
     <v-btn @click="updateCompetence('practice')" fab dark small color="secondary">
       <!-- <v-icon v-if="fakeCollapse">mdi-pencil</v-icon> -->
-      <v-icon>mdi-dumbbell</v-icon>
+      <!-- <v-icon>mdi-dumbbell</v-icon> -->
+      <v-icon>mdi-timer-sand</v-icon>
     </v-btn>
     <v-btn @click="updateCompetence('success')" class="middle" fab dark small color="success">
       <!-- <v-icon>mdi-plus</v-icon> -->
-      <v-icon>mdi-arrow-up</v-icon>
+      <!-- <v-icon>mdi-arrow-up</v-icon> -->
+      <v-icon>mdi-emoticon-happy-outline</v-icon>
     </v-btn>
     <v-text-field
       ref="inputMessage"
@@ -42,7 +44,8 @@
     ></v-text-field>
     <v-btn @click="updateCompetence('fail')" fab dark small color="error">
       <!-- <v-icon>mdi-close</v-icon> -->
-      <v-icon>mdi-minus</v-icon>
+      <!-- <v-icon>mdi-minus</v-icon> -->
+      <v-icon>mdi-emoticon-sad-outline</v-icon>
     </v-btn>
   </v-speed-dial>
 </template>

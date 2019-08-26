@@ -738,6 +738,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     competenceUpdates: Array,
@@ -4093,7 +4096,7 @@ var render = function() {
             }
           }
         },
-        [_c("v-icon", [_vm._v("mdi-dumbbell")])],
+        [_c("v-icon", [_vm._v("mdi-timer-sand")])],
         1
       ),
       _vm._v(" "),
@@ -4108,7 +4111,7 @@ var render = function() {
             }
           }
         },
-        [_c("v-icon", [_vm._v("mdi-arrow-up")])],
+        [_c("v-icon", [_vm._v("mdi-emoticon-happy-outline")])],
         1
       ),
       _vm._v(" "),
@@ -4140,7 +4143,7 @@ var render = function() {
             }
           }
         },
-        [_c("v-icon", [_vm._v("mdi-minus")])],
+        [_c("v-icon", [_vm._v("mdi-emoticon-sad-outline")])],
         1
       )
     ],
