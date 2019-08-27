@@ -5,11 +5,10 @@
 use App\Student;
 use Faker\Generator as Faker;
 
-$factory->define(Student::class, function (Faker $faker, $numero, $classes_id) {
-    echo $numero;
+$factory->define(Student::class, function (Faker $faker, Array $datas) {
     return [
-        'order_number' => $faker->randomNumber(2),
+        'order_number' => $datas['order_number'],
         'student_name' => $faker->name(),
-        'classes_id'   => $faker->randomNumber(),
+        'classe_id'   => $datas['classe_id'],
     ];
 });

@@ -11,8 +11,20 @@ class ClassesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Classe::class, 3)->create()->each(function ($classe) {
-            $classe->students()->save(factory(App\Student::class, 20));
+        $user = factory(App\User::class)->create();
+        factory(App\Classe::class, 3)
+            ->create(['user_id' => $user->id])
+            ->each(function ($classe) {
+                $a = 1;
+                while ($a <= 25) {
+                    $student = factory(App\Student::class)->create([
+                        'classe_id' => $classe->id,
+                        'order_number' => $a
+                        ]);
+                    $classe->students()
+                        ->save($student);
+                    $a++;
+                }
         });
     }
 }
