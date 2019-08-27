@@ -19,6 +19,8 @@ class CreateUpdatesTable extends Migration
             $table->tinyInteger('actual_level');
             $table->string('message')->nulllable();
             $table->tinyInteger('rating')->nulllable();
+            $table->unsignedBigInteger('skill_id');
+            $table->unsignedBigInteger('student_id');
             $table->timestamps();
             $table->softDeletes();
         });

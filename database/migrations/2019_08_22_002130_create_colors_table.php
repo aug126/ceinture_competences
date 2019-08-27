@@ -18,6 +18,7 @@ class CreateColorsTable extends Migration
             $table->tinyInteger('skill_level');
             $table->string('hexa_color', 10);
             $table->tinyInteger('max_rating')->nullable();
+            $table->unsignedBigInteger('skill_id');
             $table->timestamps();
             $table->softDeletes();
         });

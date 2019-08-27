@@ -18,6 +18,7 @@ class CreateStudentsTable extends Migration
             $table->tinyInteger('order_number');
             $table->string('student_name');
             $table->string('global_message', 1000)->nullable();
+            $table->unsignedBigInteger('classe_id');
             $table->timestamps();
             $table->softDeletes();
         });

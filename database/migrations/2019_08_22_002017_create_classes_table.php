@@ -16,6 +16,7 @@ class CreateClassesTable extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('classe_name');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->softDeletes();
         });
