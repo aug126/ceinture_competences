@@ -3,6 +3,7 @@
 use App\Color;
 use App\Program;
 use App\Skill;
+use App\Update;
 use App\User;
 use Illuminate\Database\Seeder;
 
@@ -33,18 +34,6 @@ class ClassesTableSeeder extends Seeder
             ->create(['user_id' => $user->id])
             ->each(function ($classe) {
 
-                /* STUDENTS
-                -------------------------- */
-                $a = 1;
-                while ($a <= 25) {
-                    $student = factory(App\Student::class)->create([
-                        'classe_id' => $classe->id,
-                        'order_number' => $a
-                        ]);
-                    $classe->students()
-                        ->save($student);
-                    $a++;
-                }
 
                 /* PROGRAMS
                 -------------------------- */
@@ -115,9 +104,35 @@ class ClassesTableSeeder extends Seeder
                     ]);
                 }
 
-                /* UPDATES
+                /* STUDENTS
                 -------------------------- */
-                // foreach();
+                $a = 1;
+                while ($a <= 25) {
+                    $student = factory(App\Student::class)->create([
+                        'classe_id' => $classe->id,
+                        'order_number' => $a
+                        ]);
+                    $classe->students()
+                        ->save($student);
+                    $a++;
+
+                    /* UPDATES
+                    -------------------------- */
+                    foreach ($skills as $skill) {
+                        $b = 1;
+                        $max = random_int(0, 6);
+                        while ($b <= $max) {
+                            $status_i = random_int(0, 2);
+                            $status_array = ['success', 'fail', 'practice'];
+                            Update::insert([
+                                'status'        => $status_array[$status_i],
+                                'skill_id'      => $skill->id,
+                                'student_id'    => $student->id,
+                            ]);
+                            $b++;
+                        }
+                    }
+                }
         });
     }
 }

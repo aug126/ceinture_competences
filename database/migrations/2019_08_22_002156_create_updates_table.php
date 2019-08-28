@@ -16,9 +16,8 @@ class CreateUpdatesTable extends Migration
         Schema::create('updates', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('status', 10);
-            $table->tinyInteger('actual_level');
-            $table->string('message')->nulllable();
-            $table->tinyInteger('rating')->nulllable();
+            $table->string('message')->nullable();
+            $table->tinyInteger('rating')->nullable();
             $table->unsignedBigInteger('skill_id');
             $table->unsignedBigInteger('student_id');
             $table->timestamps();
