@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::get('/test', 'TestController@index');
 Route::get('/', function () {
-    return view('welcome', compact('test'));
+    return view('welcome');
 });

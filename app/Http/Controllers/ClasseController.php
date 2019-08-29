@@ -12,19 +12,10 @@ class ClasseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() // GET      /api/classes/
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $classes = Classe::select('id', 'classe_name')->get();
+        return $classes;
     }
 
     /**
@@ -33,7 +24,7 @@ class ClasseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) // POST      /api/classes
     {
         //
     }
@@ -44,20 +35,11 @@ class ClasseController extends Controller
      * @param  \App\Classe  $classe
      * @return \Illuminate\Http\Response
      */
-    public function show(Classe $classe)
+    public function show($id) // GET     /api/classes/{id}
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Classe  $classe
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Classe $classe)
-    {
-        //
+        $classe = Classe::find($id)->students()->with('updates')->get();
+        // $students = $classe->students;
+        return $classe;
     }
 
     /**
@@ -67,7 +49,7 @@ class ClasseController extends Controller
      * @param  \App\Classe  $classe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Classe $classe)
+    public function update(Request $request, $id) // PUT/PATCH     /api/classes/{id}
     {
         //
     }
@@ -78,7 +60,7 @@ class ClasseController extends Controller
      * @param  \App\Classe  $classe
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Classe $classe)
+    public function destroy($id) // DELETE     /api/classes/{id}
     {
         //
     }

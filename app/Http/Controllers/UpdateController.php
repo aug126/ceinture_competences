@@ -18,16 +18,6 @@ class UpdateController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -44,18 +34,7 @@ class UpdateController extends Controller
      * @param  \App\Update  $update
      * @return \Illuminate\Http\Response
      */
-    public function show(Update $update)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Update  $update
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Update $update)
+    public function show($id)
     {
         //
     }
@@ -67,7 +46,7 @@ class UpdateController extends Controller
      * @param  \App\Update  $update
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Update $update)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -78,7 +57,7 @@ class UpdateController extends Controller
      * @param  \App\Update  $update
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Update $update)
+    public function destroy($id)
     {
         //
     }
