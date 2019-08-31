@@ -10,14 +10,18 @@
                 <v-icon>mdi-table-edit</v-icon>
               </v-btn>
             </th>
+            
             <th class="border-right">
               <h4>{{currentClasse && currentClasse.classe_name}}</h4>
             </th>
-            <th
-              v-for="(colors, competence) in competenceObject"
-              :key="competence"
-              :class="{'border-right': competence === 'orthographe'}"
-            >{{competence}}</th>
+            <template v-for="(program) in programsObj">
+              <th
+                v-for="(skill, skillId) in program.skills"
+                :key="skillId"
+                :class="{'border-right': isLastKey(program.skills, skillId)}"
+              >{{skill.skill_name}}</th>
+              
+            </template>
           </tr>
         </thead>
         <tbody>
@@ -29,19 +33,18 @@
             <td class="border-right name">
               <strong @click="() => showStudentSheet(student)">{{ student.student_name }}</strong>
             </td>
-            <td
+            <!-- <td
               v-for="(allUpdates, competence) in student.competences"
               :key="competence"
               :class="{'border-right': competence === 'orthographe'}"
             >
-              <!-- @click="() => upLvl(student, competence)" -->
               <belt-actions :competence-updates="allUpdates" :competence-name="competence">
                 <ceinture-type-2
                   v-if="niveau(allUpdates) > 0"
-                  :color="competenceObject[competence][niveau(allUpdates)]"
+                  :color="programsObj[competence][niveau(allUpdates)]"
                 ></ceinture-type-2>
               </belt-actions>
-            </td>
+            </td> -->
           </tr>
         </tbody>
       </v-simple-table>
@@ -63,11 +66,11 @@ export default {
   },
 
   methods: {
-    upLvl(row, competence) {
-      let maxLvl = this.competenceObject[competence].length - 1;
-      let currentLvl = row.competences[competence];
-      if (maxLvl > currentLvl) row.competences[competence] += 1;
-    },
+    // upLvl(row, competence) {
+    //   let maxLvl = this.programsObj[competence].length - 1;
+    //   let currentLvl = row.competences[competence];
+    //   if (maxLvl > currentLvl) row.competences[competence] += 1;
+    // },
     niveau(allUpdatesMessages) {
       let up = allUpdatesMessages;
       return up[up.length - 1] && up[up.length - 1].actualLevel;
@@ -80,6 +83,11 @@ export default {
     },
     getProgramsSkills() {
       this.$store.dispatch('getProgramsSkills', this.$route.params.id)
+    },
+    isLastKey(obj, key) {
+      let allKeys = Object.keys(obj);
+      let lastKey = allKeys[allKeys.length - 1];
+      return lastKey == key;
     }
   },
 
@@ -88,17 +96,14 @@ export default {
   },
 
   beforeMount() {
-    if (this.currentClasse === undefined) this.$router.push({ path: "/" });
-    else {
-      this.getStudentsUpdates();
-      this.getProgramsSkills();
-    }
+    this.getStudentsUpdates();
+    this.getProgramsSkills();
   },
 
   data() {
     return {
       tableHeight: 0,
-      competenceObject: config.competences,
+      // programsObj: config.competences,
       studentSheet: {}
     };
   },
@@ -106,7 +111,18 @@ export default {
   computed: {
     currentClasse() {
       let classeId = this.$route.params.id;
-      return this.$store.state.classes[classeId];
+      let classe = this.$store.state.classes[classeId];
+      if (classe === undefined) {
+        this.$router.push({ path: "/" });
+        return {};
+      };
+      return classe;
+    },
+    programsObj() {
+      let programs = this.currentClasse.programs;
+      if (programs === undefined) 
+        return {};
+      return programs;
     }
   },
 

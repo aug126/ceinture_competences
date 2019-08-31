@@ -150,8 +150,17 @@ const mutations = {
     console.log('classes : ', state.classes);
   },
 
-  setProgramsSkills(state, programs) {
-    console.log('programs : ', programs);
+  setProgramsSkills(state, programsObj) {
+    for (let program of programsObj.programs) {
+      for (let skill of program.skills) {
+        skill.colors = help.arrayToObjId(skill.colors);
+      }
+      program.skills = help.arrayToObjId(program.skills);
+    }
+    let classe = state.classes[programsObj.classeId];
+    classe.programs = help.arrayToObjId(programsObj.programs);
+    state.classes[programsObj.classeId] = {...classe};
+    console.log('programsSkills : ', state.classes);
   },
 
   setStudentsUpdates(state, studentsObj) {
@@ -163,7 +172,6 @@ const mutations = {
     let classe = state.classes[classeId];
     classe.students = students;
     state.classes[classeId] = {...classe};
-    console.log('classesStudents : ', state.classes);
   }
 }
 
@@ -200,12 +208,14 @@ const actions = {
   },
 
   async getStudentsUpdates(context, classeId) {
+    if (context.state.classes[classeId] === undefined) return;
     let origin = window.location.origin;
     let students = await axios.get(`${origin}/api/classes/${classeId}`);
     context.commit('setStudentsUpdates', {classeId, students: students.data});
   },
 
   async getProgramsSkills(context, classeId) {
+    if (context.state.classes[classeId] === undefined) return;
     let origin = window.location.origin;
     let programs = await axios.get(origin + `/api/programs/${classeId}`);
     context.commit('setProgramsSkills', {classeId, programs: programs.data});

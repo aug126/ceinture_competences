@@ -9,5 +9,7 @@ class Skill extends Model
 {
     use SoftDeletes;
 
-    //
+    public function colors() {
+        return $this->hasMany('App\Color');
+    }
 }

@@ -14,7 +14,7 @@ class ProgramController extends Controller
      */
     public function index($classe_id)
     {
-        $programs = Classe::find($classe_id)->programs()->with('skills')->get(['id', 'program_name']);
+        $programs = Classe::find($classe_id)->programs()->with('skills')->with('skills.colors')->get(['id', 'program_name']);
         return $programs;
     }
 

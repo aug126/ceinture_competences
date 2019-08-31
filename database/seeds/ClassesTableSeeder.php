@@ -38,70 +38,86 @@ class ClassesTableSeeder extends Seeder
                 /* PROGRAMS
                 -------------------------- */
                 Program::insert([
-                    'program_name'  => 'Programme par défaut',
-                    'classe_id'     => $classe->id,
-                    'created_at'    => now()
+                    [
+                        'program_name'  => 'Mathémathiques',
+                        'classe_id'     => $classe->id,
+                        'created_at'    => now()
+                    ], [
+                        'program_name'  => 'Français',
+                        'classe_id'     => $classe->id,
+                        'created_at'    => now()
+                    ],
                 ]);
-                $program = Program::latest('created_at')->first();
+                $programs = Program::latest('created_at')->limit(2)->get();
 
                 /* SKILLS
                 -------------------------- */
-                Skill::insert([
-                    [
-                        'skill_name' => 'Grammaire',
-                        'program_id' => $program->id
-                    ],[
-                        'skill_name' => 'Conjugaison',
-                        'program_id' => $program->id
-                    ],[
-                        'skill_name' => 'Orthographe',
-                        'program_id' => $program->id
-                    ],[
-                        'skill_name' => 'Numération',
-                        'program_id' => $program->id
-                    ],[
-                        'skill_name' => 'Calculs Écrits',
-                        'program_id' => $program->id
-                    ],[
-                        'skill_name' => 'Mesures',
-                        'program_id' => $program->id
-                    ],[
-                        'skill_name' => 'Géométrie',
-                        'program_id' => $program->id
-                    ],
-                ]);
-                $skills = $program->skills()->get();
-
+                foreach($programs as $program) {
+                    if ($program->program_name === 'Mathémathiques')
+                        Skill::insert([
+                            [
+                                'skill_name' => 'Numération',
+                                'program_id' => $program->id
+                            ],[
+                                'skill_name' => 'Calculs Écrits',
+                                'program_id' => $program->id
+                            ],[
+                                'skill_name' => 'Mesures',
+                                'program_id' => $program->id
+                            ],[
+                                'skill_name' => 'Géométrie',
+                                'program_id' => $program->id
+                            ],
+                        ]);
+                    else if ($program->program_name === 'Français')
+                        Skill::insert([
+                            [
+                                'skill_name' => 'Grammaire',
+                                'program_id' => $program->id
+                            ],[
+                                'skill_name' => 'Conjugaison',
+                                'program_id' => $program->id
+                            ],[
+                                'skill_name' => 'Orthographe',
+                                'program_id' => $program->id
+                            ]
+                        ]);
+                }
+                
                 /* COLORS
                 -------------------------- */
-                foreach($skills as $i => $skill) {
-                    Color::insert([
-                        [
-                            'skill_level'   => $i + 1,
-                            'hexa_color'    => '#ffffff',
-                            'skill_id'      => $skill->id
-                        ],[
-                            'skill_level'   => $i + 1,
-                            'hexa_color'    => '#fce844',
-                            'skill_id'      => $skill->id
-                        ],[
-                            'skill_level'   => $i + 1,
-                            'hexa_color'    => '#fea745',
-                            'skill_id'      => $skill->id
-                        ],[
-                            'skill_level'   => $i + 1,
-                            'hexa_color'    => '#318006',
-                            'skill_id'      => $skill->id
-                        ],[
-                            'skill_level'   => $i + 1,
-                            'hexa_color'    => '#fb4244',
-                            'skill_id'      => $skill->id
-                        ],[
-                            'skill_level'   => $i + 1,
-                            'hexa_color'    => '#347af8',
-                            'skill_id'      => $skill->id
-                        ]
-                    ]);
+                foreach($programs as $program) {
+                    $skills = $program->skills()->get();
+
+                    foreach($skills as $i => $skill) {
+                        Color::insert([
+                            [
+                                'skill_level'   => $i + 1,
+                                'hexa_color'    => '#ffffff',
+                                'skill_id'      => $skill->id
+                            ],[
+                                'skill_level'   => $i + 1,
+                                'hexa_color'    => '#fce844',
+                                'skill_id'      => $skill->id
+                            ],[
+                                'skill_level'   => $i + 1,
+                                'hexa_color'    => '#fea745',
+                                'skill_id'      => $skill->id
+                            ],[
+                                'skill_level'   => $i + 1,
+                                'hexa_color'    => '#318006',
+                                'skill_id'      => $skill->id
+                            ],[
+                                'skill_level'   => $i + 1,
+                                'hexa_color'    => '#fb4244',
+                                'skill_id'      => $skill->id
+                            ],[
+                                'skill_level'   => $i + 1,
+                                'hexa_color'    => '#347af8',
+                                'skill_id'      => $skill->id
+                            ]
+                        ]);
+                    }
                 }
 
                 /* STUDENTS

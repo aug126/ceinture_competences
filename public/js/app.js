@@ -2212,6 +2212,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2224,11 +2227,11 @@ __webpack_require__.r(__webpack_exports__);
     BeltStudentSheet: _partials_BeltStudentSheet__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   methods: {
-    upLvl: function upLvl(row, competence) {
-      var maxLvl = this.competenceObject[competence].length - 1;
-      var currentLvl = row.competences[competence];
-      if (maxLvl > currentLvl) row.competences[competence] += 1;
-    },
+    // upLvl(row, competence) {
+    //   let maxLvl = this.programsObj[competence].length - 1;
+    //   let currentLvl = row.competences[competence];
+    //   if (maxLvl > currentLvl) row.competences[competence] += 1;
+    // },
     niveau: function niveau(allUpdatesMessages) {
       var up = allUpdatesMessages;
       return up[up.length - 1] && up[up.length - 1].actualLevel;
@@ -2241,30 +2244,46 @@ __webpack_require__.r(__webpack_exports__);
     },
     getProgramsSkills: function getProgramsSkills() {
       this.$store.dispatch('getProgramsSkills', this.$route.params.id);
+    },
+    isLastKey: function isLastKey(obj, key) {
+      var allKeys = Object.keys(obj);
+      var lastKey = allKeys[allKeys.length - 1];
+      return lastKey == key;
     }
   },
   mounted: function mounted() {
     this.tableHeight = document.body.clientHeight - 148;
   },
   beforeMount: function beforeMount() {
-    if (this.currentClasse === undefined) this.$router.push({
-      path: "/"
-    });else {
-      this.getStudentsUpdates();
-      this.getProgramsSkills();
-    }
+    this.getStudentsUpdates();
+    this.getProgramsSkills();
   },
   data: function data() {
     return {
       tableHeight: 0,
-      competenceObject: _config__WEBPACK_IMPORTED_MODULE_3__["default"].competences,
+      // programsObj: config.competences,
       studentSheet: {}
     };
   },
   computed: {
     currentClasse: function currentClasse() {
       var classeId = this.$route.params.id;
-      return this.$store.state.classes[classeId];
+      var classe = this.$store.state.classes[classeId];
+
+      if (classe === undefined) {
+        this.$router.push({
+          path: "/"
+        });
+        return {};
+      }
+
+      ;
+      return classe;
+    },
+    programsObj: function programsObj() {
+      var programs = this.currentClasse.programs;
+      if (programs === undefined) return {};
+      return programs;
     }
   },
   watch: {
@@ -5518,17 +5537,22 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _vm._l(_vm.competenceObject, function(colors, competence) {
-                      return _c(
-                        "th",
-                        {
-                          key: competence,
-                          class: {
-                            "border-right": competence === "orthographe"
-                          }
-                        },
-                        [_vm._v(_vm._s(competence))]
-                      )
+                    _vm._l(_vm.programsObj, function(program) {
+                      return _vm._l(program.skills, function(skill, skillId) {
+                        return _c(
+                          "th",
+                          {
+                            key: skillId,
+                            class: {
+                              "border-right": _vm.isLastKey(
+                                program.skills,
+                                skillId
+                              )
+                            }
+                          },
+                          [_vm._v(_vm._s(skill.skill_name))]
+                        )
+                      })
                     })
                   ],
                   2
@@ -5540,70 +5564,25 @@ var render = function() {
                 _vm._l(
                   _vm.currentClasse && _vm.currentClasse.students,
                   function(student, studentId) {
-                    return _c(
-                      "tr",
-                      { key: studentId },
-                      [
-                        _c("td", [
-                          _c("strong", [_vm._v(_vm._s(student.order_number))])
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "border-right name" }, [
-                          _c(
-                            "strong",
-                            {
-                              on: {
-                                click: function() {
-                                  return _vm.showStudentSheet(student)
-                                }
+                    return _c("tr", { key: studentId }, [
+                      _c("td", [
+                        _c("strong", [_vm._v(_vm._s(student.order_number))])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "border-right name" }, [
+                        _c(
+                          "strong",
+                          {
+                            on: {
+                              click: function() {
+                                return _vm.showStudentSheet(student)
                               }
-                            },
-                            [_vm._v(_vm._s(student.student_name))]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _vm._l(student.competences, function(
-                          allUpdates,
-                          competence
-                        ) {
-                          return _c(
-                            "td",
-                            {
-                              key: competence,
-                              class: {
-                                "border-right": competence === "orthographe"
-                              }
-                            },
-                            [
-                              _c(
-                                "belt-actions",
-                                {
-                                  attrs: {
-                                    "competence-updates": allUpdates,
-                                    "competence-name": competence
-                                  }
-                                },
-                                [
-                                  _vm.niveau(allUpdates) > 0
-                                    ? _c("ceinture-type-2", {
-                                        attrs: {
-                                          color:
-                                            _vm.competenceObject[competence][
-                                              _vm.niveau(allUpdates)
-                                            ]
-                                        }
-                                      })
-                                    : _vm._e()
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        })
-                      ],
-                      2
-                    )
+                            }
+                          },
+                          [_vm._v(_vm._s(student.student_name))]
+                        )
+                      ])
+                    ])
                   }
                 ),
                 0
@@ -48644,18 +48623,39 @@ var mutations = {
     state.classes = help.arrayToObjId(classes);
     console.log('classes : ', state.classes);
   },
-  setProgramsSkills: function setProgramsSkills(state, programs) {
-    console.log('programs : ', programs);
-  },
-  setStudentsUpdates: function setStudentsUpdates(state, studentsObj) {
+  setProgramsSkills: function setProgramsSkills(state, programsObj) {
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
     var _iteratorError = undefined;
 
     try {
-      for (var _iterator = studentsObj.students[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var student = _step.value;
-        student.updates = help.arrayToObjId(student.updates);
+      for (var _iterator = programsObj.programs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var program = _step.value;
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+          for (var _iterator2 = program.skills[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var skill = _step2.value;
+            skill.colors = help.arrayToObjId(skill.colors);
+          }
+        } catch (err) {
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+              _iterator2["return"]();
+            }
+          } finally {
+            if (_didIteratorError2) {
+              throw _iteratorError2;
+            }
+          }
+        }
+
+        program.skills = help.arrayToObjId(program.skills);
       }
     } catch (err) {
       _didIteratorError = true;
@@ -48672,12 +48672,41 @@ var mutations = {
       }
     }
 
+    var classe = state.classes[programsObj.classeId];
+    classe.programs = help.arrayToObjId(programsObj.programs);
+    state.classes[programsObj.classeId] = _objectSpread({}, classe);
+    console.log('programsSkills : ', state.classes);
+  },
+  setStudentsUpdates: function setStudentsUpdates(state, studentsObj) {
+    var _iteratorNormalCompletion3 = true;
+    var _didIteratorError3 = false;
+    var _iteratorError3 = undefined;
+
+    try {
+      for (var _iterator3 = studentsObj.students[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+        var student = _step3.value;
+        student.updates = help.arrayToObjId(student.updates);
+      }
+    } catch (err) {
+      _didIteratorError3 = true;
+      _iteratorError3 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
+          _iterator3["return"]();
+        }
+      } finally {
+        if (_didIteratorError3) {
+          throw _iteratorError3;
+        }
+      }
+    }
+
     var students = help.arrayToObjId(studentsObj.students);
     var classeId = studentsObj.classeId;
     var classe = state.classes[classeId];
     classe.students = students;
     state.classes[classeId] = _objectSpread({}, classe);
-    console.log('classesStudents : ', state.classes);
   }
 };
 var actions = {
@@ -48743,18 +48772,26 @@ var actions = {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
+              if (!(context.state.classes[classeId] === undefined)) {
+                _context2.next = 2;
+                break;
+              }
+
+              return _context2.abrupt("return");
+
+            case 2:
               origin = window.location.origin;
-              _context2.next = 3;
+              _context2.next = 5;
               return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(origin, "/api/classes/").concat(classeId));
 
-            case 3:
+            case 5:
               students = _context2.sent;
               context.commit('setStudentsUpdates', {
                 classeId: classeId,
                 students: students.data
               });
 
-            case 5:
+            case 7:
             case "end":
               return _context2.stop();
           }
@@ -48777,18 +48814,26 @@ var actions = {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
+              if (!(context.state.classes[classeId] === undefined)) {
+                _context3.next = 2;
+                break;
+              }
+
+              return _context3.abrupt("return");
+
+            case 2:
               origin = window.location.origin;
-              _context3.next = 3;
+              _context3.next = 5;
               return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get(origin + "/api/programs/".concat(classeId));
 
-            case 3:
+            case 5:
               programs = _context3.sent;
               context.commit('setProgramsSkills', {
                 classeId: classeId,
                 programs: programs.data
               });
 
-            case 5:
+            case 7:
             case "end":
               return _context3.stop();
           }
