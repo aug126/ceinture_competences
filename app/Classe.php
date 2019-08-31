@@ -12,4 +12,8 @@ class Classe extends Model
     public function students() {
         return $this->hasMany('App\Student');
     }
+
+    public function skills() {
+        return $this->hasManyThrough('App\Skill', 'App\Program');
+    }
 }

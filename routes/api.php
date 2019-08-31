@@ -17,7 +17,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resources([
-    'classes'   => 'ClasseController',
-    'programs'  => 'ProgramController'
-]);
+Route::get('classes', 'ClasseController@index');
+Route::get('classes/{id}', 'ClasseController@show');

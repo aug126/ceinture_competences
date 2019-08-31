@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ClasseController extends Controller
 {
+    public function buildtable($id)
+    {
+        $table = Classe::find($id)->students()->with('updates')->get();
+        $skills = Classe::find($id)->skills()->get();
+        return $table . $skills;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +44,6 @@ class ClasseController extends Controller
     public function show($id) // GET     /api/classes/{id}
     {
         $classe = Classe::find($id)->students()->with('updates')->get();
-        // $students = $classe->students;
         return $classe;
     }
 

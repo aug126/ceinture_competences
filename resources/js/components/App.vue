@@ -40,6 +40,9 @@ export default {
     BtnOptions,
     AllGlobalComponents
   },
+  async mounted() {
+    await this.$store.dispatch('getClasses');
+  },
   data: () => ({})
 };
 </script>

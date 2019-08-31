@@ -16,4 +16,5 @@ class Student extends Model
     public function updates() {
         return $this->hasMany('App\Update');
     }
+
 }

@@ -78,6 +78,9 @@ export default {
   mounted() {
     this.tableHeight = document.body.clientHeight - 148;
   },
+  beforeCreate() {
+    this.$store.dispatch('getClasseStudentsUpdates', this.$route.params.id);
+  },
   created() {
     if (this.currentClasse === undefined) this.$router.push({ path: "/" });
   },

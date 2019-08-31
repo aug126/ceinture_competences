@@ -24,7 +24,7 @@
             link
             :to="'/ceintures/' + classe.id"
           >
-            <v-list-item-title>{{classe.name}}</v-list-item-title>
+            <v-list-item-title>{{classe.classe_name}}</v-list-item-title>
           </v-list-item>
 
           <v-list-item class="text-center" link to="/new-classe">

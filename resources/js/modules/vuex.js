@@ -1,10 +1,23 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import config from '../config'
+import axios from 'axios';
 
 Vue.use(Vuex)
 
 const state = {
+  /**====== getClasses() :
+   * students: [{
+   *  ->
+   *  ===>updates: [{
+   *    }]
+   * }],
+   * classes: [{
+   *  id: 1,
+   *  classe_name: 'ex class name'
+   * }]
+   */
+  students: [],
   classes: [{
     id: 'time',
     name: 'fake',
@@ -90,7 +103,6 @@ const mutations = {
     message = ''
   }) {
     // Cette fonction devrait être appelée par son action pour vérification.
-    //TODO vérifier le nombre de competences Up avec le nombre de ceintures disponibles et renvoyer une notif si on est au max.
     let date = new Date;
     const month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
     date = `${date.getDate()} ${month[date.getMonth()]}`;
@@ -129,6 +141,18 @@ const mutations = {
       message: null,
       status: null,
     }
+  },
+
+  // SET DATAS
+  // =================
+  setInitialClasses(state, classes) {
+    state.classes = classes;
+    console.log(classes);
+  },
+
+  setStudentsUpdates(state, students) {
+    state.students = students;
+    console.log(students);
   }
 }
 
@@ -154,6 +178,20 @@ const actions = {
       message
     });
 
+  },
+
+  // GET DATAS
+  // =================
+  async getClasses(context) {
+    let origin = window.location.origin;
+    let classes = await axios.get(origin + '/api/classes');
+    context.commit('setInitialClasses', classes.data);
+  },
+
+  async getClasseStudentsUpdates(context, id) {
+    let origin = window.location.origin;
+    let students = await axios.get(`${origin}/api/classes/${id}`);
+    context.commit('setStudentsUpdates', students.data);
   }
 }
 
