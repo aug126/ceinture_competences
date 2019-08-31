@@ -13,6 +13,10 @@ class Classe extends Model
         return $this->hasMany('App\Student');
     }
 
+    public function programs() {
+        return $this->hasMany('App\Program');
+    }
+
     public function skills() {
         return $this->hasManyThrough('App\Skill', 'App\Program');
     }

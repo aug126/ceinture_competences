@@ -9,6 +9,10 @@ class Program extends Model
 {
     use SoftDeletes;
 
+    // public function classe() {
+    //     return $this->belongsTo('App\Classe');
+    // }
+
     public function skills() {
         return $this->hasMany('App\Skill');
     }

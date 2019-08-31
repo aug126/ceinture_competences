@@ -18,65 +18,66 @@ const state = {
    * }]
    */
   students: [],
-  classes: [{
-    id: 'time',
-    name: 'fake',
-    studentsBelt: [{
-      numero: 1,
-      name: 'name 1',
-      competences: {
-        grammaire: [{
-          date: '19 aout',
-          message: 'test message laissé',
-          status: 'success', // 'success' | 'fail' | 'practice'
-          actualLevel: 1
-        }, {
-          date: '19 aout',
-          message: '',
-          status: 'success', // 'success' | 'fail' | 'practice'
-          actualLevel: 2
-        }, {
-          date: '19 aout',
-          message: '',
-          status: 'success', // 'success' | 'fail' | 'practice'
-          actualLevel: 3
-        }, {
-          date: '19 aout',
-          message: '',
-          status: 'success', // 'success' | 'fail' | 'practice'
-          actualLevel: 4
-        }, {
-          date: '19 aout',
-          message: '',
-          status: 'success', // 'success' | 'fail' | 'practice'
-          actualLevel: 5
-        }, {
-          date: '19 aout',
-          message: '',
-          status: 'success', // 'success' | 'fail' | 'practice'
-          actualLevel: 6
-        }],
-        conjugaison: [],
-        orthographe: [],
-        numération: [],
-        calculsEcrits: [],
-        mesures: [],
-        géométrie: []
-      }
-    }, {
-      numero: 2,
-      name: 'name 2',
-      competences: {
-        grammaire: [],
-        conjugaison: [],
-        orthographe: [],
-        numération: [],
-        calculsEcrits: [],
-        mesures: [],
-        géométrie: []
-      }
-    }]
-  }],
+  classes: [],
+  // classes: [{
+  //   id: 'time',
+  //   name: 'fake',
+  //   studentsBelt: [{
+  //     numero: 1,
+  //     name: 'name 1',
+  //     competences: {
+  //       grammaire: [{
+  //         date: '19 aout',
+  //         message: 'test message laissé',
+  //         status: 'success', // 'success' | 'fail' | 'practice'
+  //         actualLevel: 1
+  //       }, {
+  //         date: '19 aout',
+  //         message: '',
+  //         status: 'success', // 'success' | 'fail' | 'practice'
+  //         actualLevel: 2
+  //       }, {
+  //         date: '19 aout',
+  //         message: '',
+  //         status: 'success', // 'success' | 'fail' | 'practice'
+  //         actualLevel: 3
+  //       }, {
+  //         date: '19 aout',
+  //         message: '',
+  //         status: 'success', // 'success' | 'fail' | 'practice'
+  //         actualLevel: 4
+  //       }, {
+  //         date: '19 aout',
+  //         message: '',
+  //         status: 'success', // 'success' | 'fail' | 'practice'
+  //         actualLevel: 5
+  //       }, {
+  //         date: '19 aout',
+  //         message: '',
+  //         status: 'success', // 'success' | 'fail' | 'practice'
+  //         actualLevel: 6
+  //       }],
+  //       conjugaison: [],
+  //       orthographe: [],
+  //       numération: [],
+  //       calculsEcrits: [],
+  //       mesures: [],
+  //       géométrie: []
+  //     }
+  //   }, {
+  //     numero: 2,
+  //     name: 'name 2',
+  //     competences: {
+  //       grammaire: [],
+  //       conjugaison: [],
+  //       orthographe: [],
+  //       numération: [],
+  //       calculsEcrits: [],
+  //       mesures: [],
+  //       géométrie: []
+  //     }
+  //   }]
+  // }],
 
   // Globals paramètres :
   // =================
@@ -89,7 +90,6 @@ const state = {
 }
 
 const getters = {
-  currentClasse: (state, getters) => (id) => state.classes.find((classe) => classe.id == id),
 }
 
 const mutations = {
@@ -145,14 +145,25 @@ const mutations = {
 
   // SET DATAS
   // =================
-  setInitialClasses(state, classes) {
-    state.classes = classes;
-    console.log(classes);
+  setClasses(state, classes) {
+    state.classes = help.arrayToObjId(classes);
+    console.log('classes : ', state.classes);
   },
 
-  setStudentsUpdates(state, students) {
-    state.students = students;
-    console.log(students);
+  setProgramsSkills(state, programs) {
+    console.log('programs : ', programs);
+  },
+
+  setStudentsUpdates(state, studentsObj) {
+    for (let student of studentsObj.students) {
+      student.updates = help.arrayToObjId(student.updates);
+    }
+    let students = help.arrayToObjId(studentsObj.students);
+    let classeId = studentsObj.classeId;
+    let classe = state.classes[classeId];
+    classe.students = students;
+    state.classes[classeId] = {...classe};
+    console.log('classesStudents : ', state.classes);
   }
 }
 
@@ -185,14 +196,21 @@ const actions = {
   async getClasses(context) {
     let origin = window.location.origin;
     let classes = await axios.get(origin + '/api/classes');
-    context.commit('setInitialClasses', classes.data);
+    context.commit('setClasses', classes.data);
   },
 
-  async getClasseStudentsUpdates(context, id) {
+  async getStudentsUpdates(context, classeId) {
     let origin = window.location.origin;
-    let students = await axios.get(`${origin}/api/classes/${id}`);
-    context.commit('setStudentsUpdates', students.data);
-  }
+    let students = await axios.get(`${origin}/api/classes/${classeId}`);
+    context.commit('setStudentsUpdates', {classeId, students: students.data});
+  },
+
+  async getProgramsSkills(context, classeId) {
+    let origin = window.location.origin;
+    let programs = await axios.get(origin + `/api/programs/${classeId}`);
+    context.commit('setProgramsSkills', {classeId, programs: programs.data});
+  },
+
 }
 
 export default new Vuex.Store({
@@ -201,3 +219,16 @@ export default new Vuex.Store({
   mutations,
   actions
 })
+
+
+let help = {
+  arrayToObjId(arrayOfObjects) {
+    return arrayOfObjects.reduce(
+      (obj, item) => {
+        obj[item.id] = item;
+        delete item.id;
+        return obj;
+      }, {}
+    );
+  }
+}

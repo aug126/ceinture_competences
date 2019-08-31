@@ -19,10 +19,10 @@
           </template>
 
           <v-list-item
-            v-for="classe in classes"
-            :key="classe.id"
+            v-for="(classe, id) in classes"
+            :key="id"
             link
-            :to="'/ceintures/' + classe.id"
+            :to="'/ceintures/' + id"
           >
             <v-list-item-title>{{classe.classe_name}}</v-list-item-title>
           </v-list-item>

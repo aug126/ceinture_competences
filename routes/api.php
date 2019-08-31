@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('classes', 'ClasseController@index');
 Route::get('classes/{id}', 'ClasseController@show');
+Route::get('programs/{classe_id}', 'ProgramController@index');

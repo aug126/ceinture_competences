@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Program;
+use App\Classe;
 use Illuminate\Http\Request;
 
 class ProgramController extends Controller
@@ -12,9 +12,10 @@ class ProgramController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($classe_id)
     {
-        //
+        $programs = Classe::find($classe_id)->programs()->with('skills')->get(['id', 'program_name']);
+        return $programs;
     }
 
     /**

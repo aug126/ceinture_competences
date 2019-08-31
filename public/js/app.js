@@ -2235,18 +2235,24 @@ __webpack_require__.r(__webpack_exports__);
     },
     showStudentSheet: function showStudentSheet(student) {
       this.studentSheet = student;
+    },
+    getStudentsUpdates: function getStudentsUpdates() {
+      this.$store.dispatch('getStudentsUpdates', this.$route.params.id);
+    },
+    getProgramsSkills: function getProgramsSkills() {
+      this.$store.dispatch('getProgramsSkills', this.$route.params.id);
     }
   },
   mounted: function mounted() {
     this.tableHeight = document.body.clientHeight - 148;
   },
-  beforeCreate: function beforeCreate() {
-    this.$store.dispatch('getClasseStudentsUpdates', this.$route.params.id);
-  },
-  created: function created() {
+  beforeMount: function beforeMount() {
     if (this.currentClasse === undefined) this.$router.push({
       path: "/"
-    });
+    });else {
+      this.getStudentsUpdates();
+      this.getProgramsSkills();
+    }
   },
   data: function data() {
     return {
@@ -2258,7 +2264,13 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     currentClasse: function currentClasse() {
       var classeId = this.$route.params.id;
-      return this.$store.getters.currentClasse(classeId);
+      return this.$store.state.classes[classeId];
+    }
+  },
+  watch: {
+    $route: function $route() {
+      this.getStudentsUpdates();
+      this.getProgramsSkills();
     }
   }
 });
@@ -5377,13 +5389,10 @@ var render = function() {
                 },
                 [
                   _vm._v(" "),
-                  _vm._l(_vm.classes, function(classe) {
+                  _vm._l(_vm.classes, function(classe, id) {
                     return _c(
                       "v-list-item",
-                      {
-                        key: classe.id,
-                        attrs: { link: "", to: "/ceintures/" + classe.id }
-                      },
+                      { key: id, attrs: { link: "", to: "/ceintures/" + id } },
                       [
                         _c("v-list-item-title", [
                           _vm._v(_vm._s(classe.classe_name))
@@ -5502,7 +5511,9 @@ var render = function() {
                     _c("th", { staticClass: "border-right" }, [
                       _c("h4", [
                         _vm._v(
-                          _vm._s(_vm.currentClasse && _vm.currentClasse.name)
+                          _vm._s(
+                            _vm.currentClasse && _vm.currentClasse.classe_name
+                          )
                         )
                       ])
                     ]),
@@ -5527,14 +5538,14 @@ var render = function() {
               _c(
                 "tbody",
                 _vm._l(
-                  _vm.currentClasse && _vm.currentClasse.studentsBelt,
-                  function(student) {
+                  _vm.currentClasse && _vm.currentClasse.students,
+                  function(student, studentId) {
                     return _c(
                       "tr",
-                      { key: student.name },
+                      { key: studentId },
                       [
                         _c("td", [
-                          _c("strong", [_vm._v(_vm._s(student.numero))])
+                          _c("strong", [_vm._v(_vm._s(student.order_number))])
                         ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "border-right name" }, [
@@ -5547,7 +5558,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v(_vm._s(student.name))]
+                            [_vm._v(_vm._s(student.student_name))]
                           )
                         ]),
                         _vm._v(" "),
@@ -48481,6 +48492,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -48499,71 +48516,66 @@ var state = {
    * }]
    */
   students: [],
-  classes: [{
-    id: 'time',
-    name: 'fake',
-    studentsBelt: [{
-      numero: 1,
-      name: 'name 1',
-      competences: {
-        grammaire: [{
-          date: '19 aout',
-          message: 'test message laissé',
-          status: 'success',
-          // 'success' | 'fail' | 'practice'
-          actualLevel: 1
-        }, {
-          date: '19 aout',
-          message: '',
-          status: 'success',
-          // 'success' | 'fail' | 'practice'
-          actualLevel: 2
-        }, {
-          date: '19 aout',
-          message: '',
-          status: 'success',
-          // 'success' | 'fail' | 'practice'
-          actualLevel: 3
-        }, {
-          date: '19 aout',
-          message: '',
-          status: 'success',
-          // 'success' | 'fail' | 'practice'
-          actualLevel: 4
-        }, {
-          date: '19 aout',
-          message: '',
-          status: 'success',
-          // 'success' | 'fail' | 'practice'
-          actualLevel: 5
-        }, {
-          date: '19 aout',
-          message: '',
-          status: 'success',
-          // 'success' | 'fail' | 'practice'
-          actualLevel: 6
-        }],
-        conjugaison: [],
-        orthographe: [],
-        numération: [],
-        calculsEcrits: [],
-        mesures: [],
-        géométrie: []
-      }
-    }, {
-      numero: 2,
-      name: 'name 2',
-      competences: {
-        grammaire: [],
-        conjugaison: [],
-        orthographe: [],
-        numération: [],
-        calculsEcrits: [],
-        mesures: [],
-        géométrie: []
-      }
-    }]
-  }],
+  classes: [],
+  // classes: [{
+  //   id: 'time',
+  //   name: 'fake',
+  //   studentsBelt: [{
+  //     numero: 1,
+  //     name: 'name 1',
+  //     competences: {
+  //       grammaire: [{
+  //         date: '19 aout',
+  //         message: 'test message laissé',
+  //         status: 'success', // 'success' | 'fail' | 'practice'
+  //         actualLevel: 1
+  //       }, {
+  //         date: '19 aout',
+  //         message: '',
+  //         status: 'success', // 'success' | 'fail' | 'practice'
+  //         actualLevel: 2
+  //       }, {
+  //         date: '19 aout',
+  //         message: '',
+  //         status: 'success', // 'success' | 'fail' | 'practice'
+  //         actualLevel: 3
+  //       }, {
+  //         date: '19 aout',
+  //         message: '',
+  //         status: 'success', // 'success' | 'fail' | 'practice'
+  //         actualLevel: 4
+  //       }, {
+  //         date: '19 aout',
+  //         message: '',
+  //         status: 'success', // 'success' | 'fail' | 'practice'
+  //         actualLevel: 5
+  //       }, {
+  //         date: '19 aout',
+  //         message: '',
+  //         status: 'success', // 'success' | 'fail' | 'practice'
+  //         actualLevel: 6
+  //       }],
+  //       conjugaison: [],
+  //       orthographe: [],
+  //       numération: [],
+  //       calculsEcrits: [],
+  //       mesures: [],
+  //       géométrie: []
+  //     }
+  //   }, {
+  //     numero: 2,
+  //     name: 'name 2',
+  //     competences: {
+  //       grammaire: [],
+  //       conjugaison: [],
+  //       orthographe: [],
+  //       numération: [],
+  //       calculsEcrits: [],
+  //       mesures: [],
+  //       géométrie: []
+  //     }
+  //   }]
+  // }],
   // Globals paramètres :
   // =================
   overlayLoader: false,
@@ -48573,15 +48585,7 @@ var state = {
     message: null
   }
 };
-var getters = {
-  currentClasse: function currentClasse(state, getters) {
-    return function (id) {
-      return state.classes.find(function (classe) {
-        return classe.id == id;
-      });
-    };
-  }
-};
+var getters = {};
 var mutations = {
   // classes
   addClasse: function addClasse(state, newClasse) {
@@ -48636,13 +48640,44 @@ var mutations = {
   },
   // SET DATAS
   // =================
-  setInitialClasses: function setInitialClasses(state, classes) {
-    state.classes = classes;
-    console.log(classes);
+  setClasses: function setClasses(state, classes) {
+    state.classes = help.arrayToObjId(classes);
+    console.log('classes : ', state.classes);
   },
-  setStudentsUpdates: function setStudentsUpdates(state, students) {
-    state.students = students;
-    console.log(students);
+  setProgramsSkills: function setProgramsSkills(state, programs) {
+    console.log('programs : ', programs);
+  },
+  setStudentsUpdates: function setStudentsUpdates(state, studentsObj) {
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = studentsObj.students[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var student = _step.value;
+        student.updates = help.arrayToObjId(student.updates);
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+          _iterator["return"]();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
+    var students = help.arrayToObjId(studentsObj.students);
+    var classeId = studentsObj.classeId;
+    var classe = state.classes[classeId];
+    classe.students = students;
+    state.classes[classeId] = _objectSpread({}, classe);
+    console.log('classesStudents : ', state.classes);
   }
 };
 var actions = {
@@ -48683,7 +48718,7 @@ var actions = {
 
             case 3:
               classes = _context.sent;
-              context.commit('setInitialClasses', classes.data);
+              context.commit('setClasses', classes.data);
 
             case 5:
             case "end":
@@ -48699,10 +48734,10 @@ var actions = {
 
     return getClasses;
   }(),
-  getClasseStudentsUpdates: function () {
-    var _getClasseStudentsUpdates = _asyncToGenerator(
+  getStudentsUpdates: function () {
+    var _getStudentsUpdates = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(context, id) {
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(context, classeId) {
       var origin, students;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
@@ -48710,11 +48745,14 @@ var actions = {
             case 0:
               origin = window.location.origin;
               _context2.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(origin, "/api/classes/").concat(id));
+              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(origin, "/api/classes/").concat(classeId));
 
             case 3:
               students = _context2.sent;
-              context.commit('setStudentsUpdates', students.data);
+              context.commit('setStudentsUpdates', {
+                classeId: classeId,
+                students: students.data
+              });
 
             case 5:
             case "end":
@@ -48724,11 +48762,45 @@ var actions = {
       }, _callee2);
     }));
 
-    function getClasseStudentsUpdates(_x2, _x3) {
-      return _getClasseStudentsUpdates.apply(this, arguments);
+    function getStudentsUpdates(_x2, _x3) {
+      return _getStudentsUpdates.apply(this, arguments);
     }
 
-    return getClasseStudentsUpdates;
+    return getStudentsUpdates;
+  }(),
+  getProgramsSkills: function () {
+    var _getProgramsSkills = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(context, classeId) {
+      var origin, programs;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              origin = window.location.origin;
+              _context3.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get(origin + "/api/programs/".concat(classeId));
+
+            case 3:
+              programs = _context3.sent;
+              context.commit('setProgramsSkills', {
+                classeId: classeId,
+                programs: programs.data
+              });
+
+            case 5:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    function getProgramsSkills(_x4, _x5) {
+      return _getProgramsSkills.apply(this, arguments);
+    }
+
+    return getProgramsSkills;
   }()
 };
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
@@ -48737,6 +48809,15 @@ var actions = {
   mutations: mutations,
   actions: actions
 }));
+var help = {
+  arrayToObjId: function arrayToObjId(arrayOfObjects) {
+    return arrayOfObjects.reduce(function (obj, item) {
+      obj[item.id] = item;
+      delete item.id;
+      return obj;
+    }, {});
+  }
+};
 
 /***/ }),
 

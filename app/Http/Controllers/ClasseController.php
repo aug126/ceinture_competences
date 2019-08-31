@@ -43,7 +43,7 @@ class ClasseController extends Controller
      */
     public function show($id) // GET     /api/classes/{id}
     {
-        $classe = Classe::find($id)->students()->with('updates')->get();
+        $classe = Classe::find($id)->students()->with('updates:id,student_id,skill_id,status,message,created_at')->get(['id', 'student_name', 'order_number']);
         return $classe;
     }
 

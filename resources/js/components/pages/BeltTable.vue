@@ -11,7 +11,7 @@
               </v-btn>
             </th>
             <th class="border-right">
-              <h4>{{currentClasse && currentClasse.name}}</h4>
+              <h4>{{currentClasse && currentClasse.classe_name}}</h4>
             </th>
             <th
               v-for="(colors, competence) in competenceObject"
@@ -21,13 +21,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="student in (currentClasse && currentClasse.studentsBelt)" :key="student.name">
+          <tr v-for="(student, studentId) in (currentClasse && currentClasse.students)" :key="studentId">
             <td>
               <!-- <v-text-field disabled v-model="student.numero"></v-text-field> -->
-              <strong>{{ student.numero }}</strong>
+              <strong>{{ student.order_number }}</strong>
             </td>
             <td class="border-right name">
-              <strong @click="() => showStudentSheet(student)">{{ student.name }}</strong>
+              <strong @click="() => showStudentSheet(student)">{{ student.student_name }}</strong>
             </td>
             <td
               v-for="(allUpdates, competence) in student.competences"
@@ -61,6 +61,7 @@ export default {
     BeltActions,
     BeltStudentSheet
   },
+
   methods: {
     upLvl(row, competence) {
       let maxLvl = this.competenceObject[competence].length - 1;
@@ -73,17 +74,27 @@ export default {
     },
     showStudentSheet(student) {
       this.studentSheet = student;
+    },
+    getStudentsUpdates() {
+      this.$store.dispatch('getStudentsUpdates', this.$route.params.id);
+    },
+    getProgramsSkills() {
+      this.$store.dispatch('getProgramsSkills', this.$route.params.id)
     }
   },
+
   mounted() {
     this.tableHeight = document.body.clientHeight - 148;
   },
-  beforeCreate() {
-    this.$store.dispatch('getClasseStudentsUpdates', this.$route.params.id);
-  },
-  created() {
+
+  beforeMount() {
     if (this.currentClasse === undefined) this.$router.push({ path: "/" });
+    else {
+      this.getStudentsUpdates();
+      this.getProgramsSkills();
+    }
   },
+
   data() {
     return {
       tableHeight: 0,
@@ -91,11 +102,19 @@ export default {
       studentSheet: {}
     };
   },
+
   computed: {
     currentClasse() {
       let classeId = this.$route.params.id;
-      return this.$store.getters.currentClasse(classeId);
+      return this.$store.state.classes[classeId];
     }
+  },
+
+  watch: {
+    $route() {
+      this.getStudentsUpdates();
+      this.getProgramsSkills();
+    },
   }
 };
 </script>
