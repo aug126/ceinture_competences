@@ -2215,6 +2215,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2249,6 +2264,17 @@ __webpack_require__.r(__webpack_exports__);
       var allKeys = Object.keys(obj);
       var lastKey = allKeys[allKeys.length - 1];
       return lastKey == key;
+    },
+    getSkillLevel: function getSkillLevel(updates, skill) {
+      var updatesArr = Object.values(updates);
+      var nbrSuccess = updatesArr.filter(function (up) {
+        return up.skill_id === skill.id && up.status === 'success';
+      }).length;
+      var color = Object.values(skill.colors).find(function (color) {
+        return color.skill_level == nbrSuccess;
+      });
+      if (color === undefined) return null;
+      return color.hexa_color;
     }
   },
   mounted: function mounted() {
@@ -5564,25 +5590,83 @@ var render = function() {
                 _vm._l(
                   _vm.currentClasse && _vm.currentClasse.students,
                   function(student, studentId) {
-                    return _c("tr", { key: studentId }, [
-                      _c("td", [
-                        _c("strong", [_vm._v(_vm._s(student.order_number))])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "border-right name" }, [
-                        _c(
-                          "strong",
-                          {
-                            on: {
-                              click: function() {
-                                return _vm.showStudentSheet(student)
+                    return _c(
+                      "tr",
+                      { key: studentId },
+                      [
+                        _c("td", [
+                          _c("strong", [_vm._v(_vm._s(student.order_number))])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "border-right name" }, [
+                          _c(
+                            "strong",
+                            {
+                              on: {
+                                click: function() {
+                                  return _vm.showStudentSheet(student)
+                                }
                               }
-                            }
-                          },
-                          [_vm._v(_vm._s(student.student_name))]
-                        )
-                      ])
-                    ])
+                            },
+                            [_vm._v(_vm._s(student.student_name))]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.programsObj, function(program) {
+                          return _vm._l(program.skills, function(
+                            skill,
+                            skillId
+                          ) {
+                            return _c(
+                              "td",
+                              {
+                                key: skillId,
+                                class: {
+                                  "border-right": _vm.isLastKey(
+                                    program.skills,
+                                    skillId
+                                  )
+                                }
+                              },
+                              [
+                                _c("span", { staticClass: "d-none" }, [
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(
+                                        (_vm.color = _vm.getSkillLevel(
+                                          student.updates,
+                                          skill
+                                        ))
+                                      ) +
+                                      " "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "belt-actions",
+                                  {
+                                    attrs: {
+                                      "competence-updates": [],
+                                      "competence-name": skill.skill_name
+                                    }
+                                  },
+                                  [
+                                    _vm.color
+                                      ? _c("ceinture-type-2", {
+                                          attrs: { color: _vm.color }
+                                        })
+                                      : _vm._e()
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          })
+                        })
+                      ],
+                      2
+                    )
                   }
                 ),
                 0
@@ -48858,7 +48942,6 @@ var help = {
   arrayToObjId: function arrayToObjId(arrayOfObjects) {
     return arrayOfObjects.reduce(function (obj, item) {
       obj[item.id] = item;
-      delete item.id;
       return obj;
     }, {});
   }

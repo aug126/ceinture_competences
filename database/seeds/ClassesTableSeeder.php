@@ -92,27 +92,27 @@ class ClassesTableSeeder extends Seeder
                     foreach($skills as $i => $skill) {
                         Color::insert([
                             [
-                                'skill_level'   => $i + 1,
+                                'skill_level'   => 1,
                                 'hexa_color'    => '#ffffff',
                                 'skill_id'      => $skill->id
                             ],[
-                                'skill_level'   => $i + 1,
+                                'skill_level'   => 2,
                                 'hexa_color'    => '#fce844',
                                 'skill_id'      => $skill->id
                             ],[
-                                'skill_level'   => $i + 1,
+                                'skill_level'   => 3,
                                 'hexa_color'    => '#fea745',
                                 'skill_id'      => $skill->id
                             ],[
-                                'skill_level'   => $i + 1,
+                                'skill_level'   => 4,
                                 'hexa_color'    => '#318006',
                                 'skill_id'      => $skill->id
                             ],[
-                                'skill_level'   => $i + 1,
+                                'skill_level'   => 5,
                                 'hexa_color'    => '#fb4244',
                                 'skill_id'      => $skill->id
                             ],[
-                                'skill_level'   => $i + 1,
+                                'skill_level'   => 6,
                                 'hexa_color'    => '#347af8',
                                 'skill_id'      => $skill->id
                             ]
@@ -134,18 +134,21 @@ class ClassesTableSeeder extends Seeder
 
                     /* UPDATES
                     -------------------------- */
-                    foreach ($skills as $skill) {
-                        $b = 1;
-                        $max = random_int(0, 6);
-                        while ($b <= $max) {
-                            $status_i = random_int(0, 2);
-                            $status_array = ['success', 'fail', 'practice'];
-                            Update::insert([
-                                'status'        => $status_array[$status_i],
-                                'skill_id'      => $skill->id,
-                                'student_id'    => $student->id,
-                            ]);
-                            $b++;
+                    foreach($programs as $program) {
+                        $skills = $program->skills()->get();
+                        foreach ($skills as $skill) { //TODO récupérer les skills de chaque program !
+                            $b = 1;
+                            $max = random_int(1, 6);
+                            while ($b <= $max) {
+                                $status_i = random_int(0, 2);
+                                $status_array = ['success', 'fail', 'practice'];
+                                Update::insert([
+                                    'status'        => $status_array[$status_i],
+                                    'skill_id'      => $skill->id,
+                                    'student_id'    => $student->id,
+                                ]);
+                                $b++;
+                            }
                         }
                     }
                 }

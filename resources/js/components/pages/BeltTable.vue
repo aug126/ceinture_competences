@@ -45,6 +45,21 @@
                 ></ceinture-type-2>
               </belt-actions>
             </td> -->
+            <template v-for="(program) in programsObj">
+            <td
+              v-for="(skill, skillId) in program.skills"
+              :key="skillId"
+              :class="{'border-right': isLastKey(program.skills, skillId)}"
+            >
+              <span class="d-none"> {{color = getSkillLevel(student.updates, skill)}} </span>
+              <belt-actions :competence-updates="[]" :competence-name="skill.skill_name">
+                <ceinture-type-2
+                  v-if="color"
+                  :color="color"
+                ></ceinture-type-2>
+              </belt-actions>
+            </td>
+            </template>
           </tr>
         </tbody>
       </v-simple-table>
@@ -88,6 +103,17 @@ export default {
       let allKeys = Object.keys(obj);
       let lastKey = allKeys[allKeys.length - 1];
       return lastKey == key;
+    },
+    getSkillLevel(updates, skill) {
+      let updatesArr = Object.values(updates);
+      let nbrSuccess = updatesArr.filter(
+        up => {
+          return (up.skill_id === skill.id) && (up.status === 'success');
+        }
+      ).length;
+      let color = Object.values(skill.colors).find(color => color.skill_level == nbrSuccess);
+      if (color === undefined) return null;
+      return color.hexa_color;
     }
   },
 

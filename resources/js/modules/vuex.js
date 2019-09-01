@@ -236,7 +236,6 @@ let help = {
     return arrayOfObjects.reduce(
       (obj, item) => {
         obj[item.id] = item;
-        delete item.id;
         return obj;
       }, {}
     );
