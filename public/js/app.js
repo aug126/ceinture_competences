@@ -48795,22 +48795,28 @@ var actions = {
 
     var maxLevel = competenceObj.colors.length;
     var lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
-    console.log('last = ', lastUpdate);
     var actualLevel = lastUpdate.actual_level || 0;
     if (actualLevel === maxLevel) context.commit("showInfo", {
       message: "Le Niveau de compétence est déjà au maximum",
       status: 'warning'
     });else {
-      // axios.post().then((resp) => {
-      // console.log(resp);
-      context.commit("updateCompetence", {
-        competenceUpdates: competenceUpdates,
-        competenceObj: competenceObj,
+      var data = {
+        skillId: competenceObj.id,
         status: status,
-        message: message,
-        classeId: classeId,
-        studentId: studentId
-      }); // }) 
+        message: message
+      };
+      var origin = window.location.origin;
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(origin, "/api/student/").concat(studentId, "/update"), data).then(function (resp) {
+        if (!resp.data.success) return console.error('erreur lors du store de l\'update');
+        context.commit("updateCompetence", {
+          competenceUpdates: competenceUpdates,
+          competenceObj: competenceObj,
+          status: status,
+          message: message,
+          classeId: classeId,
+          studentId: studentId
+        });
+      });
     }
   },
   // GET DATAS

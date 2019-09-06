@@ -192,7 +192,6 @@ const actions = {
     // let maxLevel = config.competences[competenceName].length - 1; // - 1 car la première valeur est empty pour l'icone "start"
     let maxLevel = competenceObj.colors.length;
     let lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
-    console.log('last = ',lastUpdate);
     let actualLevel = lastUpdate.actual_level || 0;
     if (actualLevel === maxLevel)
       context.commit("showInfo", {
@@ -200,17 +199,20 @@ const actions = {
         status: 'warning'
       })
     else {
-      // axios.post().then((resp) => {
-        // console.log(resp);
-      context.commit("updateCompetence", {
-        competenceUpdates,
-        competenceObj,
-        status,
-        message,
-        classeId,
-        studentId
-      });
-      // }) 
+      let data = {skillId: competenceObj.id, status, message};
+      let origin = window.location.origin;
+      axios.post(`${origin}/api/student/${studentId}/update`, data).then((resp) => {
+        if (!resp.data.success)
+          return console.error('erreur lors du store de l\'update');
+        context.commit("updateCompetence", {
+          competenceUpdates,
+          competenceObj,
+          status,
+          message,
+          classeId,
+          studentId
+        });
+      }) 
     }
   },
 

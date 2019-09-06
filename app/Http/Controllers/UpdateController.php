@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Student;
 use App\Update;
 use Illuminate\Http\Request;
 
@@ -23,9 +24,23 @@ class UpdateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $student_id)
     {
-        //
+        $student = Student::find($student_id);
+        $actual_level = $student->updates()
+        ->where('skill_id', '=', $request->skillId)
+        ->orderBy('id', 'desc')
+        ->first()->actual_level;
+        if ($request->status === 'success')
+            $actual_level ++;
+        $insert = Update::insert([
+            'status'        => $request->status,
+            'actual_level'  => $actual_level,
+            'message'       => $request->message,
+            'skill_id'      => $request->skillId,
+            'student_id'    => $student_id
+        ]);
+        return ['success' => $insert];
     }
 
     /**
