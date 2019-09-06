@@ -136,16 +136,21 @@ class ClassesTableSeeder extends Seeder
                     -------------------------- */
                     foreach($programs as $program) {
                         $skills = $program->skills()->get();
-                        foreach ($skills as $skill) { //TODO récupérer les skills de chaque program !
+                        foreach ($skills as $skill) {
                             $b = 1;
                             $max = random_int(1, 6);
+                            $acutal_level = 0;
                             while ($b <= $max) {
                                 $status_i = random_int(0, 2);
                                 $status_array = ['success', 'fail', 'practice'];
+                                if ($status_array[$status_i] === 'success') {
+                                    $acutal_level ++;
+                                }
                                 Update::insert([
                                     'status'        => $status_array[$status_i],
                                     'skill_id'      => $skill->id,
                                     'student_id'    => $student->id,
+                                    'actual_level'  => $acutal_level
                                 ]);
                                 $b++;
                             }

@@ -2230,6 +2230,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2247,10 +2248,10 @@ __webpack_require__.r(__webpack_exports__);
     //   let currentLvl = row.competences[competence];
     //   if (maxLvl > currentLvl) row.competences[competence] += 1;
     // },
-    niveau: function niveau(allUpdatesMessages) {
-      var up = allUpdatesMessages;
-      return up[up.length - 1] && up[up.length - 1].actualLevel;
-    },
+    // niveau(allUpdatesMessages) {
+    //   let up = allUpdatesMessages;
+    //   return up[up.length - 1] && up[up.length - 1].actualLevel;
+    // },
     showStudentSheet: function showStudentSheet(student) {
       this.studentSheet = student;
     },
@@ -2265,16 +2266,16 @@ __webpack_require__.r(__webpack_exports__);
       var lastKey = allKeys[allKeys.length - 1];
       return lastKey == key;
     },
-    getSkillLevel: function getSkillLevel(updates, skill) {
-      var updatesArr = Object.values(updates);
-      var nbrSuccess = updatesArr.filter(function (up) {
-        return up.skill_id === skill.id && up.status === 'success';
-      }).length;
-      var color = Object.values(skill.colors).find(function (color) {
-        return color.skill_level == nbrSuccess;
-      });
-      if (color === undefined) return null;
-      return color.hexa_color;
+    // getSkillLevel(updates, skill) {
+    //   let updateSkillArr = Object.values(updates).filter(up => up.skill_id === skill.id);
+    //   let nbrSuccess = updateSkillArr[updateSkillArr.length - 1].actual_level;
+    //   let color = Object.values(skill.colors).find(color => color.skill_level == nbrSuccess);
+    //   if (color === undefined) return null;
+    //   return color.hexa_color;
+    // },
+    getColor: function getColor(skill) {
+      var colorObj = skill.colors[skill.updates[skill.updates.length - 1].actual_level - 1];
+      return colorObj ? colorObj.hexa_color : null;
     }
   },
   mounted: function mounted() {
@@ -2580,7 +2581,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     competenceUpdates: Array,
-    competenceName: String
+    competence: Object,
+    classeId: Number,
+    studentId: Number
+  },
+  beforeUpdate: function beforeUpdate() {
+    console.log('update');
   },
   data: function data() {
     return {
@@ -2597,9 +2603,11 @@ __webpack_require__.r(__webpack_exports__);
     updateCompetence: function updateCompetence(status) {
       this.$store.dispatch("updateCompetence", {
         competenceUpdates: this.competenceUpdates,
-        competenceName: this.competenceName,
+        competenceObj: this.competence,
         message: this.message,
-        status: status
+        status: status,
+        classeId: this.classeId,
+        studentId: this.studentId
       });
       this.message = "";
     },
@@ -2694,9 +2702,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     student: function student(newVal) {
-      if (newVal.name) this.show = true;
+      if (newVal.student_name) this.show = true;
     },
     show: function show(val) {
+      console.log(val);
       if (val === false) this.$emit("close");
     }
   },
@@ -5612,57 +5621,33 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _vm._l(_vm.programsObj, function(program) {
-                          return _vm._l(program.skills, function(
-                            skill,
-                            skillId
-                          ) {
-                            return _c(
-                              "td",
-                              {
-                                key: skillId,
-                                class: {
-                                  "border-right": _vm.isLastKey(
-                                    program.skills,
-                                    skillId
-                                  )
-                                }
-                              },
-                              [
-                                _c("span", { staticClass: "d-none" }, [
-                                  _vm._v(
-                                    " " +
-                                      _vm._s(
-                                        (_vm.color = _vm.getSkillLevel(
-                                          student.updates,
-                                          skill
-                                        ))
-                                      ) +
-                                      " "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "belt-actions",
-                                  {
-                                    attrs: {
-                                      "competence-updates": [],
-                                      "competence-name": skill.skill_name
-                                    }
-                                  },
-                                  [
-                                    _vm.color
-                                      ? _c("ceinture-type-2", {
-                                          attrs: { color: _vm.color }
-                                        })
-                                      : _vm._e()
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          })
+                        _vm._l(student.skills, function(skill, i) {
+                          return _c(
+                            "td",
+                            { key: i },
+                            [
+                              _c(
+                                "belt-actions",
+                                {
+                                  attrs: {
+                                    "competence-updates": skill.updates,
+                                    competence: skill,
+                                    classeId: _vm.currentClasse.id,
+                                    studentId: student.id
+                                  }
+                                },
+                                [
+                                  _vm.getColor(skill)
+                                    ? _c("ceinture-type-2", {
+                                        attrs: { color: _vm.getColor(skill) }
+                                      })
+                                    : _vm._e()
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
                         })
                       ],
                       2
@@ -48578,7 +48563,6 @@ var state = {
    *  classe_name: 'ex class name'
    * }]
    */
-  students: [],
   classes: [],
   // classes: [{
   //   id: 'time',
@@ -48656,22 +48640,27 @@ var mutations = {
   },
   updateCompetence: function updateCompetence(state, _ref) {
     var competenceUpdates = _ref.competenceUpdates,
+        competenceObj = _ref.competenceObj,
         status = _ref.status,
         _ref$message = _ref.message,
-        message = _ref$message === void 0 ? '' : _ref$message;
+        message = _ref$message === void 0 ? '' : _ref$message,
+        classeId = _ref.classeId,
+        studentId = _ref.studentId;
     // Cette fonction devrait être appelée par son action pour vérification.
     var date = new Date();
     var month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
     date = "".concat(date.getDate(), " ").concat(month[date.getMonth()]);
     var lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
-    var lastLevel = lastUpdate.actualLevel || 0;
+    var lastLevel = lastUpdate.actual_level || 0;
     competenceUpdates.push({
       date: date,
       message: message,
       status: status,
       // 'success' | 'fail' | 'practice'
-      actualLevel: status === 'success' ? ++lastLevel : lastLevel
+      actual_level: status === 'success' ? ++lastLevel : lastLevel
     });
+    console.log('new updates = ', competenceUpdates);
+    state.classes[classeId].students[studentId].skills[competenceObj.id].updates = competenceUpdates;
   },
   // loader
   startLoader: function startLoader(state) {
@@ -48769,7 +48758,7 @@ var mutations = {
     try {
       for (var _iterator3 = studentsObj.students[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
         var student = _step3.value;
-        student.updates = help.arrayToObjId(student.updates);
+        student.skills = help.arrayToObjId(student.skills);
       }
     } catch (err) {
       _didIteratorError3 = true;
@@ -48796,23 +48785,33 @@ var mutations = {
 var actions = {
   updateCompetence: function updateCompetence(context, _ref3) {
     var competenceUpdates = _ref3.competenceUpdates,
-        competenceName = _ref3.competenceName,
+        competenceObj = _ref3.competenceObj,
         status = _ref3.status,
         _ref3$message = _ref3.message,
-        message = _ref3$message === void 0 ? '' : _ref3$message;
-    if (!status || !competenceUpdates || !competenceName) return console.error('il faut un status/competenceUpdates/competenceName dans {} pour update une competence');
-    var maxLevel = _config__WEBPACK_IMPORTED_MODULE_3__["default"].competences[competenceName].length - 1; // - 1 car la première valeur est empty pour l'icone "start"
+        message = _ref3$message === void 0 ? '' : _ref3$message,
+        classeId = _ref3.classeId,
+        studentId = _ref3.studentId;
+    if (!status || !competenceUpdates || !competenceObj) return console.error('il faut un status/competenceUpdates/competenceObj dans {} pour update une competence'); // let maxLevel = config.competences[competenceName].length - 1; // - 1 car la première valeur est empty pour l'icone "start"
 
+    var maxLevel = competenceObj.colors.length;
     var lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
-    var actualLevel = lastUpdate.actualLevel || 0;
+    console.log('last = ', lastUpdate);
+    var actualLevel = lastUpdate.actual_level || 0;
     if (actualLevel === maxLevel) context.commit("showInfo", {
       message: "Le Niveau de compétence est déjà au maximum",
       status: 'warning'
-    });else context.commit("updateCompetence", {
-      competenceUpdates: competenceUpdates,
-      status: status,
-      message: message
-    });
+    });else {
+      // axios.post().then((resp) => {
+      // console.log(resp);
+      context.commit("updateCompetence", {
+        competenceUpdates: competenceUpdates,
+        competenceObj: competenceObj,
+        status: status,
+        message: message,
+        classeId: classeId,
+        studentId: studentId
+      }); // }) 
+    }
   },
   // GET DATAS
   // =================

@@ -68,9 +68,10 @@ export default {
   },
   watch: {
     student(newVal) {
-      if (newVal.name) this.show = true;
+      if (newVal.student_name) this.show = true;
     },
     show(val) {
+      console.log(val);
       if (val === false) this.$emit("close");
     }
   },

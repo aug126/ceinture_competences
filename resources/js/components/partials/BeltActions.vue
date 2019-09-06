@@ -54,7 +54,12 @@
 export default {
   props: {
     competenceUpdates: Array,
-    competenceName: String
+    competence: Object,
+    classeId: Number,
+    studentId: Number
+  },
+  beforeUpdate() {
+    console.log('update');
   },
   data() {
     return {
@@ -71,9 +76,11 @@ export default {
     updateCompetence(status) {
       this.$store.dispatch("updateCompetence", {
         competenceUpdates: this.competenceUpdates,
-        competenceName: this.competenceName,
+        competenceObj: this.competence,
         message: this.message,
-        status
+        status,
+        classeId: this.classeId,
+        studentId: this.studentId
       });
       this.message = "";
     },

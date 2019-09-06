@@ -17,7 +17,6 @@ const state = {
    *  classe_name: 'ex class name'
    * }]
    */
-  students: [],
   classes: [],
   // classes: [{
   //   id: 'time',
@@ -99,21 +98,26 @@ const mutations = {
   },
   updateCompetence(state, {
     competenceUpdates,
+    competenceObj,
     status,
-    message = ''
+    message = '',
+    classeId,
+    studentId
   }) {
     // Cette fonction devrait être appelée par son action pour vérification.
     let date = new Date;
     const month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
     date = `${date.getDate()} ${month[date.getMonth()]}`;
     let lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
-    let lastLevel = lastUpdate.actualLevel || 0;
+    let lastLevel = lastUpdate.actual_level || 0;
     competenceUpdates.push({
       date,
       message,
       status, // 'success' | 'fail' | 'practice'
-      actualLevel: status === 'success' ? ++lastLevel : lastLevel
+      actual_level: status === 'success' ? ++lastLevel : lastLevel
     })
+    console.log('new updates = ', competenceUpdates);
+    state.classes[classeId].students[studentId].skills[competenceObj.id].updates = competenceUpdates;
   },
   // loader
   startLoader(state) {
@@ -165,7 +169,7 @@ const mutations = {
 
   setStudentsUpdates(state, studentsObj) {
     for (let student of studentsObj.students) {
-      student.updates = help.arrayToObjId(student.updates);
+      student.skills = help.arrayToObjId(student.skills);
     }
     let students = help.arrayToObjId(studentsObj.students);
     let classeId = studentsObj.classeId;
@@ -178,25 +182,36 @@ const mutations = {
 const actions = {
   updateCompetence(context, {
     competenceUpdates,
-    competenceName,
+    competenceObj,
     status,
-    message = ''
+    message = '',
+    classeId,
+    studentId
   }) {
-    if (!status || !competenceUpdates || !competenceName) return console.error('il faut un status/competenceUpdates/competenceName dans {} pour update une competence');
-    let maxLevel = config.competences[competenceName].length - 1; // - 1 car la première valeur est empty pour l'icone "start"
+    if (!status || !competenceUpdates || !competenceObj) return console.error('il faut un status/competenceUpdates/competenceObj dans {} pour update une competence');
+    // let maxLevel = config.competences[competenceName].length - 1; // - 1 car la première valeur est empty pour l'icone "start"
+    let maxLevel = competenceObj.colors.length;
     let lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
-    let actualLevel = lastUpdate.actualLevel || 0;
+    console.log('last = ',lastUpdate);
+    let actualLevel = lastUpdate.actual_level || 0;
     if (actualLevel === maxLevel)
       context.commit("showInfo", {
         message: "Le Niveau de compétence est déjà au maximum",
         status: 'warning'
       })
-    else context.commit("updateCompetence", {
-      competenceUpdates,
-      status,
-      message
-    });
-
+    else {
+      // axios.post().then((resp) => {
+        // console.log(resp);
+      context.commit("updateCompetence", {
+        competenceUpdates,
+        competenceObj,
+        status,
+        message,
+        classeId,
+        studentId
+      });
+      // }) 
+    }
   },
 
   // GET DATAS

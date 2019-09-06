@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classe;
+use App\Update;
 use Illuminate\Http\Request;
 
 class ClasseController extends Controller
@@ -43,8 +44,29 @@ class ClasseController extends Controller
      */
     public function show($id) // GET     /api/classes/{id}
     {
-        $classe = Classe::find($id)->students()->with('updates:id,student_id,skill_id,status,message,created_at')->get(['id', 'student_name', 'order_number']);
-        return $classe;
+        $students = Classe::find($id)->students()->get(['id', 'student_name', 'order_number']);
+        $skills = Classe::find($id)->skills()->with('colors')->get();
+        foreach($students as $student) {
+            $studentSkills = $skills->toArray();
+            // transformer le $updates en {skill_id: [updates]}
+            $updates = $student->updates()->get()->toArray();
+            $studentUpdates = (object)[];
+
+            foreach($updates as $update) {
+                $skill_id = $update['skill_id'];
+                if (isset($studentUpdates->$skill_id)) {
+                    array_push($studentUpdates->$skill_id, $update);
+                } else $studentUpdates->$skill_id = [$update];
+            };
+
+            foreach($studentSkills as $key => $skill) {
+                $skill_id = $skill['id'];
+                $studentSkills[$key]['updates'] = $studentUpdates->$skill_id;
+            }
+
+            $student->skills = $studentSkills;
+        }
+        return $students;
     }
 
     /**

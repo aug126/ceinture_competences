@@ -33,19 +33,19 @@
             <td class="border-right name">
               <strong @click="() => showStudentSheet(student)">{{ student.student_name }}</strong>
             </td>
-            <!-- <td
-              v-for="(allUpdates, competence) in student.competences"
-              :key="competence"
-              :class="{'border-right': competence === 'orthographe'}"
+
+            <td
+              v-for="(skill, i) in student.skills"
+              :key="i"
             >
-              <belt-actions :competence-updates="allUpdates" :competence-name="competence">
-                <ceinture-type-2
-                  v-if="niveau(allUpdates) > 0"
-                  :color="programsObj[competence][niveau(allUpdates)]"
-                ></ceinture-type-2>
-              </belt-actions>
-            </td> -->
-            <template v-for="(program) in programsObj">
+              <belt-actions :competence-updates="skill.updates" :competence="skill" :classeId="currentClasse.id" :studentId="student.id">
+                  <ceinture-type-2
+                    v-if="getColor(skill)"
+                    :color="getColor(skill)"
+                  ></ceinture-type-2>
+                </belt-actions>
+            </td>
+            <!-- <template v-for="(program) in programsObj">
             <td
               v-for="(skill, skillId) in program.skills"
               :key="skillId"
@@ -59,7 +59,8 @@
                 ></ceinture-type-2>
               </belt-actions>
             </td>
-            </template>
+            </template> -->
+
           </tr>
         </tbody>
       </v-simple-table>
@@ -86,10 +87,10 @@ export default {
     //   let currentLvl = row.competences[competence];
     //   if (maxLvl > currentLvl) row.competences[competence] += 1;
     // },
-    niveau(allUpdatesMessages) {
-      let up = allUpdatesMessages;
-      return up[up.length - 1] && up[up.length - 1].actualLevel;
-    },
+    // niveau(allUpdatesMessages) {
+    //   let up = allUpdatesMessages;
+    //   return up[up.length - 1] && up[up.length - 1].actualLevel;
+    // },
     showStudentSheet(student) {
       this.studentSheet = student;
     },
@@ -104,16 +105,16 @@ export default {
       let lastKey = allKeys[allKeys.length - 1];
       return lastKey == key;
     },
-    getSkillLevel(updates, skill) {
-      let updatesArr = Object.values(updates);
-      let nbrSuccess = updatesArr.filter(
-        up => {
-          return (up.skill_id === skill.id) && (up.status === 'success');
-        }
-      ).length;
-      let color = Object.values(skill.colors).find(color => color.skill_level == nbrSuccess);
-      if (color === undefined) return null;
-      return color.hexa_color;
+    // getSkillLevel(updates, skill) {
+    //   let updateSkillArr = Object.values(updates).filter(up => up.skill_id === skill.id);
+    //   let nbrSuccess = updateSkillArr[updateSkillArr.length - 1].actual_level;
+    //   let color = Object.values(skill.colors).find(color => color.skill_level == nbrSuccess);
+    //   if (color === undefined) return null;
+    //   return color.hexa_color;
+    // },
+    getColor(skill) {
+      let colorObj = skill.colors[skill.updates[skill.updates.length - 1].actual_level - 1];
+      return colorObj ? colorObj.hexa_color : null;
     }
   },
 
