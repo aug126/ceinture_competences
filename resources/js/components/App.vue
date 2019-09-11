@@ -7,6 +7,31 @@
         <btn-options></btn-options>
       </v-app-bar-nav-icon>
       <v-toolbar-title>Ceintures de Compétences</v-toolbar-title>
+      <div class="flex-grow-1"></div>
+      
+      
+      
+       <v-menu
+        left
+        bottom
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <!-- <v-icon>mdi-dots-vertical</v-icon> -->
+            <v-icon>mdi-logout</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item
+            @click="logout"
+          >
+            <v-list-item-title>Se déconnecter</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
+      
     </v-app-bar>
 
     <v-content>
@@ -34,6 +59,7 @@
 import FloatingDrawer from "./layout/FloatingDrawer";
 import BtnOptions from "./layout/BtnOptions";
 import AllGlobalComponents from "./global/AllGlobalComponents";
+import axios from 'axios';
 export default {
   components: {
     FloatingDrawer,
@@ -43,12 +69,23 @@ export default {
   async mounted() {
     await this.$store.dispatch('getClasses');
   },
-  data: () => ({})
+  data: () => ({}),
+  methods: {
+    async logout() {
+      let origin = window.location.origin;
+       try {
+         await axios.post(`${origin}/logout`);
+       } 
+        catch {
+          window.location.reload();
+        }
+    }
+  }
 };
 </script>
 
 <style lang="sass">
-@import '../../sass/app.sass'
+// @import '../../sass/app.sass'
 #sidebar-nav
   justify-content: center
   display: flex
