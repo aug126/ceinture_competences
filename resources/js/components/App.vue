@@ -92,4 +92,12 @@ export default {
 #App
   button.v-app-bar__nav-icon
     margin-top: -8px !important
+  h1 
+    color: #a25da2
+  hr
+    border-color: transparentize(#a25da2, .5)
+    margin-bottom: 2rem
+
+  .w-100
+    width: 100%
 </style>

@@ -1,7 +1,8 @@
 <template>
   <div>
     <belt-student-sheet @close="studentSheet = {}" :student="studentSheet" />
-    <v-card>
+    <h1 v-if="Object.keys(programsObj).length === 0">Cette classe n'a pas de programme !</h1>
+    <v-card v-else>
       <v-simple-table id="ceinture-table" :fixed-header="true" :height="tableHeight" :dense="false">
         <thead>
           <tr>
@@ -11,14 +12,14 @@
               </v-btn>
             </th>
             
-            <th class="border-right">
+            <th class="end-program-class" :class="'height-x' + (nbrStudents + 1)">
               <h4>{{currentClasse && currentClasse.classe_name}}</h4>
             </th>
-            <template v-for="(program) in programsObj">
+            <template v-for="(program, programId) in programsObj">
               <th
                 v-for="(skill, skillId) in program.skills"
                 :key="skillId"
-                :class="{'border-right': isLastKey(program.skills, skillId)}"
+                :class="[{'end-program-class': isLastKey(program.skills, skillId), 'height-0': isLastKey(programsObj, programId)}, 'height-x' + (nbrStudents + 1)]"
               >{{skill.skill_name}}</th>
               
             </template>
@@ -27,10 +28,9 @@
         <tbody>
           <tr v-for="(student, studentId) in (currentClasse && currentClasse.students)" :key="studentId">
             <td>
-              <!-- <v-text-field disabled v-model="student.numero"></v-text-field> -->
               <strong>{{ student.order_number }}</strong>
             </td>
-            <td class="border-right name">
+            <td class="name">
               <strong @click="() => showStudentSheet(student)">{{ student.student_name }}</strong>
             </td>
 
@@ -67,15 +67,6 @@ export default {
   },
 
   methods: {
-    // upLvl(row, competence) {
-    //   let maxLvl = this.programsObj[competence].length - 1;
-    //   let currentLvl = row.competences[competence];
-    //   if (maxLvl > currentLvl) row.competences[competence] += 1;
-    // },
-    // niveau(allUpdatesMessages) {
-    //   let up = allUpdatesMessages;
-    //   return up[up.length - 1] && up[up.length - 1].actualLevel;
-    // },
     showStudentSheet(student) {
       this.studentSheet = student;
     },
@@ -90,13 +81,6 @@ export default {
       let lastKey = allKeys[allKeys.length - 1];
       return lastKey == key;
     },
-    // getSkillLevel(updates, skill) {
-    //   let updateSkillArr = Object.values(updates).filter(up => up.skill_id === skill.id);
-    //   let nbrSuccess = updateSkillArr[updateSkillArr.length - 1].actual_level;
-    //   let color = Object.values(skill.colors).find(color => color.skill_level == nbrSuccess);
-    //   if (color === undefined) return null;
-    //   return color.hexa_color;
-    // },
     getColor(skill) {
       let lastUpdate = skill.colors[skill.updates[skill.updates.length - 1]] || {};
       let colorObj = lastUpdate.actual_level - 1;
@@ -106,7 +90,6 @@ export default {
 
   mounted() {
     this.tableHeight = document.body.clientHeight - 148;
-    console.log('mounted');
   },
 
   beforeMount() {
@@ -117,7 +100,6 @@ export default {
   data() {
     return {
       tableHeight: 0,
-      // programsObj: config.competences,
       studentSheet: {}
     };
   },
@@ -137,7 +119,11 @@ export default {
       if (programs === undefined) 
         return {};
       return programs;
-    }
+    },
+    nbrStudents() {
+      if (!this.currentClasse || !this.currentClasse.students) return 0;
+      return Object.keys(this.currentClasse.students).length;
+    },
   },
 
   watch: {
@@ -156,8 +142,32 @@ export default {
     border-color: black
     text-align: center
     user-select: none
-  .border-right
-    border-right: 1px solid
+  // .border-right
+  //   border-right: 1px solid
+
+
+
+  // MIXIN
+  // mixin permet de prévoir une hauteur de cellule x le nombre de students pour couvrir tout le tableau.
+
+  $rows: 50
+  @mixin height-x-calc 
+  @for $i from 1 through $rows 
+    .height-x#{$i}::after
+      height: calc(#{$i} * 100%)
+  @include height-x-calc 
+  .height-0::after
+      height: 0 !important
+
+  th.end-program-class::after
+    position: absolute
+    content: ''
+    width: 2px
+    background: #a25ca2
+    display: block
+    top: 0
+    right: 0
+
   tr:last-child
     td 
       border-bottom: 1px solid black

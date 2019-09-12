@@ -12,4 +12,6 @@ class Skill extends Model
     public function colors() {
         return $this->hasMany('App\Color');
     }
+
+    protected $fillable = ['skill_name', 'program_id'];
 }

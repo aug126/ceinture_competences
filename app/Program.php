@@ -16,4 +16,5 @@ class Program extends Model
     public function skills() {
         return $this->hasMany('App\Skill');
     }
+    protected $fillable = ['program_name', 'classe_id'];
 }
