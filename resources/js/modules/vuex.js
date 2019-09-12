@@ -180,6 +180,20 @@ const mutations = {
 }
 
 const actions = {
+
+  // students,
+  // classe,
+  // programs,
+  // skills
+  storeClasse(context, data) {
+    if (!data.classe_name) return console.error('il faut une classe dans {} pour créer une classe.');
+    let origin = window.location.origin;
+    axios.post(`${origin}/storeClasseStudents`, data).then((resp) => {
+      console.log(resp.data);
+    })
+    // context.commit();
+  },
+
   updateCompetence(context, {
     competenceUpdates,
     competenceObj,
@@ -201,7 +215,7 @@ const actions = {
     else {
       let data = {skillId: competenceObj.id, status, message};
       let origin = window.location.origin;
-      axios.post(`${origin}/api/student/${studentId}/update`, data).then((resp) => {
+      axios.post(`${origin}/student/${studentId}/update`, data).then((resp) => {
         if (!resp.data.success)
           return console.error('erreur lors du store de l\'update');
         context.commit("updateCompetence", {
@@ -220,21 +234,21 @@ const actions = {
   // =================
   async getClasses(context) {
     let origin = window.location.origin;
-    let classes = await axios.get(origin + '/api/classes');
+    let classes = await axios.get(origin + '/classes');
     context.commit('setClasses', classes.data);
   },
 
   async getStudentsUpdates(context, classeId) {
     if (context.state.classes[classeId] === undefined) return;
     let origin = window.location.origin;
-    let students = await axios.get(`${origin}/api/classes/${classeId}`);
+    let students = await axios.get(`${origin}/classes/${classeId}`);
     context.commit('setStudentsUpdates', {classeId, students: students.data});
   },
 
   async getProgramsSkills(context, classeId) {
     if (context.state.classes[classeId] === undefined) return;
     let origin = window.location.origin;
-    let programs = await axios.get(origin + `/api/programs/${classeId}`);
+    let programs = await axios.get(origin + `/programs/${classeId}`);
     context.commit('setProgramsSkills', {classeId, programs: programs.data});
   },
 

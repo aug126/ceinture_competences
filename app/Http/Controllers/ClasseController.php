@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Classe;
+use App\Student;
 use App\Update;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClasseController extends Controller
 {
@@ -21,7 +23,7 @@ class ClasseController extends Controller
      */
     public function index() // GET      /api/classes/
     {
-        $classes = Classe::select('id', 'classe_name')->get();
+        $classes = Auth::user()->classes()->select('id', 'classe_name')->get();
         return $classes;
     }
 
@@ -33,7 +35,26 @@ class ClasseController extends Controller
      */
     public function store(Request $request) // POST      /api/classes
     {
-        //
+        // Classe
+        $new_classe = new Classe;
+        $new_classe->classe_name = $request->classe_name;
+        $new_classe->user_id = Auth::id();
+        $new_added = $new_classe->save();
+
+        // Students : add all
+        $order = (object)['number' => 0];
+        $arr_stu_datas = array_map(function($student_name) use($order, $new_classe){
+            $order->number++;
+            return [
+                'order_number'  => $order->number,
+                'student_name'  => $student_name,
+                'classe_id'     => $new_classe->id
+            ];
+        }, $request->students);
+
+        foreach ($arr_stu_datas as $stu_datas)
+            Student::create($stu_datas);
+        return (string)$new_added;
     }
 
     /**
@@ -44,9 +65,14 @@ class ClasseController extends Controller
      */
     public function show($id) // GET     /api/classes/{id}
     {
-        $students = Classe::find($id)->students()->get(['id', 'student_name', 'order_number']);
+        $classe = Classe::find($id);
+        if ($classe->user_id !== Auth::id())
+            return 'Not Authorize';
+        $students = $classe->students()->get(['id', 'student_name', 'order_number']);
         $skills = Classe::find($id)->skills()->with('colors')->get();
         foreach($students as $student) {
+            if ($student->id === 25) 
+                echo '';
             $studentSkills = $skills->toArray();
             // transformer le $updates en {skill_id: [updates]}
             $updates = $student->updates()->get()->toArray();
@@ -61,7 +87,7 @@ class ClasseController extends Controller
 
             foreach($studentSkills as $key => $skill) {
                 $skill_id = $skill['id'];
-                $studentSkills[$key]['updates'] = $studentUpdates->$skill_id;
+                $studentSkills[$key]['updates'] = isset($studentUpdates->$skill_id) ? $studentUpdates->$skill_id : [];
             }
 
             $student->skills = $studentSkills;

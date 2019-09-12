@@ -12,6 +12,9 @@ class User extends Authenticatable
     use SoftDeletes;
     use Notifiable;
 
+    public function classes() {
+        return $this->hasMany('App\Classe');
+    }
     /**
      * The attributes that are mass assignable.
      *

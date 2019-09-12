@@ -45,21 +45,6 @@
                   ></ceinture-type-2>
                 </belt-actions>
             </td>
-            <!-- <template v-for="(program) in programsObj">
-            <td
-              v-for="(skill, skillId) in program.skills"
-              :key="skillId"
-              :class="{'border-right': isLastKey(program.skills, skillId)}"
-            >
-              <span class="d-none"> {{color = getSkillLevel(student.updates, skill)}} </span>
-              <belt-actions :competence-updates="[]" :competence-name="skill.skill_name">
-                <ceinture-type-2
-                  v-if="color"
-                  :color="color"
-                ></ceinture-type-2>
-              </belt-actions>
-            </td>
-            </template> -->
 
           </tr>
         </tbody>
@@ -113,13 +98,15 @@ export default {
     //   return color.hexa_color;
     // },
     getColor(skill) {
-      let colorObj = skill.colors[skill.updates[skill.updates.length - 1].actual_level - 1];
+      let lastUpdate = skill.colors[skill.updates[skill.updates.length - 1]] || {};
+      let colorObj = lastUpdate.actual_level - 1;
       return colorObj ? colorObj.hexa_color : null;
     }
   },
 
   mounted() {
     this.tableHeight = document.body.clientHeight - 148;
+    console.log('mounted');
   },
 
   beforeMount() {

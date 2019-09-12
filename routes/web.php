@@ -13,10 +13,17 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('auth');
 
 Auth::routes();
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/', function () { return view('welcome'); });
+    Route::get('classes', 'ClasseController@index');
+    Route::get('classes/{id}', 'ClasseController@show');
+    Route::get('programs/{classe_id}', 'ProgramController@index');
+
+    Route::post('storeClasseStudents', 'ClasseController@store');
+    Route::post('student/{student_id}/update', 'UpdateController@store');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');

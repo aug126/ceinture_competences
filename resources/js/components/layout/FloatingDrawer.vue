@@ -59,4 +59,6 @@ export default {
 #FloatingDrawer
   position: fixed
   margin-top: 3rem
+  .v-list-group.v-list-group--active.v-list-group--no-action.primary--text
+    max-height: 60vh
 </style>

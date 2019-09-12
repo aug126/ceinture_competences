@@ -16,5 +16,5 @@ class Student extends Model
     public function updates() {
         return $this->hasMany('App\Update');
     }
-
+    protected $fillable = ['order_number', 'student_name', 'classe_id'];
 }

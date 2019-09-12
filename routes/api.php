@@ -13,12 +13,3 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::get('classes', 'ClasseController@index');
-Route::get('classes/{id}', 'ClasseController@show');
-Route::get('programs/{classe_id}', 'ProgramController@index');
-
-Route::post('student/{student_id}/update', 'UpdateController@store');

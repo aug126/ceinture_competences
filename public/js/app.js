@@ -2283,21 +2283,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2341,12 +2326,14 @@ __webpack_require__.r(__webpack_exports__);
     //   return color.hexa_color;
     // },
     getColor: function getColor(skill) {
-      var colorObj = skill.colors[skill.updates[skill.updates.length - 1].actual_level - 1];
+      var lastUpdate = skill.colors[skill.updates[skill.updates.length - 1]] || {};
+      var colorObj = lastUpdate.actual_level - 1;
       return colorObj ? colorObj.hexa_color : null;
     }
   },
   mounted: function mounted() {
     this.tableHeight = document.body.clientHeight - 148;
+    console.log('mounted');
   },
   beforeMount: function beforeMount() {
     this.getStudentsUpdates();
@@ -2500,7 +2487,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _createClasse = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var newClasse;
+        var datas, newClasse;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2515,16 +2502,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.abrupt("return");
 
               case 3:
-                newClasse = this.buildClasse();
+                // insert datas
+                datas = {
+                  students: this.chipEleveList,
+                  classe_name: this.className // programs: // TODO à ajouter,
+                  // skills: // TODO à ajouter
+
+                };
                 _context.next = 6;
-                return this.$store.commit("addClasse", newClasse);
+                return this.$store.dispatch('storeClasse', datas);
 
               case 6:
-                this.$router.push({
-                  path: "/ceintures/" + newClasse.id
-                });
+                newClasse = _context.sent;
+                console.log('newClasse', newClasse); // this.$router.push({ path: "/ceintures/" + newClasse.id });
 
-              case 7:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -2537,36 +2529,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return createClasse;
-    }(),
-    buildClasse: function buildClasse() {
-      var time = new Date();
-      time = time.getTime();
-      var studentsBelt = this.chipEleveList.map(function (student, index) {
-        return {
-          numero: index + 1,
-          name: student,
-          competences: {
-            grammaire: [],
-            conjugaison: [],
-            orthographe: [],
-            numération: [],
-            calculsEcrits: [],
-            mesures: [],
-            géométrie: []
-          }
-        };
-      });
-      var newClasse = {
-        id: time,
-        name: this.className,
-        studentsBelt: studentsBelt
-      }; // let newClasse = {};
-      // this.$set(newClasse, "id", time);
-      // this.$set(newClasse, "name", this.className);
-      // this.$set(newClasse, "studentsBelt", studentsBelt);
-
-      return newClasse;
-    }
+    }()
   },
   computed: {
     chipEleveList: function chipEleveList() {
@@ -2909,7 +2872,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#FloatingDrawer[data-v-4d80e9fe] {\n  position: fixed;\n  margin-top: 3rem;\n}", ""]);
+exports.push([module.i, "#FloatingDrawer[data-v-4d80e9fe] {\n  position: fixed;\n  margin-top: 3rem;\n}\n#FloatingDrawer .v-list-group.v-list-group--active.v-list-group--no-action.primary--text[data-v-4d80e9fe] {\n  max-height: 60vh;\n}", ""]);
 
 // exports
 
@@ -48891,6 +48854,17 @@ var mutations = {
   }
 };
 var actions = {
+  // students,
+  // classe,
+  // programs,
+  // skills
+  storeClasse: function storeClasse(context, data) {
+    if (!data.classe_name) return console.error('il faut une classe dans {} pour créer une classe.');
+    var origin = window.location.origin;
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(origin, "/storeClasseStudents"), data).then(function (resp) {
+      console.log(resp.data);
+    }); // context.commit();
+  },
   updateCompetence: function updateCompetence(context, _ref3) {
     var competenceUpdates = _ref3.competenceUpdates,
         competenceObj = _ref3.competenceObj,
@@ -48914,7 +48888,7 @@ var actions = {
         message: message
       };
       var origin = window.location.origin;
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(origin, "/api/student/").concat(studentId, "/update"), data).then(function (resp) {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(origin, "/student/").concat(studentId, "/update"), data).then(function (resp) {
         if (!resp.data.success) return console.error('erreur lors du store de l\'update');
         context.commit("updateCompetence", {
           competenceUpdates: competenceUpdates,
@@ -48940,7 +48914,7 @@ var actions = {
             case 0:
               origin = window.location.origin;
               _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get(origin + '/api/classes');
+              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get(origin + '/classes');
 
             case 3:
               classes = _context.sent;
@@ -48979,7 +48953,7 @@ var actions = {
             case 2:
               origin = window.location.origin;
               _context2.next = 5;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(origin, "/api/classes/").concat(classeId));
+              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(origin, "/classes/").concat(classeId));
 
             case 5:
               students = _context2.sent;
@@ -49021,7 +48995,7 @@ var actions = {
             case 2:
               origin = window.location.origin;
               _context3.next = 5;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get(origin + "/api/programs/".concat(classeId));
+              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get(origin + "/programs/".concat(classeId));
 
             case 5:
               programs = _context3.sent;

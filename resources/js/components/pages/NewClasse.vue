@@ -87,37 +87,18 @@ export default {
     async createClasse() {
       this.$refs.form.validate();
       if (this.valid === false) return;
-      let newClasse = this.buildClasse();
-      await this.$store.commit("addClasse", newClasse);
-      this.$router.push({ path: "/ceintures/" + newClasse.id });
+
+      // insert datas
+      let datas = {
+        students: this.chipEleveList,
+        classe_name: this.className,
+        // programs: // TODO à ajouter,
+        // skills: // TODO à ajouter
+      }
+      let newClasse = await this.$store.dispatch('storeClasse', datas);
+      console.log('newClasse', newClasse);
+      // this.$router.push({ path: "/ceintures/" + newClasse.id });
     },
-    buildClasse() {
-      let time = new Date();
-      time = time.getTime();
-      const studentsBelt = this.chipEleveList.map((student, index) => ({
-        numero: index + 1,
-        name: student,
-        competences: {
-          grammaire: [],
-          conjugaison: [],
-          orthographe: [],
-          numération: [],
-          calculsEcrits: [],
-          mesures: [],
-          géométrie: []
-        }
-      }));
-      let newClasse = {
-        id: time,
-        name: this.className,
-        studentsBelt
-      };
-      // let newClasse = {};
-      // this.$set(newClasse, "id", time);
-      // this.$set(newClasse, "name", this.className);
-      // this.$set(newClasse, "studentsBelt", studentsBelt);
-      return newClasse;
-    }
   },
   computed: {
     chipEleveList() {
