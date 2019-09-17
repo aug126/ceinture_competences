@@ -8,13 +8,8 @@
       </v-app-bar-nav-icon>
       <v-toolbar-title>Ceintures de Compétences</v-toolbar-title>
       <div class="flex-grow-1"></div>
-      
-      
-      
-       <v-menu
-        left
-        bottom
-      >
+
+      <v-menu left bottom>
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
             <!-- <v-icon>mdi-dots-vertical</v-icon> -->
@@ -23,15 +18,11 @@
         </template>
 
         <v-list>
-          <v-list-item
-            @click="logout"
-          >
+          <v-list-item @click="logout">
             <v-list-item-title>Se déconnecter</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
-
-      
     </v-app-bar>
 
     <v-content>
@@ -59,7 +50,7 @@
 import FloatingDrawer from "./layout/FloatingDrawer";
 import BtnOptions from "./layout/BtnOptions";
 import AllGlobalComponents from "./global/AllGlobalComponents";
-import axios from 'axios';
+import axios from "axios";
 export default {
   components: {
     FloatingDrawer,
@@ -67,18 +58,17 @@ export default {
     AllGlobalComponents
   },
   async mounted() {
-    await this.$store.dispatch('getClasses');
+    await this.$store.dispatch("getClasses");
   },
   data: () => ({}),
   methods: {
     async logout() {
       let origin = window.location.origin;
-       try {
-         await axios.post(`${origin}/logout`);
-       } 
-        catch {
-          window.location.reload();
-        }
+      try {
+        await axios.post(`${origin}/logout`);
+      } catch {
+        window.location.reload();
+      }
     }
   }
 };
@@ -96,7 +86,7 @@ export default {
     color: #a25da2
   hr
     border-color: transparentize(#a25da2, .5)
-    margin-bottom: 2rem
+    margin-bottom: 3rem
 
   .w-100
     width: 100%

@@ -1,8 +1,9 @@
 <template>
   <div id="NewClasse">
     <h1>Créez une classe avec des élèves.</h1>
-    <v-card>
+    <v-card class="p-static">
       <v-card-text>
+        <h2>La classe</h2>
         <v-form ref="form" v-model="valid">
           <v-container>
             <v-row>
@@ -32,36 +33,33 @@
                 </v-chip>
               </v-col>
             </v-row>
-            <hr>
+            <hr />
 
             <!-- Programmes / skills-->
-              <div v-for="(program, i) in classPrograms" :key="i">
-            <v-row>
-              <v-col cols="12" md="4">
-                <v-text-field
-                  v-model="program.name"
-                  label="Programmes (ex: mathémathiques)"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" md="8">
-                <v-text-field v-model="program.competences" label="Compétences (ex: calcul, géo, ...)"></v-text-field>
-                </v-col>
-            </v-row>
-              </div>
+            <h2>Les compétences</h2>
+            <div v-for="(program, i) in programsSkills" :key="i">
+              <NewProgramSkills :previews-colors="previewsColors" :program="program" />
+            </div>
+
+            <!-- ADD / DEL Programs -->
             <v-row>
               <v-col col="12" :md="multiProgr ? 2 : 4">
                 <div class="my-2">
-                  <v-btn @click="addProgr" large class="w-100 add-progr"><v-icon color="info">mdi-plus</v-icon></v-btn>
+                  <v-btn @click="addProgr" large class="w-100 add-progr">
+                    <v-icon color="info">mdi-plus</v-icon>
+                  </v-btn>
                 </div>
               </v-col>
               <v-col v-if="multiProgr" col="12" md="2">
                 <div class="my-2">
-                  <v-btn @click="delProgr" large class="w-100 add-progr"><v-icon color="info">mdi-minus</v-icon></v-btn>
+                  <v-btn @click="delProgr" large class="w-100 add-progr">
+                    <v-icon color="info">mdi-minus</v-icon>
+                  </v-btn>
                 </div>
               </v-col>
             </v-row>
-            <hr>
+
+            <hr />
           </v-container>
         </v-form>
       </v-card-text>
@@ -75,7 +73,9 @@
 </template>
 
 <script>
+import NewProgramSkills from "../partials/NewProgramSkills";
 export default {
+  components: { NewProgramSkills },
   data() {
     return {
       valid: false,
@@ -87,8 +87,11 @@ export default {
       eleveRules: [
         v => this.validUniqueEleve(v) || "Il ne peut pas y avoir 2 même noms"
       ],
-      classPrograms: [{name: '', competences: ''}],
-      programRules: []
+      programsSkills: [
+        { name: "", competences: "", levels: [], countSkills: 0 }
+      ],
+      programRules: [],
+      previewsColors: []
     };
   },
   methods: {
@@ -119,22 +122,27 @@ export default {
       this.$refs.form.resetValidation();
     },
     addProgr() {
-      this.classPrograms.push({name: '', competences: ''})
+      this.programsSkills.push({
+        name: "",
+        competences: "",
+        levels: [],
+        countSkills: 0
+      });
     },
     delProgr() {
-      this.classPrograms.pop();
+      this.programsSkills.pop();
     },
 
     async createClasse() {
       this.$refs.form.validate();
       if (this.valid === false) return;
-      let progr_skills = this.classPrograms
-        .map((progr) => ({
+      let progr_skills = this.programsSkills
+        .map(progr => ({
           program_name: progr.name,
           competences: progr.competences
-            .split(',')
-            .map((comp) => comp.trim())
-            .filter((progr) => !!progr)
+            .split(",")
+            .map(comp => comp.trim())
+            .filter(progr => !!progr)
         }))
         .filter(prog => !!prog.program_name);
       console.log(progr_skills);
@@ -146,12 +154,12 @@ export default {
         progr_skills
         // programs: // TODO à ajouter,
         // skills: // TODO à ajouter
-      }
-      console.log('datas = ', datas);
-      let newClasse = await this.$store.dispatch('storeClasse', datas);
-      console.log('newClasse', newClasse);
+      };
+      console.log("datas = ", datas);
+      let newClasse = await this.$store.dispatch("storeClasse", datas);
+      console.log("newClasse", newClasse);
       // this.$router.push({ path: "/ceintures/" + newClasse.id });
-    },
+    }
   },
   computed: {
     chipEleveList() {
@@ -164,13 +172,55 @@ export default {
       return list.filter(eleve => eleve.length > 0);
     },
     multiProgr() {
-      return this.classPrograms.length > 1 ? true : false;
+      return this.programsSkills.length > 1 ? true : false;
     }
   }
 };
 </script>
-<style lang="sass" scoped>
+<style lang="sass">
 #NewClasse
   .add-progr 
     margin-top: -3rem
+  #level-colors
+    span.skill-name
+      font-size: 1rem
+      margin-top: .3rem
+    label.v-label.theme--light
+      top: 25px
+      left: -25px !important
+    .v-input.theme--light.v-input--selection-controls.v-input--checkbox
+      margin-top: 0
+      .v-input__slot
+        margin-bottom: 0 !important
+      .v-messages.theme--light
+        display: none
+    .level-number
+      font-size: 1rem
+      font-weight: bold
+      display: block
+      margin-left: 1rem
+      text-align: center
+      margin-top: -1.7rem
+    .custom-color 
+      border: .1rem solid
+      border-radius: .3rem
+      width: 2rem
+      height: 2rem
+      display: flex
+      justify-content: center
+      margin-left: 1rem
+      cursor: pointer
+      &.colorized 
+        .v-icon.edit
+          display: none
+        &:hover .v-icon
+          display: block
+    .v-color-picker__alpha
+      display: none
+    .v-color-picker.v-sheet.theme--light.theme--light
+      position: absolute
+      z-index: 20
+  .p-static 
+    position: static
+
 </style>
