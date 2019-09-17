@@ -53,7 +53,6 @@
 <script>
 export default {
   props: {
-    competenceUpdates: Array,
     competence: Object,
     classeId: Number,
     studentId: Number
@@ -75,7 +74,6 @@ export default {
     },
     updateCompetence(status) {
       this.$store.dispatch("updateCompetence", {
-        competenceUpdates: this.competenceUpdates,
         competenceObj: this.competence,
         message: this.message,
         status,

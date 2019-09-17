@@ -30,7 +30,8 @@ class UpdateController extends Controller
         $actual_level = $student->updates()
         ->where('skill_id', '=', $request->skillId)
         ->orderBy('id', 'desc')
-        ->first()->actual_level;
+        ->first();
+        $actual_level = ($actual_level !== null) ? $actual_level->actual_level : 0;
         if ($request->status === 'success')
             $actual_level ++;
         $insert = Update::insert([

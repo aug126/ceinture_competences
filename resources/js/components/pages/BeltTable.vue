@@ -11,7 +11,7 @@
                 <v-icon>mdi-table-edit</v-icon>
               </v-btn>
             </th>
-            
+
             <th class="end-program-class" :class="'height-x' + (nbrStudents + 1)">
               <h4>{{currentClasse && currentClasse.classe_name}}</h4>
             </th>
@@ -21,12 +21,14 @@
                 :key="skillId"
                 :class="[{'end-program-class': isLastKey(program.skills, skillId), 'height-0': isLastKey(programsObj, programId)}, 'height-x' + (nbrStudents + 1)]"
               >{{skill.skill_name}}</th>
-              
             </template>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(student, studentId) in (currentClasse && currentClasse.students)" :key="studentId">
+          <tr
+            v-for="(student, studentId) in (currentClasse && currentClasse.students)"
+            :key="studentId"
+          >
             <td>
               <strong>{{ student.order_number }}</strong>
             </td>
@@ -34,18 +36,15 @@
               <strong @click="() => showStudentSheet(student)">{{ student.student_name }}</strong>
             </td>
 
-            <td
-              v-for="(skill, i) in student.skills"
-              :key="i"
-            >
-              <belt-actions :competence-updates="skill.updates" :competence="skill" :classeId="currentClasse.id" :studentId="student.id">
-                  <ceinture-type-2
-                    v-if="getColor(skill)"
-                    :color="getColor(skill)"
-                  ></ceinture-type-2>
-                </belt-actions>
+            <td v-for="(skill, i) in student.skills" :key="i">
+              <belt-actions
+                :competence="skill"
+                :classeId="currentClasse.id"
+                :studentId="student.id"
+              >
+                <ceinture-type-2 v-if="getColor(skill)" :color="getColor(skill)"></ceinture-type-2>
+              </belt-actions>
             </td>
-
           </tr>
         </tbody>
       </v-simple-table>
@@ -71,10 +70,10 @@ export default {
       this.studentSheet = student;
     },
     getStudentsUpdates() {
-      this.$store.dispatch('getStudentsUpdates', this.$route.params.id);
+      this.$store.dispatch("getStudentsUpdates", this.$route.params.id);
     },
     getProgramsSkills() {
-      this.$store.dispatch('getProgramsSkills', this.$route.params.id)
+      this.$store.dispatch("getProgramsSkills", this.$route.params.id);
     },
     isLastKey(obj, key) {
       let allKeys = Object.keys(obj);
@@ -82,7 +81,8 @@ export default {
       return lastKey == key;
     },
     getColor(skill) {
-      let lastUpdate = skill.colors[skill.updates[skill.updates.length - 1]] || {};
+      let lastUpdate =
+        skill.colors[skill.updates[skill.updates.length - 1]] || {};
       let colorObj = lastUpdate.actual_level - 1;
       return colorObj ? colorObj.hexa_color : null;
     }
@@ -111,26 +111,25 @@ export default {
       if (classe === undefined) {
         this.$router.push({ path: "/" });
         return {};
-      };
+      }
       return classe;
     },
     programsObj() {
       let programs = this.currentClasse.programs;
-      if (programs === undefined) 
-        return {};
+      if (programs === undefined) return {};
       return programs;
     },
     nbrStudents() {
       if (!this.currentClasse || !this.currentClasse.students) return 0;
       return Object.keys(this.currentClasse.students).length;
-    },
+    }
   },
 
   watch: {
     $route() {
       this.getStudentsUpdates();
       this.getProgramsSkills();
-    },
+    }
   }
 };
 </script>
@@ -163,7 +162,7 @@ export default {
     position: absolute
     content: ''
     width: 2px
-    background: #a25ca2
+    background: #ed4900
     display: block
     top: 0
     right: 0

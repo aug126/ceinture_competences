@@ -2273,7 +2273,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -2290,10 +2289,10 @@ __webpack_require__.r(__webpack_exports__);
       this.studentSheet = student;
     },
     getStudentsUpdates: function getStudentsUpdates() {
-      this.$store.dispatch('getStudentsUpdates', this.$route.params.id);
+      this.$store.dispatch("getStudentsUpdates", this.$route.params.id);
     },
     getProgramsSkills: function getProgramsSkills() {
-      this.$store.dispatch('getProgramsSkills', this.$route.params.id);
+      this.$store.dispatch("getProgramsSkills", this.$route.params.id);
     },
     isLastKey: function isLastKey(obj, key) {
       var allKeys = Object.keys(obj);
@@ -2331,7 +2330,6 @@ __webpack_require__.r(__webpack_exports__);
         return {};
       }
 
-      ;
       return classe;
     },
     programsObj: function programsObj() {
@@ -2536,33 +2534,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 progr_skills = this.programsSkills.map(function (progr) {
                   return {
                     program_name: progr.name,
-                    competences: progr.competences.split(",").map(function (comp) {
-                      return comp.trim();
-                    }).filter(function (progr) {
-                      return !!progr;
-                    })
+                    competences: progr.levels
                   };
-                }).filter(function (prog) {
-                  return !!prog.program_name;
-                });
-                console.log(progr_skills); // insert datas
+                }).filter(function (progr) {
+                  return progr.program_name !== null && progr.program_name.trim();
+                }); // insert datas
 
                 datas = {
                   students: this.chipEleveList,
                   classe_name: this.className,
-                  progr_skills: progr_skills // programs: // TODO à ajouter,
-                  // skills: // TODO à ajouter
-
+                  progr_skills: progr_skills
                 };
-                console.log("datas = ", datas);
-                _context.next = 9;
+                _context.next = 7;
                 return this.$store.dispatch("storeClasse", datas);
 
-              case 9:
+              case 7:
                 newClasse = _context.sent;
-                console.log("newClasse", newClasse); // this.$router.push({ path: "/ceintures/" + newClasse.id });
+                this.$router.push({
+                  path: "/ceintures/" + newClasse.id
+                });
 
-              case 11:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -2659,7 +2651,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    competenceUpdates: Array,
     competence: Object,
     classeId: Number,
     studentId: Number
@@ -2681,7 +2672,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateCompetence: function updateCompetence(status) {
       this.$store.dispatch("updateCompetence", {
-        competenceUpdates: this.competenceUpdates,
         competenceObj: this.competence,
         message: this.message,
         status: status,
@@ -3163,7 +3153,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#sidebar-nav {\n  justify-content: center;\n  display: flex;\n}\n#App button.v-app-bar__nav-icon {\n  margin-top: -8px !important;\n}\n#App h1 {\n  color: #a25da2;\n}\n#App hr {\n  border-color: rgba(162, 93, 162, 0.5);\n  margin-bottom: 3rem;\n}\n#App .w-100 {\n  width: 100%;\n}", ""]);
+exports.push([module.i, "#sidebar-nav {\n  justify-content: center;\n  display: flex;\n}\n#App button.v-app-bar__nav-icon {\n  margin-top: -8px !important;\n}\n#App h1 {\n  color: #a25da2;\n  margin-left: 2rem;\n}\n#App hr {\n  border-color: rgba(162, 93, 162, 0.5);\n  margin-bottom: 3rem;\n}\n#App .w-100 {\n  width: 100%;\n}", ""]);
 
 // exports
 
@@ -3220,7 +3210,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#ceinture-table th, #ceinture-table td {\n  font-size: 1.2rem;\n  border-color: black;\n  text-align: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n#ceinture-table .height-x1::after {\n  height: calc(1 * 100%);\n}\n#ceinture-table .height-x2::after {\n  height: calc(2 * 100%);\n}\n#ceinture-table .height-x3::after {\n  height: calc(3 * 100%);\n}\n#ceinture-table .height-x4::after {\n  height: calc(4 * 100%);\n}\n#ceinture-table .height-x5::after {\n  height: calc(5 * 100%);\n}\n#ceinture-table .height-x6::after {\n  height: calc(6 * 100%);\n}\n#ceinture-table .height-x7::after {\n  height: calc(7 * 100%);\n}\n#ceinture-table .height-x8::after {\n  height: calc(8 * 100%);\n}\n#ceinture-table .height-x9::after {\n  height: calc(9 * 100%);\n}\n#ceinture-table .height-x10::after {\n  height: calc(10 * 100%);\n}\n#ceinture-table .height-x11::after {\n  height: calc(11 * 100%);\n}\n#ceinture-table .height-x12::after {\n  height: calc(12 * 100%);\n}\n#ceinture-table .height-x13::after {\n  height: calc(13 * 100%);\n}\n#ceinture-table .height-x14::after {\n  height: calc(14 * 100%);\n}\n#ceinture-table .height-x15::after {\n  height: calc(15 * 100%);\n}\n#ceinture-table .height-x16::after {\n  height: calc(16 * 100%);\n}\n#ceinture-table .height-x17::after {\n  height: calc(17 * 100%);\n}\n#ceinture-table .height-x18::after {\n  height: calc(18 * 100%);\n}\n#ceinture-table .height-x19::after {\n  height: calc(19 * 100%);\n}\n#ceinture-table .height-x20::after {\n  height: calc(20 * 100%);\n}\n#ceinture-table .height-x21::after {\n  height: calc(21 * 100%);\n}\n#ceinture-table .height-x22::after {\n  height: calc(22 * 100%);\n}\n#ceinture-table .height-x23::after {\n  height: calc(23 * 100%);\n}\n#ceinture-table .height-x24::after {\n  height: calc(24 * 100%);\n}\n#ceinture-table .height-x25::after {\n  height: calc(25 * 100%);\n}\n#ceinture-table .height-x26::after {\n  height: calc(26 * 100%);\n}\n#ceinture-table .height-x27::after {\n  height: calc(27 * 100%);\n}\n#ceinture-table .height-x28::after {\n  height: calc(28 * 100%);\n}\n#ceinture-table .height-x29::after {\n  height: calc(29 * 100%);\n}\n#ceinture-table .height-x30::after {\n  height: calc(30 * 100%);\n}\n#ceinture-table .height-x31::after {\n  height: calc(31 * 100%);\n}\n#ceinture-table .height-x32::after {\n  height: calc(32 * 100%);\n}\n#ceinture-table .height-x33::after {\n  height: calc(33 * 100%);\n}\n#ceinture-table .height-x34::after {\n  height: calc(34 * 100%);\n}\n#ceinture-table .height-x35::after {\n  height: calc(35 * 100%);\n}\n#ceinture-table .height-x36::after {\n  height: calc(36 * 100%);\n}\n#ceinture-table .height-x37::after {\n  height: calc(37 * 100%);\n}\n#ceinture-table .height-x38::after {\n  height: calc(38 * 100%);\n}\n#ceinture-table .height-x39::after {\n  height: calc(39 * 100%);\n}\n#ceinture-table .height-x40::after {\n  height: calc(40 * 100%);\n}\n#ceinture-table .height-x41::after {\n  height: calc(41 * 100%);\n}\n#ceinture-table .height-x42::after {\n  height: calc(42 * 100%);\n}\n#ceinture-table .height-x43::after {\n  height: calc(43 * 100%);\n}\n#ceinture-table .height-x44::after {\n  height: calc(44 * 100%);\n}\n#ceinture-table .height-x45::after {\n  height: calc(45 * 100%);\n}\n#ceinture-table .height-x46::after {\n  height: calc(46 * 100%);\n}\n#ceinture-table .height-x47::after {\n  height: calc(47 * 100%);\n}\n#ceinture-table .height-x48::after {\n  height: calc(48 * 100%);\n}\n#ceinture-table .height-x49::after {\n  height: calc(49 * 100%);\n}\n#ceinture-table .height-x50::after {\n  height: calc(50 * 100%);\n}\n#ceinture-table .height-0::after {\n  height: 0 !important;\n}\n#ceinture-table th.end-program-class::after {\n  position: absolute;\n  content: \"\";\n  width: 2px;\n  background: #a25ca2;\n  display: block;\n  top: 0;\n  right: 0;\n}\n#ceinture-table tr:last-child td {\n  border-bottom: 1px solid black;\n}\n#ceinture-table tr:first-child td {\n  border-top: 1px solid black;\n}\n#ceinture-table tbody tr:hover {\n  background: none !important;\n}\n#ceinture-table td.name {\n  cursor: pointer;\n}\n#ceinture-table td.name > strong {\n  display: block;\n  transition: color 0.2s ease-in;\n}\n#ceinture-table td.name:hover > strong {\n  color: #4057b5 !important;\n}", ""]);
+exports.push([module.i, "#ceinture-table th, #ceinture-table td {\n  font-size: 1.2rem;\n  border-color: black;\n  text-align: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n#ceinture-table .height-x1::after {\n  height: calc(1 * 100%);\n}\n#ceinture-table .height-x2::after {\n  height: calc(2 * 100%);\n}\n#ceinture-table .height-x3::after {\n  height: calc(3 * 100%);\n}\n#ceinture-table .height-x4::after {\n  height: calc(4 * 100%);\n}\n#ceinture-table .height-x5::after {\n  height: calc(5 * 100%);\n}\n#ceinture-table .height-x6::after {\n  height: calc(6 * 100%);\n}\n#ceinture-table .height-x7::after {\n  height: calc(7 * 100%);\n}\n#ceinture-table .height-x8::after {\n  height: calc(8 * 100%);\n}\n#ceinture-table .height-x9::after {\n  height: calc(9 * 100%);\n}\n#ceinture-table .height-x10::after {\n  height: calc(10 * 100%);\n}\n#ceinture-table .height-x11::after {\n  height: calc(11 * 100%);\n}\n#ceinture-table .height-x12::after {\n  height: calc(12 * 100%);\n}\n#ceinture-table .height-x13::after {\n  height: calc(13 * 100%);\n}\n#ceinture-table .height-x14::after {\n  height: calc(14 * 100%);\n}\n#ceinture-table .height-x15::after {\n  height: calc(15 * 100%);\n}\n#ceinture-table .height-x16::after {\n  height: calc(16 * 100%);\n}\n#ceinture-table .height-x17::after {\n  height: calc(17 * 100%);\n}\n#ceinture-table .height-x18::after {\n  height: calc(18 * 100%);\n}\n#ceinture-table .height-x19::after {\n  height: calc(19 * 100%);\n}\n#ceinture-table .height-x20::after {\n  height: calc(20 * 100%);\n}\n#ceinture-table .height-x21::after {\n  height: calc(21 * 100%);\n}\n#ceinture-table .height-x22::after {\n  height: calc(22 * 100%);\n}\n#ceinture-table .height-x23::after {\n  height: calc(23 * 100%);\n}\n#ceinture-table .height-x24::after {\n  height: calc(24 * 100%);\n}\n#ceinture-table .height-x25::after {\n  height: calc(25 * 100%);\n}\n#ceinture-table .height-x26::after {\n  height: calc(26 * 100%);\n}\n#ceinture-table .height-x27::after {\n  height: calc(27 * 100%);\n}\n#ceinture-table .height-x28::after {\n  height: calc(28 * 100%);\n}\n#ceinture-table .height-x29::after {\n  height: calc(29 * 100%);\n}\n#ceinture-table .height-x30::after {\n  height: calc(30 * 100%);\n}\n#ceinture-table .height-x31::after {\n  height: calc(31 * 100%);\n}\n#ceinture-table .height-x32::after {\n  height: calc(32 * 100%);\n}\n#ceinture-table .height-x33::after {\n  height: calc(33 * 100%);\n}\n#ceinture-table .height-x34::after {\n  height: calc(34 * 100%);\n}\n#ceinture-table .height-x35::after {\n  height: calc(35 * 100%);\n}\n#ceinture-table .height-x36::after {\n  height: calc(36 * 100%);\n}\n#ceinture-table .height-x37::after {\n  height: calc(37 * 100%);\n}\n#ceinture-table .height-x38::after {\n  height: calc(38 * 100%);\n}\n#ceinture-table .height-x39::after {\n  height: calc(39 * 100%);\n}\n#ceinture-table .height-x40::after {\n  height: calc(40 * 100%);\n}\n#ceinture-table .height-x41::after {\n  height: calc(41 * 100%);\n}\n#ceinture-table .height-x42::after {\n  height: calc(42 * 100%);\n}\n#ceinture-table .height-x43::after {\n  height: calc(43 * 100%);\n}\n#ceinture-table .height-x44::after {\n  height: calc(44 * 100%);\n}\n#ceinture-table .height-x45::after {\n  height: calc(45 * 100%);\n}\n#ceinture-table .height-x46::after {\n  height: calc(46 * 100%);\n}\n#ceinture-table .height-x47::after {\n  height: calc(47 * 100%);\n}\n#ceinture-table .height-x48::after {\n  height: calc(48 * 100%);\n}\n#ceinture-table .height-x49::after {\n  height: calc(49 * 100%);\n}\n#ceinture-table .height-x50::after {\n  height: calc(50 * 100%);\n}\n#ceinture-table .height-0::after {\n  height: 0 !important;\n}\n#ceinture-table th.end-program-class::after {\n  position: absolute;\n  content: \"\";\n  width: 2px;\n  background: #ed4900;\n  display: block;\n  top: 0;\n  right: 0;\n}\n#ceinture-table tr:last-child td {\n  border-bottom: 1px solid black;\n}\n#ceinture-table tr:first-child td {\n  border-top: 1px solid black;\n}\n#ceinture-table tbody tr:hover {\n  background: none !important;\n}\n#ceinture-table td.name {\n  cursor: pointer;\n}\n#ceinture-table td.name > strong {\n  display: block;\n  transition: color 0.2s ease-in;\n}\n#ceinture-table td.name:hover > strong {\n  color: #4057b5 !important;\n}", ""]);
 
 // exports
 
@@ -6150,7 +6140,6 @@ var render = function() {
                                     "belt-actions",
                                     {
                                       attrs: {
-                                        "competence-updates": skill.updates,
                                         competence: skill,
                                         classeId: _vm.currentClasse.id,
                                         studentId: student.id
@@ -49523,8 +49512,8 @@ var theme = {
       secondary: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_4__["default"].blueGrey.darken3,
       accent: '#5b76a2',
       error: '#FF5252',
-      info: '#a25ca2',
-      //colors.indigo,
+      info: '#ed4900',
+      //'#ed4900', //colors.indigo,
       success: '#4CAF50',
       warning: '#FFC107'
     },
@@ -49566,6 +49555,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -49670,8 +49667,7 @@ var mutations = {
     state.classes.push(newClasse);
   },
   updateCompetence: function updateCompetence(state, _ref) {
-    var competenceUpdates = _ref.competenceUpdates,
-        competenceObj = _ref.competenceObj,
+    var competenceObj = _ref.competenceObj,
         status = _ref.status,
         _ref$message = _ref.message,
         message = _ref$message === void 0 ? '' : _ref$message,
@@ -49681,6 +49677,7 @@ var mutations = {
     var date = new Date();
     var month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
     date = "".concat(date.getDate(), " ").concat(month[date.getMonth()]);
+    var competenceUpdates = competenceObj.updates;
     var lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
     var lastLevel = lastUpdate.actual_level || 0;
     competenceUpdates.push({
@@ -49818,24 +49815,57 @@ var actions = {
   // classe,
   // programs,
   // skills
-  storeClasse: function storeClasse(context, data) {
-    if (!data.classe_name) return console.error('il faut une classe dans {} pour créer une classe.');
-    var origin = window.location.origin;
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(origin, "/storeClasseStudents"), data).then(function (resp) {
-      console.log(resp.data);
-    }); // context.commit();
-  },
+  storeClasse: function () {
+    var _storeClasse = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(context, data) {
+      var origin, resp;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              if (data.classe_name) {
+                _context.next = 2;
+                break;
+              }
+
+              return _context.abrupt("return", console.error('il faut une classe dans {} pour créer une classe.'));
+
+            case 2:
+              origin = window.location.origin;
+              _context.next = 5;
+              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(origin, "/storeClasseStudents"), data);
+
+            case 5:
+              resp = _context.sent;
+              context.commit('setClasses', [].concat(_toConsumableArray(Object.values(context.state.classes)), [resp.data]));
+              return _context.abrupt("return", resp.data);
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    function storeClasse(_x, _x2) {
+      return _storeClasse.apply(this, arguments);
+    }
+
+    return storeClasse;
+  }(),
   updateCompetence: function updateCompetence(context, _ref3) {
-    var competenceUpdates = _ref3.competenceUpdates,
-        competenceObj = _ref3.competenceObj,
+    var competenceObj = _ref3.competenceObj,
         status = _ref3.status,
         _ref3$message = _ref3.message,
         message = _ref3$message === void 0 ? '' : _ref3$message,
         classeId = _ref3.classeId,
         studentId = _ref3.studentId;
-    if (!status || !competenceUpdates || !competenceObj) return console.error('il faut un status/competenceUpdates/competenceObj dans {} pour update une competence'); // let maxLevel = config.competences[competenceName].length - 1; // - 1 car la première valeur est empty pour l'icone "start"
+    if (!status || !competenceObj) return console.error('il faut un status/competenceObj dans {} pour update une competence'); // let maxLevel = config.competences[competenceName].length - 1; // - 1 car la première valeur est empty pour l'icone "start"
 
     var maxLevel = competenceObj.colors.length;
+    var competenceUpdates = competenceObj.updates;
     var lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
     var actualLevel = lastUpdate.actual_level || 0;
     if (actualLevel === maxLevel) context.commit("showInfo", {
@@ -49866,29 +49896,29 @@ var actions = {
   getClasses: function () {
     var _getClasses = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(context) {
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(context) {
       var origin, classes;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               origin = window.location.origin;
-              _context.next = 3;
+              _context2.next = 3;
               return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get(origin + '/classes');
 
             case 3:
-              classes = _context.sent;
+              classes = _context2.sent;
               context.commit('setClasses', classes.data);
 
             case 5:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     }));
 
-    function getClasses(_x) {
+    function getClasses(_x3) {
       return _getClasses.apply(this, arguments);
     }
 
@@ -49897,50 +49927,8 @@ var actions = {
   getStudentsUpdates: function () {
     var _getStudentsUpdates = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(context, classeId) {
-      var origin, students;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              if (!(context.state.classes[classeId] === undefined)) {
-                _context2.next = 2;
-                break;
-              }
-
-              return _context2.abrupt("return");
-
-            case 2:
-              origin = window.location.origin;
-              _context2.next = 5;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(origin, "/classes/").concat(classeId));
-
-            case 5:
-              students = _context2.sent;
-              context.commit('setStudentsUpdates', {
-                classeId: classeId,
-                students: students.data
-              });
-
-            case 7:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
-
-    function getStudentsUpdates(_x2, _x3) {
-      return _getStudentsUpdates.apply(this, arguments);
-    }
-
-    return getStudentsUpdates;
-  }(),
-  getProgramsSkills: function () {
-    var _getProgramsSkills = _asyncToGenerator(
-    /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(context, classeId) {
-      var origin, programs;
+      var origin, students;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
@@ -49955,13 +49943,13 @@ var actions = {
             case 2:
               origin = window.location.origin;
               _context3.next = 5;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get(origin + "/programs/".concat(classeId));
+              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(origin, "/classes/").concat(classeId));
 
             case 5:
-              programs = _context3.sent;
-              context.commit('setProgramsSkills', {
+              students = _context3.sent;
+              context.commit('setStudentsUpdates', {
                 classeId: classeId,
-                programs: programs.data
+                students: students.data
               });
 
             case 7:
@@ -49972,7 +49960,49 @@ var actions = {
       }, _callee3);
     }));
 
-    function getProgramsSkills(_x4, _x5) {
+    function getStudentsUpdates(_x4, _x5) {
+      return _getStudentsUpdates.apply(this, arguments);
+    }
+
+    return getStudentsUpdates;
+  }(),
+  getProgramsSkills: function () {
+    var _getProgramsSkills = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(context, classeId) {
+      var origin, programs;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              if (!(context.state.classes[classeId] === undefined)) {
+                _context4.next = 2;
+                break;
+              }
+
+              return _context4.abrupt("return");
+
+            case 2:
+              origin = window.location.origin;
+              _context4.next = 5;
+              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get(origin + "/programs/".concat(classeId));
+
+            case 5:
+              programs = _context4.sent;
+              context.commit('setProgramsSkills', {
+                classeId: classeId,
+                programs: programs.data
+              });
+
+            case 7:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    function getProgramsSkills(_x6, _x7) {
       return _getProgramsSkills.apply(this, arguments);
     }
 

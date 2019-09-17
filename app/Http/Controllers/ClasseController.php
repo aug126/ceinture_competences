@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classe;
+use App\Color;
 use App\Program;
 use App\Skill;
 use App\Student;
@@ -64,16 +65,22 @@ class ClasseController extends Controller
                 'program_name'  => $program['program_name'],
                 'classe_id'     => $classe_id
             ]);
-            $program_id = $new_progr->id;
             foreach ($program['competences'] as $competence) {
-                Skill::create([
-                    'skill_name'    => $competence,
-                    'program_id'    => $program_id
+                $skill = Skill::create([
+                    'skill_name'    => $competence['name'],
+                    'program_id'    => $new_progr->id
                 ]);
+                foreach ($competence['colors'] as $i => $color) {
+                    Color::create([
+                        'skill_level'   => $i + 1,
+                        'hexa_color'    => $color,
+                        'skill_id'      => $skill->id
+                    ]);
+                }
             }
         }
 
-        return $new_added ? 'true' : 'false';
+        return $new_classe;
     }
 
     /**

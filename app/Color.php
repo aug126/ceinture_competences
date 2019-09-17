@@ -9,4 +9,6 @@ class Color extends Model
 {
     use SoftDeletes;
     //
+
+    protected $fillable = ['skill_id', 'hexa_color', 'skill_level'];
 }

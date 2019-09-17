@@ -97,7 +97,7 @@ const mutations = {
     state.classes.push(newClasse);
   },
   updateCompetence(state, {
-    competenceUpdates,
+    // competenceUpdates,
     competenceObj,
     status,
     message = '',
@@ -108,6 +108,7 @@ const mutations = {
     let date = new Date;
     const month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
     date = `${date.getDate()} ${month[date.getMonth()]}`;
+    let competenceUpdates = competenceObj.updates;
     let lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
     let lastLevel = lastUpdate.actual_level || 0;
     competenceUpdates.push({
@@ -185,26 +186,30 @@ const actions = {
   // classe,
   // programs,
   // skills
-  storeClasse(context, data) {
+  async storeClasse(context, data) {
     if (!data.classe_name) return console.error('il faut une classe dans {} pour créer une classe.');
     let origin = window.location.origin;
-    axios.post(`${origin}/storeClasseStudents`, data).then((resp) => {
-      console.log(resp.data);
-    })
-    // context.commit();
+    let resp = await axios.post(`${origin}/storeClasseStudents`, data);
+    context.commit('setClasses', [...Object.values(context.state.classes), resp.data]);
+    return resp.data;
+    // .then((resp) => {
+    //   console.log(resp.data);
+    //   // context.commit();
+    // })
   },
 
   updateCompetence(context, {
-    competenceUpdates,
+    // competenceUpdates,
     competenceObj,
     status,
     message = '',
     classeId,
     studentId
   }) {
-    if (!status || !competenceUpdates || !competenceObj) return console.error('il faut un status/competenceUpdates/competenceObj dans {} pour update une competence');
+    if (!status || !competenceObj) return console.error('il faut un status/competenceObj dans {} pour update une competence');
     // let maxLevel = config.competences[competenceName].length - 1; // - 1 car la première valeur est empty pour l'icone "start"
     let maxLevel = competenceObj.colors.length;
+    let competenceUpdates = competenceObj.updates;
     let lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
     let actualLevel = lastUpdate.actual_level || 0;
     if (actualLevel === maxLevel)

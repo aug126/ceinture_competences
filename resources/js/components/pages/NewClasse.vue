@@ -139,26 +139,16 @@ export default {
       let progr_skills = this.programsSkills
         .map(progr => ({
           program_name: progr.name,
-          competences: progr.competences
-            .split(",")
-            .map(comp => comp.trim())
-            .filter(progr => !!progr)
-        }))
-        .filter(prog => !!prog.program_name);
-      console.log(progr_skills);
+          competences: progr.levels})).filter(progr => (progr.program_name !== null) && progr.program_name.trim());
 
       // insert datas
       let datas = {
         students: this.chipEleveList,
         classe_name: this.className,
-        progr_skills
-        // programs: // TODO à ajouter,
-        // skills: // TODO à ajouter
+        progr_skills,
       };
-      console.log("datas = ", datas);
       let newClasse = await this.$store.dispatch("storeClasse", datas);
-      console.log("newClasse", newClasse);
-      // this.$router.push({ path: "/ceintures/" + newClasse.id });
+      this.$router.push({ path: "/ceintures/" + newClasse.id });
     }
   },
   computed: {

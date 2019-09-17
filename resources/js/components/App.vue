@@ -84,6 +84,7 @@ export default {
     margin-top: -8px !important
   h1 
     color: #a25da2
+    margin-left: 2rem
   hr
     border-color: transparentize(#a25da2, .5)
     margin-bottom: 3rem
