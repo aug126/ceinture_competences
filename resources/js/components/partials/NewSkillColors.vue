@@ -14,7 +14,17 @@
         >mdi-pencil</v-icon>
         <v-icon v-if="editing === i" color="black">mdi-check</v-icon>
       </div>
-      <span class="level-number">{{i + 1}}</span>
+      <span
+        class="level-number"
+        :class="{'dont-hide': editing !== '' || addingColor, 'hide': editing === i}"
+      >{{i + 1}}</span>
+      <div
+        @click="deleteColor(i)"
+        v-if="editing === i"
+        class="custom-color error--text delete-color"
+      >
+        <v-icon color="error">mdi-delete</v-icon>
+      </div>
     </div>
 
     <div @click="chooseColor" class="custom-color info--text">
@@ -35,7 +45,6 @@
     </div>
   </div>
 </template>
-</template>
 
 <script>
 export default {
@@ -53,6 +62,12 @@ export default {
     };
   },
   methods: {
+    deleteColor(i) {
+      this.skill.colors.splice(i, 1);
+      this.editing = "";
+      this.showColorPicker = false;
+      this.$emit("switchEditColor");
+    },
     editColor(color, i, e) {
       if (this.addingColor === true) return;
       let picker = this.$refs.colorPicker.firstChild;
@@ -71,11 +86,15 @@ export default {
       }
       this.$emit("switchEditColor");
       this.showColorPicker = !this.showColorPicker;
+      this.pushHistoryColor();
     },
     addColor() {
       if (this.editingColor === true) return;
       let newLevel;
       this.skill.colors.push(this.currentColor);
+      this.pushHistoryColor();
+    },
+    pushHistoryColor() {
       let allColors = this.previewsColors.reduce(
         (all, col) => [...all, ...col],
         []
@@ -110,4 +129,17 @@ export default {
     display: none !important
   .custom-color + .level-number:hover
     display: none !important
+  .level-number.dont-hide:hover
+    display: block !important
+  .custom-color:hover + .level-number.dont-hide
+    display: block !important
+  .level-number.hide
+    display: none !important
+  .custom-color:hover + .level-number.hide
+    display: none !important
+
+  .delete-color
+    position: absolute
+    margin-top: .5rem
+    background-color: white
 </style>

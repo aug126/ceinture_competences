@@ -201,6 +201,7 @@ export default {
       margin-left: 1rem
       text-align: center
       margin-top: -1.7rem
+      cursor: pointer
     .custom-color 
       border: .1rem solid
       border-radius: .3rem
