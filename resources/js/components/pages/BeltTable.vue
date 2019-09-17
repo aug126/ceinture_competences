@@ -81,9 +81,10 @@ export default {
       return lastKey == key;
     },
     getColor(skill) {
-      let lastUpdate =
-        skill.colors[skill.updates[skill.updates.length - 1]] || {};
-      let colorObj = lastUpdate.actual_level - 1;
+      let updates = skill.updates;
+      let colors = skill.colors;
+      let lastUpdate = updates[updates.length - 1] || {};
+      let colorObj = colors.find(color => color.skill_level === lastUpdate.actual_level);
       return colorObj ? colorObj.hexa_color : null;
     }
   },

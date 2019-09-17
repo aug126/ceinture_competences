@@ -2300,8 +2300,12 @@ __webpack_require__.r(__webpack_exports__);
       return lastKey == key;
     },
     getColor: function getColor(skill) {
-      var lastUpdate = skill.colors[skill.updates[skill.updates.length - 1]] || {};
-      var colorObj = lastUpdate.actual_level - 1;
+      var updates = skill.updates;
+      var colors = skill.colors;
+      var lastUpdate = updates[updates.length - 1] || {};
+      var colorObj = colors.find(function (color) {
+        return color.skill_level === lastUpdate.actual_level;
+      });
       return colorObj ? colorObj.hexa_color : null;
     }
   },
@@ -49881,7 +49885,7 @@ var actions = {
       axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(origin, "/student/").concat(studentId, "/update"), data).then(function (resp) {
         if (!resp.data.success) return console.error('erreur lors du store de l\'update');
         context.commit("updateCompetence", {
-          competenceUpdates: competenceUpdates,
+          // competenceUpdates,
           competenceObj: competenceObj,
           status: status,
           message: message,

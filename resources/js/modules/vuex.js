@@ -224,7 +224,7 @@ const actions = {
         if (!resp.data.success)
           return console.error('erreur lors du store de l\'update');
         context.commit("updateCompetence", {
-          competenceUpdates,
+          // competenceUpdates,
           competenceObj,
           status,
           message,
