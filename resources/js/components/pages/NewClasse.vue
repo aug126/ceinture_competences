@@ -79,11 +79,10 @@ export default {
   data() {
     return {
       valid: false,
-      className: "5 ème primaire 2019",
+      className: "",
       classRules: [v => !!v || "Le nom de la classe est requis."],
 
-      eleveList:
-        "Cyrille, Sandrine, Augustin, Larissa, Grigori, Aurélie, Damien",
+      eleveList: "",
       eleveRules: [
         v => this.validUniqueEleve(v) || "Il ne peut pas y avoir 2 même noms"
       ],
