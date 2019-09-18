@@ -7,6 +7,7 @@
     :width="width"
     :height="height"
     viewBox="0, 0, 400,174.21875"
+    :class="{'full-screen': this.$store.state.options.fullScreen}"
   >
     <g id="svgg">
       <path
@@ -50,4 +51,8 @@ path
   transition: transform .3s ease
   &:hover
     transform: scale(1.1)
+  &.full-screen
+    width: 3rem
+    height: 2rem
+    margin-bottom: -.5rem
 </style>

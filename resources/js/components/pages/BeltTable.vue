@@ -3,10 +3,15 @@
     <belt-student-sheet @close="studentSheet = {}" :student="studentSheet" />
     <h1 v-if="Object.keys(programsObj).length === 0">Cette classe n'a pas de programme !</h1>
     <v-card v-else>
-      <v-simple-table id="ceinture-table" :fixed-header="true" :height="tableHeight" :dense="false">
+      <v-simple-table
+        id="ceinture-table"
+        :class="{'full-screen': this.$store.state.options.fullScreen}"
+        :fixed-header="true"
+        :dense="false"
+      >
         <thead>
           <tr>
-            <th>
+            <th class="th-edit">
               <v-btn small color="info" dark depressed>
                 <v-icon>mdi-table-edit</v-icon>
               </v-btn>
@@ -20,7 +25,9 @@
                 v-for="(skill, skillId) in program.skills"
                 :key="skillId"
                 :class="[{'end-program-class': isLastKey(program.skills, skillId), 'height-0': isLastKey(programsObj, programId)}, 'height-x' + (nbrStudents + 1)]"
-              >{{skill.skill_name}}</th>
+              >
+                <strong class="t-head">{{skill.skill_name}}</strong>
+              </th>
             </template>
           </tr>
         </thead>
@@ -29,7 +36,7 @@
             v-for="(student, studentId) in (currentClasse && currentClasse.students)"
             :key="studentId"
           >
-            <td>
+            <td class="td-number" width="10px">
               <strong>{{ student.order_number }}</strong>
             </td>
             <td class="name">
@@ -84,7 +91,9 @@ export default {
       let updates = skill.updates;
       let colors = skill.colors;
       let lastUpdate = updates[updates.length - 1] || {};
-      let colorObj = colors.find(color => color.skill_level === lastUpdate.actual_level);
+      let colorObj = colors.find(
+        color => color.skill_level === lastUpdate.actual_level
+      );
       return colorObj ? colorObj.hexa_color : null;
     }
   },
@@ -137,15 +146,30 @@ export default {
 
 <style lang="sass">
 #ceinture-table
+  height: calc(100vh - 10rem)
+  .v-data-table__wrapper
+    height: calc(100vh - 10rem)
   th, td
-    font-size: 1.2rem
+    font-size: 1rem
     border-color: black
     text-align: center
     user-select: none
-  // .border-right
-  //   border-right: 1px solid
+  &.full-screen
+    height: calc(100vh - 4rem)
+    .v-data-table__wrapper
+      height: calc(100vh - 4rem)
 
+    td, th
+      height: 2rem
 
+  .t-head
+    display: block
+    margin: auto
+    text-align: center
+    max-width: 6rem
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
 
   // MIXIN
   // mixin permet de prévoir une hauteur de cellule x le nombre de students pour couvrir tout le tableau.
@@ -159,14 +183,21 @@ export default {
   .height-0::after
       height: 0 !important
 
-  th.end-program-class::after
-    position: absolute
-    content: ''
-    width: 2px
-    background: #ed4900
-    display: block
-    top: 0
-    right: 0
+  th.end-program-class
+    &::after
+      position: absolute
+      content: ''
+      width: 2px
+      background: #ed4900
+      display: block
+      top: 0
+      right: 0
+    h4 
+      text-align: left
+      max-width: 9rem
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
 
   tr:last-child
     td 
@@ -179,9 +210,19 @@ export default {
     background: none !important
   td.name
     cursor: pointer
+    margin-left: -1rem
     > strong 
       display: block
+      text-align: left
       transition: color .2s ease-in
+      max-width: 9rem
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
     &:hover > strong
       color: #4057b5 !important
+  // @media screen and (max-width: 959px)
+  @media screen and (max-width: 426px)
+    .th-edit, .td-number
+      display: none
 </style>

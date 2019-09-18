@@ -58,7 +58,7 @@ export default {
     studentId: Number
   },
   beforeUpdate() {
-    console.log('update');
+    console.log("update");
   },
   data() {
     return {

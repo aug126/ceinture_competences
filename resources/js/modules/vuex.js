@@ -18,6 +18,9 @@ const state = {
    * }]
    */
   classes: [],
+  options: {
+    fullScreen: false
+  },
   // classes: [{
   //   id: 'time',
   //   name: 'fake',
@@ -88,8 +91,7 @@ const state = {
   }
 }
 
-const getters = {
-}
+const getters = {}
 
 const mutations = {
   // classes
@@ -147,6 +149,10 @@ const mutations = {
       status: null,
     }
   },
+  fullScreenToggle(state, newValue) {
+    let value = newValue ? newValue : !state.options.fullScreen;
+    state.options.fullScreen = value;
+  },
 
   // SET DATAS
   // =================
@@ -164,7 +170,9 @@ const mutations = {
     }
     let classe = state.classes[programsObj.classeId];
     classe.programs = help.arrayToObjId(programsObj.programs);
-    state.classes[programsObj.classeId] = {...classe};
+    state.classes[programsObj.classeId] = {
+      ...classe
+    };
     console.log('programsSkills : ', state.classes);
   },
 
@@ -176,7 +184,9 @@ const mutations = {
     let classeId = studentsObj.classeId;
     let classe = state.classes[classeId];
     classe.students = students;
-    state.classes[classeId] = {...classe};
+    state.classes[classeId] = {
+      ...classe
+    };
   }
 }
 
@@ -218,7 +228,11 @@ const actions = {
         status: 'warning'
       })
     else {
-      let data = {skillId: competenceObj.id, status, message};
+      let data = {
+        skillId: competenceObj.id,
+        status,
+        message
+      };
       let origin = window.location.origin;
       axios.post(`${origin}/student/${studentId}/update`, data).then((resp) => {
         if (!resp.data.success)
@@ -231,7 +245,7 @@ const actions = {
           classeId,
           studentId
         });
-      }) 
+      })
     }
   },
 
@@ -247,14 +261,20 @@ const actions = {
     if (context.state.classes[classeId] === undefined) return;
     let origin = window.location.origin;
     let students = await axios.get(`${origin}/classes/${classeId}`);
-    context.commit('setStudentsUpdates', {classeId, students: students.data});
+    context.commit('setStudentsUpdates', {
+      classeId,
+      students: students.data
+    });
   },
 
   async getProgramsSkills(context, classeId) {
     if (context.state.classes[classeId] === undefined) return;
     let origin = window.location.origin;
     let programs = await axios.get(origin + `/programs/${classeId}`);
-    context.commit('setProgramsSkills', {classeId, programs: programs.data});
+    context.commit('setProgramsSkills', {
+      classeId,
+      programs: programs.data
+    });
   },
 
 }
