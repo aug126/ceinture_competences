@@ -50,7 +50,7 @@ export default {
     fullScreen(newValue) {
       setTimeout(() => {
         this.fullScreenDelayed = newValue;
-      }, 700);
+      }, 500);
     }
   }
 };

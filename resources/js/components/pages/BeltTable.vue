@@ -11,7 +11,7 @@
       >
         <thead>
           <tr>
-            <th :style="{height: fullScreenDelayed ? '2rem' : ''}" class="th-edit">
+            <th :style="{height: fullScreen ? '2rem' : ''}" class="th-edit">
               <!-- <v-btn fab v-if="editable" small color="info" dark depressed>
                 <v-icon>mdi-table-edit</v-icon>
               </v-btn>-->
@@ -19,7 +19,7 @@
             </th>
 
             <th
-              :style="{height: fullScreenDelayed ? '2rem' : ''}"
+              :style="{height: fullScreen ? '2rem' : ''}"
               class="end-program-class"
               :class="'height-x' + (nbrStudents + 1)"
             >
@@ -27,7 +27,7 @@
             </th>
             <template v-for="(program, programId) in programsObj">
               <th
-                :style="{height: fullScreenDelayed ? '2rem' : ''}"
+                :style="{height: fullScreen ? '2rem' : ''}"
                 v-for="(skill, skillId) in program.skills"
                 :key="skillId"
                 :class="[{'end-program-class': isLastKey(program.skills, skillId), 'height-0': isLastKey(programsObj, programId)}, 'height-x' + (nbrStudents + 1)]"
@@ -154,9 +154,12 @@ export default {
       this.getProgramsSkills();
     },
     fullScreen(value) {
-      setTimeout(() => {
-        this.fullScreenDelayed = value;
-      }, 800);
+      if (value === false) this.fullScreenDelayed = value;
+      else {
+        setTimeout(() => {
+          this.fullScreenDelayed = value;
+        }, 500);
+      }
     }
   }
 };

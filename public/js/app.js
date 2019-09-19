@@ -2436,9 +2436,11 @@ __webpack_require__.r(__webpack_exports__);
     fullScreen: function fullScreen(value) {
       var _this = this;
 
-      setTimeout(function () {
-        _this.fullScreenDelayed = value;
-      }, 800);
+      if (value === false) this.fullScreenDelayed = value;else {
+        setTimeout(function () {
+          _this.fullScreenDelayed = value;
+        }, 500);
+      }
     }
   }
 });
@@ -3243,7 +3245,7 @@ __webpack_require__.r(__webpack_exports__);
 
       setTimeout(function () {
         _this.fullScreenDelayed = newValue;
-      }, 700);
+      }, 500);
     }
   }
 });
@@ -6367,9 +6369,7 @@ var render = function() {
                           "th",
                           {
                             staticClass: "th-edit",
-                            style: {
-                              height: _vm.fullScreenDelayed ? "2rem" : ""
-                            }
+                            style: { height: _vm.fullScreen ? "2rem" : "" }
                           },
                           [
                             _c(
@@ -6385,9 +6385,7 @@ var render = function() {
                           {
                             staticClass: "end-program-class",
                             class: "height-x" + (_vm.nbrStudents + 1),
-                            style: {
-                              height: _vm.fullScreenDelayed ? "2rem" : ""
-                            }
+                            style: { height: _vm.fullScreen ? "2rem" : "" }
                           },
                           [
                             _c("h4", [
@@ -6423,9 +6421,7 @@ var render = function() {
                                   },
                                   "height-x" + (_vm.nbrStudents + 1)
                                 ],
-                                style: {
-                                  height: _vm.fullScreenDelayed ? "2rem" : ""
-                                }
+                                style: { height: _vm.fullScreen ? "2rem" : "" }
                               },
                               [
                                 _c("strong", { staticClass: "t-head" }, [
