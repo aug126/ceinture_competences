@@ -39,7 +39,7 @@ class ClassesTableSeeder extends Seeder
                 -------------------------- */
                 Program::insert([
                     [
-                        'program_name'  => 'Mathémathiques',
+                        'program_name'  => 'Mathématiques',
                         'classe_id'     => $classe->id,
                         'created_at'    => now()
                     ], [
@@ -53,7 +53,7 @@ class ClassesTableSeeder extends Seeder
                 /* SKILLS
                 -------------------------- */
                 foreach($programs as $program) {
-                    if ($program->program_name === 'Mathémathiques')
+                    if ($program->program_name === 'Mathématiques')
                         Skill::insert([
                             [
                                 'skill_name' => 'Numération',

@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col cols="12" md="4">
-      <v-text-field v-model="program.name" label="Programmes (ex: mathémathiques)" required></v-text-field>
+      <v-text-field v-model="program.name" label="Programmes (ex: mathématiques)" required></v-text-field>
     </v-col>
     <v-col cols="12" md="8">
       <v-text-field

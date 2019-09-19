@@ -7,7 +7,7 @@
     :width="width"
     :height="height"
     viewBox="0, 0, 400,174.21875"
-    :class="{'full-screen': this.$store.state.options.fullScreen}"
+    :class="{'full-screen': fullScreenDelayed}"
   >
     <g id="svgg">
       <path
@@ -36,9 +36,22 @@ export default {
     return {
       width: "80",
       height: "37",
-      border: "#0b0906"
+      border: "#0b0906",
       // color: "#8a602d"
+      fullScreenDelayed: false
     };
+  },
+  computed: {
+    fullScreen() {
+      return this.$store.state.options.fullScreen;
+    }
+  },
+  watch: {
+    fullScreen(newValue) {
+      setTimeout(() => {
+        this.fullScreenDelayed = newValue;
+      }, 700);
+    }
   }
 };
 </script>

@@ -5,23 +5,29 @@
     <v-card v-else>
       <v-simple-table
         id="ceinture-table"
-        :class="{'full-screen': this.$store.state.options.fullScreen}"
+        :class="{'full-screen': fullScreenDelayed}"
         :fixed-header="true"
         :dense="false"
       >
         <thead>
           <tr>
-            <th class="th-edit">
-              <v-btn small color="info" dark depressed>
+            <th :style="{height: fullScreenDelayed ? '2rem' : ''}" class="th-edit">
+              <!-- <v-btn fab v-if="editable" small color="info" dark depressed>
                 <v-icon>mdi-table-edit</v-icon>
-              </v-btn>
+              </v-btn>-->
+              <span style="word-break: normal">N°</span>
             </th>
 
-            <th class="end-program-class" :class="'height-x' + (nbrStudents + 1)">
+            <th
+              :style="{height: fullScreenDelayed ? '2rem' : ''}"
+              class="end-program-class"
+              :class="'height-x' + (nbrStudents + 1)"
+            >
               <h4>{{currentClasse && currentClasse.classe_name}}</h4>
             </th>
             <template v-for="(program, programId) in programsObj">
               <th
+                :style="{height: fullScreenDelayed ? '2rem' : ''}"
                 v-for="(skill, skillId) in program.skills"
                 :key="skillId"
                 :class="[{'end-program-class': isLastKey(program.skills, skillId), 'height-0': isLastKey(programsObj, programId)}, 'height-x' + (nbrStudents + 1)]"
@@ -110,7 +116,8 @@ export default {
   data() {
     return {
       tableHeight: 0,
-      studentSheet: {}
+      studentSheet: {},
+      fullScreenDelayed: false
     };
   },
 
@@ -132,6 +139,12 @@ export default {
     nbrStudents() {
       if (!this.currentClasse || !this.currentClasse.students) return 0;
       return Object.keys(this.currentClasse.students).length;
+    },
+    fullScreen() {
+      return this.$store.state.options.fullScreen;
+    },
+    editable() {
+      return this.$store.state.options.editable;
     }
   },
 
@@ -139,6 +152,11 @@ export default {
     $route() {
       this.getStudentsUpdates();
       this.getProgramsSkills();
+    },
+    fullScreen(value) {
+      setTimeout(() => {
+        this.fullScreenDelayed = value;
+      }, 800);
     }
   }
 };
@@ -158,9 +176,8 @@ export default {
     height: calc(100vh - 4rem)
     .v-data-table__wrapper
       height: calc(100vh - 4rem)
-
     td, th
-      height: 2rem
+      height: 2rem !important
 
   .t-head
     display: block

@@ -7,21 +7,21 @@ Vue.use(VueRouter);
 
 import NewClasse from "../components/pages/NewClasse";
 import BeltTable from "../components/pages/BeltTable";
-import Welcome from "../components/pages/Welcome.vue"
+import Accueil from "../components/pages/Accueil.vue"
 
 const routes = [{
-    path: "/new-classe",
-    component: NewClasse
-  },
-  {
-    path: "/ceintures/:id",
-    component: BeltTable
-  },
-  {
-    path: "/",
-    component: Welcome
-  }
-]
+  path: "/accueil",
+  component: Accueil
+}, {
+  path: "/new-classe",
+  component: NewClasse
+}, {
+  path: "/ceintures/:id",
+  component: BeltTable
+}, {
+  path: "/",
+  redirect: '/accueil'
+}]
 
 export default new VueRouter({
   routes

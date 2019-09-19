@@ -2133,6 +2133,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2147,11 +2162,18 @@ __webpack_require__.r(__webpack_exports__);
     setFullScreen: function setFullScreen() {
       this.$store.commit("fullScreenToggle");
       this.fab = false;
+    },
+    setEditable: function setEditable() {
+      this.$store.commit("editableToggle");
+      this.fab = false;
     }
   },
   computed: {
     fullScreen: function fullScreen() {
       return this.$store.state.options.fullScreen;
+    },
+    editable: function editable() {
+      return this.$store.state.options.editable;
     }
   }
 });
@@ -2214,19 +2236,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       classListOpen: true,
-      items: [{
-        title: "Se Connecter",
-        icon: "mdi-lock-open"
-      }, {
+      items: [// { title: "Se Connecter", icon: "mdi-lock-open" },
+      {
         title: "Gérer mes classes",
         icon: "mdi-folder-open"
       }],
-      hideNav: false
+      hideNav: true
     };
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["classes"])
@@ -2248,6 +2281,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _partials_BeltStudentSheet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../partials/BeltStudentSheet */ "./resources/js/components/partials/BeltStudentSheet.vue");
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../config */ "./resources/js/config.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2355,7 +2394,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       tableHeight: 0,
-      studentSheet: {}
+      studentSheet: {},
+      fullScreenDelayed: false
     };
   },
   computed: {
@@ -2380,12 +2420,25 @@ __webpack_require__.r(__webpack_exports__);
     nbrStudents: function nbrStudents() {
       if (!this.currentClasse || !this.currentClasse.students) return 0;
       return Object.keys(this.currentClasse.students).length;
+    },
+    fullScreen: function fullScreen() {
+      return this.$store.state.options.fullScreen;
+    },
+    editable: function editable() {
+      return this.$store.state.options.editable;
     }
   },
   watch: {
     $route: function $route() {
       this.getStudentsUpdates();
       this.getProgramsSkills();
+    },
+    fullScreen: function fullScreen(value) {
+      var _this = this;
+
+      setTimeout(function () {
+        _this.fullScreenDelayed = value;
+      }, 800);
     }
   }
 });
@@ -3174,9 +3227,24 @@ __webpack_require__.r(__webpack_exports__);
     return {
       width: "80",
       height: "37",
-      border: "#0b0906" // color: "#8a602d"
-
+      border: "#0b0906",
+      // color: "#8a602d"
+      fullScreenDelayed: false
     };
+  },
+  computed: {
+    fullScreen: function fullScreen() {
+      return this.$store.state.options.fullScreen;
+    }
+  },
+  watch: {
+    fullScreen: function fullScreen(newValue) {
+      var _this = this;
+
+      setTimeout(function () {
+        _this.fullScreenDelayed = newValue;
+      }, 700);
+    }
   }
 });
 
@@ -3194,7 +3262,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#App #sidebar-nav {\n  z-index: 3;\n  justify-content: center;\n  display: flex;\n  transition: all linear 0.4s;\n  padding: 1rem;\n}\n#App #sidebar-nav.full-screen {\n  flex: 0;\n  padding-left: 0;\n  padding-right: 0;\n  transform: translateX(-256px);\n}\n#App .router-view-container {\n  transition: all linear 0.4s;\n}\n#App .router-view-container.full-screen {\n  max-width: 100%;\n  flex: 0 0 100%;\n}\n#App .v-content {\n  transition: padding 0.4s linear;\n}\n#App .v-content.full-screen {\n  padding: 0 5rem 0.5rem 5rem !important;\n}\n#App button.v-app-bar__nav-icon {\n  transform: translateY(-4px);\n}\n#App .v-app-bar {\n  margin: 0;\n  transition: linear 0.4s;\n}\n#App .v-footer {\n  transition: linear 0.4s;\n}\n#App h1 {\n  color: #a25da2;\n  margin-left: 2rem;\n}\n#App hr {\n  border-color: rgba(162, 93, 162, 0.5);\n  margin-bottom: 3rem;\n}\n#App .w-100 {\n  width: 100%;\n}\n#App .mt--64 {\n  margin-top: -64px !important;\n}\n#App .mt-64 {\n  margin-top: 64px !important;\n}\n#App .mb--64 {\n  margin-bottom: -64px !important;\n}\n#App .justify-evenly {\n  justify-content: space-evenly;\n}", ""]);
+exports.push([module.i, "#App #sidebar-nav {\n  z-index: 3;\n  justify-content: center;\n  display: flex;\n  transition: all linear 0.4s;\n  padding: 1rem;\n}\n#App #sidebar-nav.full-screen {\n  flex: 0;\n  padding-left: 0;\n  padding-right: 0;\n  transform: translateX(-256px);\n}\n#App .router-view-container {\n  transition: all linear 0.4s;\n}\n#App .router-view-container.full-screen {\n  max-width: 100%;\n  flex: 0 0 100%;\n}\n#App .v-content {\n  transition: padding 0.4s linear;\n}\n#App .v-content.full-screen {\n  padding: 0 5rem 0.5rem 5rem !important;\n}\n#App button.v-app-bar__nav-icon {\n  transform: translateY(-4px);\n}\n#App .v-app-bar {\n  margin: 0;\n  transition: linear 0.4s;\n}\n#App .v-footer {\n  transition: linear 0.4s;\n}\n#App h1 {\n  color: #a25da2;\n  margin-left: 2rem;\n}\n#App hr {\n  border-color: rgba(162, 93, 162, 0.5);\n  margin-bottom: 3rem;\n}\n#App .w-100 {\n  width: 100%;\n}\n#App .mt--64 {\n  margin-top: -64px !important;\n}\n#App .mt-64 {\n  margin-top: 64px !important;\n}\n#App .mb--64 {\n  margin-bottom: -64px !important;\n}\n#App .justify-evenly {\n  justify-content: space-evenly;\n}\n\n/** ScrollBar */\n::-webkit-scrollbar {\n  width: 10px;\n}\n\n/* Track */\n::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n\n/* Handle */\n::-webkit-scrollbar-thumb {\n  background: #bbb;\n}\n\n/* Handle on hover */\n::-webkit-scrollbar-thumb:hover {\n  background: #999;\n}", ""]);
 
 // exports
 
@@ -3251,7 +3319,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#FloatingDrawer {\n  position: fixed;\n  margin-top: 3rem;\n  z-index: 10;\n  transition: right ease 0.4s;\n}\n#FloatingDrawer .v-list-group.v-list-group--active.v-list-group--no-action.primary--text {\n  max-height: 60vh;\n}\n#FloatingDrawer .btn-hide-nav {\n  display: none;\n  position: absolute;\n  right: -1.5rem;\n  bottom: 1.5rem;\n  transition: right ease 0.4s;\n}\n@media screen and (max-width: 959px) {\n#FloatingDrawer {\n    z-index: 10;\n    height: calc(100% - 58px - 38px);\n    top: 0;\n    right: calc(100% - 256px);\n    margin-top: 58px;\n}\n#FloatingDrawer.hide-nav {\n    right: 100% !important;\n}\n#FloatingDrawer.hide-nav .btn-hide-nav {\n    right: -3.3rem;\n}\n#FloatingDrawer .btn-hide-nav {\n    display: block;\n}\n}", ""]);
+exports.push([module.i, "#FloatingDrawer {\n  position: fixed;\n  margin-top: 3rem;\n  z-index: 10;\n  transition: right ease 0.4s;\n}\n#FloatingDrawer .v-list-group.v-list-group--active.v-list-group--no-action.primary--text {\n  max-height: 60vh;\n}\n#FloatingDrawer .btn-hide-nav {\n  display: none;\n  position: absolute;\n  right: -1.5rem;\n  bottom: 1.5rem;\n  transition: right ease 0.4s;\n}\n#FloatingDrawer .new-class {\n  margin-left: -1rem;\n}\n@media screen and (max-width: 959px) {\n#FloatingDrawer {\n    z-index: 10;\n    height: calc(100% - 58px - 38px);\n    top: 0;\n    right: calc(100% - 256px);\n    margin-top: 58px;\n}\n#FloatingDrawer.hide-nav {\n    right: 100% !important;\n}\n#FloatingDrawer.hide-nav .btn-hide-nav {\n    right: -3.3rem;\n}\n#FloatingDrawer .btn-hide-nav {\n    display: block;\n}\n}", ""]);
 
 // exports
 
@@ -3270,7 +3338,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#ceinture-table {\n  height: calc(100vh - 10rem);\n}\n#ceinture-table .v-data-table__wrapper {\n  height: calc(100vh - 10rem);\n}\n#ceinture-table th, #ceinture-table td {\n  font-size: 1rem;\n  border-color: black;\n  text-align: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n#ceinture-table.full-screen {\n  height: calc(100vh - 4rem);\n}\n#ceinture-table.full-screen .v-data-table__wrapper {\n  height: calc(100vh - 4rem);\n}\n#ceinture-table.full-screen td, #ceinture-table.full-screen th {\n  height: 2rem;\n}\n#ceinture-table .t-head {\n  display: block;\n  margin: auto;\n  text-align: center;\n  max-width: 6rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table .height-x1::after {\n  height: calc(1 * 100%);\n}\n#ceinture-table .height-x2::after {\n  height: calc(2 * 100%);\n}\n#ceinture-table .height-x3::after {\n  height: calc(3 * 100%);\n}\n#ceinture-table .height-x4::after {\n  height: calc(4 * 100%);\n}\n#ceinture-table .height-x5::after {\n  height: calc(5 * 100%);\n}\n#ceinture-table .height-x6::after {\n  height: calc(6 * 100%);\n}\n#ceinture-table .height-x7::after {\n  height: calc(7 * 100%);\n}\n#ceinture-table .height-x8::after {\n  height: calc(8 * 100%);\n}\n#ceinture-table .height-x9::after {\n  height: calc(9 * 100%);\n}\n#ceinture-table .height-x10::after {\n  height: calc(10 * 100%);\n}\n#ceinture-table .height-x11::after {\n  height: calc(11 * 100%);\n}\n#ceinture-table .height-x12::after {\n  height: calc(12 * 100%);\n}\n#ceinture-table .height-x13::after {\n  height: calc(13 * 100%);\n}\n#ceinture-table .height-x14::after {\n  height: calc(14 * 100%);\n}\n#ceinture-table .height-x15::after {\n  height: calc(15 * 100%);\n}\n#ceinture-table .height-x16::after {\n  height: calc(16 * 100%);\n}\n#ceinture-table .height-x17::after {\n  height: calc(17 * 100%);\n}\n#ceinture-table .height-x18::after {\n  height: calc(18 * 100%);\n}\n#ceinture-table .height-x19::after {\n  height: calc(19 * 100%);\n}\n#ceinture-table .height-x20::after {\n  height: calc(20 * 100%);\n}\n#ceinture-table .height-x21::after {\n  height: calc(21 * 100%);\n}\n#ceinture-table .height-x22::after {\n  height: calc(22 * 100%);\n}\n#ceinture-table .height-x23::after {\n  height: calc(23 * 100%);\n}\n#ceinture-table .height-x24::after {\n  height: calc(24 * 100%);\n}\n#ceinture-table .height-x25::after {\n  height: calc(25 * 100%);\n}\n#ceinture-table .height-x26::after {\n  height: calc(26 * 100%);\n}\n#ceinture-table .height-x27::after {\n  height: calc(27 * 100%);\n}\n#ceinture-table .height-x28::after {\n  height: calc(28 * 100%);\n}\n#ceinture-table .height-x29::after {\n  height: calc(29 * 100%);\n}\n#ceinture-table .height-x30::after {\n  height: calc(30 * 100%);\n}\n#ceinture-table .height-x31::after {\n  height: calc(31 * 100%);\n}\n#ceinture-table .height-x32::after {\n  height: calc(32 * 100%);\n}\n#ceinture-table .height-x33::after {\n  height: calc(33 * 100%);\n}\n#ceinture-table .height-x34::after {\n  height: calc(34 * 100%);\n}\n#ceinture-table .height-x35::after {\n  height: calc(35 * 100%);\n}\n#ceinture-table .height-x36::after {\n  height: calc(36 * 100%);\n}\n#ceinture-table .height-x37::after {\n  height: calc(37 * 100%);\n}\n#ceinture-table .height-x38::after {\n  height: calc(38 * 100%);\n}\n#ceinture-table .height-x39::after {\n  height: calc(39 * 100%);\n}\n#ceinture-table .height-x40::after {\n  height: calc(40 * 100%);\n}\n#ceinture-table .height-x41::after {\n  height: calc(41 * 100%);\n}\n#ceinture-table .height-x42::after {\n  height: calc(42 * 100%);\n}\n#ceinture-table .height-x43::after {\n  height: calc(43 * 100%);\n}\n#ceinture-table .height-x44::after {\n  height: calc(44 * 100%);\n}\n#ceinture-table .height-x45::after {\n  height: calc(45 * 100%);\n}\n#ceinture-table .height-x46::after {\n  height: calc(46 * 100%);\n}\n#ceinture-table .height-x47::after {\n  height: calc(47 * 100%);\n}\n#ceinture-table .height-x48::after {\n  height: calc(48 * 100%);\n}\n#ceinture-table .height-x49::after {\n  height: calc(49 * 100%);\n}\n#ceinture-table .height-x50::after {\n  height: calc(50 * 100%);\n}\n#ceinture-table .height-0::after {\n  height: 0 !important;\n}\n#ceinture-table th.end-program-class::after {\n  position: absolute;\n  content: \"\";\n  width: 2px;\n  background: #ed4900;\n  display: block;\n  top: 0;\n  right: 0;\n}\n#ceinture-table th.end-program-class h4 {\n  text-align: left;\n  max-width: 9rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table tr:last-child td {\n  border-bottom: 1px solid black;\n}\n#ceinture-table tr:first-child td {\n  border-top: 1px solid black;\n}\n#ceinture-table tbody tr:hover {\n  background: none !important;\n}\n#ceinture-table td.name {\n  cursor: pointer;\n  margin-left: -1rem;\n}\n#ceinture-table td.name > strong {\n  display: block;\n  text-align: left;\n  transition: color 0.2s ease-in;\n  max-width: 9rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table td.name:hover > strong {\n  color: #4057b5 !important;\n}\n@media screen and (max-width: 426px) {\n#ceinture-table .th-edit, #ceinture-table .td-number {\n    display: none;\n}\n}", ""]);
+exports.push([module.i, "#ceinture-table {\n  height: calc(100vh - 10rem);\n}\n#ceinture-table .v-data-table__wrapper {\n  height: calc(100vh - 10rem);\n}\n#ceinture-table th, #ceinture-table td {\n  font-size: 1rem;\n  border-color: black;\n  text-align: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n#ceinture-table.full-screen {\n  height: calc(100vh - 4rem);\n}\n#ceinture-table.full-screen .v-data-table__wrapper {\n  height: calc(100vh - 4rem);\n}\n#ceinture-table.full-screen td, #ceinture-table.full-screen th {\n  height: 2rem !important;\n}\n#ceinture-table .t-head {\n  display: block;\n  margin: auto;\n  text-align: center;\n  max-width: 6rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table .height-x1::after {\n  height: calc(1 * 100%);\n}\n#ceinture-table .height-x2::after {\n  height: calc(2 * 100%);\n}\n#ceinture-table .height-x3::after {\n  height: calc(3 * 100%);\n}\n#ceinture-table .height-x4::after {\n  height: calc(4 * 100%);\n}\n#ceinture-table .height-x5::after {\n  height: calc(5 * 100%);\n}\n#ceinture-table .height-x6::after {\n  height: calc(6 * 100%);\n}\n#ceinture-table .height-x7::after {\n  height: calc(7 * 100%);\n}\n#ceinture-table .height-x8::after {\n  height: calc(8 * 100%);\n}\n#ceinture-table .height-x9::after {\n  height: calc(9 * 100%);\n}\n#ceinture-table .height-x10::after {\n  height: calc(10 * 100%);\n}\n#ceinture-table .height-x11::after {\n  height: calc(11 * 100%);\n}\n#ceinture-table .height-x12::after {\n  height: calc(12 * 100%);\n}\n#ceinture-table .height-x13::after {\n  height: calc(13 * 100%);\n}\n#ceinture-table .height-x14::after {\n  height: calc(14 * 100%);\n}\n#ceinture-table .height-x15::after {\n  height: calc(15 * 100%);\n}\n#ceinture-table .height-x16::after {\n  height: calc(16 * 100%);\n}\n#ceinture-table .height-x17::after {\n  height: calc(17 * 100%);\n}\n#ceinture-table .height-x18::after {\n  height: calc(18 * 100%);\n}\n#ceinture-table .height-x19::after {\n  height: calc(19 * 100%);\n}\n#ceinture-table .height-x20::after {\n  height: calc(20 * 100%);\n}\n#ceinture-table .height-x21::after {\n  height: calc(21 * 100%);\n}\n#ceinture-table .height-x22::after {\n  height: calc(22 * 100%);\n}\n#ceinture-table .height-x23::after {\n  height: calc(23 * 100%);\n}\n#ceinture-table .height-x24::after {\n  height: calc(24 * 100%);\n}\n#ceinture-table .height-x25::after {\n  height: calc(25 * 100%);\n}\n#ceinture-table .height-x26::after {\n  height: calc(26 * 100%);\n}\n#ceinture-table .height-x27::after {\n  height: calc(27 * 100%);\n}\n#ceinture-table .height-x28::after {\n  height: calc(28 * 100%);\n}\n#ceinture-table .height-x29::after {\n  height: calc(29 * 100%);\n}\n#ceinture-table .height-x30::after {\n  height: calc(30 * 100%);\n}\n#ceinture-table .height-x31::after {\n  height: calc(31 * 100%);\n}\n#ceinture-table .height-x32::after {\n  height: calc(32 * 100%);\n}\n#ceinture-table .height-x33::after {\n  height: calc(33 * 100%);\n}\n#ceinture-table .height-x34::after {\n  height: calc(34 * 100%);\n}\n#ceinture-table .height-x35::after {\n  height: calc(35 * 100%);\n}\n#ceinture-table .height-x36::after {\n  height: calc(36 * 100%);\n}\n#ceinture-table .height-x37::after {\n  height: calc(37 * 100%);\n}\n#ceinture-table .height-x38::after {\n  height: calc(38 * 100%);\n}\n#ceinture-table .height-x39::after {\n  height: calc(39 * 100%);\n}\n#ceinture-table .height-x40::after {\n  height: calc(40 * 100%);\n}\n#ceinture-table .height-x41::after {\n  height: calc(41 * 100%);\n}\n#ceinture-table .height-x42::after {\n  height: calc(42 * 100%);\n}\n#ceinture-table .height-x43::after {\n  height: calc(43 * 100%);\n}\n#ceinture-table .height-x44::after {\n  height: calc(44 * 100%);\n}\n#ceinture-table .height-x45::after {\n  height: calc(45 * 100%);\n}\n#ceinture-table .height-x46::after {\n  height: calc(46 * 100%);\n}\n#ceinture-table .height-x47::after {\n  height: calc(47 * 100%);\n}\n#ceinture-table .height-x48::after {\n  height: calc(48 * 100%);\n}\n#ceinture-table .height-x49::after {\n  height: calc(49 * 100%);\n}\n#ceinture-table .height-x50::after {\n  height: calc(50 * 100%);\n}\n#ceinture-table .height-0::after {\n  height: 0 !important;\n}\n#ceinture-table th.end-program-class::after {\n  position: absolute;\n  content: \"\";\n  width: 2px;\n  background: #ed4900;\n  display: block;\n  top: 0;\n  right: 0;\n}\n#ceinture-table th.end-program-class h4 {\n  text-align: left;\n  max-width: 9rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table tr:last-child td {\n  border-bottom: 1px solid black;\n}\n#ceinture-table tr:first-child td {\n  border-top: 1px solid black;\n}\n#ceinture-table tbody tr:hover {\n  background: none !important;\n}\n#ceinture-table td.name {\n  cursor: pointer;\n  margin-left: -1rem;\n}\n#ceinture-table td.name > strong {\n  display: block;\n  text-align: left;\n  transition: color 0.2s ease-in;\n  max-width: 9rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table td.name:hover > strong {\n  color: #4057b5 !important;\n}\n@media screen and (max-width: 426px) {\n#ceinture-table .th-edit, #ceinture-table .td-number {\n    display: none;\n}\n}", ""]);
 
 // exports
 
@@ -5879,6 +5947,26 @@ var render = function() {
                     [_c("v-icon", [_vm._v("mdi-monitor-screenshot")])],
                     1
                   )
+                : _vm.editable
+                ? _c(
+                    "v-btn",
+                    {
+                      attrs: {
+                        color: "warning",
+                        fab: "",
+                        title: "Quitter",
+                        dark: ""
+                      },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          return _vm.setEditable($event)
+                        }
+                      }
+                    },
+                    [_c("v-icon", [_vm._v("mdi-pencil")])],
+                    1
+                  )
                 : _c(
                     "v-btn",
                     {
@@ -5894,7 +5982,9 @@ var render = function() {
                     [
                       _vm.fab
                         ? _c("v-icon", [_vm._v("mdi-close")])
-                        : _c("v-icon", [_vm._v("mdi-cogs")])
+                        : _c("v-icon", { attrs: { title: "Options" } }, [
+                            _vm._v("mdi-cogs")
+                          ])
                     ],
                     1
                   )
@@ -5916,7 +6006,13 @@ var render = function() {
       _c(
         "v-btn",
         {
-          attrs: { fab: "", dark: "", small: "", color: "green" },
+          attrs: {
+            fab: "",
+            dark: "",
+            small: "",
+            color: "green",
+            title: "Grand écran"
+          },
           on: {
             click: function($event) {
               $event.stopPropagation()
@@ -5931,7 +6027,13 @@ var render = function() {
       _c(
         "v-btn",
         {
-          attrs: { fab: "", dark: "", small: "", color: "grey" },
+          attrs: {
+            fab: "",
+            dark: "",
+            small: "",
+            color: "grey",
+            title: "Non disponible"
+          },
           on: {
             click: function($event) {
               $event.stopPropagation()
@@ -5949,7 +6051,13 @@ var render = function() {
       _c(
         "v-btn",
         {
-          attrs: { fab: "", dark: "", small: "", color: "grey" },
+          attrs: {
+            fab: "",
+            dark: "",
+            small: "",
+            color: "grey",
+            title: "Non disponible"
+          },
           on: {
             click: function($event) {
               $event.stopPropagation()
@@ -5957,6 +6065,27 @@ var render = function() {
           }
         },
         [_c("v-icon", [_vm._v("mdi-printer")])],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        {
+          attrs: {
+            fab: "",
+            dark: "",
+            small: "",
+            color: "grey",
+            title: "Non disponible"
+          },
+          on: {
+            click: function($event) {
+              $event.stopPropagation()
+              return _vm.setEditable($event)
+            }
+          }
+        },
+        [_c("v-icon", [_vm._v("mdi-pencil")])],
         1
       )
     ],
@@ -6007,19 +6136,21 @@ var render = function() {
             [
               _c(
                 "v-list-item",
-                { attrs: { "active-class": "active", link: "" } },
+                {
+                  attrs: { "active-class": "active", link: "", to: "/accueil" }
+                },
                 [
                   _c(
                     "v-list-item-icon",
                     [
                       _c("v-icon", { attrs: { color: "info" } }, [
-                        _vm._v("mdi-lock-open")
+                        _vm._v("mdi-home")
                       ])
                     ],
                     1
                   ),
                   _vm._v(" "),
-                  _c("v-list-item-title", [_vm._v("Se Connecter")])
+                  _c("v-list-item-title", [_vm._v("Accueil")])
                 ],
                 1
               ),
@@ -6087,7 +6218,9 @@ var render = function() {
                       }
                     },
                     [
-                      _c("v-list-item-title", [_vm._v("Nouvelle classe")]),
+                      _c("v-list-item-title", { staticClass: "new-class" }, [
+                        _vm._v("Nouvelle classe")
+                      ]),
                       _vm._v(" "),
                       _c(
                         "v-list-item-action",
@@ -6140,6 +6273,49 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/Accueil.vue?vue&type=template&id=49b2578e&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/Accueil.vue?vue&type=template&id=49b2578e& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "Accueil" } }, [
+      _c("h1", [_vm._v("Bienvenue sur le site de compétences.")]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("\n    Ce site est en cours de construction.\n    "),
+        _c("br"),
+        _vm._v(
+          "Il peut déjà être utilisé mais aucune donnée n'est modifiable. (doat.augustin@gmail.com)\n  "
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/BeltTable.vue?vue&type=template&id=2c4bad5d&":
 /*!******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/BeltTable.vue?vue&type=template&id=2c4bad5d& ***!
@@ -6175,9 +6351,7 @@ var render = function() {
               _c(
                 "v-simple-table",
                 {
-                  class: {
-                    "full-screen": this.$store.state.options.fullScreen
-                  },
+                  class: { "full-screen": _vm.fullScreenDelayed },
                   attrs: {
                     id: "ceinture-table",
                     "fixed-header": true,
@@ -6191,30 +6365,29 @@ var render = function() {
                       [
                         _c(
                           "th",
-                          { staticClass: "th-edit" },
+                          {
+                            staticClass: "th-edit",
+                            style: {
+                              height: _vm.fullScreenDelayed ? "2rem" : ""
+                            }
+                          },
                           [
                             _c(
-                              "v-btn",
-                              {
-                                attrs: {
-                                  small: "",
-                                  color: "info",
-                                  dark: "",
-                                  depressed: ""
-                                }
-                              },
-                              [_c("v-icon", [_vm._v("mdi-table-edit")])],
-                              1
+                              "span",
+                              { staticStyle: { "word-break": "normal" } },
+                              [_vm._v("N°")]
                             )
-                          ],
-                          1
+                          ]
                         ),
                         _vm._v(" "),
                         _c(
                           "th",
                           {
                             staticClass: "end-program-class",
-                            class: "height-x" + (_vm.nbrStudents + 1)
+                            class: "height-x" + (_vm.nbrStudents + 1),
+                            style: {
+                              height: _vm.fullScreenDelayed ? "2rem" : ""
+                            }
                           },
                           [
                             _c("h4", [
@@ -6249,7 +6422,10 @@ var render = function() {
                                     )
                                   },
                                   "height-x" + (_vm.nbrStudents + 1)
-                                ]
+                                ],
+                                style: {
+                                  height: _vm.fullScreenDelayed ? "2rem" : ""
+                                }
                               },
                               [
                                 _c("strong", { staticClass: "t-head" }, [
@@ -6602,30 +6778,6 @@ var render = function() {
     ],
     1
   )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/Welcome.vue?vue&type=template&id=04233788&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pages/Welcome.vue?vue&type=template&id=04233788& ***!
-  \****************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Bienvenue")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -7018,7 +7170,7 @@ var render = function() {
         { attrs: { cols: "12", md: "4" } },
         [
           _c("v-text-field", {
-            attrs: { label: "Programmes (ex: mathémathiques)", required: "" },
+            attrs: { label: "Programmes (ex: mathématiques)", required: "" },
             model: {
               value: _vm.program.name,
               callback: function($$v) {
@@ -7255,7 +7407,7 @@ var render = function() {
   return _c(
     "svg",
     {
-      class: { "full-screen": this.$store.state.options.fullScreen },
+      class: { "full-screen": _vm.fullScreenDelayed },
       attrs: {
         id: "svg-ceinture-type-2",
         version: "1.1",
@@ -48574,6 +48726,59 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/pages/Accueil.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/pages/Accueil.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Accueil_vue_vue_type_template_id_49b2578e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Accueil.vue?vue&type=template&id=49b2578e& */ "./resources/js/components/pages/Accueil.vue?vue&type=template&id=49b2578e&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _Accueil_vue_vue_type_template_id_49b2578e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Accueil_vue_vue_type_template_id_49b2578e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/pages/Accueil.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/Accueil.vue?vue&type=template&id=49b2578e&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/pages/Accueil.vue?vue&type=template&id=49b2578e& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Accueil_vue_vue_type_template_id_49b2578e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Accueil.vue?vue&type=template&id=49b2578e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/Accueil.vue?vue&type=template&id=49b2578e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Accueil_vue_vue_type_template_id_49b2578e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Accueil_vue_vue_type_template_id_49b2578e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/pages/BeltTable.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/components/pages/BeltTable.vue ***!
@@ -48743,59 +48948,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewClasse_vue_vue_type_template_id_73db4687___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewClasse_vue_vue_type_template_id_73db4687___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/pages/Welcome.vue":
-/*!***************************************************!*\
-  !*** ./resources/js/components/pages/Welcome.vue ***!
-  \***************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Welcome_vue_vue_type_template_id_04233788___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Welcome.vue?vue&type=template&id=04233788& */ "./resources/js/components/pages/Welcome.vue?vue&type=template&id=04233788&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _Welcome_vue_vue_type_template_id_04233788___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Welcome_vue_vue_type_template_id_04233788___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/pages/Welcome.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/pages/Welcome.vue?vue&type=template&id=04233788&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/pages/Welcome.vue?vue&type=template&id=04233788& ***!
-  \**********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Welcome_vue_vue_type_template_id_04233788___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Welcome.vue?vue&type=template&id=04233788& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pages/Welcome.vue?vue&type=template&id=04233788&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Welcome_vue_vue_type_template_id_04233788___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Welcome_vue_vue_type_template_id_04233788___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -49645,7 +49797,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _components_pages_NewClasse__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/pages/NewClasse */ "./resources/js/components/pages/NewClasse.vue");
 /* harmony import */ var _components_pages_BeltTable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/pages/BeltTable */ "./resources/js/components/pages/BeltTable.vue");
-/* harmony import */ var _components_pages_Welcome_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/pages/Welcome.vue */ "./resources/js/components/pages/Welcome.vue");
+/* harmony import */ var _components_pages_Accueil_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/pages/Accueil.vue */ "./resources/js/components/pages/Accueil.vue");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -49653,6 +49805,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 
 
 var routes = [{
+  path: "/accueil",
+  component: _components_pages_Accueil_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+}, {
   path: "/new-classe",
   component: _components_pages_NewClasse__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
@@ -49660,7 +49815,7 @@ var routes = [{
   component: _components_pages_BeltTable__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, {
   path: "/",
-  component: _components_pages_Welcome_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+  redirect: '/accueil'
 }];
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: routes
@@ -49781,7 +49936,8 @@ var state = {
    */
   classes: [],
   options: {
-    fullScreen: false
+    fullScreen: false,
+    editable: false
   },
   // classes: [{
   //   id: 'time',
@@ -49912,6 +50068,10 @@ var mutations = {
   fullScreenToggle: function fullScreenToggle(state, newValue) {
     var value = newValue ? newValue : !state.options.fullScreen;
     state.options.fullScreen = value;
+  },
+  editableToggle: function editableToggle(state, newValue) {
+    var value = newValue ? newValue : !state.options.editable;
+    state.options.editable = value;
   },
   // SET DATAS
   // =================

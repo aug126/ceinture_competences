@@ -1,12 +1,25 @@
 <template>
-  <v-card :elevation="hideNav ? '' : '12'" id="FloatingDrawer" :class="{'hide-nav': hideNav}" class="mx-auto" width="256">
+  <v-card
+    :elevation="hideNav ? '' : '12'"
+    id="FloatingDrawer"
+    :class="{'hide-nav': hideNav}"
+    class="mx-auto"
+    width="256"
+  >
     <v-navigation-drawer floating permanent>
       <v-list :dense="false" rounded>
-        <v-list-item active-class="active" link>
+        <!-- <v-list-item active-class="active" link>
           <v-list-item-icon>
             <v-icon color="info">mdi-lock-open</v-icon>
           </v-list-item-icon>
           <v-list-item-title>Se Connecter</v-list-item-title>
+        </v-list-item>-->
+
+        <v-list-item active-class="active" link to="/accueil">
+          <v-list-item-icon>
+            <v-icon color="info">mdi-home</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Accueil</v-list-item-title>
         </v-list-item>
 
         <v-list-group
@@ -29,7 +42,7 @@
           </v-list-item>
 
           <v-list-item @click="hideNav = true" class="text-center" link to="/new-classe">
-            <v-list-item-title>Nouvelle classe</v-list-item-title>
+            <v-list-item-title class="new-class">Nouvelle classe</v-list-item-title>
             <v-list-item-action>
               <v-icon color="info">mdi-plus-circle</v-icon>
             </v-list-item-action>
@@ -37,7 +50,7 @@
         </v-list-group>
       </v-list>
     </v-navigation-drawer>
-    <v-btn @click="hideNav = !hideNav" class=btn-hide-nav fab color="info" small>
+    <v-btn @click="hideNav = !hideNav" class="btn-hide-nav" fab color="info" small>
       <v-icon v-if="hideNav">mdi-arrow-right</v-icon>
       <v-icon v-else>mdi-arrow-left</v-icon>
     </v-btn>
@@ -51,10 +64,10 @@ export default {
     return {
       classListOpen: true,
       items: [
-        { title: "Se Connecter", icon: "mdi-lock-open" },
+        // { title: "Se Connecter", icon: "mdi-lock-open" },
         { title: "Gérer mes classes", icon: "mdi-folder-open" }
       ],
-      hideNav: false
+      hideNav: true
     };
   },
   computed: mapState(["classes"])
@@ -75,6 +88,8 @@ export default {
     right: -1.5rem
     bottom: 1.5rem
     transition: right ease .4s
+  .new-class 
+    margin-left: -1rem
 @media screen and (max-width: 959px)
   #FloatingDrawer
     z-index: 10

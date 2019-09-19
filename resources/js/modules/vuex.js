@@ -19,7 +19,8 @@ const state = {
    */
   classes: [],
   options: {
-    fullScreen: false
+    fullScreen: false,
+    editable: false
   },
   // classes: [{
   //   id: 'time',
@@ -153,7 +154,10 @@ const mutations = {
     let value = newValue ? newValue : !state.options.fullScreen;
     state.options.fullScreen = value;
   },
-
+  editableToggle(state, newValue) {
+    let value = newValue ? newValue : !state.options.editable;
+    state.options.editable = value;
+  },
   // SET DATAS
   // =================
   setClasses(state, classes) {

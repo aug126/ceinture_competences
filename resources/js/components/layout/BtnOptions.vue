@@ -11,9 +11,21 @@
       <v-btn v-if="fullScreen" @click.stop="setFullScreen" color="green" fab title="Quitter">
         <v-icon>mdi-monitor-screenshot</v-icon>
       </v-btn>
+
+      <v-btn
+        v-else-if="editable"
+        @click.stop="setEditable"
+        color="warning"
+        fab
+        title="Quitter"
+        dark
+      >
+        <v-icon>mdi-pencil</v-icon>
+      </v-btn>
+
       <v-btn v-else v-model="fab" color="info" dark fab>
         <v-icon v-if="fab">mdi-close</v-icon>
-        <v-icon v-else>mdi-cogs</v-icon>
+        <v-icon v-else title="Options">mdi-cogs</v-icon>
       </v-btn>
     </template>
 
@@ -21,15 +33,18 @@
         <v-icon v-if="fakeCollapse">mdi-arrow-split-horizontal</v-icon>
         <v-icon v-else>mdi-arrow-collapse-vertical</v-icon>
     </v-btn>-->
-    <v-btn @click.stop="setFullScreen" fab dark small color="green">
+    <v-btn @click.stop="setFullScreen" fab dark small color="green" title="Grand écran">
       <v-icon>mdi-monitor-screenshot</v-icon>
     </v-btn>
-    <v-btn @click.stop fab dark small color="grey">
+    <v-btn @click.stop fab dark small color="grey" title="Non disponible">
       <v-icon v-if="fakeCollapse">mdi-eye-off</v-icon>
       <v-icon v-else>mdi-eye-plus</v-icon>
     </v-btn>
-    <v-btn @click.stop fab dark small color="grey">
+    <v-btn @click.stop fab dark small color="grey" title="Non disponible">
       <v-icon>mdi-printer</v-icon>
+    </v-btn>
+    <v-btn @click.stop="setEditable" fab dark small color="grey" title="Non disponible">
+      <v-icon>mdi-pencil</v-icon>
     </v-btn>
   </v-speed-dial>
 </template>
@@ -49,11 +64,18 @@ export default {
     setFullScreen() {
       this.$store.commit("fullScreenToggle");
       this.fab = false;
+    },
+    setEditable() {
+      this.$store.commit("editableToggle");
+      this.fab = false;
     }
   },
   computed: {
     fullScreen() {
       return this.$store.state.options.fullScreen;
+    },
+    editable() {
+      return this.$store.state.options.editable;
     }
   }
 };
