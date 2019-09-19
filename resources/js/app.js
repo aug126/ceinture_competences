@@ -36,14 +36,32 @@ import store from './modules/vuex';
 // Root Component
 import App from './components/App.vue';
 
+if (document.getElementById('app')) {
 
-new Vue({
-  vuetify,
-  router,
-  store,
-  el: "#app",
-  components: {
-    App
-  },
-  template: "<App/>"
-});
+  new Vue({
+    vuetify,
+    router,
+    store,
+    el: "#app",
+    components: {
+      App
+    },
+    template: "<App/>"
+  });
+  window.stop();
+}
+
+
+import VueLogin from './laravel/Login.vue'
+Vue.component(VueLogin);
+if (document.getElementById('app-login')) {
+
+  new Vue({
+    vuetify,
+    el: "#app-login",
+    components: {
+      VueLogin
+    },
+    // template: "<vue-login/>"
+  })
+}
