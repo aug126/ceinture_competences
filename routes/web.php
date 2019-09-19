@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
-    // Route::get('/', function () { return view('welcome'); });
+    Route::get('/', function () { return view('home'); });
     Route::get('classes', 'ClasseController@index');
     Route::get('classes/{id}', 'ClasseController@show');
     Route::get('programs/{classe_id}', 'ProgramController@index');
@@ -27,3 +27,7 @@ Route::group(['middleware' => 'auth'], function() {
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home', function() {
+    return redirect('/');
+});

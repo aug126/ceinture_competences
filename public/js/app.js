@@ -3261,6 +3261,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -3316,31 +3318,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["login-url"],
   // name: "vue-login",
-  mounted: function mounted() {
-    console.log(this.loginUrl, this.csrf);
-  },
+  mounted: function mounted() {},
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
-      checkbox: true
+      email: '',
+      password: '',
+      checkboxRemember: true //-----
+
     };
   },
   methods: {
-    checkUser: function checkUser() {}
+    checkUser: function checkUser() {
+      var formData = new FormData();
+      formData.append('email', this.email);
+      formData.append('password', this.password);
+      formData.append('remember', this.checkboxRemember);
+      formData.append('_token', this.csrf);
+      var request = new XMLHttpRequest();
+      request.open('POST', this.loginUrl);
+      console.log(request);
+      request.send(formData);
+      console.log(request);
+
+      request.onreadystatechange = function (event) {
+        if (this.readyState === XMLHttpRequest.DONE) {
+          if (this.status === 200) {
+            this.goTo();
+          } else {
+            console.log("Status de la réponse: %d (%s)", this.status, his.statusText);
+          }
+        }
+      };
+    },
+    goTo: function goTo() {
+      var subUrl = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '/';
+      var origin = window.location.origin;
+      var url = origin + subUrl;
+      window.location.href = url;
+    }
   }
 });
 
@@ -3587,7 +3607,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/**\n<template>\n  <div id=\"Login\">\n    <h1>LOGIN</h1>\n    \n\n<div class=\"container\">\n        <div class=\"row justify-content-center\">\n            <div class=\"col-md-8\">\n\n                <div class=\"card\">\n                    <div class=\"card-header\">@lang('auth.login')</div>\n\n                    <div class=\"card-body\">\n                        <form method=\"POST\" action=\"{{ route('login') }}\">\n                              <input type=\"hidden\" name=\"_token\" :value=\"csrf\">\n\n\n                            <div class=\"form-group row\">\n                                <label for=\"email\" class=\"col-md-4 col-form-label text-md-right\">@lang('auth.email_address')</label>\n\n                                <div class=\"col-md-6\">\n                                    <!-- <input id=\"email\" type=\"email\" class=\"form-control @error('email') is-invalid @enderror\" name=\"email\" value=\"{{ old('email') }}\" required autocomplete=\"email\" autofocus> -->\n\n                                    <!-- @error('email')\n                                    <span class=\"invalid-feedback\" role=\"alert\">\n                                        <strong>{{ $message }}</strong>\n                                    </span>\n                                    @enderror -->\n                                </div>\n                            </div>\n\n                            <div class=\"form-group row\">\n                                <label for=\"password\" class=\"col-md-4 col-form-label text-md-right\">@lang('auth.password')</label>\n\n                                <div class=\"col-md-6\">\n                                    <!-- <input id=\"password\" type=\"password\" class=\"form-control @error('password') is-invalid @enderror\" name=\"password\" required autocomplete=\"current-password\"> -->\n\n                                    <!-- @error('password')\n                                    <span class=\"invalid-feedback\" role=\"alert\">\n                                        <strong>{{ $message }}</strong>\n                                    </span>\n                                    @enderror -->\n                                </div>\n                            </div>\n\n                            <!-- <div class=\"form-group row\">\n                                <div class=\"col-md-6 offset-md-4\">\n                                    <div class=\"form-check\">\n                                        <input class=\"form-check-input\" type=\"checkbox\" name=\"remember\" id=\"remember\" {{ old('remember') ? 'checked' : '' }}>\n\n                                        <label class=\"form-check-label\" for=\"remember\">\n                                            @lang('auth.remember_me')\n                                        </label>\n                                    </div>\n                                </div>\n                            </div> -->\n\n                            <div class=\"form-group row mb-0\">\n                                <div class=\"col-md-8 offset-md-4\">\n                                    <button type=\"submit\" class=\"btn btn-primary\">\n                                        @lang('auth.login')\n                                    </button>\n\n                                    <!-- @if (Route::has('password.request'))\n                                    <a class=\"btn btn-link\" href=\"{{ route('password.request') }}\">\n                                        @lang('auth.forgot_password')\n                                    </a>\n                                    @endif\n                                </div> -->\n                            </div>\n                        </form>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n  </div>\n</template>\n\n<script>\nexport default {\n  data: () => ({})\n};\n</script>\n */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/**\n<template>\n  <div id=\"Login\">\n    <h1>LOGIN</h1>\n    \n\n  </div>\n</template>\n\n<script>\nexport default {\n  data: () => ({})\n};\n</script>\n */\n", ""]);
 
 // exports
 
@@ -7608,7 +7628,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-app",
-    { attrs: { id: "inspire" } },
+    { staticStyle: { display: "auto" }, attrs: { id: "inspire" } },
     [
       _c(
         "v-content",
@@ -7642,7 +7662,7 @@ var render = function() {
                               _c(
                                 "v-tooltip",
                                 {
-                                  attrs: { bottom: "" },
+                                  attrs: { right: "" },
                                   scopedSlots: _vm._u([
                                     {
                                       key: "activator",
@@ -7675,46 +7695,10 @@ var render = function() {
                                     }
                                   ])
                                 },
-                                [_vm._v(" "), _c("span", [_vm._v("Portfolio")])]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-tooltip",
-                                {
-                                  attrs: { right: "" },
-                                  scopedSlots: _vm._u([
-                                    {
-                                      key: "activator",
-                                      fn: function(ref) {
-                                        var on = ref.on
-                                        return [
-                                          _c(
-                                            "v-btn",
-                                            _vm._g(
-                                              {
-                                                attrs: {
-                                                  icon: "",
-                                                  large: "",
-                                                  href:
-                                                    "https://codepen.io/johnjleider/pen/pMvGQO",
-                                                  target: "_blank"
-                                                }
-                                              },
-                                              on
-                                            ),
-                                            [
-                                              _c("v-icon", [
-                                                _vm._v("mdi-email")
-                                              ])
-                                            ],
-                                            1
-                                          )
-                                        ]
-                                      }
-                                    }
-                                  ])
-                                },
-                                [_vm._v(" "), _c("span", [_vm._v("Contact")])]
+                                [
+                                  _vm._v(" "),
+                                  _c("span", [_vm._v("Dévelopeur du site")])
+                                ]
                               )
                             ],
                             1
@@ -7739,10 +7723,17 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("v-text-field", {
                                     attrs: {
-                                      label: "Identifiant",
+                                      label: "Identifiant (email)",
                                       name: "email",
                                       "prepend-icon": "mdi-account",
                                       type: "email"
+                                    },
+                                    model: {
+                                      value: _vm.email,
+                                      callback: function($$v) {
+                                        _vm.email = $$v
+                                      },
+                                      expression: "email"
                                     }
                                   }),
                                   _vm._v(" "),
@@ -7753,17 +7744,24 @@ var render = function() {
                                       name: "password",
                                       "prepend-icon": "mdi-lock",
                                       type: "password"
+                                    },
+                                    model: {
+                                      value: _vm.password,
+                                      callback: function($$v) {
+                                        _vm.password = $$v
+                                      },
+                                      expression: "password"
                                     }
                                   }),
                                   _vm._v(" "),
                                   _c("v-checkbox", {
                                     attrs: { label: "Se souvenir de moi" },
                                     model: {
-                                      value: _vm.checkbox,
+                                      value: _vm.checkboxRemember,
                                       callback: function($$v) {
-                                        _vm.checkbox = $$v
+                                        _vm.checkboxRemember = $$v
                                       },
-                                      expression: "checkbox"
+                                      expression: "checkboxRemember"
                                     }
                                   })
                                 ],
@@ -7779,17 +7777,46 @@ var render = function() {
                               _c("div", { staticClass: "flex-grow-1" }),
                               _vm._v(" "),
                               _c(
-                                "a",
+                                "v-btn",
                                 {
-                                  staticClass: "btn btn-link",
-                                  attrs: { href: "" }
+                                  attrs: { color: "primary" },
+                                  on: { click: _vm.checkUser }
                                 },
-                                [_vm._v("Mot de passe oublié ?")]
+                                [_vm._v("Connexion")]
                               ),
                               _vm._v(" "),
-                              _c("v-btn", { attrs: { color: "primary" } }, [
-                                _vm._v("Login")
-                              ])
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: { outlined: "", color: "primary" },
+                                  on: {
+                                    click: function() {
+                                      return _vm.goTo("/register")
+                                    }
+                                  }
+                                },
+                                [_vm._v("S'enregistrer")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: {
+                                    title: "Mot de passe oublié ?",
+                                    outlined: "",
+                                    color: "primary"
+                                  },
+                                  on: {
+                                    click: function() {
+                                      return _vm.goTo("/password/reset")
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("v-icon", [_vm._v("mdi-account-question")])
+                                ],
+                                1
+                              )
                             ],
                             1
                           )
