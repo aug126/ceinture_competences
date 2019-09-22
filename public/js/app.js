@@ -2592,9 +2592,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return "rgb(".concat(num, ", ").concat(num2, ", ").concat(num3, ")");
     },
     clear: function clear() {
-      this.eleveList = "";
-      this.className = "";
-      this.$refs.form.resetValidation();
+      // this.eleveList = "";
+      // this.className = "";
+      // this.$refs.form.resetValidation();
+      this.$router.push({
+        path: '/accueil/'
+      });
     },
     addProgr: function addProgr() {
       this.programsSkills.push({

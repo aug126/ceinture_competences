@@ -116,9 +116,10 @@ export default {
       return `rgb(${num}, ${num2}, ${num3})`;
     },
     clear() {
-      this.eleveList = "";
-      this.className = "";
-      this.$refs.form.resetValidation();
+      // this.eleveList = "";
+      // this.className = "";
+      // this.$refs.form.resetValidation();
+      this.$router.push({path: '/accueil/'});
     },
     addProgr() {
       this.programsSkills.push({
