@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div id="app-register">
+    <vue-register register-url="{{ route('register') }}"> </vue-register>
+</div>
+
+<!-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -74,5 +78,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 @endsection

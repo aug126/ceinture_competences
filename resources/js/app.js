@@ -53,14 +53,25 @@ if (document.getElementById('app')) {
 
 
 import VueLogin from './laravel/Login.vue'
-Vue.component(VueLogin);
 if (document.getElementById('app-login')) {
-
+  Vue.component(VueLogin);
   new Vue({
     vuetify,
     el: "#app-login",
     components: {
       VueLogin
+    },
+    // template: "<vue-login/>"
+  })
+}
+import VueRegister from './laravel/Register.vue'
+if (document.getElementById('app-register')) {
+  Vue.component(VueRegister);
+  new Vue({
+    vuetify,
+    el: "#app-register",
+    components: {
+      VueRegister
     },
     // template: "<vue-login/>"
   })

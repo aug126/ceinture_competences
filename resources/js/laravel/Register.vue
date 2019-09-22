@@ -6,7 +6,7 @@
           <v-col cols="12" sm="8" md="4">
             <v-card class="elevation-12">
               <v-toolbar color="primary" dark flat>
-                <v-toolbar-title>Formulaire de connexion</v-toolbar-title>
+                <v-toolbar-title>Formulaire d'enregistrement</v-toolbar-title>
                 <div class="flex-grow-1"></div>
                 <v-tooltip right>
                   <template v-slot:activator="{ on }">
@@ -19,10 +19,18 @@
               </v-toolbar>
 
               <v-card-text>
-                <v-form method="POST" :action="this.loginUrl">
+                <v-form method="POST" :action="this.registerUrl">
                   <input type="hidden" name="_token" :value="csrf" />
                   <v-text-field
-                    label="Email"
+                    label="Nom complet"
+                    name="name"
+                    prepend-icon="mdi-account"
+                    type="text"
+                    v-model="name"
+                  ></v-text-field>
+
+                  <v-text-field
+                    label="Identifiant (Email)"
                     name="email"
                     prepend-icon="mdi-at"
                     type="email"
@@ -36,19 +44,27 @@
                     type="password"
                     v-model="password"
                   ></v-text-field>
-                  <v-checkbox v-model="checkboxRemember" label="Se souvenir de moi"></v-checkbox>
+                  <v-text-field
+                    id="password-confirm"
+                    label="Confirmation mot de passe"
+                    name="password_confirmation"
+                    prepend-icon="mdi-lock"
+                    type="password"
+                    v-model="passwordConfirm"
+                  ></v-text-field>
                 </v-form>
                 <ul class="no-bullet">
                   <li v-for="(error, i) in errors" :key="i" class="error--text">
                     {{error}}
                   </li>
                 </ul>
+
               </v-card-text>
               <v-card-actions>
                 <div class="flex-grow-1"></div>
-                <v-btn @click="checkUser" color="primary">Connexion</v-btn>
-                <v-btn outlined @click="() => goTo('/register')" color="primary">S'enregistrer</v-btn>
-                <v-btn title="Mot de passe oublié ?" outlined @click="() => goTo('/password/reset')" color="primary"><v-icon>mdi-account-question</v-icon></v-btn>
+                <v-btn @click="registerUser" color="primary">Enregistrement</v-btn>
+                <v-btn outlined @click="() => goTo('/login')" color="primary">Se connecter</v-btn>
+                <!-- <v-btn title="Mot de passe oublié ?" outlined @click="() => goTo('/password/reset')" color="primary"><v-icon>mdi-account-question</v-icon></v-btn> -->
               </v-card-actions>
             </v-card>
           </v-col>
@@ -61,7 +77,7 @@
 <script>
 import axios from 'axios';
 export default {
-  props: ["login-url"],
+  props: ["register-url"],
   // name: "vue-login",
   mounted() {
   },
@@ -69,32 +85,32 @@ export default {
     csrf: document
       .querySelector('meta[name="csrf-token"]')
       .getAttribute("content"),
+    name: '',
     email: '',
     password: '', 
-    checkboxRemember: true,
+    passwordConfirm: '',
     errors: []
     //-----
   }),
   methods: {
-    async checkUser() {
+    async registerUser() {
       let formData = new FormData;
+      formData.append('name', this.name);
       formData.append('email', this.email);
       formData.append('password', this.password);
-      formData.append('remember', this.checkboxRemember);
+      formData.append('password_confirmation', this.passwordConfirm);
       formData.append('_token', this.csrf);
 
-      let resp = await axios.post(this.loginUrl, formData);
+      let resp = await axios.post(this.registerUrl, formData);
+
       if (resp.data.errors) {
         this.errors = resp.data.errors;
-        // SHOW Errors
-        return;
       } else
-          this.goTo();
-      return;
+        this.goTo();
     },
     goTo(subUrl = '/') {
-      let origin = window.location.origin;
-      let url = origin + subUrl
+     let origin = window.location.origin;
+     let url = origin + subUrl
       window.location.href = url;
     }
   }
