@@ -158,7 +158,7 @@ export default {
       else {
         setTimeout(() => {
           this.fullScreenDelayed = value;
-        }, 500);
+        }, 10);
       }
     }
   }
@@ -167,18 +167,19 @@ export default {
 
 <style lang="sass">
 #ceinture-table
-  height: calc(100vh - 10rem)
+  max-height: calc(100vh - 10rem)
   .v-data-table__wrapper
-    height: calc(100vh - 10rem)
+    max-height: calc(100vh - 10rem)
   th, td
     font-size: 1rem
     border-color: black
     text-align: center
     user-select: none
+    transition: height .4s linear
   &.full-screen
-    height: calc(100vh - 4rem)
+    max-height: calc(100vh - 3rem)
     .v-data-table__wrapper
-      height: calc(100vh - 4rem)
+      max-height: calc(100vh - 3rem)
     td, th
       height: 2rem !important
 

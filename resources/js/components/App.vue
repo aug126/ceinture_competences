@@ -83,7 +83,6 @@ export default {
 </script>
 
 <style lang="sass">
-// @import '../../sass/app.sass'
 $anim-time: .4s
 #App 
   #sidebar-nav
@@ -115,23 +114,6 @@ $anim-time: .4s
     transition: linear $anim-time
 
 
-#App
-  h1 
-    color: #a25da2
-    margin-left: 2rem
-  hr
-    border-color: transparentize(#a25da2, .5)
-    margin-bottom: 3rem
-  .w-100
-    width: 100%
-  .mt--64
-    margin-top: -64px !important
-  .mt-64
-    margin-top: 64px !important
-  .mb--64
-    margin-bottom: -64px !important
-  .justify-evenly
-    justify-content: space-evenly
 
 
 /** ScrollBar */

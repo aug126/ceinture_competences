@@ -35,6 +35,7 @@
                     prepend-icon="mdi-lock"
                     type="password"
                     v-model="password"
+                    @keypress.enter="checkUser"
                   ></v-text-field>
                   <v-checkbox v-model="checkboxRemember" label="Se souvenir de moi"></v-checkbox>
                 </v-form>
