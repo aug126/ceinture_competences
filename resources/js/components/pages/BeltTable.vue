@@ -11,7 +11,7 @@
       >
         <thead>
           <tr>
-            <th :style="{height: fullScreen ? '2rem' : ''}" class="th-edit">
+            <th :style="{height: fullScreen ? (zoom * 2) + 'rem' : ''}" class="th-edit">
               <!-- <v-btn fab v-if="editable" small color="info" dark depressed>
                 <v-icon>mdi-table-edit</v-icon>
               </v-btn>-->
@@ -19,7 +19,7 @@
             </th>
 
             <th
-              :style="{height: fullScreen ? '2rem' : ''}"
+              :style="{height: fullScreen ? (zoom * 2) + 'rem' : ''}"
               class="end-program-class"
               :class="'height-x' + (nbrStudents + 1)"
             >
@@ -27,7 +27,7 @@
             </th>
             <template v-for="(program, programId) in programsObj">
               <th
-                :style="{height: fullScreen ? '2rem' : ''}"
+                :style="{height: fullScreen ? (zoom * 2) + 'rem' : ''}"
                 v-for="(skill, skillId) in program.skills"
                 :key="skillId"
                 :class="[{'end-program-class': isLastKey(program.skills, skillId), 'height-0': isLastKey(programsObj, programId)}, 'height-x' + (nbrStudents + 1)]"
@@ -42,20 +42,32 @@
             v-for="(student, studentId) in (currentClasse && currentClasse.students)"
             :key="studentId"
           >
-            <td class="td-number" width="10px">
+            <td
+              :style="{height: fullScreen ? (zoom * 2) + 'rem' : ''}"
+              class="td-number"
+              width="10px"
+            >
               <strong>{{ student.order_number }}</strong>
             </td>
-            <td class="name">
+            <td :style="{height: fullScreen ? (zoom * 2) + 'rem' : ''}" class="name">
               <strong @click="() => showStudentSheet(student)">{{ student.student_name }}</strong>
             </td>
 
-            <td v-for="(skill, i) in student.skills" :key="i">
+            <td
+              :style="{height: fullScreen ? (zoom * 2) + 'rem' : ''}"
+              v-for="(skill, i) in student.skills"
+              :key="i"
+            >
               <belt-actions
                 :competence="skill"
                 :classeId="currentClasse.id"
                 :studentId="student.id"
               >
-                <ceinture-type-2 v-if="getColor(skill)" :color="getColor(skill)"></ceinture-type-2>
+                <ceinture-type-2
+                  v-if="getColor(skill)"
+                  :style="{height: fullScreen ? (zoom * 2) + 'rem' : ''}"
+                  :color="getColor(skill)"
+                ></ceinture-type-2>
               </belt-actions>
             </td>
           </tr>
@@ -145,6 +157,9 @@ export default {
     },
     editable() {
       return this.$store.state.options.editable;
+    },
+    zoom() {
+      return this.$store.state.options.zoomCoef;
     }
   },
 
@@ -167,9 +182,12 @@ export default {
 
 <style lang="sass">
 #ceinture-table
-  max-height: calc(100vh - 10rem)
+  max-height: calc(100vh - 11.5rem)
+  .cursor-pointer 
+    display: flex
+    align-items: center
   .v-data-table__wrapper
-    max-height: calc(100vh - 10rem)
+    max-height: calc(100vh - 11.5rem)
   th, td
     font-size: 1rem
     border-color: black
@@ -177,11 +195,9 @@ export default {
     user-select: none
     transition: height .4s linear
   &.full-screen
-    max-height: calc(100vh - 3rem)
+    max-height: calc(100vh - 4rem)
     .v-data-table__wrapper
-      max-height: calc(100vh - 3rem)
-    td, th
-      height: 2rem !important
+      max-height: calc(100vh - 4rem)
 
   .t-head
     display: block

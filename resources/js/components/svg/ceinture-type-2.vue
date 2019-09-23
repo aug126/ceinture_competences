@@ -65,7 +65,7 @@ path
   &:hover
     transform: scale(1.1)
   &.full-screen
-    width: 3rem
-    height: 2rem
-    margin-bottom: -.5rem
+    // width: 3rem
+    height: 1.8rem
+    // margin-bottom: -.5rem
 </style>

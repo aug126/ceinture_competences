@@ -20,7 +20,8 @@ const state = {
   classes: [],
   options: {
     fullScreen: false,
-    editable: false
+    editable: false,
+    zoomCoef: 1
   },
   // classes: [{
   //   id: 'time',
@@ -191,15 +192,19 @@ const mutations = {
     state.classes[classeId] = {
       ...classe
     };
+  },
+  incrementZoom(state, data = null) {
+    if (state.options.zoomCoef >= 1.3) return;
+    state.options.zoomCoef += 0.2;
+  },
+  decrementZoom(state, data = null) {
+    if (state.options.zoomCoef <= 0.7) return;
+    state.options.zoomCoef -= 0.2;
   }
 }
 
 const actions = {
 
-  // students,
-  // classe,
-  // programs,
-  // skills
   async storeClasse(context, data) {
     if (!data.classe_name) return console.error('il faut une classe dans {} pour créer une classe.');
     let origin = window.location.origin;

@@ -33,7 +33,7 @@
           </v-col>
           <v-col
             :class="{'full-screen' : fullScreen}"
-            class="router-view-container col-md-9 col-sm-12"
+            class="router-view-container py-0 col-md-9 col-sm-12"
           >
             <!-- ROUTER
             =======================-->

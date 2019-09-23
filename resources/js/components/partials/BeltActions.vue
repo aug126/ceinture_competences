@@ -93,6 +93,12 @@ export default {
 
 <style lang="sass">
 #BeltActions 
+  height: 100%
+  display: flex
+  justify-content: center
+  button.close:first-child
+    z-index: 1
+    // margin-top: -.8rem
   .v-speed-dial__list
     z-index: 5
     left: 50%
@@ -102,17 +108,21 @@ export default {
     .v-speed-dial--direction-right
       left: 55%
     .v-btn.middle 
-      margin-top: -180%
+      margin-top: -115%
     .input
       width: 200px !important
       position: absolute
       z-index: 10
-      top: 120% !important
+      top: 175% !important
       transition: transform .2s ease .2s !important
       caret-color: #4057b5 !important
   .v-speed-dial
     .v-speed-dial--is-active
       transform: scale(2)
+
+  .cursor-pointer
+    display: flex
+    justify-content: center
   
 #BeltActions
   button.transition-color 

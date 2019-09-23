@@ -28,6 +28,11 @@ hr {
   margin-bottom: -64px !important;
 }
 
+.py-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 .justify-evenly {
   justify-content: space-evenly;
 }

@@ -2148,6 +2148,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2160,12 +2172,27 @@ __webpack_require__.r(__webpack_exports__);
       this.fakeCollapse = !this.fakeCollapse;
     },
     setFullScreen: function setFullScreen() {
+      var isFullScreen = this.$store.state.options.fullScreen;
+
+      if (isFullScreen) {// document.body.style.zoom = "100%";
+      } else {// let coef = this.$store.state.options.zoomCoef;
+          // document.body.style.zoom = 100 * coef + "%";
+        }
+
       this.$store.commit("fullScreenToggle");
       this.fab = false;
     },
     setEditable: function setEditable() {
       this.$store.commit("editableToggle");
       this.fab = false;
+    },
+    zoomPlus: function zoomPlus() {
+      this.$store.commit("incrementZoom"); // let coef = this.$store.state.options.zoomCoef;
+      // document.body.style.zoom = 100 * coef + "%";
+    },
+    zoomMinus: function zoomMinus() {
+      this.$store.commit("decrementZoom"); // let coef = this.$store.state.options.zoomCoef;
+      // document.body.style.zoom = 100 * coef + "%";
     }
   },
   computed: {
@@ -2348,6 +2375,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2426,6 +2465,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     editable: function editable() {
       return this.$store.state.options.editable;
+    },
+    zoom: function zoom() {
+      return this.$store.state.options.zoomCoef;
     }
   },
   watch: {
@@ -3655,7 +3697,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#BtnOptions .v-speed-dial__list {\n  left: -1rem;\n  margin-top: 4rem;\n}\n#BtnOptions.full-screen .v-speed-dial__list {\n  left: -1rem;\n  margin-top: 0rem;\n}\n@media screen and (max-width: 959px) {\n#BtnOptions {\n    display: none;\n}\n}", ""]);
+exports.push([module.i, "#BtnOptions .v-speed-dial__list {\n  left: -1rem;\n  margin-top: 4rem;\n}\n#BtnOptions.full-screen .v-speed-dial__list {\n  left: -1rem;\n  margin-top: 0rem;\n}\n#zoom-btns {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n#zoom-btns button {\n  margin-top: 0.5rem;\n}\n@media screen and (max-width: 959px) {\n#BtnOptions {\n    display: none;\n}\n}", ""]);
 
 // exports
 
@@ -3693,7 +3735,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#ceinture-table {\n  max-height: calc(100vh - 10rem);\n}\n#ceinture-table .v-data-table__wrapper {\n  max-height: calc(100vh - 10rem);\n}\n#ceinture-table th, #ceinture-table td {\n  font-size: 1rem;\n  border-color: black;\n  text-align: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  transition: height 0.4s linear;\n}\n#ceinture-table.full-screen {\n  max-height: calc(100vh - 3rem);\n}\n#ceinture-table.full-screen .v-data-table__wrapper {\n  max-height: calc(100vh - 3rem);\n}\n#ceinture-table.full-screen td, #ceinture-table.full-screen th {\n  height: 2rem !important;\n}\n#ceinture-table .t-head {\n  display: block;\n  margin: auto;\n  text-align: center;\n  max-width: 6rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table .height-x1::after {\n  height: calc(1 * 100%);\n}\n#ceinture-table .height-x2::after {\n  height: calc(2 * 100%);\n}\n#ceinture-table .height-x3::after {\n  height: calc(3 * 100%);\n}\n#ceinture-table .height-x4::after {\n  height: calc(4 * 100%);\n}\n#ceinture-table .height-x5::after {\n  height: calc(5 * 100%);\n}\n#ceinture-table .height-x6::after {\n  height: calc(6 * 100%);\n}\n#ceinture-table .height-x7::after {\n  height: calc(7 * 100%);\n}\n#ceinture-table .height-x8::after {\n  height: calc(8 * 100%);\n}\n#ceinture-table .height-x9::after {\n  height: calc(9 * 100%);\n}\n#ceinture-table .height-x10::after {\n  height: calc(10 * 100%);\n}\n#ceinture-table .height-x11::after {\n  height: calc(11 * 100%);\n}\n#ceinture-table .height-x12::after {\n  height: calc(12 * 100%);\n}\n#ceinture-table .height-x13::after {\n  height: calc(13 * 100%);\n}\n#ceinture-table .height-x14::after {\n  height: calc(14 * 100%);\n}\n#ceinture-table .height-x15::after {\n  height: calc(15 * 100%);\n}\n#ceinture-table .height-x16::after {\n  height: calc(16 * 100%);\n}\n#ceinture-table .height-x17::after {\n  height: calc(17 * 100%);\n}\n#ceinture-table .height-x18::after {\n  height: calc(18 * 100%);\n}\n#ceinture-table .height-x19::after {\n  height: calc(19 * 100%);\n}\n#ceinture-table .height-x20::after {\n  height: calc(20 * 100%);\n}\n#ceinture-table .height-x21::after {\n  height: calc(21 * 100%);\n}\n#ceinture-table .height-x22::after {\n  height: calc(22 * 100%);\n}\n#ceinture-table .height-x23::after {\n  height: calc(23 * 100%);\n}\n#ceinture-table .height-x24::after {\n  height: calc(24 * 100%);\n}\n#ceinture-table .height-x25::after {\n  height: calc(25 * 100%);\n}\n#ceinture-table .height-x26::after {\n  height: calc(26 * 100%);\n}\n#ceinture-table .height-x27::after {\n  height: calc(27 * 100%);\n}\n#ceinture-table .height-x28::after {\n  height: calc(28 * 100%);\n}\n#ceinture-table .height-x29::after {\n  height: calc(29 * 100%);\n}\n#ceinture-table .height-x30::after {\n  height: calc(30 * 100%);\n}\n#ceinture-table .height-x31::after {\n  height: calc(31 * 100%);\n}\n#ceinture-table .height-x32::after {\n  height: calc(32 * 100%);\n}\n#ceinture-table .height-x33::after {\n  height: calc(33 * 100%);\n}\n#ceinture-table .height-x34::after {\n  height: calc(34 * 100%);\n}\n#ceinture-table .height-x35::after {\n  height: calc(35 * 100%);\n}\n#ceinture-table .height-x36::after {\n  height: calc(36 * 100%);\n}\n#ceinture-table .height-x37::after {\n  height: calc(37 * 100%);\n}\n#ceinture-table .height-x38::after {\n  height: calc(38 * 100%);\n}\n#ceinture-table .height-x39::after {\n  height: calc(39 * 100%);\n}\n#ceinture-table .height-x40::after {\n  height: calc(40 * 100%);\n}\n#ceinture-table .height-x41::after {\n  height: calc(41 * 100%);\n}\n#ceinture-table .height-x42::after {\n  height: calc(42 * 100%);\n}\n#ceinture-table .height-x43::after {\n  height: calc(43 * 100%);\n}\n#ceinture-table .height-x44::after {\n  height: calc(44 * 100%);\n}\n#ceinture-table .height-x45::after {\n  height: calc(45 * 100%);\n}\n#ceinture-table .height-x46::after {\n  height: calc(46 * 100%);\n}\n#ceinture-table .height-x47::after {\n  height: calc(47 * 100%);\n}\n#ceinture-table .height-x48::after {\n  height: calc(48 * 100%);\n}\n#ceinture-table .height-x49::after {\n  height: calc(49 * 100%);\n}\n#ceinture-table .height-x50::after {\n  height: calc(50 * 100%);\n}\n#ceinture-table .height-0::after {\n  height: 0 !important;\n}\n#ceinture-table th.end-program-class::after {\n  position: absolute;\n  content: \"\";\n  width: 2px;\n  background: #ed4900;\n  display: block;\n  top: 0;\n  right: 0;\n}\n#ceinture-table th.end-program-class h4 {\n  text-align: left;\n  max-width: 9rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table tr:last-child td {\n  border-bottom: 1px solid black;\n}\n#ceinture-table tr:first-child td {\n  border-top: 1px solid black;\n}\n#ceinture-table tbody tr:hover {\n  background: none !important;\n}\n#ceinture-table td.name {\n  cursor: pointer;\n  margin-left: -1rem;\n}\n#ceinture-table td.name > strong {\n  display: block;\n  text-align: left;\n  transition: color 0.2s ease-in;\n  max-width: 9rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table td.name:hover > strong {\n  color: #4057b5 !important;\n}\n@media screen and (max-width: 426px) {\n#ceinture-table .th-edit, #ceinture-table .td-number {\n    display: none;\n}\n}", ""]);
+exports.push([module.i, "#ceinture-table {\n  max-height: calc(100vh - 11.5rem);\n}\n#ceinture-table .cursor-pointer {\n  display: flex;\n  align-items: center;\n}\n#ceinture-table .v-data-table__wrapper {\n  max-height: calc(100vh - 11.5rem);\n}\n#ceinture-table th, #ceinture-table td {\n  font-size: 1rem;\n  border-color: black;\n  text-align: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  transition: height 0.4s linear;\n}\n#ceinture-table.full-screen {\n  max-height: calc(100vh - 4rem);\n}\n#ceinture-table.full-screen .v-data-table__wrapper {\n  max-height: calc(100vh - 4rem);\n}\n#ceinture-table .t-head {\n  display: block;\n  margin: auto;\n  text-align: center;\n  max-width: 6rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table .height-x1::after {\n  height: calc(1 * 100%);\n}\n#ceinture-table .height-x2::after {\n  height: calc(2 * 100%);\n}\n#ceinture-table .height-x3::after {\n  height: calc(3 * 100%);\n}\n#ceinture-table .height-x4::after {\n  height: calc(4 * 100%);\n}\n#ceinture-table .height-x5::after {\n  height: calc(5 * 100%);\n}\n#ceinture-table .height-x6::after {\n  height: calc(6 * 100%);\n}\n#ceinture-table .height-x7::after {\n  height: calc(7 * 100%);\n}\n#ceinture-table .height-x8::after {\n  height: calc(8 * 100%);\n}\n#ceinture-table .height-x9::after {\n  height: calc(9 * 100%);\n}\n#ceinture-table .height-x10::after {\n  height: calc(10 * 100%);\n}\n#ceinture-table .height-x11::after {\n  height: calc(11 * 100%);\n}\n#ceinture-table .height-x12::after {\n  height: calc(12 * 100%);\n}\n#ceinture-table .height-x13::after {\n  height: calc(13 * 100%);\n}\n#ceinture-table .height-x14::after {\n  height: calc(14 * 100%);\n}\n#ceinture-table .height-x15::after {\n  height: calc(15 * 100%);\n}\n#ceinture-table .height-x16::after {\n  height: calc(16 * 100%);\n}\n#ceinture-table .height-x17::after {\n  height: calc(17 * 100%);\n}\n#ceinture-table .height-x18::after {\n  height: calc(18 * 100%);\n}\n#ceinture-table .height-x19::after {\n  height: calc(19 * 100%);\n}\n#ceinture-table .height-x20::after {\n  height: calc(20 * 100%);\n}\n#ceinture-table .height-x21::after {\n  height: calc(21 * 100%);\n}\n#ceinture-table .height-x22::after {\n  height: calc(22 * 100%);\n}\n#ceinture-table .height-x23::after {\n  height: calc(23 * 100%);\n}\n#ceinture-table .height-x24::after {\n  height: calc(24 * 100%);\n}\n#ceinture-table .height-x25::after {\n  height: calc(25 * 100%);\n}\n#ceinture-table .height-x26::after {\n  height: calc(26 * 100%);\n}\n#ceinture-table .height-x27::after {\n  height: calc(27 * 100%);\n}\n#ceinture-table .height-x28::after {\n  height: calc(28 * 100%);\n}\n#ceinture-table .height-x29::after {\n  height: calc(29 * 100%);\n}\n#ceinture-table .height-x30::after {\n  height: calc(30 * 100%);\n}\n#ceinture-table .height-x31::after {\n  height: calc(31 * 100%);\n}\n#ceinture-table .height-x32::after {\n  height: calc(32 * 100%);\n}\n#ceinture-table .height-x33::after {\n  height: calc(33 * 100%);\n}\n#ceinture-table .height-x34::after {\n  height: calc(34 * 100%);\n}\n#ceinture-table .height-x35::after {\n  height: calc(35 * 100%);\n}\n#ceinture-table .height-x36::after {\n  height: calc(36 * 100%);\n}\n#ceinture-table .height-x37::after {\n  height: calc(37 * 100%);\n}\n#ceinture-table .height-x38::after {\n  height: calc(38 * 100%);\n}\n#ceinture-table .height-x39::after {\n  height: calc(39 * 100%);\n}\n#ceinture-table .height-x40::after {\n  height: calc(40 * 100%);\n}\n#ceinture-table .height-x41::after {\n  height: calc(41 * 100%);\n}\n#ceinture-table .height-x42::after {\n  height: calc(42 * 100%);\n}\n#ceinture-table .height-x43::after {\n  height: calc(43 * 100%);\n}\n#ceinture-table .height-x44::after {\n  height: calc(44 * 100%);\n}\n#ceinture-table .height-x45::after {\n  height: calc(45 * 100%);\n}\n#ceinture-table .height-x46::after {\n  height: calc(46 * 100%);\n}\n#ceinture-table .height-x47::after {\n  height: calc(47 * 100%);\n}\n#ceinture-table .height-x48::after {\n  height: calc(48 * 100%);\n}\n#ceinture-table .height-x49::after {\n  height: calc(49 * 100%);\n}\n#ceinture-table .height-x50::after {\n  height: calc(50 * 100%);\n}\n#ceinture-table .height-0::after {\n  height: 0 !important;\n}\n#ceinture-table th.end-program-class::after {\n  position: absolute;\n  content: \"\";\n  width: 2px;\n  background: #ed4900;\n  display: block;\n  top: 0;\n  right: 0;\n}\n#ceinture-table th.end-program-class h4 {\n  text-align: left;\n  max-width: 9rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table tr:last-child td {\n  border-bottom: 1px solid black;\n}\n#ceinture-table tr:first-child td {\n  border-top: 1px solid black;\n}\n#ceinture-table tbody tr:hover {\n  background: none !important;\n}\n#ceinture-table td.name {\n  cursor: pointer;\n  margin-left: -1rem;\n}\n#ceinture-table td.name > strong {\n  display: block;\n  text-align: left;\n  transition: color 0.2s ease-in;\n  max-width: 9rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table td.name:hover > strong {\n  color: #4057b5 !important;\n}\n@media screen and (max-width: 426px) {\n#ceinture-table .th-edit, #ceinture-table .td-number {\n    display: none;\n}\n}", ""]);
 
 // exports
 
@@ -3731,7 +3773,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#BeltActions .v-speed-dial__list {\n  z-index: 5;\n  left: 50%;\n  transform: translateX(-50%);\n}\n#BeltActions .v-speed-dial__list .v-speed-dial--direction-left {\n  right: 55%;\n}\n#BeltActions .v-speed-dial__list .v-speed-dial--direction-right {\n  left: 55%;\n}\n#BeltActions .v-speed-dial__list .v-btn.middle {\n  margin-top: -180%;\n}\n#BeltActions .v-speed-dial__list .input {\n  width: 200px !important;\n  position: absolute;\n  z-index: 10;\n  top: 120% !important;\n  transition: transform 0.2s ease 0.2s !important;\n  caret-color: #4057b5 !important;\n}\n#BeltActions .v-speed-dial .v-speed-dial--is-active {\n  transform: scale(2);\n}\n#BeltActions button.transition-color {\n  transition: background ease 0.3s !important;\n}\n#BeltActions .input-info-border .v-input__slot {\n  border: 1px solid #4057b5;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12) !important;\n}\n#BeltActions .close.v-btn--active:before {\n  opacity: 0 !important;\n}", ""]);
+exports.push([module.i, "#BeltActions {\n  height: 100%;\n  display: flex;\n  justify-content: center;\n}\n#BeltActions button.close:first-child {\n  z-index: 1;\n}\n#BeltActions .v-speed-dial__list {\n  z-index: 5;\n  left: 50%;\n  transform: translateX(-50%);\n}\n#BeltActions .v-speed-dial__list .v-speed-dial--direction-left {\n  right: 55%;\n}\n#BeltActions .v-speed-dial__list .v-speed-dial--direction-right {\n  left: 55%;\n}\n#BeltActions .v-speed-dial__list .v-btn.middle {\n  margin-top: -115%;\n}\n#BeltActions .v-speed-dial__list .input {\n  width: 200px !important;\n  position: absolute;\n  z-index: 10;\n  top: 175% !important;\n  transition: transform 0.2s ease 0.2s !important;\n  caret-color: #4057b5 !important;\n}\n#BeltActions .v-speed-dial .v-speed-dial--is-active {\n  transform: scale(2);\n}\n#BeltActions .cursor-pointer {\n  display: flex;\n  justify-content: center;\n}\n#BeltActions button.transition-color {\n  transition: background ease 0.3s !important;\n}\n#BeltActions .input-info-border .v-input__slot {\n  border: 1px solid #4057b5;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12) !important;\n}\n#BeltActions .close.v-btn--active:before {\n  opacity: 0 !important;\n}", ""]);
 
 // exports
 
@@ -3788,7 +3830,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "path[data-v-67ab2fcb] {\n  transition: fill 0.5s linear;\n}\n#svg-ceinture-type-2[data-v-67ab2fcb] {\n  cursor: pointer;\n  transition: transform 0.3s ease;\n}\n#svg-ceinture-type-2[data-v-67ab2fcb]:hover {\n  transform: scale(1.1);\n}\n#svg-ceinture-type-2.full-screen[data-v-67ab2fcb] {\n  width: 3rem;\n  height: 2rem;\n  margin-bottom: -0.5rem;\n}", ""]);
+exports.push([module.i, "path[data-v-67ab2fcb] {\n  transition: fill 0.5s linear;\n}\n#svg-ceinture-type-2[data-v-67ab2fcb] {\n  cursor: pointer;\n  transition: transform 0.3s ease;\n}\n#svg-ceinture-type-2[data-v-67ab2fcb]:hover {\n  transform: scale(1.1);\n}\n#svg-ceinture-type-2.full-screen[data-v-67ab2fcb] {\n  height: 1.8rem;\n}", ""]);
 
 // exports
 
@@ -6191,7 +6233,8 @@ var render = function() {
                   _c(
                     "v-col",
                     {
-                      staticClass: "router-view-container col-md-9 col-sm-12",
+                      staticClass:
+                        "router-view-container py-0 col-md-9 col-sm-12",
                       class: { "full-screen": _vm.fullScreen }
                     },
                     [_c("router-view")],
@@ -6371,176 +6414,233 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-speed-dial",
-    {
-      class: { "full-screen": _vm.fullScreen },
-      attrs: {
-        id: "BtnOptions",
-        direction: "right",
-        "open-on-hover": false,
-        transition: "scale-transition"
-      },
-      scopedSlots: _vm._u([
-        {
-          key: "activator",
-          fn: function() {
-            return [
-              _vm.fullScreen
-                ? _c(
-                    "v-btn",
-                    {
-                      attrs: { color: "green", fab: "", title: "Quitter" },
-                      on: {
-                        click: function($event) {
-                          $event.stopPropagation()
-                          return _vm.setFullScreen($event)
-                        }
-                      }
-                    },
-                    [_c("v-icon", [_vm._v("mdi-monitor-screenshot")])],
-                    1
-                  )
-                : _vm.editable
-                ? _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        color: "warning",
-                        fab: "",
-                        title: "Quitter",
-                        dark: ""
-                      },
-                      on: {
-                        click: function($event) {
-                          $event.stopPropagation()
-                          return _vm.setEditable($event)
-                        }
-                      }
-                    },
-                    [_c("v-icon", [_vm._v("mdi-pencil")])],
-                    1
-                  )
-                : _c(
-                    "v-btn",
-                    {
-                      attrs: { color: "info", dark: "", fab: "" },
-                      model: {
-                        value: _vm.fab,
-                        callback: function($$v) {
-                          _vm.fab = $$v
-                        },
-                        expression: "fab"
-                      }
-                    },
-                    [
-                      _vm.fab
-                        ? _c("v-icon", [_vm._v("mdi-close")])
-                        : _c("v-icon", { attrs: { title: "Options" } }, [
-                            _vm._v("mdi-cogs")
-                          ])
-                    ],
-                    1
-                  )
-            ]
-          },
-          proxy: true
-        }
-      ]),
-      model: {
-        value: _vm.fab,
-        callback: function($$v) {
-          _vm.fab = $$v
-        },
-        expression: "fab"
-      }
-    },
+    "div",
     [
-      _vm._v(" "),
       _c(
-        "v-btn",
+        "v-speed-dial",
         {
+          class: { "full-screen": _vm.fullScreen },
           attrs: {
-            fab: "",
-            dark: "",
-            small: "",
-            color: "green",
-            title: "Grand écran"
+            id: "BtnOptions",
+            direction: "right",
+            "open-on-hover": false,
+            transition: "scale-transition"
           },
-          on: {
-            click: function($event) {
-              $event.stopPropagation()
-              return _vm.setFullScreen($event)
+          scopedSlots: _vm._u([
+            {
+              key: "activator",
+              fn: function() {
+                return [
+                  _vm.fullScreen
+                    ? _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "green", fab: "", title: "Quitter" },
+                          on: {
+                            click: function($event) {
+                              $event.stopPropagation()
+                              return _vm.setFullScreen($event)
+                            }
+                          }
+                        },
+                        [_c("v-icon", [_vm._v("mdi-monitor-screenshot")])],
+                        1
+                      )
+                    : _vm.editable
+                    ? _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            color: "warning",
+                            fab: "",
+                            title: "Quitter",
+                            dark: ""
+                          },
+                          on: {
+                            click: function($event) {
+                              $event.stopPropagation()
+                              return _vm.setEditable($event)
+                            }
+                          }
+                        },
+                        [_c("v-icon", [_vm._v("mdi-pencil")])],
+                        1
+                      )
+                    : _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "info", dark: "", fab: "" },
+                          model: {
+                            value: _vm.fab,
+                            callback: function($$v) {
+                              _vm.fab = $$v
+                            },
+                            expression: "fab"
+                          }
+                        },
+                        [
+                          _vm.fab
+                            ? _c("v-icon", [_vm._v("mdi-close")])
+                            : _c("v-icon", { attrs: { title: "Options" } }, [
+                                _vm._v("mdi-cogs")
+                              ])
+                        ],
+                        1
+                      )
+                ]
+              },
+              proxy: true
             }
-          }
-        },
-        [_c("v-icon", [_vm._v("mdi-monitor-screenshot")])],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-btn",
-        {
-          attrs: {
-            fab: "",
-            dark: "",
-            small: "",
-            color: "grey",
-            title: "Non disponible"
-          },
-          on: {
-            click: function($event) {
-              $event.stopPropagation()
-            }
+          ]),
+          model: {
+            value: _vm.fab,
+            callback: function($$v) {
+              _vm.fab = $$v
+            },
+            expression: "fab"
           }
         },
         [
-          _vm.fakeCollapse
-            ? _c("v-icon", [_vm._v("mdi-eye-off")])
-            : _c("v-icon", [_vm._v("mdi-eye-plus")])
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              attrs: {
+                fab: "",
+                dark: "",
+                small: "",
+                color: "green",
+                title: "Grand écran"
+              },
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                  return _vm.setFullScreen($event)
+                }
+              }
+            },
+            [_c("v-icon", [_vm._v("mdi-monitor-screenshot")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              attrs: {
+                fab: "",
+                dark: "",
+                small: "",
+                color: "grey",
+                title: "Non disponible"
+              },
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                }
+              }
+            },
+            [
+              _vm.fakeCollapse
+                ? _c("v-icon", [_vm._v("mdi-eye-off")])
+                : _c("v-icon", [_vm._v("mdi-eye-plus")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              attrs: {
+                fab: "",
+                dark: "",
+                small: "",
+                color: "grey",
+                title: "Non disponible"
+              },
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                }
+              }
+            },
+            [_c("v-icon", [_vm._v("mdi-printer")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              attrs: {
+                fab: "",
+                dark: "",
+                small: "",
+                color: "grey",
+                title: "Non disponible"
+              },
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                  return _vm.setEditable($event)
+                }
+              }
+            },
+            [_c("v-icon", [_vm._v("mdi-pencil")])],
+            1
+          )
         ],
         1
       ),
       _vm._v(" "),
-      _c(
-        "v-btn",
-        {
-          attrs: {
-            fab: "",
-            dark: "",
-            small: "",
-            color: "grey",
-            title: "Non disponible"
+      _c("v-fab-transition", [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.fullScreen,
+                expression: "fullScreen"
+              }
+            ],
+            attrs: { id: "zoom-btns" }
           },
-          on: {
-            click: function($event) {
-              $event.stopPropagation()
-            }
-          }
-        },
-        [_c("v-icon", [_vm._v("mdi-printer")])],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-btn",
-        {
-          attrs: {
-            fab: "",
-            dark: "",
-            small: "",
-            color: "grey",
-            title: "Non disponible"
-          },
-          on: {
-            click: function($event) {
-              $event.stopPropagation()
-              return _vm.setEditable($event)
-            }
-          }
-        },
-        [_c("v-icon", [_vm._v("mdi-pencil")])],
-        1
-      )
+          [
+            _c(
+              "v-btn",
+              {
+                attrs: {
+                  fab: "",
+                  dark: "",
+                  small: "",
+                  color: "green lighten-2",
+                  title: "Non disponible"
+                },
+                on: { click: _vm.zoomPlus }
+              },
+              [_c("v-icon", [_vm._v("mdi-magnify-plus")])],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-btn",
+              {
+                attrs: {
+                  fab: "",
+                  dark: "",
+                  small: "",
+                  color: "green lighten-2",
+                  title: "Non disponible"
+                },
+                on: { click: _vm.zoomMinus }
+              },
+              [_c("v-icon", [_vm._v("mdi-magnify-minus")])],
+              1
+            )
+          ],
+          1
+        )
+      ])
     ],
     1
   )
@@ -6820,7 +6920,9 @@ var render = function() {
                           "th",
                           {
                             staticClass: "th-edit",
-                            style: { height: _vm.fullScreen ? "2rem" : "" }
+                            style: {
+                              height: _vm.fullScreen ? _vm.zoom * 2 + "rem" : ""
+                            }
                           },
                           [
                             _c(
@@ -6836,7 +6938,9 @@ var render = function() {
                           {
                             staticClass: "end-program-class",
                             class: "height-x" + (_vm.nbrStudents + 1),
-                            style: { height: _vm.fullScreen ? "2rem" : "" }
+                            style: {
+                              height: _vm.fullScreen ? _vm.zoom * 2 + "rem" : ""
+                            }
                           },
                           [
                             _c("h4", [
@@ -6872,7 +6976,11 @@ var render = function() {
                                   },
                                   "height-x" + (_vm.nbrStudents + 1)
                                 ],
-                                style: { height: _vm.fullScreen ? "2rem" : "" }
+                                style: {
+                                  height: _vm.fullScreen
+                                    ? _vm.zoom * 2 + "rem"
+                                    : ""
+                                }
                               },
                               [
                                 _c("strong", { staticClass: "t-head" }, [
@@ -6900,6 +7008,11 @@ var render = function() {
                               "td",
                               {
                                 staticClass: "td-number",
+                                style: {
+                                  height: _vm.fullScreen
+                                    ? _vm.zoom * 2 + "rem"
+                                    : ""
+                                },
                                 attrs: { width: "10px" }
                               },
                               [
@@ -6909,24 +7022,42 @@ var render = function() {
                               ]
                             ),
                             _vm._v(" "),
-                            _c("td", { staticClass: "name" }, [
-                              _c(
-                                "strong",
-                                {
-                                  on: {
-                                    click: function() {
-                                      return _vm.showStudentSheet(student)
+                            _c(
+                              "td",
+                              {
+                                staticClass: "name",
+                                style: {
+                                  height: _vm.fullScreen
+                                    ? _vm.zoom * 2 + "rem"
+                                    : ""
+                                }
+                              },
+                              [
+                                _c(
+                                  "strong",
+                                  {
+                                    on: {
+                                      click: function() {
+                                        return _vm.showStudentSheet(student)
+                                      }
                                     }
-                                  }
-                                },
-                                [_vm._v(_vm._s(student.student_name))]
-                              )
-                            ]),
+                                  },
+                                  [_vm._v(_vm._s(student.student_name))]
+                                )
+                              ]
+                            ),
                             _vm._v(" "),
                             _vm._l(student.skills, function(skill, i) {
                               return _c(
                                 "td",
-                                { key: i },
+                                {
+                                  key: i,
+                                  style: {
+                                    height: _vm.fullScreen
+                                      ? _vm.zoom * 2 + "rem"
+                                      : ""
+                                  }
+                                },
                                 [
                                   _c(
                                     "belt-actions",
@@ -6940,6 +7071,11 @@ var render = function() {
                                     [
                                       _vm.getColor(skill)
                                         ? _c("ceinture-type-2", {
+                                            style: {
+                                              height: _vm.fullScreen
+                                                ? _vm.zoom * 2 + "rem"
+                                                : ""
+                                            },
                                             attrs: {
                                               color: _vm.getColor(skill)
                                             }
@@ -51127,7 +51263,8 @@ var state = {
   classes: [],
   options: {
     fullScreen: false,
-    editable: false
+    editable: false,
+    zoomCoef: 1
   },
   // classes: [{
   //   id: 'time',
@@ -51353,13 +51490,19 @@ var mutations = {
     var classe = state.classes[classeId];
     classe.students = students;
     state.classes[classeId] = _objectSpread({}, classe);
+  },
+  incrementZoom: function incrementZoom(state) {
+    var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    if (state.options.zoomCoef >= 1.3) return;
+    state.options.zoomCoef += 0.2;
+  },
+  decrementZoom: function decrementZoom(state) {
+    var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    if (state.options.zoomCoef <= 0.7) return;
+    state.options.zoomCoef -= 0.2;
   }
 };
 var actions = {
-  // students,
-  // classe,
-  // programs,
-  // skills
   storeClasse: function () {
     var _storeClasse = _asyncToGenerator(
     /*#__PURE__*/
