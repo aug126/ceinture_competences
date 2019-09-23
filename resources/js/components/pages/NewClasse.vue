@@ -213,5 +213,7 @@ export default {
       z-index: 20
   .p-static 
     position: static
+  .v-card__text
+    overflow: hidden
 
 </style>

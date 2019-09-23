@@ -3141,7 +3141,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       } else if (action === 'show') {
         var rect = e.target.getBoundingClientRect();
         var left = "calc(".concat(rect.left, "px - 300px - 1.3rem)");
-        var top = "calc(".concat(rect.top, "px - 2.8rem)");
+        console.log(rect.top + window.scrollY);
+        var top = "calc(".concat(rect.top + window.scrollY, "px - 5.3rem)");
         picker.style.left = left;
         picker.style.top = top;
       }
@@ -3698,7 +3699,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#NewClasse .add-progr {\n  margin-top: -3rem;\n}\n#NewClasse #level-colors span.skill-name {\n  font-size: 1rem;\n  margin-top: 0.3rem;\n}\n#NewClasse #level-colors label.v-label.theme--light {\n  top: 25px;\n  left: -25px !important;\n}\n#NewClasse #level-colors .v-input.theme--light.v-input--selection-controls.v-input--checkbox {\n  margin-top: 0;\n}\n#NewClasse #level-colors .v-input.theme--light.v-input--selection-controls.v-input--checkbox .v-input__slot {\n  margin-bottom: 0 !important;\n}\n#NewClasse #level-colors .v-input.theme--light.v-input--selection-controls.v-input--checkbox .v-messages.theme--light {\n  display: none;\n}\n#NewClasse #level-colors .level-number {\n  font-size: 1rem;\n  font-weight: bold;\n  display: block;\n  margin-left: 1rem;\n  text-align: center;\n  margin-top: -1.7rem;\n  cursor: pointer;\n}\n#NewClasse #level-colors .custom-color {\n  border: 0.1rem solid;\n  border-radius: 0.3rem;\n  width: 2rem;\n  height: 2rem;\n  display: flex;\n  justify-content: center;\n  margin-left: 1rem;\n  cursor: pointer;\n}\n#NewClasse #level-colors .custom-color.colorized .v-icon.edit {\n  display: none;\n}\n#NewClasse #level-colors .custom-color.colorized:hover .v-icon {\n  display: block;\n}\n#NewClasse #level-colors .v-color-picker__alpha {\n  display: none;\n}\n#NewClasse #level-colors .v-color-picker.v-sheet.theme--light.theme--light {\n  position: absolute;\n  z-index: 20;\n}\n#NewClasse .p-static {\n  position: static;\n}", ""]);
+exports.push([module.i, "#NewClasse .add-progr {\n  margin-top: -3rem;\n}\n#NewClasse #level-colors span.skill-name {\n  font-size: 1rem;\n  margin-top: 0.3rem;\n}\n#NewClasse #level-colors label.v-label.theme--light {\n  top: 25px;\n  left: -25px !important;\n}\n#NewClasse #level-colors .v-input.theme--light.v-input--selection-controls.v-input--checkbox {\n  margin-top: 0;\n}\n#NewClasse #level-colors .v-input.theme--light.v-input--selection-controls.v-input--checkbox .v-input__slot {\n  margin-bottom: 0 !important;\n}\n#NewClasse #level-colors .v-input.theme--light.v-input--selection-controls.v-input--checkbox .v-messages.theme--light {\n  display: none;\n}\n#NewClasse #level-colors .level-number {\n  font-size: 1rem;\n  font-weight: bold;\n  display: block;\n  margin-left: 1rem;\n  text-align: center;\n  margin-top: -1.7rem;\n  cursor: pointer;\n}\n#NewClasse #level-colors .custom-color {\n  border: 0.1rem solid;\n  border-radius: 0.3rem;\n  width: 2rem;\n  height: 2rem;\n  display: flex;\n  justify-content: center;\n  margin-left: 1rem;\n  cursor: pointer;\n}\n#NewClasse #level-colors .custom-color.colorized .v-icon.edit {\n  display: none;\n}\n#NewClasse #level-colors .custom-color.colorized:hover .v-icon {\n  display: block;\n}\n#NewClasse #level-colors .v-color-picker__alpha {\n  display: none;\n}\n#NewClasse #level-colors .v-color-picker.v-sheet.theme--light.theme--light {\n  position: absolute;\n  z-index: 20;\n}\n#NewClasse .p-static {\n  position: static;\n}\n#NewClasse .v-card__text {\n  overflow: hidden;\n}", ""]);
 
 // exports
 

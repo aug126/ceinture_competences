@@ -79,7 +79,8 @@ export default {
       } else if (action === 'show') {
         let rect = e.target.getBoundingClientRect();
         let left = `calc(${rect.left}px - 300px - 1.3rem)`;
-        let top = `calc(${rect.top}px - 2.8rem)`;
+        console.log(rect.top + window.scrollY);
+        let top = `calc(${rect.top + window.scrollY}px - 5.3rem)`;
         picker.style.left = left;
         picker.style.top = top;
       }
