@@ -68,21 +68,33 @@ export default {
       this.showColorPicker = false;
       this.$emit("switchEditColor");
     },
+    positionPicker(action, e, i) {
+      console.log('test');
+      let picker = this.$refs.colorPicker.firstChild;
+      if (action === 'hide') {
+        picker.style.left = "auto";
+        picker.style.top = "auto";
+        this.skill.colors[i] = this.currentColor;
+        this.editing = "";
+      } else if (action === 'show') {
+        let rect = e.target.getBoundingClientRect();
+        let left = `calc(${rect.left}px - 300px - 1.3rem)`;
+        let top = `calc(${rect.top}px - 2.8rem)`;
+        picker.style.left = left;
+        picker.style.top = top;
+      }
+    },
     editColor(color, i, e) {
       if (this.addingColor === true) return;
       let picker = this.$refs.colorPicker.firstChild;
       if (this.editingColor === true) {
         // on click sur v
         if (this.editing !== i) return;
-        picker.style.left = "auto";
-        this.skill.colors[i] = this.currentColor;
-        this.editing = "";
+        this.positionPicker('hide', e, i);
       } else {
         this.editing = i;
         this.currentColor = color;
-        let widthBtn = e.currentTarget.clientWidth;
-        let mousePos = e.clientX + widthBtn - e.offsetX;
-        picker.style.left = mousePos + "px";
+        this.positionPicker('show', e);
       }
       this.$emit("switchEditColor");
       this.showColorPicker = !this.showColorPicker;
@@ -111,8 +123,12 @@ export default {
       });
     },
     chooseColor(e) {
+      console.log(window.devicePixelRatio);
       if (this.editingColor === true) return;
-      if (this.addingColor === true) this.addColor();
+      if (this.addingColor === true) {
+        this.addColor();
+      } else 
+        this.positionPicker('show', e);
       this.addingColor = !this.addingColor;
       this.showColorPicker = !this.showColorPicker;
     }
