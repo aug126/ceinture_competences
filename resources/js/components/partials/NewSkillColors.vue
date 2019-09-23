@@ -51,14 +51,15 @@ export default {
   props: {
     skill: Object,
     editingColor: Boolean,
-    previewsColors: Array
+    previewsColors: Array,
+    getHistoryColors: Function
   },
   data() {
     return {
       showColorPicker: false,
       currentColor: "#EDDC00FF",
-      addingColor: false,
-      editing: ""
+      editing: "",
+      addingColor: false
     };
   },
   methods: {
@@ -67,19 +68,18 @@ export default {
       this.editing = "";
       this.showColorPicker = false;
       this.$emit("switchEditColor");
+      this.pushHistoryColor();
     },
     positionPicker(action, e, i) {
-      console.log('test');
       let picker = this.$refs.colorPicker.firstChild;
-      if (action === 'hide') {
+      if (action === "hide") {
         picker.style.left = "auto";
         picker.style.top = "auto";
         this.skill.colors[i] = this.currentColor;
         this.editing = "";
-      } else if (action === 'show') {
+      } else if (action === "show") {
         let rect = e.target.getBoundingClientRect();
         let left = `calc(${rect.left}px - 300px - 1.3rem)`;
-        console.log(rect.top + window.scrollY);
         let top = `calc(${rect.top + window.scrollY}px - 5.3rem)`;
         picker.style.left = left;
         picker.style.top = top;
@@ -91,15 +91,15 @@ export default {
       if (this.editingColor === true) {
         // on click sur v
         if (this.editing !== i) return;
-        this.positionPicker('hide', e, i);
+        this.positionPicker("hide", e, i);
+        this.pushHistoryColor();
       } else {
         this.editing = i;
         this.currentColor = color;
-        this.positionPicker('show', e);
+        this.positionPicker("show", e);
       }
       this.$emit("switchEditColor");
       this.showColorPicker = !this.showColorPicker;
-      this.pushHistoryColor();
     },
     addColor() {
       if (this.editingColor === true) return;
@@ -108,12 +108,7 @@ export default {
       this.pushHistoryColor();
     },
     pushHistoryColor() {
-      let allColors = this.previewsColors.reduce(
-        (all, col) => [...all, ...col],
-        []
-      );
-      if (allColors.indexOf(this.currentColor) === -1)
-        allColors.push(this.currentColor);
+      let allColors = this.getHistoryColors();
       this.previewsColors.length = 0;
       this.previewsColors.push([], [], [], [], []);
       let finder = 0;
@@ -124,12 +119,10 @@ export default {
       });
     },
     chooseColor(e) {
-      console.log(window.devicePixelRatio);
       if (this.editingColor === true) return;
       if (this.addingColor === true) {
         this.addColor();
-      } else 
-        this.positionPicker('show', e);
+      } else this.positionPicker("show", e);
       this.addingColor = !this.addingColor;
       this.showColorPicker = !this.showColorPicker;
     }

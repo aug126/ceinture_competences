@@ -16,8 +16,9 @@
         <NewSkillColors
           :previews-colors="previewsColors"
           :editing-color="editingColor"
-          :skill="program.levels[i]"
-          @switchEditColor="editingColor = !editingColor"
+          :skill="program.skills[i]"
+          @switchEditColor="$emit('switchEditColor')"
+          :getHistoryColors="getHistoryColors"
         />
       </div>
     </v-col>
@@ -32,12 +33,13 @@ export default {
   },
   props: {
     program: Object,
-    previewsColors: Array
+    previewsColors: Array,
+    editingColor: Boolean,
+    getHistoryColors: Function
   },
   data() {
     return {
-      skillsFocus: false,
-      editingColor: false
+      skillsFocus: false
     };
   },
   methods: {},
@@ -50,7 +52,7 @@ export default {
 
       // for add
       if (skills.length > this.program.countSkills) {
-        this.program.levels.push({
+        this.program.skills.push({
           name: skills[skills.length - 1],
           colors: []
         });
@@ -59,29 +61,29 @@ export default {
       }
       // modifcation
       else {
-        for (let i = 0; i < this.program.levels.length; i++) {
-          let level = this.program.levels[i];
+        for (let i = 0; i < this.program.skills.length; i++) {
+          let level = this.program.skills[i];
           let notModified = skills.filter(skill => level.name === skill);
           // for delete
           if (notModified.length === 0) {
             if (skills.length < this.program.countSkills) {
-              this.program.levels.splice(i, 1);
+              this.program.skills.splice(i, 1);
               this.program.countSkills--;
               return skills;
             }
             // le nom a été modifié dans la ligne {level}
             let oldName = level.name;
-            let toModify = this.program.levels.find(
+            let toModify = this.program.skills.find(
               level => level.name === oldName
             );
-            let iToModify = this.program.levels.indexOf(toModify);
+            let iToModify = this.program.skills.indexOf(toModify);
             for (let i = 0; i < skills.length; i++) {
               let skill = skills[i];
-              let notModified = this.program.levels.filter(
+              let notModified = this.program.skills.filter(
                 level => skill === level.name
               );
               if (notModified.length === 0) {
-                this.program.levels[iToModify].name = skills[iToModify];
+                this.program.skills[iToModify].name = skills[iToModify];
                 return skills;
               }
             }

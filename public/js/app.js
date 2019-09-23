@@ -2465,6 +2465,20 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2560,14 +2574,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       programsSkills: [{
         name: "",
         competences: "",
-        levels: [],
+        skills: [],
         countSkills: 0
       }],
       programRules: [],
-      previewsColors: []
+      previewsColors: [],
+      editingColor: false
     };
   },
   methods: {
+    getHistoryColors: function getHistoryColors() {
+      var arrColors = this.programsSkills.reduce(function (allColors, progr) {
+        return [].concat(_toConsumableArray(allColors), _toConsumableArray(progr.skills.reduce(function (colors, lvl) {
+          return [].concat(_toConsumableArray(colors), _toConsumableArray(lvl.colors));
+        }, [])));
+      }, []);
+
+      var historyColors = _toConsumableArray(new Set(arrColors));
+
+      return historyColors;
+    },
     closeChip: function closeChip(index) {
       this.chipEleveList.splice(index, 1);
       this.eleveList = this.chipEleveList.join(", ");
@@ -2592,11 +2618,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return "rgb(".concat(num, ", ").concat(num2, ", ").concat(num3, ")");
     },
     clear: function clear() {
-      // this.eleveList = "";
-      // this.className = "";
-      // this.$refs.form.resetValidation();
       this.$router.push({
-        path: '/accueil/'
+        path: "/accueil/"
       });
     },
     addProgr: function addProgr() {
@@ -2632,7 +2655,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 progr_skills = this.programsSkills.map(function (progr) {
                   return {
                     program_name: progr.name,
-                    competences: progr.levels
+                    competences: progr.skills
                   };
                 }).filter(function (progr) {
                   return progr.program_name !== null && progr.program_name.trim();
@@ -2944,6 +2967,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2951,12 +2975,13 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   },
   props: {
     program: Object,
-    previewsColors: Array
+    previewsColors: Array,
+    editingColor: Boolean,
+    getHistoryColors: Function
   },
   data: function data() {
     return {
-      skillsFocus: false,
-      editingColor: false
+      skillsFocus: false
     };
   },
   methods: {},
@@ -2971,7 +2996,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }); // for add
 
       if (skills.length > this.program.countSkills) {
-        this.program.levels.push({
+        this.program.skills.push({
           name: skills[skills.length - 1],
           colors: []
         });
@@ -2980,14 +3005,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       } // modifcation
       else {
           var _loop = function _loop(i) {
-            var level = _this.program.levels[i];
+            var level = _this.program.skills[i];
             var notModified = skills.filter(function (skill) {
               return level.name === skill;
             }); // for delete
 
             if (notModified.length === 0) {
               if (skills.length < _this.program.countSkills) {
-                _this.program.levels.splice(i, 1);
+                _this.program.skills.splice(i, 1);
 
                 _this.program.countSkills--;
                 return {
@@ -2998,21 +3023,21 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
               var oldName = level.name;
 
-              var toModify = _this.program.levels.find(function (level) {
+              var toModify = _this.program.skills.find(function (level) {
                 return level.name === oldName;
               });
 
-              var iToModify = _this.program.levels.indexOf(toModify);
+              var iToModify = _this.program.skills.indexOf(toModify);
 
               var _loop2 = function _loop2(_i) {
                 var skill = skills[_i];
 
-                var notModified = _this.program.levels.filter(function (level) {
+                var notModified = _this.program.skills.filter(function (level) {
                   return skill === level.name;
                 });
 
                 if (notModified.length === 0) {
-                  _this.program.levels[iToModify].name = skills[iToModify];
+                  _this.program.skills[iToModify].name = skills[iToModify];
                   return {
                     v: {
                       v: skills
@@ -3029,7 +3054,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
             }
           };
 
-          for (var i = 0; i < this.program.levels.length; i++) {
+          for (var i = 0; i < this.program.skills.length; i++) {
             var _ret = _loop(i);
 
             if (_typeof(_ret) === "object") return _ret.v;
@@ -3052,14 +3077,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
 //
 //
 //
@@ -3112,14 +3129,15 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   props: {
     skill: Object,
     editingColor: Boolean,
-    previewsColors: Array
+    previewsColors: Array,
+    getHistoryColors: Function
   },
   data: function data() {
     return {
       showColorPicker: false,
       currentColor: "#EDDC00FF",
-      addingColor: false,
-      editing: ""
+      editing: "",
+      addingColor: false
     };
   },
   methods: {
@@ -3128,20 +3146,19 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       this.editing = "";
       this.showColorPicker = false;
       this.$emit("switchEditColor");
+      this.pushHistoryColor();
     },
     positionPicker: function positionPicker(action, e, i) {
-      console.log('test');
       var picker = this.$refs.colorPicker.firstChild;
 
-      if (action === 'hide') {
+      if (action === "hide") {
         picker.style.left = "auto";
         picker.style.top = "auto";
         this.skill.colors[i] = this.currentColor;
         this.editing = "";
-      } else if (action === 'show') {
+      } else if (action === "show") {
         var rect = e.target.getBoundingClientRect();
         var left = "calc(".concat(rect.left, "px - 300px - 1.3rem)");
-        console.log(rect.top + window.scrollY);
         var top = "calc(".concat(rect.top + window.scrollY, "px - 5.3rem)");
         picker.style.left = left;
         picker.style.top = top;
@@ -3154,16 +3171,16 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       if (this.editingColor === true) {
         // on click sur v
         if (this.editing !== i) return;
-        this.positionPicker('hide', e, i);
+        this.positionPicker("hide", e, i);
+        this.pushHistoryColor();
       } else {
         this.editing = i;
         this.currentColor = color;
-        this.positionPicker('show', e);
+        this.positionPicker("show", e);
       }
 
       this.$emit("switchEditColor");
       this.showColorPicker = !this.showColorPicker;
-      this.pushHistoryColor();
     },
     addColor: function addColor() {
       if (this.editingColor === true) return;
@@ -3174,10 +3191,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     pushHistoryColor: function pushHistoryColor() {
       var _this = this;
 
-      var allColors = this.previewsColors.reduce(function (all, col) {
-        return [].concat(_toConsumableArray(all), _toConsumableArray(col));
-      }, []);
-      if (allColors.indexOf(this.currentColor) === -1) allColors.push(this.currentColor);
+      var allColors = this.getHistoryColors();
       this.previewsColors.length = 0;
       this.previewsColors.push([], [], [], [], []);
       var finder = 0;
@@ -3190,12 +3204,11 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       });
     },
     chooseColor: function chooseColor(e) {
-      console.log(window.devicePixelRatio);
       if (this.editingColor === true) return;
 
       if (this.addingColor === true) {
         this.addColor();
-      } else this.positionPicker('show', e);
+      } else this.positionPicker("show", e);
 
       this.addingColor = !this.addingColor;
       this.showColorPicker = !this.showColorPicker;
@@ -7100,8 +7113,15 @@ var render = function() {
                           [
                             _c("NewProgramSkills", {
                               attrs: {
+                                "editing-color": _vm.editingColor,
                                 "previews-colors": _vm.previewsColors,
-                                program: program
+                                program: program,
+                                getHistoryColors: _vm.getHistoryColors
+                              },
+                              on: {
+                                switchEditColor: function($event) {
+                                  _vm.editingColor = !_vm.editingColor
+                                }
                               }
                             })
                           ],
@@ -7649,11 +7669,12 @@ var render = function() {
                   attrs: {
                     "previews-colors": _vm.previewsColors,
                     "editing-color": _vm.editingColor,
-                    skill: _vm.program.levels[i]
+                    skill: _vm.program.skills[i],
+                    getHistoryColors: _vm.getHistoryColors
                   },
                   on: {
                     switchEditColor: function($event) {
-                      _vm.editingColor = !_vm.editingColor
+                      return _vm.$emit("switchEditColor")
                     }
                   }
                 })

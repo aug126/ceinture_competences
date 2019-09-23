@@ -38,7 +38,13 @@
             <!-- Programmes / skills-->
             <h2>Les compétences</h2>
             <div v-for="(program, i) in programsSkills" :key="i">
-              <NewProgramSkills :previews-colors="previewsColors" :program="program" />
+              <NewProgramSkills
+                @switchEditColor="editingColor = !editingColor"
+                :editing-color="editingColor"
+                :previews-colors="previewsColors"
+                :program="program"
+                :getHistoryColors="getHistoryColors"
+              />
             </div>
 
             <!-- ADD / DEL Programs -->
@@ -87,13 +93,27 @@ export default {
         v => this.validUniqueEleve(v) || "Il ne peut pas y avoir 2 même noms"
       ],
       programsSkills: [
-        { name: "", competences: "", levels: [], countSkills: 0 }
+        { name: "", competences: "", skills: [], countSkills: 0 }
       ],
       programRules: [],
-      previewsColors: []
+      previewsColors: [],
+      editingColor: false
     };
   },
   methods: {
+    getHistoryColors() {
+      let arrColors = this.programsSkills.reduce((allColors, progr) => {
+        return [
+          ...allColors,
+          ...progr.skills.reduce(
+            (colors, lvl) => [...colors, ...lvl.colors],
+            []
+          )
+        ];
+      }, []);
+      let historyColors = [...new Set(arrColors)];
+      return historyColors;
+    },
     closeChip(index) {
       this.chipEleveList.splice(index, 1);
       this.eleveList = this.chipEleveList.join(", ");
@@ -116,10 +136,7 @@ export default {
       return `rgb(${num}, ${num2}, ${num3})`;
     },
     clear() {
-      // this.eleveList = "";
-      // this.className = "";
-      // this.$refs.form.resetValidation();
-      this.$router.push({path: '/accueil/'});
+      this.$router.push({ path: "/accueil/" });
     },
     addProgr() {
       this.programsSkills.push({
@@ -139,13 +156,17 @@ export default {
       let progr_skills = this.programsSkills
         .map(progr => ({
           program_name: progr.name,
-          competences: progr.levels})).filter(progr => (progr.program_name !== null) && progr.program_name.trim());
+          competences: progr.skills
+        }))
+        .filter(
+          progr => progr.program_name !== null && progr.program_name.trim()
+        );
 
       // insert datas
       let datas = {
         students: this.chipEleveList,
         classe_name: this.className,
-        progr_skills,
+        progr_skills
       };
       let newClasse = await this.$store.dispatch("storeClasse", datas);
       this.$router.push({ path: "/ceintures/" + newClasse.id });
