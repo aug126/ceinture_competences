@@ -2162,6 +2162,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2278,6 +2285,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2308,8 +2316,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _svg_ceinture_type_2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../svg/ceinture-type-2 */ "./resources/js/components/svg/ceinture-type-2.vue");
 /* harmony import */ var _partials_BeltActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../partials/BeltActions */ "./resources/js/components/partials/BeltActions.vue");
 /* harmony import */ var _partials_BeltStudentSheet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../partials/BeltStudentSheet */ "./resources/js/components/partials/BeltStudentSheet.vue");
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../config */ "./resources/js/config.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2389,7 +2396,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2866,7 +2878,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../config */ "./resources/js/config.js");
 //
 //
 //
@@ -2932,7 +2943,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     student: Object
@@ -2950,7 +2960,6 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       show: false,
-      config: _config__WEBPACK_IMPORTED_MODULE_0__["default"].competences,
       fileOption: "message",
       disabledOption: "date"
     };
@@ -3741,7 +3750,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#ceinture-table {\n  max-height: calc(100vh - 11.5rem);\n}\n#ceinture-table .cursor-pointer {\n  display: flex;\n  align-items: center;\n}\n#ceinture-table .v-data-table__wrapper {\n  max-height: calc(100vh - 11.5rem);\n}\n#ceinture-table th, #ceinture-table td {\n  font-size: 1rem;\n  border-color: black;\n  text-align: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  transition: height 0.4s linear;\n}\n#ceinture-table.full-screen {\n  max-height: calc(100vh - 4rem);\n}\n#ceinture-table.full-screen .v-data-table__wrapper {\n  max-height: calc(100vh - 4rem);\n}\n#ceinture-table .t-head {\n  display: block;\n  margin: auto;\n  text-align: center;\n  max-width: 6rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table .height-x1::after {\n  height: calc(1 * 100%);\n}\n#ceinture-table .height-x2::after {\n  height: calc(2 * 100%);\n}\n#ceinture-table .height-x3::after {\n  height: calc(3 * 100%);\n}\n#ceinture-table .height-x4::after {\n  height: calc(4 * 100%);\n}\n#ceinture-table .height-x5::after {\n  height: calc(5 * 100%);\n}\n#ceinture-table .height-x6::after {\n  height: calc(6 * 100%);\n}\n#ceinture-table .height-x7::after {\n  height: calc(7 * 100%);\n}\n#ceinture-table .height-x8::after {\n  height: calc(8 * 100%);\n}\n#ceinture-table .height-x9::after {\n  height: calc(9 * 100%);\n}\n#ceinture-table .height-x10::after {\n  height: calc(10 * 100%);\n}\n#ceinture-table .height-x11::after {\n  height: calc(11 * 100%);\n}\n#ceinture-table .height-x12::after {\n  height: calc(12 * 100%);\n}\n#ceinture-table .height-x13::after {\n  height: calc(13 * 100%);\n}\n#ceinture-table .height-x14::after {\n  height: calc(14 * 100%);\n}\n#ceinture-table .height-x15::after {\n  height: calc(15 * 100%);\n}\n#ceinture-table .height-x16::after {\n  height: calc(16 * 100%);\n}\n#ceinture-table .height-x17::after {\n  height: calc(17 * 100%);\n}\n#ceinture-table .height-x18::after {\n  height: calc(18 * 100%);\n}\n#ceinture-table .height-x19::after {\n  height: calc(19 * 100%);\n}\n#ceinture-table .height-x20::after {\n  height: calc(20 * 100%);\n}\n#ceinture-table .height-x21::after {\n  height: calc(21 * 100%);\n}\n#ceinture-table .height-x22::after {\n  height: calc(22 * 100%);\n}\n#ceinture-table .height-x23::after {\n  height: calc(23 * 100%);\n}\n#ceinture-table .height-x24::after {\n  height: calc(24 * 100%);\n}\n#ceinture-table .height-x25::after {\n  height: calc(25 * 100%);\n}\n#ceinture-table .height-x26::after {\n  height: calc(26 * 100%);\n}\n#ceinture-table .height-x27::after {\n  height: calc(27 * 100%);\n}\n#ceinture-table .height-x28::after {\n  height: calc(28 * 100%);\n}\n#ceinture-table .height-x29::after {\n  height: calc(29 * 100%);\n}\n#ceinture-table .height-x30::after {\n  height: calc(30 * 100%);\n}\n#ceinture-table .height-x31::after {\n  height: calc(31 * 100%);\n}\n#ceinture-table .height-x32::after {\n  height: calc(32 * 100%);\n}\n#ceinture-table .height-x33::after {\n  height: calc(33 * 100%);\n}\n#ceinture-table .height-x34::after {\n  height: calc(34 * 100%);\n}\n#ceinture-table .height-x35::after {\n  height: calc(35 * 100%);\n}\n#ceinture-table .height-x36::after {\n  height: calc(36 * 100%);\n}\n#ceinture-table .height-x37::after {\n  height: calc(37 * 100%);\n}\n#ceinture-table .height-x38::after {\n  height: calc(38 * 100%);\n}\n#ceinture-table .height-x39::after {\n  height: calc(39 * 100%);\n}\n#ceinture-table .height-x40::after {\n  height: calc(40 * 100%);\n}\n#ceinture-table .height-x41::after {\n  height: calc(41 * 100%);\n}\n#ceinture-table .height-x42::after {\n  height: calc(42 * 100%);\n}\n#ceinture-table .height-x43::after {\n  height: calc(43 * 100%);\n}\n#ceinture-table .height-x44::after {\n  height: calc(44 * 100%);\n}\n#ceinture-table .height-x45::after {\n  height: calc(45 * 100%);\n}\n#ceinture-table .height-x46::after {\n  height: calc(46 * 100%);\n}\n#ceinture-table .height-x47::after {\n  height: calc(47 * 100%);\n}\n#ceinture-table .height-x48::after {\n  height: calc(48 * 100%);\n}\n#ceinture-table .height-x49::after {\n  height: calc(49 * 100%);\n}\n#ceinture-table .height-x50::after {\n  height: calc(50 * 100%);\n}\n#ceinture-table .height-0::after {\n  height: 0 !important;\n}\n#ceinture-table th.end-program-class::after {\n  position: absolute;\n  content: \"\";\n  width: 2px;\n  background: #ed4900;\n  display: block;\n  top: 0;\n  right: 0;\n}\n#ceinture-table th.end-program-class h4 {\n  text-align: left;\n  max-width: 9rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table tr:last-child td {\n  border-bottom: 1px solid black;\n}\n#ceinture-table tr:first-child td {\n  border-top: 1px solid black;\n}\n#ceinture-table tbody tr:hover {\n  background: none !important;\n}\n#ceinture-table td.name {\n  cursor: pointer;\n  margin-left: -1rem;\n}\n#ceinture-table td.name > strong {\n  display: block;\n  text-align: left;\n  transition: color 0.2s ease-in;\n  max-width: 9rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table td.name:hover > strong {\n  color: #4057b5 !important;\n}\n@media screen and (max-width: 426px) {\n#ceinture-table .th-edit, #ceinture-table .td-number {\n    display: none;\n}\n}", ""]);
+exports.push([module.i, ".v-card.v-sheet {\n  overflow: hidden;\n}\n#ceinture-table {\n  max-height: calc(100vh - 11.5rem);\n}\n#ceinture-table .cursor-pointer {\n  display: flex;\n  align-items: center;\n}\n#ceinture-table .v-data-table__wrapper {\n  max-height: calc(100vh - 11.5rem);\n}\n#ceinture-table th, #ceinture-table td {\n  font-size: 1rem;\n  border-color: black;\n  text-align: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  transition: height 0.4s linear;\n}\n#ceinture-table.full-screen {\n  max-height: calc(100vh - 4rem);\n}\n#ceinture-table.full-screen .v-data-table__wrapper {\n  max-height: calc(100vh - 4rem);\n}\n#ceinture-table .t-head {\n  display: block;\n  margin: auto;\n  text-align: center;\n  max-width: 6rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table .height-x1::after {\n  height: calc(1 * 100%);\n}\n#ceinture-table .height-x2::after {\n  height: calc(2 * 100%);\n}\n#ceinture-table .height-x3::after {\n  height: calc(3 * 100%);\n}\n#ceinture-table .height-x4::after {\n  height: calc(4 * 100%);\n}\n#ceinture-table .height-x5::after {\n  height: calc(5 * 100%);\n}\n#ceinture-table .height-x6::after {\n  height: calc(6 * 100%);\n}\n#ceinture-table .height-x7::after {\n  height: calc(7 * 100%);\n}\n#ceinture-table .height-x8::after {\n  height: calc(8 * 100%);\n}\n#ceinture-table .height-x9::after {\n  height: calc(9 * 100%);\n}\n#ceinture-table .height-x10::after {\n  height: calc(10 * 100%);\n}\n#ceinture-table .height-x11::after {\n  height: calc(11 * 100%);\n}\n#ceinture-table .height-x12::after {\n  height: calc(12 * 100%);\n}\n#ceinture-table .height-x13::after {\n  height: calc(13 * 100%);\n}\n#ceinture-table .height-x14::after {\n  height: calc(14 * 100%);\n}\n#ceinture-table .height-x15::after {\n  height: calc(15 * 100%);\n}\n#ceinture-table .height-x16::after {\n  height: calc(16 * 100%);\n}\n#ceinture-table .height-x17::after {\n  height: calc(17 * 100%);\n}\n#ceinture-table .height-x18::after {\n  height: calc(18 * 100%);\n}\n#ceinture-table .height-x19::after {\n  height: calc(19 * 100%);\n}\n#ceinture-table .height-x20::after {\n  height: calc(20 * 100%);\n}\n#ceinture-table .height-x21::after {\n  height: calc(21 * 100%);\n}\n#ceinture-table .height-x22::after {\n  height: calc(22 * 100%);\n}\n#ceinture-table .height-x23::after {\n  height: calc(23 * 100%);\n}\n#ceinture-table .height-x24::after {\n  height: calc(24 * 100%);\n}\n#ceinture-table .height-x25::after {\n  height: calc(25 * 100%);\n}\n#ceinture-table .height-x26::after {\n  height: calc(26 * 100%);\n}\n#ceinture-table .height-x27::after {\n  height: calc(27 * 100%);\n}\n#ceinture-table .height-x28::after {\n  height: calc(28 * 100%);\n}\n#ceinture-table .height-x29::after {\n  height: calc(29 * 100%);\n}\n#ceinture-table .height-x30::after {\n  height: calc(30 * 100%);\n}\n#ceinture-table .height-x31::after {\n  height: calc(31 * 100%);\n}\n#ceinture-table .height-x32::after {\n  height: calc(32 * 100%);\n}\n#ceinture-table .height-x33::after {\n  height: calc(33 * 100%);\n}\n#ceinture-table .height-x34::after {\n  height: calc(34 * 100%);\n}\n#ceinture-table .height-x35::after {\n  height: calc(35 * 100%);\n}\n#ceinture-table .height-x36::after {\n  height: calc(36 * 100%);\n}\n#ceinture-table .height-x37::after {\n  height: calc(37 * 100%);\n}\n#ceinture-table .height-x38::after {\n  height: calc(38 * 100%);\n}\n#ceinture-table .height-x39::after {\n  height: calc(39 * 100%);\n}\n#ceinture-table .height-x40::after {\n  height: calc(40 * 100%);\n}\n#ceinture-table .height-x41::after {\n  height: calc(41 * 100%);\n}\n#ceinture-table .height-x42::after {\n  height: calc(42 * 100%);\n}\n#ceinture-table .height-x43::after {\n  height: calc(43 * 100%);\n}\n#ceinture-table .height-x44::after {\n  height: calc(44 * 100%);\n}\n#ceinture-table .height-x45::after {\n  height: calc(45 * 100%);\n}\n#ceinture-table .height-x46::after {\n  height: calc(46 * 100%);\n}\n#ceinture-table .height-x47::after {\n  height: calc(47 * 100%);\n}\n#ceinture-table .height-x48::after {\n  height: calc(48 * 100%);\n}\n#ceinture-table .height-x49::after {\n  height: calc(49 * 100%);\n}\n#ceinture-table .height-x50::after {\n  height: calc(50 * 100%);\n}\n#ceinture-table .height-0::after {\n  height: 0 !important;\n}\n#ceinture-table th.end-program-class::after {\n  position: absolute;\n  content: \"\";\n  width: 2px;\n  background: #ed4900;\n  display: block;\n  top: 0;\n  right: 0;\n}\n#ceinture-table th.end-program-class h4 {\n  text-align: left;\n  max-width: 9rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table tr:last-child td {\n  border-bottom: 1px solid black;\n}\n#ceinture-table tr:first-child td {\n  border-top: 1px solid black;\n}\n#ceinture-table tbody tr:hover {\n  background: none !important;\n}\n#ceinture-table td.name {\n  cursor: pointer;\n  margin-left: -1rem;\n}\n#ceinture-table td.name > strong {\n  display: block;\n  text-align: left;\n  transition: color 0.2s ease-in;\n  max-width: 9rem;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#ceinture-table td.name:hover > strong {\n  color: #4057b5 !important;\n}\n@media screen and (max-width: 426px) {\n#ceinture-table .th-edit, #ceinture-table .td-number {\n    display: none;\n}\n}", ""]);
 
 // exports
 
@@ -6441,7 +6450,11 @@ var render = function() {
                     ? _c(
                         "v-btn",
                         {
-                          attrs: { color: "green", fab: "", title: "Quitter" },
+                          attrs: {
+                            color: "green",
+                            fab: "",
+                            title: "Quitter le mode zoom"
+                          },
                           on: {
                             click: function($event) {
                               $event.stopPropagation()
@@ -6459,7 +6472,7 @@ var render = function() {
                           attrs: {
                             color: "warning",
                             fab: "",
-                            title: "Quitter",
+                            title: "Quitter le mode edition",
                             dark: ""
                           },
                           on: {
@@ -6469,7 +6482,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_c("v-icon", [_vm._v("mdi-pencil")])],
+                        [_c("v-icon", [_vm._v("mdi-pencil-off")])],
                         1
                       )
                     : _c(
@@ -6580,7 +6593,7 @@ var render = function() {
                 fab: "",
                 dark: "",
                 small: "",
-                color: "grey",
+                color: "warning",
                 title: "Non disponible"
               },
               on: {
@@ -6765,7 +6778,11 @@ var render = function() {
                       [
                         _c("v-list-item-title", [
                           _vm._v(_vm._s(classe.classe_name))
-                        ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", {
+                          class: { editable: _vm.$store.state.options.editable }
+                        })
                       ],
                       1
                     )
@@ -7042,20 +7059,24 @@ var render = function() {
                                   height: _vm.fullScreen
                                     ? _vm.zoom * 2 + "rem"
                                     : ""
+                                },
+                                on: {
+                                  click: function() {
+                                    return _vm.showStudentSheet(student)
+                                  }
                                 }
                               },
                               [
-                                _c(
-                                  "strong",
-                                  {
-                                    on: {
-                                      click: function() {
-                                        return _vm.showStudentSheet(student)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(student.student_name))]
-                                )
+                                _c("strong", [
+                                  _vm._v(_vm._s(student.student_name))
+                                ]),
+                                _vm._v(" "),
+                                _c("div", {
+                                  class: {
+                                    "editable mt--26":
+                                      _vm.$store.state.options.editable
+                                  }
+                                })
                               ]
                             ),
                             _vm._v(" "),
@@ -50533,419 +50554,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/config.js":
-/*!********************************!*\
-  !*** ./resources/js/config.js ***!
-  \********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({
-  competences: {
-    grammaire: [, "white", "yellow", "orange", "green", "red", "blue"],
-    conjugaison: [, "white", "yellow", "orange", "green", "red", "blue"],
-    orthographe: [, "white", "yellow", "orange", "green", "red", "blue"],
-    numération: [, "white", "yellow", "orange", "green", "red", "blue"],
-    calculsEcrits: [, "white", "yellow", "orange", "green", "red", "blue"],
-    mesures: [, "white", "yellow", "orange", "green", "red", "blue"],
-    géométrie: [, "white", "yellow", "orange", "green", "red", "blue"]
-  } // {
-  //   numero: 1,
-  //   name: "Augustin",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 2,
-  //   name: "Céline",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 3,
-  //   name: "Autres enfants",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 4,
-  //   name: "aad",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 5,
-  //   name: "aae",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 6,
-  //   name: "aaf",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 7,
-  //   name: "aag",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 8,
-  //   name: "aah",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 9,
-  //   name: "aai",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aaj",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aak",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aal",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aam",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aan",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aao",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aap",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aaq",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aar",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aas",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aat",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aau",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aav",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aaw",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aax",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aay",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aaz",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "aba",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "abb",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "abc",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // },
-  // {
-  //   numero: 1,
-  //   name: "abd",
-  //   competences: {
-  //     grammaire: 3,
-  //     conjugaison: 1,
-  //     orthographe: 3,
-  //     numération: 1,
-  //     calculsEcrits: 4,
-  //     mesures: 1,
-  //     géométrie: 2
-  //   }
-  // }
-
-});
-
-/***/ }),
-
 /***/ "./resources/js/laravel/Login.vue":
 /*!****************************************!*\
   !*** ./resources/js/laravel/Login.vue ***!
@@ -51192,10 +50800,10 @@ var theme = {
       secondary: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_4__["default"].blueGrey.darken3,
       accent: '#5b76a2',
       error: '#FF5252',
-      info: '#ed4900',
-      //'#ed4900', //colors.indigo,
+      info: '#7a067b',
+      //'#ed4900', //'#ed4900', //colors.indigo,
       success: '#4CAF50',
-      warning: '#FFC107'
+      warning: '#ed4900'
     },
     dark: {// primary: '#1976D2',
       // secondary: '#424242',
@@ -51231,9 +50839,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../config */ "./resources/js/config.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -51253,7 +50860,6 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -51531,7 +51137,7 @@ var actions = {
             case 2:
               origin = window.location.origin;
               _context.next = 5;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(origin, "/storeClasseStudents"), data);
+              return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("".concat(origin, "/storeClasseStudents"), data);
 
             case 5:
               resp = _context.sent;
@@ -51579,7 +51185,7 @@ var actions = {
         date: date
       };
       var origin = window.location.origin;
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(origin, "/student/").concat(studentId, "/update"), data).then(function (resp) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("".concat(origin, "/student/").concat(studentId, "/update"), data).then(function (resp) {
         if (!resp.data.success) return console.error('erreur lors du store de l\'update');
         context.commit("updateCompetence", {
           // competenceUpdates,
@@ -51606,7 +51212,7 @@ var actions = {
             case 0:
               origin = window.location.origin;
               _context2.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get(origin + '/classes');
+              return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get(origin + '/classes');
 
             case 3:
               classes = _context2.sent;
@@ -51645,7 +51251,7 @@ var actions = {
             case 2:
               origin = window.location.origin;
               _context3.next = 5;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("".concat(origin, "/classes/").concat(classeId));
+              return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("".concat(origin, "/classes/").concat(classeId));
 
             case 5:
               students = _context3.sent;
@@ -51687,7 +51293,7 @@ var actions = {
             case 2:
               origin = window.location.origin;
               _context4.next = 5;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get(origin + "/programs/".concat(classeId));
+              return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get(origin + "/programs/".concat(classeId));
 
             case 5:
               programs = _context4.sent;

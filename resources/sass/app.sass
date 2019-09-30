@@ -29,8 +29,36 @@ hr
   margin-top: 64px !important
 .mb--64
   margin-bottom: -64px !important
+.mt--26
+  margin-top: -26px !important
+.ml--1
+  margin-left: -1rem !important
 .py-0
   padding-top: 0 !important
   padding-bottom: 0 !important
 .justify-evenly
   justify-content: space-evenly
+
+
+  // PENCIL pour éditer les éléments
+.editable
+  margin-left: -1.5rem
+  transition: transform ease .3s
+  .in-table
+    text-align: right
+    width: min-content
+  .in-nav
+  position: absolute
+
+  &:hover
+    transform: scale(1.4)
+  &:before
+    display: inline-block
+    font: normal normal normal 24px/1 "Material Design Icons"
+    font-size: 1.2rem
+    text-rendering: auto
+    line-height: inherit
+    -webkit-font-smoothing: antialiased
+  &::before
+    content: "\F3EB"
+    color: $warning

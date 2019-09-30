@@ -49,8 +49,14 @@
             >
               <strong>{{ student.order_number }}</strong>
             </td>
-            <td :style="{height: fullScreen ? (zoom * 2) + 'rem' : ''}" class="name">
-              <strong @click="() => showStudentSheet(student)">{{ student.student_name }}</strong>
+            <td
+              @click="() => showStudentSheet(student)"
+              :style="{height: fullScreen ? (zoom * 2) + 'rem' : ''}"
+              class="name"
+            >
+              <strong>{{ student.student_name }}</strong>
+              <div :class="{'editable mt--26': $store.state.options.editable}"></div>
+              <!-- <v-icon v-if="$store.state.options.editable">mdi-pencil</v-icon> -->
             </td>
 
             <td
@@ -81,7 +87,6 @@
 import CeintureType2 from "../svg/ceinture-type-2";
 import BeltActions from "../partials/BeltActions";
 import BeltStudentSheet from "../partials/BeltStudentSheet";
-import config from "../../config";
 import { mapGetters } from "vuex";
 export default {
   components: {
@@ -181,6 +186,8 @@ export default {
 </script>
 
 <style lang="sass">
+.v-card.v-sheet
+  overflow: hidden
 #ceinture-table
   max-height: calc(100vh - 11.5rem)
   .cursor-pointer 

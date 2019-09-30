@@ -16,9 +16,9 @@ const theme = {
       secondary: colors.blueGrey.darken3,
       accent: '#5b76a2',
       error: '#FF5252',
-      info: '#ed4900', //'#ed4900', //colors.indigo,
+      info: '#7a067b', //'#ed4900', //'#ed4900', //colors.indigo,
       success: '#4CAF50',
-      warning: '#FFC107',
+      warning: '#ed4900',
     },
     dark: {
       // primary: '#1976D2',

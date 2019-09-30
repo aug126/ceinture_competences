@@ -9,7 +9,13 @@
       :class="{'full-screen': fullScreen}"
     >
       <template v-slot:activator>
-        <v-btn v-if="fullScreen" @click.stop="setFullScreen" color="green" fab title="Quitter">
+        <v-btn
+          v-if="fullScreen"
+          @click.stop="setFullScreen"
+          color="green"
+          fab
+          title="Quitter le mode zoom"
+        >
           <v-icon>mdi-monitor-screenshot</v-icon>
         </v-btn>
 
@@ -18,10 +24,10 @@
           @click.stop="setEditable"
           color="warning"
           fab
-          title="Quitter"
+          title="Quitter le mode edition"
           dark
         >
-          <v-icon>mdi-pencil</v-icon>
+          <v-icon>mdi-pencil-off</v-icon>
         </v-btn>
 
         <v-btn v-else v-model="fab" color="info" dark fab>
@@ -44,22 +50,23 @@
       <v-btn @click.stop fab dark small color="grey" title="Non disponible">
         <v-icon>mdi-printer</v-icon>
       </v-btn>
-      <v-btn @click.stop="setEditable" fab dark small color="grey" title="Non disponible">
+      <v-btn @click.stop="setEditable" fab dark small color="warning" title="Non disponible">
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
     </v-speed-dial>
     <section>
-    <v-fab-transition>
-      <div v-show="fullScreen" id="zoom-btns">
-        <v-btn @click="zoomPlus" fab dark small color="green lighten-2" title="Agrandir">
-          <v-icon>mdi-magnify-plus</v-icon>
-        </v-btn>
-        <v-btn @click="zoomMinus" fab dark small color="green lighten-2" title="Diminuer">
-          <v-icon>mdi-magnify-minus</v-icon>
-        </v-btn>
-      </div>
-    </v-fab-transition>
-</section>
+      <!-- WHEN ZOOM ACTIVATED -->
+      <v-fab-transition>
+        <div v-show="fullScreen" id="zoom-btns">
+          <v-btn @click="zoomPlus" fab dark small color="green lighten-2" title="Agrandir">
+            <v-icon>mdi-magnify-plus</v-icon>
+          </v-btn>
+          <v-btn @click="zoomMinus" fab dark small color="green lighten-2" title="Diminuer">
+            <v-icon>mdi-magnify-minus</v-icon>
+          </v-btn>
+        </div>
+      </v-fab-transition>
+    </section>
   </div>
 </template>
 

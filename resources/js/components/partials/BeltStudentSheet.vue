@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import config from "../../config";
 export default {
   props: {
     student: Object
@@ -82,7 +81,6 @@ export default {
   data() {
     return {
       show: false,
-      config: config.competences,
       fileOption: "message",
       disabledOption: "date"
     };
