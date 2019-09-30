@@ -2160,6 +2160,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3773,7 +3775,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#BeltActions {\n  height: 100%;\n  display: flex;\n  justify-content: center;\n}\n#BeltActions button.close:first-child {\n  z-index: 1;\n}\n#BeltActions .v-speed-dial__list {\n  z-index: 5;\n  left: 50%;\n  transform: translateX(-50%);\n}\n#BeltActions .v-speed-dial__list .v-speed-dial--direction-left {\n  right: 55%;\n}\n#BeltActions .v-speed-dial__list .v-speed-dial--direction-right {\n  left: 55%;\n}\n#BeltActions .v-speed-dial__list .v-btn.middle {\n  margin-top: -115%;\n}\n#BeltActions .v-speed-dial__list .input {\n  width: 200px !important;\n  position: absolute;\n  z-index: 10;\n  top: 175% !important;\n  transition: transform 0.2s ease 0.2s !important;\n  caret-color: #4057b5 !important;\n}\n#BeltActions .v-speed-dial .v-speed-dial--is-active {\n  transform: scale(2);\n}\n#BeltActions .cursor-pointer {\n  display: flex;\n  justify-content: center;\n}\n#BeltActions button.transition-color {\n  transition: background ease 0.3s !important;\n}\n#BeltActions .input-info-border .v-input__slot {\n  border: 1px solid #4057b5;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12) !important;\n}\n#BeltActions .close.v-btn--active:before {\n  opacity: 0 !important;\n}", ""]);
+exports.push([module.i, "#BeltActions {\n  height: 100%;\n  display: flex;\n  justify-content: center;\n}\n#BeltActions button.close:first-child {\n  z-index: 1;\n}\n#BeltActions .v-speed-dial__list {\n  z-index: 5;\n  left: 50%;\n  transform: translateX(-50%);\n}\n#BeltActions .v-speed-dial__list .v-speed-dial--direction-left {\n  right: 55%;\n}\n#BeltActions .v-speed-dial__list .v-speed-dial--direction-right {\n  left: 55%;\n}\n#BeltActions .v-speed-dial__list .v-btn.middle {\n  margin-top: -6rem;\n}\n#BeltActions .v-speed-dial__list .input {\n  width: 200px !important;\n  position: absolute;\n  z-index: 10;\n  top: 3rem !important;\n  transition: transform 0.2s ease 0.2s !important;\n  caret-color: #4057b5 !important;\n}\n#BeltActions .v-speed-dial .v-speed-dial--is-active {\n  transform: scale(2);\n}\n#BeltActions .cursor-pointer {\n  display: flex;\n  justify-content: center;\n}\n#BeltActions button.transition-color {\n  transition: background ease 0.3s !important;\n}\n#BeltActions .input-info-border .v-input__slot {\n  border: 1px solid #4057b5;\n  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12) !important;\n}\n#BeltActions .close.v-btn--active:before {\n  opacity: 0 !important;\n}", ""]);
 
 // exports
 
@@ -6591,56 +6593,62 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("v-fab-transition", [
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.fullScreen,
-                expression: "fullScreen"
-              }
-            ],
-            attrs: { id: "zoom-btns" }
-          },
-          [
+      _c(
+        "section",
+        [
+          _c("v-fab-transition", [
             _c(
-              "v-btn",
+              "div",
               {
-                attrs: {
-                  fab: "",
-                  dark: "",
-                  small: "",
-                  color: "green lighten-2",
-                  title: "Non disponible"
-                },
-                on: { click: _vm.zoomPlus }
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.fullScreen,
+                    expression: "fullScreen"
+                  }
+                ],
+                attrs: { id: "zoom-btns" }
               },
-              [_c("v-icon", [_vm._v("mdi-magnify-plus")])],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "v-btn",
-              {
-                attrs: {
-                  fab: "",
-                  dark: "",
-                  small: "",
-                  color: "green lighten-2",
-                  title: "Non disponible"
-                },
-                on: { click: _vm.zoomMinus }
-              },
-              [_c("v-icon", [_vm._v("mdi-magnify-minus")])],
+              [
+                _c(
+                  "v-btn",
+                  {
+                    attrs: {
+                      fab: "",
+                      dark: "",
+                      small: "",
+                      color: "green lighten-2",
+                      title: "Agrandir"
+                    },
+                    on: { click: _vm.zoomPlus }
+                  },
+                  [_c("v-icon", [_vm._v("mdi-magnify-plus")])],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    attrs: {
+                      fab: "",
+                      dark: "",
+                      small: "",
+                      color: "green lighten-2",
+                      title: "Diminuer"
+                    },
+                    on: { click: _vm.zoomMinus }
+                  },
+                  [_c("v-icon", [_vm._v("mdi-magnify-minus")])],
+                  1
+                )
+              ],
               1
             )
-          ],
-          1
-        )
-      ])
+          ])
+        ],
+        1
+      )
     ],
     1
   )

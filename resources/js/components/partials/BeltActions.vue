@@ -108,12 +108,12 @@ export default {
     .v-speed-dial--direction-right
       left: 55%
     .v-btn.middle 
-      margin-top: -115%
+      margin-top: -6rem
     .input
       width: 200px !important
       position: absolute
       z-index: 10
-      top: 175% !important
+      top: 3rem !important
       transition: transform .2s ease .2s !important
       caret-color: #4057b5 !important
   .v-speed-dial

@@ -48,16 +48,18 @@
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
     </v-speed-dial>
+    <section>
     <v-fab-transition>
       <div v-show="fullScreen" id="zoom-btns">
-        <v-btn @click="zoomPlus" fab dark small color="green lighten-2" title="Non disponible">
+        <v-btn @click="zoomPlus" fab dark small color="green lighten-2" title="Agrandir">
           <v-icon>mdi-magnify-plus</v-icon>
         </v-btn>
-        <v-btn @click="zoomMinus" fab dark small color="green lighten-2" title="Non disponible">
+        <v-btn @click="zoomMinus" fab dark small color="green lighten-2" title="Diminuer">
           <v-icon>mdi-magnify-minus</v-icon>
         </v-btn>
       </div>
     </v-fab-transition>
+</section>
   </div>
 </template>
 
