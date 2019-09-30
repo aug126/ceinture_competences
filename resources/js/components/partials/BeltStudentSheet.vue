@@ -2,7 +2,7 @@
   <v-dialog v-model="show" width="850">
     <v-card id="BeltStudentSheet">
       <v-card-title class="headline grey lighten-2" primary-title>
-        {{student.name}}
+        {{student.student_name}}
         <v-spacer />
         <v-btn class="info--text" @click="toggleFileOption">
           <v-icon v-if="fileOption === 'message'">mdi-file-eye</v-icon>
@@ -10,29 +10,30 @@
         </v-btn>
       </v-card-title>
 
-      <v-simple-table>
+      <v-simple-table :fixed-header="true">
         <thead>
           <tr>
             <th
               class="text-center border-right"
-              v-for="(updates, competence) in student.competences"
-              :key="competence"
-            >{{ competence }}</th>
+              v-for="(skill, i) in student.skills"
+              :key="i"
+            >{{ skill.skill_name }}</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-if="student.competences">
+          <tr>
             <td
+              valign="top"
               class="border-right"
-              v-for="(updates, competence) in student.competences"
-              :key="competence"
+              v-for="(skill, i) in student.skills"
+              :key="i"
             >
               <div class="h-100">
                 <v-tooltip
                   :open-on-click="false"
                   :disabled="!update[disabledOption]"
-                  v-for="(update, i) in updates"
-                  :key="i"
+                  v-for="(update, j) in skill.updates"
+                  :key="j"
                   top
                 >
                   <template v-slot:activator="{ on }">
@@ -40,8 +41,10 @@
                       v-on="on"
                       :class="getThemeColor(update.status)"
                       class="text-center lighten-5 update"
-                      :style="'border-left: 8px solid ' + (update.status === 'success' && config[competence][update.actualLevel] || 'transparent') + ' !important'"
-                    >{{update[fileOption] || '- - - -'}}</div>
+                      :style="'border-left: 8px solid ' + (update.status === 'success' && skill.colors[update.actualLevel - 1] || 'transparent') + ' !important'"
+                    >
+                    {{update[fileOption] || '- - - -'}}
+                    </div>
                   </template>
                   <span>{{update[disabledOption]}}</span>
                 </v-tooltip>
@@ -68,6 +71,7 @@ export default {
   },
   watch: {
     student(newVal) {
+      console.log('student = ', newVal);
       if (newVal.student_name) this.show = true;
     },
     show(val) {

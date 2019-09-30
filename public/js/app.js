@@ -2929,6 +2929,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2936,6 +2939,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     student: function student(newVal) {
+      console.log('student = ', newVal);
       if (newVal.student_name) this.show = true;
     },
     show: function show(val) {
@@ -7582,7 +7586,9 @@ var render = function() {
               attrs: { "primary-title": "" }
             },
             [
-              _vm._v("\n      " + _vm._s(_vm.student.name) + "\n      "),
+              _vm._v(
+                "\n      " + _vm._s(_vm.student.student_name) + "\n      "
+              ),
               _c("v-spacer"),
               _vm._v(" "),
               _c(
@@ -7602,18 +7608,15 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("v-simple-table", [
+          _c("v-simple-table", { attrs: { "fixed-header": true } }, [
             _c("thead", [
               _c(
                 "tr",
-                _vm._l(_vm.student.competences, function(updates, competence) {
+                _vm._l(_vm.student.skills, function(skill, i) {
                   return _c(
                     "th",
-                    {
-                      key: competence,
-                      staticClass: "text-center border-right"
-                    },
-                    [_vm._v(_vm._s(competence))]
+                    { key: i, staticClass: "text-center border-right" },
+                    [_vm._v(_vm._s(skill.skill_name))]
                   )
                 }),
                 0
@@ -7621,91 +7624,91 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("tbody", [
-              _vm.student.competences
-                ? _c(
-                    "tr",
-                    _vm._l(_vm.student.competences, function(
-                      updates,
-                      competence
-                    ) {
-                      return _c(
-                        "td",
-                        { key: competence, staticClass: "border-right" },
-                        [
-                          _c(
-                            "div",
-                            { staticClass: "h-100" },
-                            _vm._l(updates, function(update, i) {
-                              return _c(
-                                "v-tooltip",
-                                {
-                                  key: i,
-                                  attrs: {
-                                    "open-on-click": false,
-                                    disabled: !update[_vm.disabledOption],
-                                    top: ""
-                                  },
-                                  scopedSlots: _vm._u(
-                                    [
-                                      {
-                                        key: "activator",
-                                        fn: function(ref) {
-                                          var on = ref.on
-                                          return [
-                                            _c(
-                                              "div",
-                                              _vm._g(
-                                                {
-                                                  staticClass:
-                                                    "text-center lighten-5 update",
-                                                  class: _vm.getThemeColor(
-                                                    update.status
-                                                  ),
-                                                  style:
-                                                    "border-left: 8px solid " +
-                                                    ((update.status ===
-                                                      "success" &&
-                                                      _vm.config[competence][
-                                                        update.actualLevel
-                                                      ]) ||
-                                                      "transparent") +
-                                                    " !important"
-                                                },
-                                                on
+              _c(
+                "tr",
+                _vm._l(_vm.student.skills, function(skill, i) {
+                  return _c(
+                    "td",
+                    {
+                      key: i,
+                      staticClass: "border-right",
+                      attrs: { valign: "top" }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "h-100" },
+                        _vm._l(skill.updates, function(update, j) {
+                          return _c(
+                            "v-tooltip",
+                            {
+                              key: j,
+                              attrs: {
+                                "open-on-click": false,
+                                disabled: !update[_vm.disabledOption],
+                                top: ""
+                              },
+                              scopedSlots: _vm._u(
+                                [
+                                  {
+                                    key: "activator",
+                                    fn: function(ref) {
+                                      var on = ref.on
+                                      return [
+                                        _c(
+                                          "div",
+                                          _vm._g(
+                                            {
+                                              staticClass:
+                                                "text-center lighten-5 update",
+                                              class: _vm.getThemeColor(
+                                                update.status
                                               ),
-                                              [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    update[_vm.fileOption] ||
-                                                      "- - - -"
-                                                  )
-                                                )
-                                              ]
+                                              style:
+                                                "border-left: 8px solid " +
+                                                ((update.status === "success" &&
+                                                  skill.colors[
+                                                    update.actualLevel - 1
+                                                  ]) ||
+                                                  "transparent") +
+                                                " !important"
+                                            },
+                                            on
+                                          ),
+                                          [
+                                            _vm._v(
+                                              "\n                  " +
+                                                _vm._s(
+                                                  update[_vm.fileOption] ||
+                                                    "- - - -"
+                                                ) +
+                                                "\n                  "
                                             )
                                           ]
-                                        }
-                                      }
-                                    ],
-                                    null,
-                                    true
-                                  )
-                                },
-                                [
-                                  _vm._v(" "),
-                                  _c("span", [
-                                    _vm._v(_vm._s(update[_vm.disabledOption]))
-                                  ])
-                                ]
+                                        )
+                                      ]
+                                    }
+                                  }
+                                ],
+                                null,
+                                true
                               )
-                            }),
-                            1
+                            },
+                            [
+                              _vm._v(" "),
+                              _c("span", [
+                                _vm._v(_vm._s(update[_vm.disabledOption]))
+                              ])
+                            ]
                           )
-                        ]
+                        }),
+                        1
                       )
-                    }),
-                    0
+                    ]
                   )
-                : _vm._e()
+                }),
+                0
+              )
             ])
           ]),
           _vm._v(" "),
@@ -51354,11 +51357,9 @@ var mutations = {
         _ref$message = _ref.message,
         message = _ref$message === void 0 ? '' : _ref$message,
         classeId = _ref.classeId,
-        studentId = _ref.studentId;
+        studentId = _ref.studentId,
+        date = _ref.date;
     // Cette fonction devrait être appelée par son action pour vérification.
-    var date = new Date();
-    var month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-    date = "".concat(date.getDate(), " ").concat(month[date.getMonth()]);
     var competenceUpdates = competenceObj.updates;
     var lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
     var lastLevel = lastUpdate.actual_level || 0;
@@ -51564,6 +51565,9 @@ var actions = {
     var competenceUpdates = competenceObj.updates;
     var lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
     var actualLevel = lastUpdate.actual_level || 0;
+    var date = new Date();
+    var month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    date = "".concat(date.getDate(), " ").concat(month[date.getMonth()]);
     if (actualLevel === maxLevel) context.commit("showInfo", {
       message: "Le Niveau de compétence est déjà au maximum",
       status: 'warning'
@@ -51571,7 +51575,8 @@ var actions = {
       var data = {
         skillId: competenceObj.id,
         status: status,
-        message: message
+        message: message,
+        date: date
       };
       var origin = window.location.origin;
       axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("".concat(origin, "/student/").concat(studentId, "/update"), data).then(function (resp) {
@@ -51582,7 +51587,8 @@ var actions = {
           status: status,
           message: message,
           classeId: classeId,
-          studentId: studentId
+          studentId: studentId,
+          date: date
         });
       });
     }

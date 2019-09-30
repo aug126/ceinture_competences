@@ -39,7 +39,8 @@ class UpdateController extends Controller
             'actual_level'  => $actual_level,
             'message'       => $request->message,
             'skill_id'      => $request->skillId,
-            'student_id'    => $student_id
+            'student_id'    => $student_id,
+            'date'    => $request->date
         ]);
         return ['success' => $insert];
     }

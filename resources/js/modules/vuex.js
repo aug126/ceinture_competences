@@ -106,12 +106,11 @@ const mutations = {
     status,
     message = '',
     classeId,
-    studentId
+    studentId,
+    date
   }) {
     // Cette fonction devrait être appelée par son action pour vérification.
-    let date = new Date;
-    const month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
-    date = `${date.getDate()} ${month[date.getMonth()]}`;
+
     let competenceUpdates = competenceObj.updates;
     let lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
     let lastLevel = lastUpdate.actual_level || 0;
@@ -231,6 +230,11 @@ const actions = {
     let competenceUpdates = competenceObj.updates;
     let lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
     let actualLevel = lastUpdate.actual_level || 0;
+
+    let date = new Date;
+    const month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+    date = `${date.getDate()} ${month[date.getMonth()]}`;
+
     if (actualLevel === maxLevel)
       context.commit("showInfo", {
         message: "Le Niveau de compétence est déjà au maximum",
@@ -240,7 +244,8 @@ const actions = {
       let data = {
         skillId: competenceObj.id,
         status,
-        message
+        message,
+        date
       };
       let origin = window.location.origin;
       axios.post(`${origin}/student/${studentId}/update`, data).then((resp) => {
@@ -252,7 +257,8 @@ const actions = {
           status,
           message,
           classeId,
-          studentId
+          studentId,
+          date
         });
       })
     }
