@@ -18,6 +18,10 @@ hr {
   width: 100%;
 }
 
+.w-50 {
+  width: 50%;
+}
+
 .mt--64 {
   margin-top: -64px !important;
 }

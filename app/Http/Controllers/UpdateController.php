@@ -78,4 +78,18 @@ class UpdateController extends Controller
     {
         //
     }
+
+    public function massUpdate(Request $request)
+    {
+        foreach ($request->updates as $update)
+        {
+
+            $update_model = Update::find($update['id']);
+            $update_model->message = $update['message'];
+            $update_model->save();
+            if (isset($update['delete']) && $update['delete'] === true)
+                $update_model->delete();
+
+        }
+    }
 }

@@ -50,7 +50,7 @@
       <v-btn @click.stop fab dark small color="grey" title="Non disponible">
         <v-icon>mdi-printer</v-icon>
       </v-btn>
-      <v-btn @click.stop="setEditable" fab dark small color="warning" title="Non disponible">
+      <v-btn @click.stop="setEditable" fab dark small color="warning" title="Modifier des éléments">
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
     </v-speed-dial>

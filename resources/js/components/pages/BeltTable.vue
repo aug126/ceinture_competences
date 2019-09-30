@@ -12,9 +12,6 @@
         <thead>
           <tr>
             <th :style="{height: fullScreen ? (zoom * 2) + 'rem' : ''}" class="th-edit">
-              <!-- <v-btn fab v-if="editable" small color="info" dark depressed>
-                <v-icon>mdi-table-edit</v-icon>
-              </v-btn>-->
               <span style="word-break: normal">N°</span>
             </th>
 
@@ -55,8 +52,10 @@
               class="name"
             >
               <strong>{{ student.student_name }}</strong>
-              <div :class="{'editable mt--26': $store.state.options.editable}"></div>
-              <!-- <v-icon v-if="$store.state.options.editable">mdi-pencil</v-icon> -->
+              <div
+                @click.stop="() => showStudentSheet(student, 'editable')"
+                :class="{'editable mt--26': $store.state.options.editable}"
+              ></div>
             </td>
 
             <td
@@ -96,7 +95,9 @@ export default {
   },
 
   methods: {
-    showStudentSheet(student) {
+    showStudentSheet(student, editable) {
+      if (editable === "editable") student.editable = true;
+      else student.editable = false;
       this.studentSheet = student;
     },
     getStudentsUpdates() {

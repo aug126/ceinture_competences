@@ -2401,7 +2401,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -2413,7 +2412,8 @@ __webpack_require__.r(__webpack_exports__);
     BeltStudentSheet: _partials_BeltStudentSheet__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   methods: {
-    showStudentSheet: function showStudentSheet(student) {
+    showStudentSheet: function showStudentSheet(student, editable) {
+      if (editable === "editable") student.editable = true;else student.editable = false;
       this.studentSheet = student;
     },
     getStudentsUpdates: function getStudentsUpdates() {
@@ -2878,6 +2878,32 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 //
 //
 //
@@ -2943,25 +2969,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     student: Object
   },
   watch: {
     student: function student(newVal) {
-      console.log('student = ', newVal);
-      if (newVal.student_name) this.show = true;
+      var _this = this;
+
+      if (newVal.student_name) {
+        this.show = true;
+
+        if (this.edit) {
+          this.editedName = this.student.student_name;
+          Object.entries(this.student.skills).forEach(function (_ref) {
+            var _ref2 = _slicedToArray(_ref, 2),
+                id = _ref2[0],
+                skill = _ref2[1];
+
+            _this.editedUpdates[id] = skill.updates;
+          });
+        }
+      }
     },
     show: function show(val) {
-      console.log(val);
-      if (val === false) this.$emit("close");
+      if (val === false) {
+        this.$emit("close");
+        this.columnSelected = "";
+      }
     }
   },
   data: function data() {
     return {
       show: false,
       fileOption: "message",
-      disabledOption: "date"
+      disabledOption: "date",
+      editedName: "",
+      columnSelected: "",
+      editedUpdates: {}
     };
   },
   methods: {
@@ -2980,6 +3038,52 @@ __webpack_require__.r(__webpack_exports__);
     toggleFileOption: function toggleFileOption() {
       this.disabledOption = this.fileOption;
       if (this.fileOption === "message") this.fileOption = "date";else this.fileOption = "message";
+    },
+    editStudent: function () {
+      var _editStudent = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var updates, requests, resps;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                updates = Object.values(this.editedUpdates).reduce(function (all, updates) {
+                  return [].concat(_toConsumableArray(all), _toConsumableArray(updates));
+                }, []);
+                console.log(updates);
+                this.student.student_name = this.editedName;
+                requests = [axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/student/edit-updates", {
+                  updates: updates
+                }), axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("student-editname/".concat(this.student.id), {
+                  student: this.student
+                })];
+                _context.next = 6;
+                return Promise.all(requests);
+
+              case 6:
+                resps = _context.sent;
+                this.$store.dispatch("getStudentsUpdates", this.$route.params.id);
+                this.show = false;
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function editStudent() {
+        return _editStudent.apply(this, arguments);
+      }
+
+      return editStudent;
+    }()
+  },
+  computed: {
+    edit: function edit() {
+      return this.student.editable;
     }
   }
 });
@@ -3807,7 +3911,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#BeltStudentSheet tbody tr:hover {\n  background: none !important;\n}\n#BeltStudentSheet th.border-right, #BeltStudentSheet td.border-right {\n  border-right: 1px solid rgba(0, 0, 0, 0.54) !important;\n}\n#BeltStudentSheet td {\n  padding: 0;\n}\n#BeltStudentSheet td div.update {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.54) !important;\n  padding: 0.4rem;\n  height: 2.1rem;\n}", ""]);
+exports.push([module.i, "#BeltStudentSheet tbody tr:hover {\n  background: none !important;\n}\n#BeltStudentSheet th.border-right:hover {\n  cursor: pointer;\n}\n#BeltStudentSheet th.border-right, #BeltStudentSheet td.border-right {\n  border-right: 1px solid rgba(0, 0, 0, 0.54) !important;\n  word-break: keep-all;\n}\n#BeltStudentSheet td {\n  padding: 0;\n}\n#BeltStudentSheet td div.update {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.54) !important;\n  padding: 0.4rem;\n  height: 2.1rem;\n  overflow: hidden;\n}\n#BeltStudentSheet .v-text-field__details {\n  display: none;\n}\n#BeltStudentSheet td .v-input__slot {\n  min-height: 2rem;\n  margin-top: -0.4rem;\n}", ""]);
 
 // exports
 
@@ -6594,7 +6698,7 @@ var render = function() {
                 dark: "",
                 small: "",
                 color: "warning",
-                title: "Non disponible"
+                title: "Modifier des éléments"
               },
               on: {
                 click: function($event) {
@@ -7075,6 +7179,17 @@ var render = function() {
                                   class: {
                                     "editable mt--26":
                                       _vm.$store.state.options.editable
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      $event.stopPropagation()
+                                      return (function() {
+                                        return _vm.showStudentSheet(
+                                          student,
+                                          "editable"
+                                        )
+                                      })($event)
+                                    }
                                   }
                                 })
                               ]
@@ -7607,24 +7722,44 @@ var render = function() {
               attrs: { "primary-title": "" }
             },
             [
-              _vm._v(
-                "\n      " + _vm._s(_vm.student.student_name) + "\n      "
-              ),
+              _vm.edit
+                ? _c("v-text-field", {
+                    attrs: { placeholder: "Prénom N.", solo: "" },
+                    model: {
+                      value: _vm.editedName,
+                      callback: function($$v) {
+                        _vm.editedName = $$v
+                      },
+                      expression: "editedName"
+                    }
+                  })
+                : _c("span", [_vm._v(_vm._s(_vm.student.student_name))]),
+              _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  staticClass: "info--text",
-                  on: { click: _vm.toggleFileOption }
-                },
-                [
-                  _vm.fileOption === "message"
-                    ? _c("v-icon", [_vm._v("mdi-file-eye")])
-                    : _c("v-icon", [_vm._v("mdi-file-eye-outline")])
-                ],
-                1
-              )
+              !_vm.edit
+                ? _c(
+                    "v-btn",
+                    {
+                      staticClass: "info--text",
+                      on: { click: _vm.toggleFileOption }
+                    },
+                    [
+                      _vm.fileOption === "message"
+                        ? _c(
+                            "v-icon",
+                            { attrs: { title: "afficher les dates" } },
+                            [_vm._v("mdi-calendar")]
+                          )
+                        : _c(
+                            "v-icon",
+                            { attrs: { title: "afficher les commentaires" } },
+                            [_vm._v("mdi-comment")]
+                          )
+                    ],
+                    1
+                  )
+                : _vm._e()
             ],
             1
           ),
@@ -7636,7 +7771,17 @@ var render = function() {
                 _vm._l(_vm.student.skills, function(skill, i) {
                   return _c(
                     "th",
-                    { key: i, staticClass: "text-center border-right" },
+                    {
+                      key: i,
+                      staticClass: "text-center border-right",
+                      class:
+                        skill.skill_name === _vm.columnSelected ? "w-50" : "",
+                      on: {
+                        click: function($event) {
+                          _vm.columnSelected = skill.skill_name
+                        }
+                      }
+                    },
                     [_vm._v(_vm._s(skill.skill_name))]
                   )
                 }),
@@ -7697,15 +7842,39 @@ var render = function() {
                                             on
                                           ),
                                           [
-                                            _vm._v(
-                                              "\n                  " +
-                                                _vm._s(
-                                                  update[_vm.fileOption] ||
-                                                    "- - - -"
-                                                ) +
-                                                "\n                  "
-                                            )
-                                          ]
+                                            _vm.edit
+                                              ? _c("v-text-field", {
+                                                  attrs: {
+                                                    height: "2rem",
+                                                    "background-color":
+                                                      "transparent",
+                                                    solo: ""
+                                                  },
+                                                  model: {
+                                                    value:
+                                                      _vm.editedUpdates[i][j]
+                                                        .message,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedUpdates[i][j],
+                                                        "message",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "editedUpdates[i][j].message"
+                                                  }
+                                                })
+                                              : _c("span", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      update[_vm.fileOption] ||
+                                                        "- - - -"
+                                                    )
+                                                  )
+                                                ])
+                                          ],
+                                          1
                                         )
                                       ]
                                     }
@@ -7740,20 +7909,45 @@ var render = function() {
             [
               _c("v-spacer"),
               _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "primary", dark: "", outlined: "" },
-                  on: {
-                    click: function($event) {
-                      _vm.show = false
-                    }
-                  }
-                },
-                [_vm._v("Close")]
-              )
+              !_vm.edit
+                ? _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "primary", dark: "", outlined: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.show = false
+                        }
+                      }
+                    },
+                    [_vm._v("Close")]
+                  )
+                : [
+                    _c(
+                      "v-btn",
+                      {
+                        attrs: { color: "primary", dark: "", outlined: "" },
+                        on: {
+                          click: function($event) {
+                            _vm.show = false
+                          }
+                        }
+                      },
+                      [_vm._v("Cancel")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-btn",
+                      {
+                        attrs: { color: "primary", dark: "" },
+                        on: { click: _vm.editStudent }
+                      },
+                      [_c("v-icon", [_vm._v("mdi-check")])],
+                      1
+                    )
+                  ]
             ],
-            1
+            2
           )
         ],
         1

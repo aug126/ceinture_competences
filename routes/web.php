@@ -24,6 +24,9 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::post('storeClasseStudents', 'ClasseController@store');
     Route::post('student/{student_id}/update', 'UpdateController@store');
+    Route::post('student-editname/{student_id}', 'StudentController@update');
+
+    Route::post('student/edit-updates', 'UpdateController@massUpdate');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
