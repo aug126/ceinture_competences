@@ -3024,7 +3024,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
             _this.$set(_this.editedUpdates, id, updates);
           });
-          console.log(this.editedUpdates);
         }
       }
     },
@@ -6913,13 +6912,7 @@ var render = function() {
                       [
                         _c("v-list-item-title", [
                           _vm._v(_vm._s(classe.classe_name))
-                        ]),
-                        _vm._v(" "),
-                        _c("div", {
-                          class: {
-                            "editable in-nav": _vm.$store.state.options.editable
-                          }
-                        })
+                        ])
                       ],
                       1
                     )
@@ -51139,82 +51132,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var state = {
-  /**====== getClasses() :
-   * students: [{
-   *  ->
-   *  ===>updates: [{
-   *    }]
-   * }],
-   * classes: [{
-   *  id: 1,
-   *  classe_name: 'ex class name'
-   * }]
-   */
   classes: [],
   options: {
     fullScreen: false,
     editable: false,
     zoomCoef: 1
   },
-  // classes: [{
-  //   id: 'time',
-  //   name: 'fake',
-  //   studentsBelt: [{
-  //     numero: 1,
-  //     name: 'name 1',
-  //     competences: {
-  //       grammaire: [{
-  //         date: '19 aout',
-  //         message: 'test message laissé',
-  //         status: 'success', // 'success' | 'fail' | 'practice'
-  //         actualLevel: 1
-  //       }, {
-  //         date: '19 aout',
-  //         message: '',
-  //         status: 'success', // 'success' | 'fail' | 'practice'
-  //         actualLevel: 2
-  //       }, {
-  //         date: '19 aout',
-  //         message: '',
-  //         status: 'success', // 'success' | 'fail' | 'practice'
-  //         actualLevel: 3
-  //       }, {
-  //         date: '19 aout',
-  //         message: '',
-  //         status: 'success', // 'success' | 'fail' | 'practice'
-  //         actualLevel: 4
-  //       }, {
-  //         date: '19 aout',
-  //         message: '',
-  //         status: 'success', // 'success' | 'fail' | 'practice'
-  //         actualLevel: 5
-  //       }, {
-  //         date: '19 aout',
-  //         message: '',
-  //         status: 'success', // 'success' | 'fail' | 'practice'
-  //         actualLevel: 6
-  //       }],
-  //       conjugaison: [],
-  //       orthographe: [],
-  //       numération: [],
-  //       calculsEcrits: [],
-  //       mesures: [],
-  //       géométrie: []
-  //     }
-  //   }, {
-  //     numero: 2,
-  //     name: 'name 2',
-  //     competences: {
-  //       grammaire: [],
-  //       conjugaison: [],
-  //       orthographe: [],
-  //       numération: [],
-  //       calculsEcrits: [],
-  //       mesures: [],
-  //       géométrie: []
-  //     }
-  //   }]
-  // }],
   // Globals paramètres :
   // =================
   overlayLoader: false,
@@ -51230,28 +51153,6 @@ var mutations = {
   addClasse: function addClasse(state, newClasse) {
     state.classes.push(newClasse);
   },
-  updateCompetence: function updateCompetence(state, _ref) {
-    var competenceObj = _ref.competenceObj,
-        status = _ref.status,
-        _ref$message = _ref.message,
-        message = _ref$message === void 0 ? '' : _ref$message,
-        classeId = _ref.classeId,
-        studentId = _ref.studentId,
-        date = _ref.date;
-    // Cette fonction devrait être appelée par son action pour vérification.
-    var competenceUpdates = competenceObj.updates;
-    var lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
-    var lastLevel = lastUpdate.actual_level || 0;
-    competenceUpdates.push({
-      date: date,
-      message: message,
-      status: status,
-      // 'success' | 'fail' | 'practice'
-      actual_level: status === 'success' ? ++lastLevel : lastLevel
-    }); // console.log('new updates = ', competenceUpdates);
-
-    state.classes[classeId].students[studentId].skills[competenceObj.id].updates = competenceUpdates;
-  },
   // loader
   startLoader: function startLoader(state) {
     // console.log('start loader');
@@ -51262,10 +51163,10 @@ var mutations = {
     state.overlayLoader = false;
   },
   // notifications infos (snakbar)
-  showInfo: function showInfo(state, _ref2) {
-    var message = _ref2.message,
-        _ref2$status = _ref2.status,
-        status = _ref2$status === void 0 ? null : _ref2$status;
+  showInfo: function showInfo(state, _ref) {
+    var message = _ref.message,
+        _ref$status = _ref.status,
+        status = _ref$status === void 0 ? null : _ref$status;
     state.notifyInfo = {
       show: true,
       message: message,
@@ -51429,13 +51330,13 @@ var actions = {
 
     return storeClasse;
   }(),
-  updateCompetence: function updateCompetence(context, _ref3) {
-    var competenceObj = _ref3.competenceObj,
-        status = _ref3.status,
-        _ref3$message = _ref3.message,
-        message = _ref3$message === void 0 ? '' : _ref3$message,
-        classeId = _ref3.classeId,
-        studentId = _ref3.studentId;
+  updateCompetence: function updateCompetence(context, _ref2) {
+    var competenceObj = _ref2.competenceObj,
+        status = _ref2.status,
+        _ref2$message = _ref2.message,
+        message = _ref2$message === void 0 ? '' : _ref2$message,
+        classeId = _ref2.classeId,
+        studentId = _ref2.studentId;
     if (!status || !competenceObj) return console.error('il faut un status/competenceObj dans {} pour update une competence'); // let maxLevel = config.competences[competenceName].length - 1; // - 1 car la première valeur est empty pour l'icone "start"
 
     var maxLevel = competenceObj.colors.length;
@@ -51458,15 +51359,7 @@ var actions = {
       var origin = window.location.origin;
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("".concat(origin, "/student/").concat(studentId, "/update"), data).then(function (resp) {
         if (!resp.data.success) return console.error('erreur lors du store de l\'update');
-        context.commit("updateCompetence", {
-          // competenceUpdates,
-          competenceObj: competenceObj,
-          status: status,
-          message: message,
-          classeId: classeId,
-          studentId: studentId,
-          date: date
-        });
+        context.dispatch('getStudentsUpdates', classeId);
       });
     }
   },

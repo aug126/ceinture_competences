@@ -105,7 +105,6 @@ export default {
             });
             this.$set(this.editedUpdates, id, updates);
           });
-          console.log(this.editedUpdates);
         }
       }
     },

@@ -39,7 +39,7 @@
             @click="hideNav = true"
           >
             <v-list-item-title>{{classe.classe_name}}</v-list-item-title>
-            <div :class="{'editable in-nav': $store.state.options.editable}"></div>
+            <!-- <div :class="{'editable in-nav': $store.state.options.editable}"></div> -->
           </v-list-item>
 
           <v-list-item @click="hideNav = true" class="text-center" link to="/new-classe">

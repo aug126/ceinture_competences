@@ -5,83 +5,12 @@ import axios from 'axios';
 Vue.use(Vuex)
 
 const state = {
-  /**====== getClasses() :
-   * students: [{
-   *  ->
-   *  ===>updates: [{
-   *    }]
-   * }],
-   * classes: [{
-   *  id: 1,
-   *  classe_name: 'ex class name'
-   * }]
-   */
   classes: [],
   options: {
     fullScreen: false,
     editable: false,
     zoomCoef: 1
   },
-  // classes: [{
-  //   id: 'time',
-  //   name: 'fake',
-  //   studentsBelt: [{
-  //     numero: 1,
-  //     name: 'name 1',
-  //     competences: {
-  //       grammaire: [{
-  //         date: '19 aout',
-  //         message: 'test message laissé',
-  //         status: 'success', // 'success' | 'fail' | 'practice'
-  //         actualLevel: 1
-  //       }, {
-  //         date: '19 aout',
-  //         message: '',
-  //         status: 'success', // 'success' | 'fail' | 'practice'
-  //         actualLevel: 2
-  //       }, {
-  //         date: '19 aout',
-  //         message: '',
-  //         status: 'success', // 'success' | 'fail' | 'practice'
-  //         actualLevel: 3
-  //       }, {
-  //         date: '19 aout',
-  //         message: '',
-  //         status: 'success', // 'success' | 'fail' | 'practice'
-  //         actualLevel: 4
-  //       }, {
-  //         date: '19 aout',
-  //         message: '',
-  //         status: 'success', // 'success' | 'fail' | 'practice'
-  //         actualLevel: 5
-  //       }, {
-  //         date: '19 aout',
-  //         message: '',
-  //         status: 'success', // 'success' | 'fail' | 'practice'
-  //         actualLevel: 6
-  //       }],
-  //       conjugaison: [],
-  //       orthographe: [],
-  //       numération: [],
-  //       calculsEcrits: [],
-  //       mesures: [],
-  //       géométrie: []
-  //     }
-  //   }, {
-  //     numero: 2,
-  //     name: 'name 2',
-  //     competences: {
-  //       grammaire: [],
-  //       conjugaison: [],
-  //       orthographe: [],
-  //       numération: [],
-  //       calculsEcrits: [],
-  //       mesures: [],
-  //       géométrie: []
-  //     }
-  //   }]
-  // }],
-
   // Globals paramètres :
   // =================
   overlayLoader: false,
@@ -98,29 +27,6 @@ const mutations = {
   // classes
   addClasse(state, newClasse) {
     state.classes.push(newClasse);
-  },
-  updateCompetence(state, {
-    // competenceUpdates,
-    competenceObj,
-    status,
-    message = '',
-    classeId,
-    studentId,
-    date
-  }) {
-    // Cette fonction devrait être appelée par son action pour vérification.
-
-    let competenceUpdates = competenceObj.updates;
-    let lastUpdate = competenceUpdates[competenceUpdates.length - 1] || {};
-    let lastLevel = lastUpdate.actual_level || 0;
-    competenceUpdates.push({
-      date,
-      message,
-      status, // 'success' | 'fail' | 'practice'
-      actual_level: status === 'success' ? ++lastLevel : lastLevel
-    })
-    // console.log('new updates = ', competenceUpdates);
-    state.classes[classeId].students[studentId].skills[competenceObj.id].updates = competenceUpdates;
   },
   // loader
   startLoader(state) {
@@ -250,15 +156,7 @@ const actions = {
       axios.post(`${origin}/student/${studentId}/update`, data).then((resp) => {
         if (!resp.data.success)
           return console.error('erreur lors du store de l\'update');
-        context.commit("updateCompetence", {
-          // competenceUpdates,
-          competenceObj,
-          status,
-          message,
-          classeId,
-          studentId,
-          date
-        });
+        context.dispatch('getStudentsUpdates', classeId);
       })
     }
   },
