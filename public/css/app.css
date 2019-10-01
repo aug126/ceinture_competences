@@ -54,14 +54,17 @@ hr {
 .editable {
   margin-left: -1.5rem;
   transition: transform ease 0.3s;
-  position: absolute;
 }
 
-.editable .in-table {
+.editable.in-table {
   text-align: right;
   width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
+}
+
+.editable.in-nav {
+  position: absolute;
 }
 
 .editable:hover {

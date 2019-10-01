@@ -34,7 +34,10 @@
                   :key="j"
                   top
                 >
-                  <template v-slot:activator="{ on }">
+                  <template
+                    v-if="!editedUpdates[i] || !editedUpdates[i][j] || editedUpdates[i][j].status !== 'deleted' "
+                    v-slot:activator="{ on }"
+                  >
                     <div
                       v-on="on"
                       :class="getThemeColor(update.status)"
@@ -46,7 +49,7 @@
                         v-model="editedUpdates[i][j].message"
                         v-if="edit"
                         height="2rem"
-                        background-color="transparent"
+                        background-color="rgba(0, 0, 0, 0.05)"
                         solo
                       ></v-text-field>
                       <span v-else>{{update[fileOption] || '- - - -'}}</span>
@@ -54,6 +57,14 @@
                   </template>
                   <span>{{update[disabledOption]}}</span>
                 </v-tooltip>
+                <div
+                  v-if="skill.updates.length && edit && editedUpdates[i][0].status !== 'deleted'"
+                  class="remove-last-update"
+                >
+                  <v-btn @click="() => removeUpdateSkill(i)" fab color="warning" small>
+                    <v-icon>mdi-delete-circle-outline</v-icon>
+                  </v-btn>
+                </div>
               </div>
             </td>
           </tr>
@@ -88,8 +99,13 @@ export default {
         if (this.edit) {
           this.editedName = this.student.student_name;
           Object.entries(this.student.skills).forEach(([id, skill]) => {
-            this.editedUpdates[id] = skill.updates;
+            let updates = {};
+            skill.updates.forEach((up, ind) => {
+              this.$set(updates, ind, { ...up });
+            });
+            this.$set(this.editedUpdates, id, updates);
           });
+          console.log(this.editedUpdates);
         }
       }
     },
@@ -126,11 +142,17 @@ export default {
       if (this.fileOption === "message") this.fileOption = "date";
       else this.fileOption = "message";
     },
+    removeUpdateSkill(skillId) {
+      let numberUpdates = Object.values(this.editedUpdates[skillId]).filter(
+        up => up.status !== "deleted"
+      ).length;
+      let lastUpdate = { ...this.editedUpdates[skillId][numberUpdates - 1] };
+      this.editedUpdates[skillId][numberUpdates - 1].status = "deleted";
+    },
     async editStudent() {
       let updates = Object.values(this.editedUpdates).reduce((all, updates) => {
-        return [...all, ...updates];
+        return [...all, ...Object.values(updates)];
       }, []);
-      console.log(updates);
       this.student.student_name = this.editedName;
       let requests = [
         axios.post("/student/edit-updates", { updates }),
@@ -172,4 +194,12 @@ export default {
   td .v-input__slot
     min-height: 2rem
     margin-top: -0.4rem
+    border: 1px solid #0000003b !important
+  // Remove update
+  .remove-last-update 
+    text-align: center
+    button.v-btn 
+      width: 2rem
+      height: 2rem
+      transform: translateY(-30%)
 </style>

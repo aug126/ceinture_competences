@@ -57,9 +57,9 @@ export default {
     classeId: Number,
     studentId: Number
   },
-  beforeUpdate() {
-    console.log("update");
-  },
+  // beforeUpdate() {
+  //   console.log("update");
+  // },
   data() {
     return {
       fab: false,

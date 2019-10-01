@@ -2832,9 +2832,9 @@ __webpack_require__.r(__webpack_exports__);
     classeId: Number,
     studentId: Number
   },
-  beforeUpdate: function beforeUpdate() {
-    console.log("update");
-  },
+  // beforeUpdate() {
+  //   console.log("update");
+  // },
   data: function data() {
     return {
       fab: false,
@@ -2896,6 +2896,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -2904,6 +2910,17 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3000,8 +3017,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
                 id = _ref2[0],
                 skill = _ref2[1];
 
-            _this.editedUpdates[id] = skill.updates;
+            var updates = {};
+            skill.updates.forEach(function (up, ind) {
+              _this.$set(updates, ind, _objectSpread({}, up));
+            });
+
+            _this.$set(_this.editedUpdates, id, updates);
           });
+          console.log(this.editedUpdates);
         }
       }
     },
@@ -3039,6 +3062,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       this.disabledOption = this.fileOption;
       if (this.fileOption === "message") this.fileOption = "date";else this.fileOption = "message";
     },
+    removeUpdateSkill: function removeUpdateSkill(skillId) {
+      var numberUpdates = Object.values(this.editedUpdates[skillId]).filter(function (up) {
+        return up.status !== "deleted";
+      }).length;
+
+      var lastUpdate = _objectSpread({}, this.editedUpdates[skillId][numberUpdates - 1]);
+
+      this.editedUpdates[skillId][numberUpdates - 1].status = "deleted";
+    },
     editStudent: function () {
       var _editStudent = _asyncToGenerator(
       /*#__PURE__*/
@@ -3049,24 +3081,23 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
             switch (_context.prev = _context.next) {
               case 0:
                 updates = Object.values(this.editedUpdates).reduce(function (all, updates) {
-                  return [].concat(_toConsumableArray(all), _toConsumableArray(updates));
+                  return [].concat(_toConsumableArray(all), _toConsumableArray(Object.values(updates)));
                 }, []);
-                console.log(updates);
                 this.student.student_name = this.editedName;
                 requests = [axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/student/edit-updates", {
                   updates: updates
                 }), axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("student-editname/".concat(this.student.id), {
                   student: this.student
                 })];
-                _context.next = 6;
+                _context.next = 5;
                 return Promise.all(requests);
 
-              case 6:
+              case 5:
                 resps = _context.sent;
                 this.$store.dispatch("getStudentsUpdates", this.$route.params.id);
                 this.show = false;
 
-              case 9:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -3911,7 +3942,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#BeltStudentSheet tbody tr:hover {\n  background: none !important;\n}\n#BeltStudentSheet th.border-right:hover {\n  cursor: pointer;\n}\n#BeltStudentSheet th.border-right, #BeltStudentSheet td.border-right {\n  border-right: 1px solid rgba(0, 0, 0, 0.54) !important;\n  word-break: keep-all;\n}\n#BeltStudentSheet td {\n  padding: 0;\n}\n#BeltStudentSheet td div.update {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.54) !important;\n  padding: 0.4rem;\n  height: 2.1rem;\n  overflow: hidden;\n}\n#BeltStudentSheet .v-text-field__details {\n  display: none;\n}\n#BeltStudentSheet td .v-input__slot {\n  min-height: 2rem;\n  margin-top: -0.4rem;\n}", ""]);
+exports.push([module.i, "#BeltStudentSheet tbody tr:hover {\n  background: none !important;\n}\n#BeltStudentSheet th.border-right:hover {\n  cursor: pointer;\n}\n#BeltStudentSheet th.border-right, #BeltStudentSheet td.border-right {\n  border-right: 1px solid rgba(0, 0, 0, 0.54) !important;\n  word-break: keep-all;\n}\n#BeltStudentSheet td {\n  padding: 0;\n}\n#BeltStudentSheet td div.update {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.54) !important;\n  padding: 0.4rem;\n  height: 2.1rem;\n  overflow: hidden;\n}\n#BeltStudentSheet .v-text-field__details {\n  display: none;\n}\n#BeltStudentSheet td .v-input__slot {\n  min-height: 2rem;\n  margin-top: -0.4rem;\n  border: 1px solid #0000003b !important;\n}\n#BeltStudentSheet .remove-last-update {\n  text-align: center;\n}\n#BeltStudentSheet .remove-last-update button.v-btn {\n  width: 2rem;\n  height: 2rem;\n  transform: translateY(-30%);\n}", ""]);
 
 // exports
 
@@ -6885,7 +6916,9 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", {
-                          class: { editable: _vm.$store.state.options.editable }
+                          class: {
+                            "editable in-nav": _vm.$store.state.options.editable
+                          }
                         })
                       ],
                       1
@@ -7177,7 +7210,7 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("div", {
                                   class: {
-                                    "editable mt--26":
+                                    "editable in-table mt--26":
                                       _vm.$store.state.options.editable
                                   },
                                   on: {
@@ -7804,95 +7837,141 @@ var render = function() {
                       _c(
                         "div",
                         { staticClass: "h-100" },
-                        _vm._l(skill.updates, function(update, j) {
-                          return _c(
-                            "v-tooltip",
-                            {
-                              key: j,
-                              attrs: {
-                                "open-on-click": false,
-                                disabled: !update[_vm.disabledOption],
-                                top: ""
-                              },
-                              scopedSlots: _vm._u(
-                                [
-                                  {
-                                    key: "activator",
-                                    fn: function(ref) {
-                                      var on = ref.on
-                                      return [
-                                        _c(
-                                          "div",
-                                          _vm._g(
-                                            {
-                                              staticClass:
-                                                "text-center lighten-5 update",
-                                              class: _vm.getThemeColor(
-                                                update.status
-                                              ),
-                                              style:
-                                                "border-left: 8px solid " +
-                                                ((update.status === "success" &&
-                                                  skill.colors[
-                                                    update.actualLevel - 1
-                                                  ]) ||
-                                                  "transparent") +
-                                                " !important"
-                                            },
-                                            on
-                                          ),
-                                          [
-                                            _vm.edit
-                                              ? _c("v-text-field", {
-                                                  attrs: {
-                                                    height: "2rem",
-                                                    "background-color":
-                                                      "transparent",
-                                                    solo: ""
+                        [
+                          _vm._l(skill.updates, function(update, j) {
+                            return _c(
+                              "v-tooltip",
+                              {
+                                key: j,
+                                attrs: {
+                                  "open-on-click": false,
+                                  disabled: !update[_vm.disabledOption],
+                                  top: ""
+                                },
+                                scopedSlots: _vm._u(
+                                  [
+                                    !_vm.editedUpdates[i] ||
+                                    !_vm.editedUpdates[i][j] ||
+                                    _vm.editedUpdates[i][j].status !== "deleted"
+                                      ? {
+                                          key: "activator",
+                                          fn: function(ref) {
+                                            var on = ref.on
+                                            return [
+                                              _c(
+                                                "div",
+                                                _vm._g(
+                                                  {
+                                                    staticClass:
+                                                      "text-center lighten-5 update",
+                                                    class: _vm.getThemeColor(
+                                                      update.status
+                                                    ),
+                                                    style:
+                                                      "border-left: 8px solid " +
+                                                      ((update.status ===
+                                                        "success" &&
+                                                        skill.colors[
+                                                          update.actualLevel - 1
+                                                        ]) ||
+                                                        "transparent") +
+                                                      " !important"
                                                   },
-                                                  model: {
-                                                    value:
-                                                      _vm.editedUpdates[i][j]
-                                                        .message,
-                                                    callback: function($$v) {
-                                                      _vm.$set(
-                                                        _vm.editedUpdates[i][j],
-                                                        "message",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression:
-                                                      "editedUpdates[i][j].message"
-                                                  }
-                                                })
-                                              : _c("span", [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      update[_vm.fileOption] ||
-                                                        "- - - -"
-                                                    )
-                                                  )
-                                                ])
-                                          ],
-                                          1
-                                        )
-                                      ]
-                                    }
-                                  }
+                                                  on
+                                                ),
+                                                [
+                                                  _vm.edit
+                                                    ? _c("v-text-field", {
+                                                        attrs: {
+                                                          height: "2rem",
+                                                          "background-color":
+                                                            "rgba(0, 0, 0, 0.05)",
+                                                          solo: ""
+                                                        },
+                                                        model: {
+                                                          value:
+                                                            _vm.editedUpdates[
+                                                              i
+                                                            ][j].message,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.$set(
+                                                              _vm.editedUpdates[
+                                                                i
+                                                              ][j],
+                                                              "message",
+                                                              $$v
+                                                            )
+                                                          },
+                                                          expression:
+                                                            "editedUpdates[i][j].message"
+                                                        }
+                                                      })
+                                                    : _c("span", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            update[
+                                                              _vm.fileOption
+                                                            ] || "- - - -"
+                                                          )
+                                                        )
+                                                      ])
+                                                ],
+                                                1
+                                              )
+                                            ]
+                                          }
+                                        }
+                                      : null
+                                  ],
+                                  null,
+                                  true
+                                )
+                              },
+                              [
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(_vm._s(update[_vm.disabledOption]))
+                                ])
+                              ]
+                            )
+                          }),
+                          _vm._v(" "),
+                          skill.updates.length &&
+                          _vm.edit &&
+                          _vm.editedUpdates[i][0].status !== "deleted"
+                            ? _c(
+                                "div",
+                                { staticClass: "remove-last-update" },
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        fab: "",
+                                        color: "warning",
+                                        small: ""
+                                      },
+                                      on: {
+                                        click: function() {
+                                          return _vm.removeUpdateSkill(i)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("v-icon", [
+                                        _vm._v("mdi-delete-circle-outline")
+                                      ])
+                                    ],
+                                    1
+                                  )
                                 ],
-                                null,
-                                true
+                                1
                               )
-                            },
-                            [
-                              _vm._v(" "),
-                              _c("span", [
-                                _vm._v(_vm._s(update[_vm.disabledOption]))
-                              ])
-                            ]
-                          )
-                        }),
-                        1
+                            : _vm._e()
+                        ],
+                        2
                       )
                     ]
                   )
@@ -51169,17 +51248,17 @@ var mutations = {
       status: status,
       // 'success' | 'fail' | 'practice'
       actual_level: status === 'success' ? ++lastLevel : lastLevel
-    });
-    console.log('new updates = ', competenceUpdates);
+    }); // console.log('new updates = ', competenceUpdates);
+
     state.classes[classeId].students[studentId].skills[competenceObj.id].updates = competenceUpdates;
   },
   // loader
   startLoader: function startLoader(state) {
-    console.log('start loader');
+    // console.log('start loader');
     state.overlayLoader = true;
   },
   stopLoader: function stopLoader(state) {
-    console.log('stop loader');
+    // console.log('stop loader');
     state.overlayLoader = false;
   },
   // notifications infos (snakbar)
@@ -51212,8 +51291,7 @@ var mutations = {
   // SET DATAS
   // =================
   setClasses: function setClasses(state, classes) {
-    state.classes = help.arrayToObjId(classes);
-    console.log('classes : ', state.classes);
+    state.classes = help.arrayToObjId(classes); // console.log('classes : ', state.classes);
   },
   setProgramsSkills: function setProgramsSkills(state, programsObj) {
     var _iteratorNormalCompletion = true;
@@ -51266,8 +51344,7 @@ var mutations = {
 
     var classe = state.classes[programsObj.classeId];
     classe.programs = help.arrayToObjId(programsObj.programs);
-    state.classes[programsObj.classeId] = _objectSpread({}, classe);
-    console.log('programsSkills : ', state.classes);
+    state.classes[programsObj.classeId] = _objectSpread({}, classe); // console.log('programsSkills : ', state.classes);
   },
   setStudentsUpdates: function setStudentsUpdates(state, studentsObj) {
     var _iteratorNormalCompletion3 = true;

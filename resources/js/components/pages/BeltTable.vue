@@ -54,7 +54,7 @@
               <strong>{{ student.student_name }}</strong>
               <div
                 @click.stop="() => showStudentSheet(student, 'editable')"
-                :class="{'editable mt--26': $store.state.options.editable}"
+                :class="{'editable in-table mt--26': $store.state.options.editable}"
               ></div>
             </td>
 

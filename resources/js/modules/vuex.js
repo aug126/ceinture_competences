@@ -119,16 +119,16 @@ const mutations = {
       status, // 'success' | 'fail' | 'practice'
       actual_level: status === 'success' ? ++lastLevel : lastLevel
     })
-    console.log('new updates = ', competenceUpdates);
+    // console.log('new updates = ', competenceUpdates);
     state.classes[classeId].students[studentId].skills[competenceObj.id].updates = competenceUpdates;
   },
   // loader
   startLoader(state) {
-    console.log('start loader');
+    // console.log('start loader');
     state.overlayLoader = true;
   },
   stopLoader(state) {
-    console.log('stop loader');
+    // console.log('stop loader');
     state.overlayLoader = false;
   },
   // notifications infos (snakbar)
@@ -161,7 +161,7 @@ const mutations = {
   // =================
   setClasses(state, classes) {
     state.classes = help.arrayToObjId(classes);
-    console.log('classes : ', state.classes);
+    // console.log('classes : ', state.classes);
   },
 
   setProgramsSkills(state, programsObj) {
@@ -176,7 +176,7 @@ const mutations = {
     state.classes[programsObj.classeId] = {
       ...classe
     };
-    console.log('programsSkills : ', state.classes);
+    // console.log('programsSkills : ', state.classes);
   },
 
   setStudentsUpdates(state, studentsObj) {
