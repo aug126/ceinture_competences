@@ -21,7 +21,6 @@ class CreateUpdatesTable extends Migration
             $table->tinyInteger('rating')->nullable();
             $table->unsignedBigInteger('skill_id');
             $table->unsignedBigInteger('student_id');
-            $table->string('date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
