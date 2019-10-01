@@ -142,7 +142,7 @@ export default {
       this.programsSkills.push({
         name: "",
         competences: "",
-        levels: [],
+        skills: [],
         countSkills: 0
       });
     },
